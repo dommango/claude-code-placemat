@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code Reference Dashboard — Changelog</title>
+    <style>
+        :root {
+            --bg-page: #0a0a0a;
+            --bg-card: #141414;
+            --border-color: #2a2a2a;
+            --text-main: #ededed;
+            --text-muted: #888888;
+            --code-bg: #1e1e1e;
+            --code-color: #f1f1f1;
+            --anthropic-coral: #d97757;
+            --anthropic-teal: #879d86;
+            --header-bg: rgba(10, 10, 10, 0.95);
+            --row-hover: rgba(255, 255, 255, 0.03);
+        }
+
+        :root[data-theme="light"] {
+            --bg-page: #f4f4f5;
+            --bg-card: #ffffff;
+            --border-color: #e4e4e7;
+            --text-main: #18181b;
+            --text-muted: #52525b;
+            --code-bg: #f4f4f5;
+            --code-color: #18181b;
+            --anthropic-coral: #c2410c;
+            --anthropic-teal: #0f766e;
+            --header-bg: rgba(244, 244, 245, 0.95);
+            --row-hover: rgba(0, 0, 0, 0.02);
+        }
+
+        body {
+            margin: 0;
+            padding: 15px;
+            font-family: 'Geist', 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.4;
+            padding-top: 65px;
+            font-size: 0.85rem;
+        }
+
+        .global-header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background-color: var(--header-bg); backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color); z-index: 1000;
+            padding: 8px 20px; display: flex; align-items: center;
+            justify-content: space-between; box-sizing: border-box;
+        }
+
+        .header-title h1 {
+            color: var(--anthropic-coral); margin: 0; font-size: 1.1rem;
+            font-weight: 700; letter-spacing: -0.02em;
+        }
+
+        .header-nav { display: flex; gap: 12px; align-items: center; }
+
+        .header-link {
+            color: var(--text-muted); text-decoration: none; font-size: 0.8rem;
+            padding: 4px 10px; border: 1px solid var(--border-color); border-radius: 4px;
+        }
+        .header-link:hover { color: var(--text-main); border-color: var(--anthropic-teal); }
+
+        .theme-toggle {
+            background: none; border: 1px solid var(--border-color); color: var(--text-main);
+            padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; }
+
+        .version-block {
+            background-color: var(--bg-card); border-radius: 6px;
+            padding: 16px 20px; border: 1px solid var(--border-color);
+            margin-bottom: 15px;
+        }
+
+        .version-block h2 {
+            margin: 0 0 12px 0; padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--anthropic-coral); font-size: 1rem; font-weight: 700;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .version-date {
+            font-size: 0.75rem; color: var(--text-muted); font-weight: 400;
+        }
+
+        .change-category {
+            margin-bottom: 16px;
+        }
+
+        .change-category-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin: 14px 0 6px 0;
+            padding: 4px 8px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+        .cat-template {
+            background: rgba(217, 119, 87, 0.15);
+            border: 1px solid rgba(217, 119, 87, 0.3);
+        }
+        .cat-content {
+            background: rgba(135, 157, 134, 0.15);
+            border: 1px solid rgba(135, 157, 134, 0.3);
+        }
+
+        .change-section h3 {
+            color: var(--anthropic-teal); font-size: 0.75rem;
+            margin: 12px 0 6px 0; text-transform: uppercase;
+            letter-spacing: 0.05em; font-weight: 700;
+        }
+
+        .change-list {
+            list-style: none; padding: 0; margin: 0;
+        }
+
+        .change-list li {
+            padding: 4px 0; border-bottom: 1px solid var(--border-color);
+            font-size: 0.8rem; display: flex; gap: 8px;
+        }
+        .change-list li:last-child { border-bottom: none; }
+        .change-list li:hover { background-color: var(--row-hover); }
+
+        .tag {
+            display: inline-block; padding: 1px 5px; border-radius: 3px;
+            font-size: 0.65em; font-weight: 700; flex-shrink: 0;
+            min-width: 45px; text-align: center; margin-top: 2px;
+        }
+        .tag-add { background: rgba(135, 157, 134, 0.15); color: var(--anthropic-teal); border: 1px solid var(--anthropic-teal); }
+        .tag-fix { background: rgba(217, 119, 87, 0.15); color: var(--anthropic-coral); border: 1px solid var(--anthropic-coral); }
+        .tag-change { background: rgba(245, 158, 11, 0.1); color: #fbbf24; border: 1px solid #f59e0b; }
+        .tag-remove { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid #ef4444; }
+
+        code {
+            font-family: ui-monospace, monospace; background-color: var(--code-bg);
+            color: var(--code-color); padding: 1px 4px; border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        .global-footer {
+            text-align: center; padding: 15px; margin-top: 10px;
+            color: var(--text-muted); font-size: 0.75rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .global-footer a { color: var(--anthropic-teal); text-decoration: none; font-weight: 600; }
+        .global-footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            .global-header { flex-direction: column; align-items: flex-start; padding-top: 10px; }
+            body { padding-top: 90px; }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <header class="global-header">
+        <div class="header-title">
+            <h1>Changelog</h1>
+        </div>
+        <div class="header-nav">
+            <a href="index.html" class="header-link">Dashboard</a>
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- Template v1.1 -->
+        <div class="version-block">
+            <h2>Template v1.1 <span class="version-date">2026-03-27 — As of CC v2.1.85</span></h2>
+
+            <div class="change-category">
+                <span class="change-category-title cat-template">Template / Structure</span>
+                <ul class="change-list">
+                    <li><span class="tag tag-change">CHG</span>Replaced badge system (NEW/UNVERIFIED tags) with shaded code backgrounds + top legend</li>
+                    <li><span class="tag tag-fix">FIX</span>Fixed truncated code elements (e.g., <code>--dangerously-skip-permissions</code> was <code>--dangerously-skip...</code>)</li>
+                    <li><span class="tag tag-add">ADD</span>8-bit Claude Code minion icon in header</li>
+                    <li><span class="tag tag-change">CHG</span>Title restored to "Claude Code Reference Dashboard"</li>
+                    <li><span class="tag tag-change">CHG</span>Header restructured: title + icon left, "As of release: vX.X.XX" + changelog link + theme + search right</li>
+                    <li><span class="tag tag-change">CHG</span>Footer now tracks template version separately from CC release version</li>
+                    <li><span class="tag tag-change">CHG</span>Changelog now separates template/structural changes from content/release changes</li>
+                    <li><span class="tag tag-change">CHG</span>Complete visual redesign — darker theme, tighter spacing, compact layout</li>
+                    <li><span class="tag tag-change">CHG</span>Card h2 headings now uppercase with letter-spacing</li>
+                    <li><span class="tag tag-change">CHG</span>Command Builder: model dropdown replaced with <code>--effort</code> selector</li>
+                    <li><span class="tag tag-change">CHG</span>Command Builder: Verbose/Think checkboxes replaced with <code>--bare</code> checkbox</li>
+                    <li><span class="tag tag-change">CHG</span>Grid minimum column width reduced from 420px to 340px</li>
+                    <li><span class="tag tag-add">ADD</span>Row hover highlight on all tables</li>
+                    <li><span class="tag tag-change">CHG</span>Code elements now use <code>word-break: break-word</code> instead of <code>break-all</code></li>
+                    <li><span class="tag tag-remove">DEL</span>Removed "Extension System &amp; Auth" card — replaced with granular cards</li>
+                    <li><span class="tag tag-remove">DEL</span>Removed "Workflow &amp; Custom Commands" card</li>
+                    <li><span class="tag tag-remove">DEL</span>Removed <code>.col-2</code> layout, <code>.tip</code> blocks</li>
+                </ul>
+            </div>
+
+            <div class="change-category">
+                <span class="change-category-title cat-content">Content / CC Release Updates</span>
+
+                <div class="change-section">
+                    <h3>New Cards</h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><strong>Slash Commands (Tools)</strong> — /init, /memory, /mcp, /hooks, /skills, /agents, /chrome, /add-dir, /btw, /loop, /schedule, /voice, /doctor, /pr-comments, /security-review, /stats, /desktop, /remote-control, /reload-plugins</li>
+                        <li><span class="tag tag-add">ADD</span><strong>Config &amp; Environment</strong> — settings file priority, JSON settings, environment variables, managed-settings.d/</li>
+                        <li><span class="tag tag-add">ADD</span><strong>Skills &amp; Agent Frontmatter</strong> — skill YAML fields, agent YAML fields, built-in skills</li>
+                        <li><span class="tag tag-add">ADD</span><strong>Memory, Hooks &amp; MCP</strong> — rules, auto-memory, event hooks, MCP serve mode, elicitation</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
+                    <h3>Keyboard Shortcuts</h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>Ctrl L</code> — Clear screen + full redraw</li>
+                        <li><span class="tag tag-add">ADD</span><code>Ctrl O</code> — Toggle verbose / transcript mode</li>
+                        <li><span class="tag tag-add">ADD</span><code>Ctrl J</code> — Newline (control sequence)</li>
+                        <li><span class="tag tag-add">ADD</span><code>Tab</code> — Cycle permission modes</li>
+                        <li><span class="tag tag-add">ADD</span><code>\ P</code> — Switch model</li>
+                        <li><span class="tag tag-add">ADD</span><code>\ T</code> — Toggle thinking</li>
+                        <li><span class="tag tag-add">ADD</span>Session Picker Nav section (P, R, /, A, B keys)</li>
+                        <li><span class="tag tag-change">CHG</span><code>Ctrl F</code> kill agents &rarr; <code>Ctrl X K</code> chord (CC v2.1.83)</li>
+                        <li><span class="tag tag-remove">DEL</span>Removed duplicate Ctrl F fast mode entry</li>
+                        <li><span class="tag tag-remove">DEL</span>Removed <code>Shift+Tab</code>, <code>Cmd+P</code>, <code>Enter</code>, <code>Esc</code> standalone entries (restructured)</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
+                    <h3>Slash Commands</h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span>~30 new slash commands across two cards (Core + Tools)</li>
+                        <li><span class="tag tag-remove">DEL</span>Removed <code>/review</code>, <code>/teleport</code>, <code>/plugin</code></li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
+                    <h3>CLI Flags</h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>--bare</code> — Minimal headless mode</li>
+                        <li><span class="tag tag-add">ADD</span><code>--channels</code> — Permission relay / MCP push messages</li>
+                        <li><span class="tag tag-add">ADD</span><code>--effort</code> — Set effort level at launch</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
+                    <h3>CC v2.1.82–v2.1.85 Updates</h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-change">CHG</span><code>Ctrl F</code> &rarr; <code>Ctrl X K</code> for killing background agents (v2.1.83)</li>
+                        <li><span class="tag tag-add">ADD</span><code>CwdChanged</code> / <code>FileChanged</code> hook events (v2.1.83)</li>
+                        <li><span class="tag tag-add">ADD</span><code>initialPrompt</code> agent frontmatter field (v2.1.83)</li>
+                        <li><span class="tag tag-add">ADD</span><code>managed-settings.d/</code> drop-in policy directory (v2.1.83)</li>
+                        <li><span class="tag tag-add">ADD</span><code>TaskCreated</code> hook event (v2.1.84)</li>
+                        <li><span class="tag tag-add">ADD</span><code>if:</code> conditional field for hooks (v2.1.85)</li>
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_SUBPROCESS_ENV_SCRUB</code> env var (v2.1.83)</li>
+                        <li><span class="tag tag-fix">FIX</span>Fixed <code>SubAgentStart</code> &rarr; <code>SubagentStart</code> casing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Template v1.0 -->
+        <div class="version-block">
+            <h2>Template v1.0 <span class="version-date">2026-03 — As of CC v2.1.81</span></h2>
+
+            <div class="change-category">
+                <span class="change-category-title cat-template">Template / Structure</span>
+                <ul class="change-list">
+                    <li><span class="tag tag-add">ADD</span>Dark/light theme toggle with Anthropic brand colors</li>
+                    <li><span class="tag tag-add">ADD</span>Global search with hierarchical filtering (Ctrl+K)</li>
+                    <li><span class="tag tag-add">ADD</span>Click-to-copy on all <code>code</code> elements with flash animation</li>
+                    <li><span class="tag tag-add">ADD</span>Command Builder with model selector, output format, verbose/think flags</li>
+                    <li><span class="tag tag-add">ADD</span>Responsive mobile layout</li>
+                    <li><span class="tag tag-add">ADD</span>Badge system for NEW, UNVERIFIED, and PRO items</li>
+                </ul>
+            </div>
+
+            <div class="change-category">
+                <span class="change-category-title cat-content">Content / CC Release Updates</span>
+                <ul class="change-list">
+                    <li><span class="tag tag-add">ADD</span><strong>Keyboard Shortcuts</strong> card — submission, interrupts, navigation, UI</li>
+                    <li><span class="tag tag-add">ADD</span><strong>Slash Commands</strong> card — session/context, project development, advanced</li>
+                    <li><span class="tag tag-add">ADD</span><strong>CLI Launch Flags</strong> card — launch types, behavior, context flags</li>
+                    <li><span class="tag tag-add">ADD</span><strong>Extension System &amp; Auth</strong> card — Big 5 overview, auth commands</li>
+                    <li><span class="tag tag-add">ADD</span><strong>Hooks &amp; File Structure</strong> card — event hooks, .claude/ directory map</li>
+                    <li><span class="tag tag-add">ADD</span><strong>Workflow &amp; Custom Commands</strong> card — common combos, command variables</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer class="global-footer">
+            <a href="https://dommango.github.io" target="_blank" rel="noopener noreferrer">Context//Collapse</a>
+        </footer>
+
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const root = document.documentElement;
+            const btn = document.getElementById('themeBtn');
+            if (root.dataset.theme === 'dark') {
+                root.dataset.theme = 'light';
+                btn.innerHTML = '&#127769;';
+            } else {
+                root.dataset.theme = 'dark';
+                btn.innerHTML = '&#9728;&#65039;';
+            }
+        }
+    </script>
+</body>
+</html>

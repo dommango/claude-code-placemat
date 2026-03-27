@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code Reference Dashboard</title>
+    <style>
+        /* Base Themes */
+        :root {
+            --bg-page: #0a0a0a;
+            --bg-card: #141414;
+            --border-color: #2a2a2a;
+            --text-main: #ededed;
+            --text-muted: #888888;
+            --code-bg: #1e1e1e;
+            --code-color: #f1f1f1;
+            --anthropic-coral: #d97757;
+            --anthropic-teal: #879d86;
+            --header-bg: rgba(10, 10, 10, 0.95);
+            --success-flash: rgba(217, 119, 87, 0.3);
+            --row-hover: rgba(255, 255, 255, 0.03);
+            --code-new-bg: rgba(135, 157, 134, 0.2);
+            --code-new-border: rgba(135, 157, 134, 0.5);
+            --code-unverified-bg: rgba(245, 158, 11, 0.15);
+            --code-unverified-border: rgba(245, 158, 11, 0.4);
+        }
+
+        :root[data-theme="light"] {
+            --bg-page: #f4f4f5;
+            --bg-card: #ffffff;
+            --border-color: #e4e4e7;
+            --text-main: #18181b;
+            --text-muted: #52525b;
+            --code-bg: #f4f4f5;
+            --code-color: #18181b;
+            --anthropic-coral: #c2410c;
+            --anthropic-teal: #0f766e;
+            --header-bg: rgba(244, 244, 245, 0.95);
+            --success-flash: rgba(194, 65, 12, 0.2);
+            --row-hover: rgba(0, 0, 0, 0.02);
+            --code-new-bg: rgba(15, 118, 110, 0.1);
+            --code-new-border: rgba(15, 118, 110, 0.35);
+            --code-unverified-bg: rgba(245, 158, 11, 0.1);
+            --code-unverified-border: rgba(245, 158, 11, 0.3);
+        }
+
+        body {
+            margin: 0;
+            padding: 15px;
+            font-family: 'Geist', 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.4;
+            padding-top: 65px;
+            transition: background-color 0.3s, color 0.3s;
+            font-size: 0.85rem;
+        }
+
+        /* --- STICKY HEADER & CONTROLS --- */
+        .global-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--header-bg);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-title h1 {
+            color: var(--anthropic-coral);
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .minion-icon {
+            width: 24px;
+            height: 24px;
+            image-rendering: pixelated;
+        }
+
+        .global-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .release-tag {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        .theme-toggle {
+            background: none; border: 1px solid var(--border-color); color: var(--text-main);
+            padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;
+        }
+
+        .header-link {
+            color: var(--text-muted); text-decoration: none; font-size: 0.8rem;
+            padding: 4px 10px; border: 1px solid var(--border-color); border-radius: 4px;
+        }
+        .header-link:hover { color: var(--text-main); border-color: var(--anthropic-teal); }
+
+        #dashboardSearch {
+            width: 180px; padding: 6px 12px; border-radius: 4px; border: 1px solid var(--border-color);
+            background: var(--code-bg); color: var(--text-main); font-size: 0.8rem;
+        }
+        #dashboardSearch:focus { outline: none; border-color: var(--anthropic-teal); }
+
+        /* --- DASHBOARD GRID & CARDS --- */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 15px;
+            max-width: 1900px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 6px;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .card.full-width { grid-column: 1 / -1; }
+
+        .card h2 {
+            margin: 0 0 10px 0;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .search-group { margin-bottom: 12px; }
+
+        .search-group h3 {
+            color: var(--anthropic-teal);
+            font-size: 0.75rem;
+            margin: 10px 0 6px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+        }
+
+        /* --- TABLES & CODE (Compact) --- */
+        table { width: 100%; border-collapse: collapse; font-size: 0.8rem; table-layout: fixed; }
+        td { padding: 4px 6px; border-bottom: 1px solid var(--border-color); vertical-align: middle; }
+        td:first-child { width: 42%; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover { background-color: var(--row-hover); }
+
+        code {
+            font-family: ui-monospace, monospace;
+            background-color: var(--code-bg);
+            color: var(--code-color);
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-size: 0.85em;
+            cursor: pointer;
+            border: 1px solid transparent;
+            word-break: break-word;
+        }
+        code:hover { border-color: var(--anthropic-coral); }
+
+        /* Shaded code states */
+        code.new {
+            background-color: var(--code-new-bg);
+            border-color: var(--code-new-border);
+        }
+        code.unverified {
+            background-color: var(--code-unverified-bg);
+            border-color: var(--code-unverified-border);
+        }
+
+        @keyframes copyFlash {
+            0% { background-color: var(--success-flash); }
+            100% { background-color: var(--code-bg); }
+        }
+        code.copied { animation: copyFlash 0.3s ease-out; border-color: var(--anthropic-coral); }
+
+        /* --- COMPACT BUILDER --- */
+        .compact-builder { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 0.8rem; }
+        .compact-builder input, .compact-builder select {
+            padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border-color);
+            background: var(--code-bg); color: var(--text-main); font-size: 0.8rem;
+        }
+        .compact-builder input[type="text"] { flex: 2; min-width: 200px; }
+        #generatedCmd { flex: 1; min-width: 150px; padding: 4px 8px; background: var(--code-bg); color: var(--anthropic-coral); border: 1px dashed var(--border-color); text-align: center; }
+
+        /* --- LEGEND --- */
+        .legend {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            padding: 6px 0;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .legend-swatch {
+            display: inline-block;
+            width: 32px;
+            height: 16px;
+            border-radius: 3px;
+            vertical-align: middle;
+        }
+        .swatch-new {
+            background-color: var(--code-new-bg);
+            border: 1px solid var(--code-new-border);
+        }
+        .swatch-unverified {
+            background-color: var(--code-unverified-bg);
+            border: 1px solid var(--code-unverified-border);
+        }
+        .swatch-default {
+            background-color: var(--code-bg);
+            border: 1px solid transparent;
+        }
+
+        .desc { color: var(--text-muted); font-size: 0.75rem; }
+
+        /* --- FOOTER --- */
+        .global-footer {
+            grid-column: 1 / -1; text-align: center; padding: 15px; margin-top: 10px;
+            color: var(--text-muted); font-size: 0.75rem; border-top: 1px solid var(--border-color);
+        }
+        .global-footer a { color: var(--anthropic-teal); text-decoration: none; font-weight: 600; }
+        .global-footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            .global-header { flex-direction: column; align-items: flex-start; padding-top: 10px; }
+            .global-controls { width: 100%; justify-content: space-between; }
+            body { padding-top: 90px; }
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <header class="global-header">
+        <div class="header-title">
+            <!-- 8-bit Claude Code minion icon -->
+            <svg class="minion-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <rect x="5" y="1" width="6" height="2" fill="#d97757"/>
+                <rect x="4" y="3" width="8" height="2" fill="#d97757"/>
+                <rect x="3" y="5" width="10" height="3" fill="#d97757"/>
+                <rect x="5" y="5" width="2" height="2" fill="#1e1e1e"/>
+                <rect x="9" y="5" width="2" height="2" fill="#1e1e1e"/>
+                <rect x="6" y="6" width="1" height="1" fill="#f1f1f1"/>
+                <rect x="10" y="6" width="1" height="1" fill="#f1f1f1"/>
+                <rect x="4" y="8" width="8" height="2" fill="#d97757"/>
+                <rect x="6" y="9" width="4" height="1" fill="#1e1e1e"/>
+                <rect x="3" y="10" width="3" height="3" fill="#d97757"/>
+                <rect x="10" y="10" width="3" height="3" fill="#d97757"/>
+                <rect x="5" y="10" width="6" height="3" fill="#d97757"/>
+                <rect x="3" y="13" width="3" height="2" fill="#d97757"/>
+                <rect x="10" y="13" width="3" height="2" fill="#d97757"/>
+            </svg>
+            <h1>Claude Code Reference Dashboard</h1>
+        </div>
+        <div class="global-controls">
+            <span class="release-tag">As of release: v2.1.85</span>
+            <a href="changelog.html" class="header-link">Changelog</a>
+            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
+            <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
+        </div>
+    </header>
+
+    <div class="dashboard-grid">
+
+        <!-- Legend + Command Builder -->
+        <div class="card full-width search-exclude" style="padding: 8px 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                <div class="legend">
+                    <div class="legend-item"><span class="legend-swatch swatch-default"></span> Verified</div>
+                    <div class="legend-item"><span class="legend-swatch swatch-new"></span> New (recent release)</div>
+                    <div class="legend-item"><span class="legend-swatch swatch-unverified"></span> Unverified</div>
+                </div>
+                <div class="compact-builder">
+                    <span style="color: var(--anthropic-teal); font-weight: 700;">BUILDER:</span>
+                    <input type="text" id="labPrompt" placeholder="Instruction (e.g., refactor auth)">
+                    <select id="labEffort">
+                        <option value="">Effort: Auto</option>
+                        <option value="--effort high">High (Opus)</option>
+                        <option value="--effort low">Low (Haiku)</option>
+                    </select>
+                    <select id="labFormat">
+                        <option value="">Text Output</option>
+                        <option value="--output-format json">JSON Output</option>
+                    </select>
+                    <label style="color: var(--text-muted);"><input type="checkbox" id="labBare"> Bare Headless</label>
+                    <code id="generatedCmd" title="Click to copy">claude -p ""</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Keys & Shortcuts</h2>
+
+            <div class="search-group">
+                <h3>General Controls</h3>
+                <table>
+                    <tr class="search-item"><td><code>Ctrl C</code> / <code>D</code></td><td class="desc">Cancel input / Exit session</td></tr>
+                    <tr class="search-item"><td><code class="new">Ctrl L</code></td><td class="desc">Clear screen + full redraw</td></tr>
+                    <tr class="search-item"><td><code>Ctrl O</code></td><td class="desc">Toggle verbose output</td></tr>
+                    <tr class="search-item"><td><code>Ctrl R</code></td><td class="desc">Reverse search history</td></tr>
+                    <tr class="search-item"><td><code>Ctrl G</code></td><td class="desc">Open prompt in external editor</td></tr>
+                    <tr class="search-item"><td><code>Ctrl B</code></td><td class="desc">Background running task</td></tr>
+                    <tr class="search-item"><td><code>Ctrl T</code></td><td class="desc">Toggle task list</td></tr>
+                    <tr class="search-item"><td><code>Ctrl V</code></td><td class="desc">Paste image from clipboard</td></tr>
+                    <tr class="search-item"><td><code>Ctrl X K</code></td><td class="desc">Kill background agents (chord, x2)</td></tr>
+                    <tr class="search-item"><td><code>Esc Esc</code></td><td class="desc">Rewind / undo state</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Mode & Input</h3>
+                <table>
+                    <tr class="search-item"><td><code class="new">Tab</code></td><td class="desc">Cycle permission modes</td></tr>
+                    <tr class="search-item"><td><code class="new">\ P</code></td><td class="desc">Switch model</td></tr>
+                    <tr class="search-item"><td><code class="new">\ T</code></td><td class="desc">Toggle thinking on/off</td></tr>
+                    <tr class="search-item"><td><code>\ Enter</code></td><td class="desc">Newline (quick)</td></tr>
+                    <tr class="search-item"><td><code>Ctrl J</code></td><td class="desc">Newline (control seq)</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Session Picker Nav</h3>
+                <table>
+                    <tr class="search-item"><td><code>P</code> / <code>R</code></td><td class="desc">Preview / Rename session</td></tr>
+                    <tr class="search-item"><td><code>/</code></td><td class="desc">Search sessions</td></tr>
+                    <tr class="search-item"><td><code>A</code> / <code>B</code></td><td class="desc">Filter All projects / Current branch</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Slash Commands (Core)</h2>
+
+            <div class="search-group">
+                <h3>Session Management</h3>
+                <table>
+                    <tr class="search-item"><td><code>/clear</code></td><td class="desc">Clear conversation context</td></tr>
+                    <tr class="search-item"><td><code>/compact [focus]</code></td><td class="desc">Compact context to free space</td></tr>
+                    <tr class="search-item"><td><code class="unverified">/resume</code></td><td class="desc">Display session picker menu</td></tr>
+                    <tr class="search-item"><td><code>/rename [name]</code></td><td class="desc">Name current session</td></tr>
+                    <tr class="search-item"><td><code>/branch [name]</code></td><td class="desc">Branch convo (formerly /fork)</td></tr>
+                    <tr class="search-item"><td><code>/cost</code></td><td class="desc">Token usage stats</td></tr>
+                    <tr class="search-item"><td><code>/context</code></td><td class="desc">Visualize context window (grid)</td></tr>
+                    <tr class="search-item"><td><code>/diff</code></td><td class="desc">Interactive diff viewer</td></tr>
+                    <tr class="search-item"><td><code>/copy</code></td><td class="desc">Copy last response</td></tr>
+                    <tr class="search-item"><td><code>/export</code></td><td class="desc">Export conversation</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Configuration</h3>
+                <table>
+                    <tr class="search-item"><td><code>/config</code></td><td class="desc">Open settings interface</td></tr>
+                    <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model manually</td></tr>
+                    <tr class="search-item"><td><code class="new">/effort [level]</code></td><td class="desc">Set effort (low/med/high/auto)</td></tr>
+                    <tr class="search-item"><td><code class="unverified">/fast [on/off]</code></td><td class="desc">Toggle Fast mode</td></tr>
+                    <tr class="search-item"><td><code>/permissions</code></td><td class="desc">View/update tool permissions</td></tr>
+                    <tr class="search-item"><td><code class="new">/color [color]</code></td><td class="desc">Set prompt-bar color</td></tr>
+                    <tr class="search-item"><td><code>/keybindings</code></td><td class="desc">Customize keyboard shortcuts</td></tr>
+                    <tr class="search-item"><td><code>/terminal-setup</code></td><td class="desc">Configure terminal integration</td></tr>
+                    <tr class="search-item"><td><code>/theme</code></td><td class="desc">Change color theme</td></tr>
+                    <tr class="search-item"><td><code>/vim</code></td><td class="desc">Toggle vim-style editing</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Slash Commands (Tools)</h2>
+
+            <div class="search-group">
+                <h3>Development Tools</h3>
+                <table>
+                    <tr class="search-item"><td><code>/init</code></td><td class="desc">Create CLAUDE.md memory</td></tr>
+                    <tr class="search-item"><td><code>/memory</code></td><td class="desc">Edit CLAUDE.md files directly</td></tr>
+                    <tr class="search-item"><td><code>/mcp</code></td><td class="desc">Manage MCP servers</td></tr>
+                    <tr class="search-item"><td><code>/hooks</code></td><td class="desc">Manage event lifecycle hooks</td></tr>
+                    <tr class="search-item"><td><code>/skills</code></td><td class="desc">List available active skills</td></tr>
+                    <tr class="search-item"><td><code>/agents</code></td><td class="desc">Manage sub-agents</td></tr>
+                    <tr class="search-item"><td><code>/chrome</code></td><td class="desc">Chrome browser integration</td></tr>
+                    <tr class="search-item"><td><code>/add-dir &lt;path&gt;</code></td><td class="desc">Add working directory to context</td></tr>
+                    <tr class="search-item"><td><code class="new">/reload-plugins</code></td><td class="desc">Hot-reload local plugins</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Special & Utility</h3>
+                <table>
+                    <tr class="search-item"><td><code>/btw &lt;query&gt;</code></td><td class="desc">Side question (does not alter context)</td></tr>
+                    <tr class="search-item"><td><code class="unverified">/plan [desc]</code></td><td class="desc">Switch to Plan Mode directly</td></tr>
+                    <tr class="search-item"><td><code>/loop [interval]</code></td><td class="desc">Schedule recurring background task</td></tr>
+                    <tr class="search-item"><td><code class="new">/schedule</code></td><td class="desc">Cloud scheduled tasks</td></tr>
+                    <tr class="search-item"><td><code>/voice</code></td><td class="desc">Push-to-talk voice prompting</td></tr>
+                    <tr class="search-item"><td><code>/doctor</code></td><td class="desc">Diagnose installation/env issues</td></tr>
+                    <tr class="search-item"><td><code>/pr-comments [PR]</code></td><td class="desc">Fetch GitHub PR comments</td></tr>
+                    <tr class="search-item"><td><code>/security-review</code></td><td class="desc">Security analysis of uncommitted code</td></tr>
+                    <tr class="search-item"><td><code>/stats</code> / <code>/insights</code></td><td class="desc">Usage streaks / HTML sessions report</td></tr>
+                    <tr class="search-item"><td><code>/desktop</code></td><td class="desc">Continue session in Desktop app</td></tr>
+                    <tr class="search-item"><td><code>/remote-control</code></td><td class="desc">Bridge session to claude.ai/code</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>CLI & Headless Flags</h2>
+
+            <div class="search-group">
+                <h3>Core Execution</h3>
+                <table>
+                    <tr class="search-item"><td><code>claude</code></td><td class="desc">Start interactive REPL</td></tr>
+                    <tr class="search-item"><td><code>claude -p "q"</code></td><td class="desc">Headless execution (scripting)</td></tr>
+                    <tr class="search-item"><td><code>claude -c</code> / <code>-r "n"</code></td><td class="desc">Continue last / Resume specific</td></tr>
+                    <tr class="search-item"><td><code>claude --from-pr</code></td><td class="desc">Resume session linked to a PR</td></tr>
+                    <tr class="search-item"><td><code>claude --fork-session</code></td><td class="desc">Fork existing session on resume</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Headless & CI Flags</h3>
+                <table>
+                    <tr class="search-item"><td><code class="new">--bare</code></td><td class="desc">Minimal headless (no hooks/LSP)</td></tr>
+                    <tr class="search-item"><td><code class="new">--channels</code></td><td class="desc">Permission relay / MCP push msg</td></tr>
+                    <tr class="search-item"><td><code>--output-format json</code></td><td class="desc">Structured JSON output</td></tr>
+                    <tr class="search-item"><td><code>--json-schema</code></td><td class="desc">Strict JSON schema validation</td></tr>
+                    <tr class="search-item"><td><code>--dangerously-skip-permissions</code></td><td class="desc">Skip all approval prompts</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>State & Behavior</h3>
+                <table>
+                    <tr class="search-item"><td><code>-w</code> / <code>--worktree</code></td><td class="desc">Start in isolated git worktree</td></tr>
+                    <tr class="search-item"><td><code>--effort</code></td><td class="desc">Set effort level (low/med/high)</td></tr>
+                    <tr class="search-item"><td><code>--model</code></td><td class="desc">Override specific model at launch</td></tr>
+                    <tr class="search-item"><td><code>--fallback-model</code></td><td class="desc">Fallback if primary is overloaded</td></tr>
+                    <tr class="search-item"><td><code>--permission-mode plan</code></td><td class="desc">Start in read-only plan mode</td></tr>
+                    <tr class="search-item"><td><code>--max-budget-usd</code></td><td class="desc">Set cost cap for session</td></tr>
+                    <tr class="search-item"><td><code>--remote</code></td><td class="desc">Start web-accessible session</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Config & Environment</h2>
+
+            <div class="search-group">
+                <h3>Files & Priority</h3>
+                <table>
+                    <tr class="search-item"><td><code>~/.claude/settings.json</code></td><td class="desc">User global defaults</td></tr>
+                    <tr class="search-item"><td><code>.claude/settings.json</code></td><td class="desc">Project shared (committed)</td></tr>
+                    <tr class="search-item"><td><code>.claude/settings.local.json</code></td><td class="desc">Project local only (gitignored)</td></tr>
+                    <tr class="search-item"><td><code>~/.claude.json</code></td><td class="desc">OAuth, MCP, state configuration</td></tr>
+                    <tr class="search-item"><td><code>.mcp.json</code></td><td class="desc">Project-specific MCP servers</td></tr>
+                    <tr class="search-item"><td><code>managed-settings.d/</code></td><td class="desc">Drop-in policy fragments (alphabetical merge)</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Key JSON Settings</h3>
+                <table>
+                    <tr class="search-item"><td><code>modelOverrides</code></td><td class="desc">Map model picker to custom IDs</td></tr>
+                    <tr class="search-item"><td><code>autoMemoryDirectory</code></td><td class="desc">Custom auto-loaded memory dir</td></tr>
+                    <tr class="search-item"><td><code class="new">worktree.sparsePaths</code></td><td class="desc">Sparse checkout dirs for agents</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Environment Variables</h3>
+                <table>
+                    <tr class="search-item"><td><code>ANTHROPIC_API_KEY</code></td><td class="desc">Auth override</td></tr>
+                    <tr class="search-item"><td><code>ANTHROPIC_MODEL</code></td><td class="desc">Default model override</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_EFFORT_LEVEL</code></td><td class="desc">Default effort (low/med/high)</td></tr>
+                    <tr class="search-item"><td><code>MAX_THINKING_TOKENS</code></td><td class="desc">Cap extended thinking limits</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_PLUGIN_SEED_DIR</code></td><td class="desc">Multiple plugin seed directories</td></tr>
+                    <tr class="search-item"><td><code>IS_DEMO</code></td><td class="desc">Demo mode (hides email/org)</td></tr>
+                    <tr class="search-item"><td><code>CLAUDECODE</code></td><td class="desc">Detects if running inside CC shell</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_SUBPROCESS_ENV_SCRUB</code></td><td class="desc">Strip credentials from subprocesses</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Skills & Agent Frontmatter</h2>
+
+            <div class="search-group">
+                <h3>Built-in Skills & Locations</h3>
+                <table>
+                    <tr class="search-item"><td><code>/simplify</code></td><td class="desc">Code review (3 parallel agents)</td></tr>
+                    <tr class="search-item"><td><code>/batch</code></td><td class="desc">Large parallel changes (5-30 worktrees)</td></tr>
+                    <tr class="search-item"><td><code>/claude-api</code></td><td class="desc">Load API + SDK reference into context</td></tr>
+                    <tr class="search-item"><td><code>.claude/skills/&lt;name&gt;/</code></td><td class="desc">Project specific skill directory</td></tr>
+                    <tr class="search-item"><td><code>~/.claude/skills/&lt;name&gt;/</code></td><td class="desc">Global personal skill directory</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Skill YAML Frontmatter</h3>
+                <table>
+                    <tr class="search-item"><td><code>description</code></td><td class="desc">Auto-invocation trigger string</td></tr>
+                    <tr class="search-item"><td><code class="new">effort</code></td><td class="desc">Override effort level specifically for skill</td></tr>
+                    <tr class="search-item"><td><code>allowed-tools</code></td><td class="desc">Skip permission prompts for skill</td></tr>
+                    <tr class="search-item"><td><code>context: fork</code></td><td class="desc">Run skill logic in an isolated subagent</td></tr>
+                    <tr class="search-item"><td><code>$ARGUMENTS</code></td><td class="desc">User input placeholder replacement</td></tr>
+                    <tr class="search-item"><td><code class="unverified">$FILE_PATH</code></td><td class="desc">File path resolution (hook strings only)</td></tr>
+                    <tr class="search-item"><td><code>${CLAUDE_SKILL_DIR}</code></td><td class="desc">Reference the skill's own directory</td></tr>
+                    <tr class="search-item"><td><code>! 'cmd'</code></td><td class="desc">Dynamic bash execution context injection</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Agent YAML Frontmatter</h3>
+                <table>
+                    <tr class="search-item"><td><code>permissionMode</code></td><td class="desc">default / acceptEdits / plan / bypass</td></tr>
+                    <tr class="search-item"><td><code>isolation: worktree</code></td><td class="desc">Run agent in isolated git worktree</td></tr>
+                    <tr class="search-item"><td><code>memory: user|project</code></td><td class="desc">Persistent memory storage scope</td></tr>
+                    <tr class="search-item"><td><code>background: true</code></td><td class="desc">Run entirely as background task</td></tr>
+                    <tr class="search-item"><td><code>initialPrompt</code></td><td class="desc">Auto-submit first turn on spawn</td></tr>
+                    <tr class="search-item"><td><code class="new">SendMessage</code></td><td class="desc">Auto-resumes stopped agents</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Memory, Hooks & MCP</h2>
+
+            <div class="search-group">
+                <h3>Rules & Auto-Memory</h3>
+                <table>
+                    <tr class="search-item"><td><code>.claude/rules/*.md</code></td><td class="desc">Project specific structural rules</td></tr>
+                    <tr class="search-item"><td><code>~/.claude/rules/*.md</code></td><td class="desc">User specific global rules</td></tr>
+                    <tr class="search-item"><td><code>paths:</code> (frontmatter)</td><td class="desc">Path-specific rule triggers</td></tr>
+                    <tr class="search-item"><td><code>@path/to/file</code></td><td class="desc">Import file directly in CLAUDE.md</td></tr>
+                    <tr class="search-item"><td><code>.../memory/MEMORY.md</code></td><td class="desc">Topic files, automatically loaded</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Event Hooks</h3>
+                <table>
+                    <tr class="search-item"><td><code>PreToolUse</code> / <code>PostToolUse</code></td><td class="desc">Intercept before/after tool execution</td></tr>
+                    <tr class="search-item"><td><code>SubagentStart</code> / <code>Stop</code></td><td class="desc">Lifecycle triggers for agent spawning</td></tr>
+                    <tr class="search-item"><td><code>SessionEnd</code></td><td class="desc">Run cleanup script when session closes</td></tr>
+                    <tr class="search-item"><td><code>CwdChanged</code> / <code>FileChanged</code></td><td class="desc">React to directory or file changes</td></tr>
+                    <tr class="search-item"><td><code>TaskCreated</code></td><td class="desc">Fires when task created via TaskCreate</td></tr>
+                    <tr class="search-item"><td><code>if:</code> (hook field)</td><td class="desc">Conditional execution (permission rule syntax)</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>MCP Servers</h3>
+                <table>
+                    <tr class="search-item"><td><code>claude mcp list/add/remove</code></td><td class="desc">Standard MCP server management</td></tr>
+                    <tr class="search-item"><td><code>claude mcp serve</code></td><td class="desc">Run Claude Code as an MCP server</td></tr>
+                    <tr class="search-item"><td><code>--transport http/stdio/sse</code></td><td class="desc">Protocol connection methods</td></tr>
+                    <tr class="search-item"><td><code class="new">Elicitation</code></td><td class="desc">Servers can request input mid-task</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Auth Commands</h3>
+                <table>
+                    <tr class="search-item"><td><code>claude auth login/logout</code></td><td class="desc">Session authentication control</td></tr>
+                    <tr class="search-item"><td><code>claude auth status</code></td><td class="desc">Check current authentication validity</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <footer class="global-footer">
+            Template v1.1 | March 2026<br>
+            <a href="https://dommango.github.io" target="_blank" rel="noopener noreferrer">Context//Collapse</a>
+        </footer>
+
+    </div>
+
+    <script>
+        // --- THEME TOGGLE LOGIC ---
+        function toggleTheme() {
+            const root = document.documentElement;
+            const btn = document.getElementById('themeBtn');
+            if (root.dataset.theme === 'dark') {
+                root.dataset.theme = 'light';
+                btn.innerHTML = '&#127769;';
+            } else {
+                root.dataset.theme = 'dark';
+                btn.innerHTML = '&#9728;&#65039;';
+            }
+        }
+
+        // --- CLICK TO COPY LOGIC ---
+        document.querySelectorAll('code').forEach(el => {
+            if(el.id === 'generatedCmd') return;
+            el.title = "Click to copy";
+            el.addEventListener('click', () => copyText(el, el.innerText));
+        });
+
+        async function copyText(element, text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                element.classList.add('copied');
+                setTimeout(() => element.classList.remove('copied'), 300);
+            } catch (err) { console.error('Failed to copy: ', err); }
+        }
+
+        // --- HIERARCHICAL SEARCH LOGIC ---
+        const searchInput = document.getElementById('dashboardSearch');
+        searchInput.addEventListener('input', (e) => performSearch(e.target.value));
+
+        window.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault(); searchInput.focus();
+            }
+        });
+
+        function performSearch(term) {
+            term = term.toLowerCase().trim();
+            const cards = document.querySelectorAll('.dashboard-grid .card:not(.search-exclude)');
+
+            cards.forEach(card => {
+                let cardHasMatch = false;
+
+                if (!term) {
+                    card.style.display = 'block';
+                    card.querySelectorAll('.search-group').forEach(sg => sg.style.display = 'block');
+                    card.querySelectorAll('.search-item').forEach(item => item.style.display = 'table-row');
+                    return;
+                }
+
+                const cardTitle = card.querySelector('h2').innerText.toLowerCase();
+                if (cardTitle.includes(term)) {
+                    card.style.display = 'block';
+                    card.querySelectorAll('.search-group').forEach(sg => sg.style.display = 'block');
+                    card.querySelectorAll('.search-item').forEach(item => item.style.display = 'table-row');
+                    return;
+                }
+
+                const groups = card.querySelectorAll('.search-group');
+                groups.forEach(group => {
+                    let groupHasMatch = false;
+                    const heading = group.querySelector('h3');
+
+                    if (heading && heading.innerText.toLowerCase().includes(term)) {
+                        groupHasMatch = true;
+                        group.querySelectorAll('.search-item').forEach(item => item.style.display = 'table-row');
+                    } else {
+                        const items = group.querySelectorAll('.search-item');
+                        items.forEach(item => {
+                            if (item.innerText.toLowerCase().includes(term)) {
+                                item.style.display = 'table-row';
+                                groupHasMatch = true;
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        });
+                    }
+
+                    group.style.display = groupHasMatch ? 'block' : 'none';
+                    if (groupHasMatch) cardHasMatch = true;
+                });
+
+                card.style.display = cardHasMatch ? 'block' : 'none';
+            });
+        }
+
+        // --- COMPACT COMMAND BUILDER LOGIC ---
+        const labPrompt = document.getElementById('labPrompt');
+        const labEffort = document.getElementById('labEffort');
+        const labFormat = document.getElementById('labFormat');
+        const labBare = document.getElementById('labBare');
+        const genOut = document.getElementById('generatedCmd');
+
+        const updateCmd = () => {
+            const prompt = labPrompt.value.replace(/"/g, '\\"');
+            const effort = labEffort.value;
+            const format = labFormat.value;
+            const bare = labBare.checked ? '--bare' : '';
+
+            let cmd = `claude -p "${prompt}"`;
+            if (effort) cmd += ` ${effort}`;
+            if (format) cmd += ` ${format}`;
+            if (bare) cmd += ` ${bare}`;
+
+            genOut.innerText = cmd.trim();
+        };
+
+        [labPrompt, labEffort, labFormat].forEach(el => el.addEventListener('input', updateCmd));
+        labBare.addEventListener('change', updateCmd);
+
+        genOut.addEventListener('click', () => copyText(genOut, genOut.innerText));
+
+    </script>
+</body>
+</html>
