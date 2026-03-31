@@ -287,7 +287,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.86</span>
+            <span class="release-tag">As of release: v2.1.88</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -494,6 +494,7 @@
                     <tr class="search-item"><td><code>modelOverrides</code></td><td class="desc">Map model picker to custom IDs</td></tr>
                     <tr class="search-item"><td><code>autoMemoryDirectory</code></td><td class="desc">Custom auto-loaded memory dir</td></tr>
                     <tr class="search-item"><td><code>worktree.sparsePaths</code></td><td class="desc">Sparse checkout dirs for agents</td></tr>
+                    <tr class="search-item"><td><code class="new">showThinkingSummaries</code></td><td class="desc">Show thinking summaries in interactive sessions (default: false)</td></tr> <!-- added:v2.1.88 -->
                 </table>
             </div>
 
@@ -508,7 +509,8 @@
                     <tr class="search-item"><td><code>IS_DEMO</code></td><td class="desc">Demo mode (hides email/org)</td></tr>
                     <tr class="search-item"><td><code>CLAUDECODE</code></td><td class="desc">Detects if running inside CC shell</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_SUBPROCESS_ENV_SCRUB</code></td><td class="desc">Strip credentials from subprocesses</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_MCP_SERVER_NAME</code> / <code class="new">CLAUDE_CODE_MCP_SERVER_URL</code></td><td class="desc">Inject server identity into MCP headerHelper scripts</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_MCP_SERVER_NAME</code> / <code>CLAUDE_CODE_MCP_SERVER_URL</code></td><td class="desc">Inject server identity into MCP headerHelper scripts</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_NO_FLICKER=1</code></td><td class="desc">Opt into flicker-free alt-screen rendering with virtualized scrollback</td></tr> <!-- added:v2.1.88 -->
                 </table>
             </div>
         </div>
@@ -577,6 +579,7 @@
                     <tr class="search-item"><td><code>CwdChanged</code> / <code>FileChanged</code></td><td class="desc">React to directory or file changes</td></tr>
                     <tr class="search-item"><td><code>TaskCreated</code></td><td class="desc">Fires when task created via TaskCreate</td></tr>
                     <tr class="search-item"><td><code>if:</code> (hook field)</td><td class="desc">Conditional execution (permission rule syntax)</td></tr>
+                    <tr class="search-item"><td><code class="new">PermissionDenied</code></td><td class="desc">Fires after auto mode classifier denials; return {retry:true} to allow retry</td></tr> <!-- added:v2.1.88 -->
                 </table>
             </div>
 

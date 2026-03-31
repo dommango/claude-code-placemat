@@ -263,7 +263,15 @@
                     <h3>CC v2.1.86 Updates</h3>
                     <ul class="change-list">
                         <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_MCP_SERVER_NAME</code> / <code>CLAUDE_CODE_MCP_SERVER_URL</code> — Inject server identity into MCP <code>headersHelper</code> scripts, enabling one helper to serve multiple servers (v2.1.85)</li>
-                        <li><span class="tag tag-change">CHG</span>Bumped release tag from v2.1.85 to v2.1.86 (March 27, 2026)</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
+                    <h3>CC v2.1.88 Updates</h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_NO_FLICKER=1</code> env var — Opt into flicker-free alt-screen rendering with virtualized scrollback</li>
+                        <li><span class="tag tag-add">ADD</span><code>PermissionDenied</code> hook event — Fires after auto mode classifier denials; return <code>{retry:true}</code> to allow retry</li>
+                        <li><span class="tag tag-add">ADD</span><code>showThinkingSummaries</code> JSON setting — Show thinking summaries in interactive sessions (default: false since v2.1.88)</li>
                     </ul>
                 </div>
             </div>
