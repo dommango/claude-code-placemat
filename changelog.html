@@ -203,6 +203,46 @@
                 <span class="change-category-title cat-content">Content / CC Release Updates</span>
 
                 <div class="change-section">
+                    <h3>CC v2.1.89–v2.1.90 <span class="version-date">2026-04-01</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>/powerup</code> slash command — Interactive lessons teaching CC features with animated demos</li>
+                        <li><span class="tag tag-add">ADD</span><code>MCP_CONNECTION_NONBLOCKING=true</code> env var — Skip MCP connection wait in headless (-p) mode</li>
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_PLUGIN_KEEP_MARKETPLACE_ON_FAILURE</code> env var — Keep marketplace cache when git pull fails (offline envs)</li>
+                        <li><span class="tag tag-add">ADD</span><code>"defer"</code> PreToolUse hook decision — Headless sessions pause at tool call; resume with <code>-p --resume</code> to re-evaluate</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
+                    <h3>CC v2.1.88 <span class="version-date">2026-03-31</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_NO_FLICKER=1</code> env var — Opt into flicker-free alt-screen rendering with virtualized scrollback</li>
+                        <li><span class="tag tag-add">ADD</span><code>PermissionDenied</code> hook event — Fires after auto mode classifier denials; return <code>{retry:true}</code> to allow retry</li>
+                        <li><span class="tag tag-add">ADD</span><code>showThinkingSummaries</code> JSON setting — Show thinking summaries in interactive sessions (default: false since v2.1.88)</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
+                    <h3>CC v2.1.86 <span class="version-date">2026-03-28</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_MCP_SERVER_NAME</code> / <code>CLAUDE_CODE_MCP_SERVER_URL</code> — Inject server identity into MCP <code>headersHelper</code> scripts, enabling one helper to serve multiple servers (v2.1.85)</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
+                    <h3>CC v2.1.82–v2.1.85 <span class="version-date">2026-03-27</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-change">CHG</span><code>Ctrl F</code> &rarr; <code>Ctrl X K</code> for killing background agents (v2.1.83)</li>
+                        <li><span class="tag tag-add">ADD</span><code>CwdChanged</code> / <code>FileChanged</code> hook events (v2.1.83)</li>
+                        <li><span class="tag tag-add">ADD</span><code>initialPrompt</code> agent frontmatter field (v2.1.83)</li>
+                        <li><span class="tag tag-add">ADD</span><code>managed-settings.d/</code> drop-in policy directory (v2.1.83)</li>
+                        <li><span class="tag tag-add">ADD</span><code>TaskCreated</code> hook event (v2.1.84)</li>
+                        <li><span class="tag tag-add">ADD</span><code>if:</code> conditional field for hooks (v2.1.85)</li>
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_SUBPROCESS_ENV_SCRUB</code> env var (v2.1.83)</li>
+                        <li><span class="tag tag-fix">FIX</span>Fixed <code>SubAgentStart</code> &rarr; <code>SubagentStart</code> casing</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
                     <h3>New Cards</h3>
                     <ul class="change-list">
                         <li><span class="tag tag-add">ADD</span><strong>Slash Commands (Tools)</strong> — /init, /memory, /mcp, /hooks, /skills, /agents, /chrome, /add-dir, /btw, /loop, /schedule, /voice, /doctor, /pr-comments, /security-review, /stats, /desktop, /remote-control, /reload-plugins</li>
@@ -242,46 +282,6 @@
                         <li><span class="tag tag-add">ADD</span><code>--bare</code> — Minimal headless mode</li>
                         <li><span class="tag tag-add">ADD</span><code>--channels</code> — Permission relay / MCP push messages</li>
                         <li><span class="tag tag-add">ADD</span><code>--effort</code> — Set effort level at launch</li>
-                    </ul>
-                </div>
-
-                <div class="change-section">
-                    <h3>CC v2.1.82–v2.1.85 Updates</h3>
-                    <ul class="change-list">
-                        <li><span class="tag tag-change">CHG</span><code>Ctrl F</code> &rarr; <code>Ctrl X K</code> for killing background agents (v2.1.83)</li>
-                        <li><span class="tag tag-add">ADD</span><code>CwdChanged</code> / <code>FileChanged</code> hook events (v2.1.83)</li>
-                        <li><span class="tag tag-add">ADD</span><code>initialPrompt</code> agent frontmatter field (v2.1.83)</li>
-                        <li><span class="tag tag-add">ADD</span><code>managed-settings.d/</code> drop-in policy directory (v2.1.83)</li>
-                        <li><span class="tag tag-add">ADD</span><code>TaskCreated</code> hook event (v2.1.84)</li>
-                        <li><span class="tag tag-add">ADD</span><code>if:</code> conditional field for hooks (v2.1.85)</li>
-                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_SUBPROCESS_ENV_SCRUB</code> env var (v2.1.83)</li>
-                        <li><span class="tag tag-fix">FIX</span>Fixed <code>SubAgentStart</code> &rarr; <code>SubagentStart</code> casing</li>
-                    </ul>
-                </div>
-
-                <div class="change-section">
-                    <h3>CC v2.1.86 Updates</h3>
-                    <ul class="change-list">
-                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_MCP_SERVER_NAME</code> / <code>CLAUDE_CODE_MCP_SERVER_URL</code> — Inject server identity into MCP <code>headersHelper</code> scripts, enabling one helper to serve multiple servers (v2.1.85)</li>
-                    </ul>
-                </div>
-
-                <div class="change-section">
-                    <h3>CC v2.1.88 Updates</h3>
-                    <ul class="change-list">
-                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_NO_FLICKER=1</code> env var — Opt into flicker-free alt-screen rendering with virtualized scrollback</li>
-                        <li><span class="tag tag-add">ADD</span><code>PermissionDenied</code> hook event — Fires after auto mode classifier denials; return <code>{retry:true}</code> to allow retry</li>
-                        <li><span class="tag tag-add">ADD</span><code>showThinkingSummaries</code> JSON setting — Show thinking summaries in interactive sessions (default: false since v2.1.88)</li>
-                    </ul>
-                </div>
-
-                <div class="change-section">
-                    <h3>CC v2.1.89–v2.1.90 Updates</h3>
-                    <ul class="change-list">
-                        <li><span class="tag tag-add">ADD</span><code>/powerup</code> slash command — Interactive lessons teaching CC features with animated demos</li>
-                        <li><span class="tag tag-add">ADD</span><code>MCP_CONNECTION_NONBLOCKING=true</code> env var — Skip MCP connection wait in headless (-p) mode</li>
-                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_PLUGIN_KEEP_MARKETPLACE_ON_FAILURE</code> env var — Keep marketplace cache when git pull fails (offline envs)</li>
-                        <li><span class="tag tag-add">ADD</span><code>"defer"</code> PreToolUse hook decision — Headless sessions pause at tool call; resume with <code>-p --resume</code> to re-evaluate</li>
                     </ul>
                 </div>
             </div>
