@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.90</span>
+            <span class="release-tag">As of release: v2.1.92</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -420,7 +420,7 @@
                     <tr class="search-item"><td><code class="unverified">/resume</code></td><td class="desc">Display session picker menu</td></tr>
                     <tr class="search-item"><td><code>/rename [name]</code></td><td class="desc">Name current session</td></tr>
                     <tr class="search-item"><td><code>/branch [name]</code></td><td class="desc">Branch convo (formerly /fork)</td></tr>
-                    <tr class="search-item"><td><code>/cost</code></td><td class="desc">Token usage stats</td></tr>
+                    <tr class="search-item"><td><code>/cost</code></td><td class="desc">Token usage & per-model cost breakdown</td></tr>
                     <tr class="search-item"><td><code>/context</code></td><td class="desc">Visualize context window (grid)</td></tr>
                     <tr class="search-item"><td><code>/diff</code></td><td class="desc">Interactive diff viewer</td></tr>
                     <tr class="search-item"><td><code>/copy</code></td><td class="desc">Copy last response</td></tr>
@@ -440,7 +440,7 @@
                     <tr class="search-item"><td><code>/keybindings</code></td><td class="desc">Customize keyboard shortcuts</td></tr>
                     <tr class="search-item"><td><code>/terminal-setup</code></td><td class="desc">Configure terminal integration</td></tr>
                     <tr class="search-item"><td><code>/theme</code></td><td class="desc">Change color theme</td></tr>
-                    <tr class="search-item"><td><code>/vim</code></td><td class="desc">Toggle vim-style editing</td></tr>
+                    <tr class="search-item"><td><code class="new">/release-notes</code></td><td class="desc">Interactive version picker for release notes</td></tr> <!-- added:v2.1.92 -->
                 </table>
             </div>
         </div>
@@ -517,6 +517,7 @@
                     <tr class="search-item"><td><code>--permission-mode plan</code></td><td class="desc">Start in read-only plan mode</td></tr>
                     <tr class="search-item"><td><code>--max-budget-usd</code></td><td class="desc">Set cost cap for session</td></tr>
                     <tr class="search-item"><td><code>--remote</code></td><td class="desc">Start web-accessible session</td></tr>
+                    <tr class="search-item"><td><code class="new">--remote-control-session-name-prefix</code></td><td class="desc">Custom hostname prefix for Remote Control session names</td></tr> <!-- added:v2.1.92 -->
                 </table>
             </div>
         </div>
@@ -542,7 +543,9 @@
                     <tr class="search-item"><td><code>modelOverrides</code></td><td class="desc">Map model picker to custom IDs</td></tr>
                     <tr class="search-item"><td><code>autoMemoryDirectory</code></td><td class="desc">Custom auto-loaded memory dir</td></tr>
                     <tr class="search-item"><td><code>worktree.sparsePaths</code></td><td class="desc">Sparse checkout dirs for agents</td></tr>
-                    <tr class="search-item"><td><code class="new">showThinkingSummaries</code></td><td class="desc">Show thinking summaries in interactive sessions (default: false)</td></tr> <!-- added:v2.1.89 -->
+                    <tr class="search-item"><td><code>showThinkingSummaries</code></td><td class="desc">Show thinking summaries in interactive sessions (default: false)</td></tr>
+                    <tr class="search-item"><td><code class="new">disableSkillShellExecution</code></td><td class="desc">Disable inline shell execution in skills and custom slash commands</td></tr> <!-- added:v2.1.91 -->
+                    <tr class="search-item"><td><code class="new">forceRemoteSettingsRefresh</code></td><td class="desc">Block startup until remote managed settings are freshly fetched; fail-closed on fetch failure</td></tr> <!-- added:v2.1.92 -->
                 </table>
             </div>
 
@@ -558,7 +561,7 @@
                     <tr class="search-item"><td><code>CLAUDECODE</code></td><td class="desc">Detects if running inside CC shell</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_SUBPROCESS_ENV_SCRUB</code></td><td class="desc">Strip credentials from subprocesses</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MCP_SERVER_NAME</code> / <code>CLAUDE_CODE_MCP_SERVER_URL</code></td><td class="desc">Inject server identity into MCP headerHelper scripts</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_NO_FLICKER=1</code></td><td class="desc">Opt into flicker-free alt-screen rendering with virtualized scrollback</td></tr> <!-- added:v2.1.89 -->
+                    <tr class="search-item"><td><code>CLAUDE_CODE_NO_FLICKER=1</code></td><td class="desc">Opt into flicker-free alt-screen rendering with virtualized scrollback</td></tr>
                     <tr class="search-item"><td><code class="new">MCP_CONNECTION_NONBLOCKING=true</code></td><td class="desc">Skip MCP connection wait in headless (-p) mode</td></tr> <!-- added:v2.1.90 -->
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_PLUGIN_KEEP_MARKETPLACE_ON_FAILURE</code></td><td class="desc">Keep marketplace cache when git pull fails (offline envs)</td></tr> <!-- added:v2.1.90 -->
                 </table>
@@ -576,6 +579,7 @@
                     <tr class="search-item"><td><code>/claude-api</code></td><td class="desc">Load API + SDK reference into context</td></tr>
                     <tr class="search-item"><td><code>.claude/skills/&lt;name&gt;/</code></td><td class="desc">Project specific skill directory</td></tr>
                     <tr class="search-item"><td><code>~/.claude/skills/&lt;name&gt;/</code></td><td class="desc">Global personal skill directory</td></tr>
+                    <tr class="search-item"><td><code class="new">plugin: bin/</code></td><td class="desc">Plugin executables in bin/ invocable as bare commands from Bash tool</td></tr> <!-- added:v2.1.91 -->
                 </table>
             </div>
 
@@ -629,7 +633,7 @@
                     <tr class="search-item"><td><code>CwdChanged</code> / <code>FileChanged</code></td><td class="desc">React to directory or file changes</td></tr>
                     <tr class="search-item"><td><code>TaskCreated</code></td><td class="desc">Fires when task created via TaskCreate</td></tr>
                     <tr class="search-item"><td><code>if:</code> (hook field)</td><td class="desc">Conditional execution (permission rule syntax)</td></tr>
-                    <tr class="search-item"><td><code class="new">PermissionDenied</code></td><td class="desc">Fires after auto mode classifier denials; return {retry:true} to allow retry</td></tr> <!-- added:v2.1.89 -->
+                    <tr class="search-item"><td><code>PermissionDenied</code></td><td class="desc">Fires after auto mode classifier denials; return {retry:true} to allow retry</td></tr>
                     <tr class="search-item"><td><code class="new">"defer"</code> (PreToolUse)</td><td class="desc">Headless sessions pause at tool call; resume with -p --resume to re-evaluate</td></tr> <!-- added:v2.1.90 -->
                 </table>
             </div>
@@ -641,6 +645,7 @@
                     <tr class="search-item"><td><code>claude mcp serve</code></td><td class="desc">Run Claude Code as an MCP server</td></tr>
                     <tr class="search-item"><td><code>--transport http/stdio/sse</code></td><td class="desc">Protocol connection methods</td></tr>
                     <tr class="search-item"><td><code>Elicitation</code></td><td class="desc">Servers can request input mid-task</td></tr>
+                    <tr class="search-item"><td><code class="new">_meta["anthropic/maxResultSizeChars"]</code></td><td class="desc">Override max MCP result size per call (up to 500K chars)</td></tr> <!-- added:v2.1.91 -->
                 </table>
             </div>
 
@@ -817,13 +822,17 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.90",
-        "date": "2026-04-01",
+        "version": "v2.1.92",
+        "date": "2026-04-04",
         "changes": [
-            {"tag": "ADD", "text": "<code>/powerup</code> — Interactive lessons teaching CC features with animated demos"},
-            {"tag": "ADD", "text": "<code>MCP_CONNECTION_NONBLOCKING=true</code> env var — Skip MCP wait in headless mode"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_PLUGIN_KEEP_MARKETPLACE_ON_FAILURE</code> env var — Offline marketplace cache"},
-            {"tag": "ADD", "text": "<code>\"defer\"</code> PreToolUse hook decision — Headless pause/resume"}
+            {"tag": "ADD", "text": "<code>disableSkillShellExecution</code> setting — Disable inline shell execution in skills and custom slash commands"},
+            {"tag": "ADD", "text": "<code>_meta[\"anthropic/maxResultSizeChars\"]</code> MCP annotation — Override max result size per call (up to 500K chars)"},
+            {"tag": "ADD", "text": "<code>plugin: bin/</code> — Plugin executables in bin/ invocable as bare commands from Bash tool"},
+            {"tag": "ADD", "text": "<code>forceRemoteSettingsRefresh</code> setting — Block startup until remote managed settings are freshly fetched; fail-closed"},
+            {"tag": "ADD", "text": "<code>/release-notes</code> slash command — Interactive version picker for release notes"},
+            {"tag": "ADD", "text": "<code>--remote-control-session-name-prefix</code> flag — Custom hostname prefix for Remote Control session names"},
+            {"tag": "CHG", "text": "<code>/cost</code> — Now shows per-model and cache-hit breakdown"},
+            {"tag": "DEL", "text": "<code>/vim</code> slash command removed — use <code>/config</code> → Editor mode to toggle vim-style editing"}
         ]
     }
     </script>

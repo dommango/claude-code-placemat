@@ -203,6 +203,26 @@
                 <span class="change-category-title cat-content">Content / CC Release Updates</span>
 
                 <div class="change-section">
+                    <h3>CC v2.1.92 <span class="version-date">2026-04-04</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>forceRemoteSettingsRefresh</code> JSON setting — Block startup until remote managed settings are freshly fetched; fail-closed on fetch failure</li>
+                        <li><span class="tag tag-add">ADD</span><code>/release-notes</code> slash command — Interactive version picker for release notes</li>
+                        <li><span class="tag tag-add">ADD</span><code>--remote-control-session-name-prefix</code> CLI flag — Custom hostname prefix for Remote Control session names</li>
+                        <li><span class="tag tag-change">CHG</span><code>/cost</code> — Description updated to reflect per-model and cache-hit breakdown</li>
+                        <li><span class="tag tag-remove">DEL</span><code>/vim</code> slash command removed — toggle vim mode via <code>/config</code> → Editor mode</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
+                    <h3>CC v2.1.91 <span class="version-date">2026-04-02</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>disableSkillShellExecution</code> JSON setting — Disable inline shell execution in skills and custom slash commands</li>
+                        <li><span class="tag tag-add">ADD</span><code>_meta["anthropic/maxResultSizeChars"]</code> MCP annotation — Override max result size per tool call (up to 500K chars)</li>
+                        <li><span class="tag tag-add">ADD</span><code>plugin: bin/</code> — Plugin executables in <code>bin/</code> invocable as bare commands from Bash tool</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
                     <h3>CC v2.1.89–v2.1.90 <span class="version-date">2026-04-01</span></h3>
                     <ul class="change-list">
                         <li><span class="tag tag-add">ADD</span><code>/powerup</code> slash command — Interactive lessons teaching CC features with animated demos</li>
