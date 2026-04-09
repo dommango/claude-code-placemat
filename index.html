@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.92</span>
+            <span class="release-tag">As of release: v2.1.97</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -377,7 +377,7 @@
                 <table>
                     <tr class="search-item"><td><code>Ctrl C</code> / <code>D</code></td><td class="desc">Cancel input / Exit session</td></tr>
                     <tr class="search-item"><td><code>Ctrl L</code></td><td class="desc">Clear screen + full redraw</td></tr>
-                    <tr class="search-item"><td><code>Ctrl O</code></td><td class="desc">Toggle verbose output</td></tr>
+                    <tr class="search-item"><td><code>Ctrl O</code></td><td class="desc">Toggle verbose output; in NO_FLICKER mode, toggles focus view</td></tr>
                     <tr class="search-item"><td><code>Ctrl R</code></td><td class="desc">Reverse search history</td></tr>
                     <tr class="search-item"><td><code>Ctrl G</code></td><td class="desc">Open prompt in external editor</td></tr>
                     <tr class="search-item"><td><code>Ctrl B</code></td><td class="desc">Background running task</td></tr>
@@ -440,7 +440,7 @@
                     <tr class="search-item"><td><code>/keybindings</code></td><td class="desc">Customize keyboard shortcuts</td></tr>
                     <tr class="search-item"><td><code>/terminal-setup</code></td><td class="desc">Configure terminal integration</td></tr>
                     <tr class="search-item"><td><code>/theme</code></td><td class="desc">Change color theme</td></tr>
-                    <tr class="search-item"><td><code class="new">/release-notes</code></td><td class="desc">Interactive version picker for release notes</td></tr> <!-- added:v2.1.92 -->
+                    <tr class="search-item"><td><code>/release-notes</code></td><td class="desc">Interactive version picker for release notes</td></tr>
                 </table>
             </div>
         </div>
@@ -474,7 +474,7 @@
                     <tr class="search-item"><td><code>/doctor</code></td><td class="desc">Diagnose installation/env issues</td></tr>
                     <tr class="search-item"><td><code>/pr-comments [PR]</code></td><td class="desc">Fetch GitHub PR comments</td></tr>
                     <tr class="search-item"><td><code>/security-review</code></td><td class="desc">Security analysis of uncommitted code</td></tr>
-                    <tr class="search-item"><td><code class="new">/powerup</code></td><td class="desc">Interactive lessons teaching CC features with animated demos</td></tr> <!-- added:v2.1.90 -->
+                    <tr class="search-item"><td><code>/powerup</code></td><td class="desc">Interactive lessons teaching CC features with animated demos</td></tr>
                     <tr class="search-item"><td><code>/stats</code> / <code>/insights</code></td><td class="desc">Usage streaks / HTML sessions report</td></tr>
                     <tr class="search-item"><td><code>/desktop</code></td><td class="desc">Continue session in Desktop app</td></tr>
                     <tr class="search-item"><td><code>/remote-control</code></td><td class="desc">Bridge session to claude.ai/code</td></tr>
@@ -517,7 +517,7 @@
                     <tr class="search-item"><td><code>--permission-mode plan</code></td><td class="desc">Start in read-only plan mode</td></tr>
                     <tr class="search-item"><td><code>--max-budget-usd</code></td><td class="desc">Set cost cap for session</td></tr>
                     <tr class="search-item"><td><code>--remote</code></td><td class="desc">Start web-accessible session</td></tr>
-                    <tr class="search-item"><td><code class="new">--remote-control-session-name-prefix</code></td><td class="desc">Custom hostname prefix for Remote Control session names</td></tr> <!-- added:v2.1.92 -->
+                    <tr class="search-item"><td><code>--remote-control-session-name-prefix</code></td><td class="desc">Custom hostname prefix for Remote Control session names</td></tr>
                 </table>
             </div>
         </div>
@@ -544,8 +544,9 @@
                     <tr class="search-item"><td><code>autoMemoryDirectory</code></td><td class="desc">Custom auto-loaded memory dir</td></tr>
                     <tr class="search-item"><td><code>worktree.sparsePaths</code></td><td class="desc">Sparse checkout dirs for agents</td></tr>
                     <tr class="search-item"><td><code>showThinkingSummaries</code></td><td class="desc">Show thinking summaries in interactive sessions (default: false)</td></tr>
-                    <tr class="search-item"><td><code class="new">disableSkillShellExecution</code></td><td class="desc">Disable inline shell execution in skills and custom slash commands</td></tr> <!-- added:v2.1.91 -->
-                    <tr class="search-item"><td><code class="new">forceRemoteSettingsRefresh</code></td><td class="desc">Block startup until remote managed settings are freshly fetched; fail-closed on fetch failure</td></tr> <!-- added:v2.1.92 -->
+                    <tr class="search-item"><td><code>disableSkillShellExecution</code></td><td class="desc">Disable inline shell execution in skills and custom slash commands</td></tr>
+                    <tr class="search-item"><td><code>forceRemoteSettingsRefresh</code></td><td class="desc">Block startup until remote managed settings are freshly fetched; fail-closed on fetch failure</td></tr>
+                    <tr class="search-item"><td><code class="new">statusLine.refreshInterval</code></td><td class="desc">Re-run status line command every N seconds</td></tr> <!-- added:v2.1.97 -->
                 </table>
             </div>
 
@@ -562,8 +563,9 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_SUBPROCESS_ENV_SCRUB</code></td><td class="desc">Strip credentials from subprocesses</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MCP_SERVER_NAME</code> / <code>CLAUDE_CODE_MCP_SERVER_URL</code></td><td class="desc">Inject server identity into MCP headerHelper scripts</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_NO_FLICKER=1</code></td><td class="desc">Opt into flicker-free alt-screen rendering with virtualized scrollback</td></tr>
-                    <tr class="search-item"><td><code class="new">MCP_CONNECTION_NONBLOCKING=true</code></td><td class="desc">Skip MCP connection wait in headless (-p) mode</td></tr> <!-- added:v2.1.90 -->
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_PLUGIN_KEEP_MARKETPLACE_ON_FAILURE</code></td><td class="desc">Keep marketplace cache when git pull fails (offline envs)</td></tr> <!-- added:v2.1.90 -->
+                    <tr class="search-item"><td><code>MCP_CONNECTION_NONBLOCKING=true</code></td><td class="desc">Skip MCP connection wait in headless (-p) mode</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_PLUGIN_KEEP_MARKETPLACE_ON_FAILURE</code></td><td class="desc">Keep marketplace cache when git pull fails (offline envs)</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_USE_MANTLE=1</code></td><td class="desc">Enable Amazon Bedrock powered by Mantle</td></tr> <!-- added:v2.1.94 -->
                 </table>
             </div>
         </div>
@@ -579,7 +581,7 @@
                     <tr class="search-item"><td><code>/claude-api</code></td><td class="desc">Load API + SDK reference into context</td></tr>
                     <tr class="search-item"><td><code>.claude/skills/&lt;name&gt;/</code></td><td class="desc">Project specific skill directory</td></tr>
                     <tr class="search-item"><td><code>~/.claude/skills/&lt;name&gt;/</code></td><td class="desc">Global personal skill directory</td></tr>
-                    <tr class="search-item"><td><code class="new">plugin: bin/</code></td><td class="desc">Plugin executables in bin/ invocable as bare commands from Bash tool</td></tr> <!-- added:v2.1.91 -->
+                    <tr class="search-item"><td><code>plugin: bin/</code></td><td class="desc">Plugin executables in bin/ invocable as bare commands from Bash tool</td></tr>
                 </table>
             </div>
 
@@ -594,6 +596,7 @@
                     <tr class="search-item"><td><code class="unverified">$FILE_PATH</code></td><td class="desc">File path resolution (hook strings only)</td></tr>
                     <tr class="search-item"><td><code>${CLAUDE_SKILL_DIR}</code></td><td class="desc">Reference the skill's own directory</td></tr>
                     <tr class="search-item"><td><code>! 'cmd'</code></td><td class="desc">Dynamic bash execution context injection</td></tr>
+                    <tr class="search-item"><td><code class="new">keep-coding-instructions</code></td><td class="desc">Control plugin output style for coding tasks</td></tr> <!-- added:v2.1.94 -->
                 </table>
             </div>
 
@@ -634,7 +637,8 @@
                     <tr class="search-item"><td><code>TaskCreated</code></td><td class="desc">Fires when task created via TaskCreate</td></tr>
                     <tr class="search-item"><td><code>if:</code> (hook field)</td><td class="desc">Conditional execution (permission rule syntax)</td></tr>
                     <tr class="search-item"><td><code>PermissionDenied</code></td><td class="desc">Fires after auto mode classifier denials; return {retry:true} to allow retry</td></tr>
-                    <tr class="search-item"><td><code class="new">"defer"</code> (PreToolUse)</td><td class="desc">Headless sessions pause at tool call; resume with -p --resume to re-evaluate</td></tr> <!-- added:v2.1.90 -->
+                    <tr class="search-item"><td><code>"defer"</code> (PreToolUse)</td><td class="desc">Headless sessions pause at tool call; resume with -p --resume to re-evaluate</td></tr>
+                    <tr class="search-item"><td><code class="new">UserPromptSubmit</code></td><td class="desc">Fires on user prompt submit; supports hookSpecificOutput.sessionTitle to set session title</td></tr> <!-- added:v2.1.94 -->
                 </table>
             </div>
 
@@ -645,7 +649,7 @@
                     <tr class="search-item"><td><code>claude mcp serve</code></td><td class="desc">Run Claude Code as an MCP server</td></tr>
                     <tr class="search-item"><td><code>--transport http/stdio/sse</code></td><td class="desc">Protocol connection methods</td></tr>
                     <tr class="search-item"><td><code>Elicitation</code></td><td class="desc">Servers can request input mid-task</td></tr>
-                    <tr class="search-item"><td><code class="new">_meta["anthropic/maxResultSizeChars"]</code></td><td class="desc">Override max MCP result size per call (up to 500K chars)</td></tr> <!-- added:v2.1.91 -->
+                    <tr class="search-item"><td><code>_meta["anthropic/maxResultSizeChars"]</code></td><td class="desc">Override max MCP result size per call (up to 500K chars)</td></tr>
                 </table>
             </div>
 
@@ -822,17 +826,14 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.92",
-        "date": "2026-04-04",
+        "version": "v2.1.97",
+        "date": "2026-04-08",
         "changes": [
-            {"tag": "ADD", "text": "<code>disableSkillShellExecution</code> setting — Disable inline shell execution in skills and custom slash commands"},
-            {"tag": "ADD", "text": "<code>_meta[\"anthropic/maxResultSizeChars\"]</code> MCP annotation — Override max result size per call (up to 500K chars)"},
-            {"tag": "ADD", "text": "<code>plugin: bin/</code> — Plugin executables in bin/ invocable as bare commands from Bash tool"},
-            {"tag": "ADD", "text": "<code>forceRemoteSettingsRefresh</code> setting — Block startup until remote managed settings are freshly fetched; fail-closed"},
-            {"tag": "ADD", "text": "<code>/release-notes</code> slash command — Interactive version picker for release notes"},
-            {"tag": "ADD", "text": "<code>--remote-control-session-name-prefix</code> flag — Custom hostname prefix for Remote Control session names"},
-            {"tag": "CHG", "text": "<code>/cost</code> — Now shows per-model and cache-hit breakdown"},
-            {"tag": "DEL", "text": "<code>/vim</code> slash command removed — use <code>/config</code> → Editor mode to toggle vim-style editing"}
+            {"tag": "CHG", "text": "<code>Ctrl O</code> — In NO_FLICKER mode, now toggles focus view (prompt + tool summary + response)"},
+            {"tag": "ADD", "text": "<code>statusLine.refreshInterval</code> setting — Re-run status line command every N seconds"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_USE_MANTLE=1</code> env var — Enable Amazon Bedrock powered by Mantle"},
+            {"tag": "ADD", "text": "<code>keep-coding-instructions</code> skill frontmatter field — Control plugin output style for coding tasks"},
+            {"tag": "ADD", "text": "<code>UserPromptSubmit</code> hook event — Fires on user prompt submit; supports <code>hookSpecificOutput.sessionTitle</code>"}
         ]
     }
     </script>

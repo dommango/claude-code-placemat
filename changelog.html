@@ -203,6 +203,23 @@
                 <span class="change-category-title cat-content">Content / CC Release Updates</span>
 
                 <div class="change-section">
+                    <h3>CC v2.1.97 <span class="version-date">2026-04-08</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-change">CHG</span><code>Ctrl O</code> — Description updated to note focus view toggle in NO_FLICKER mode</li>
+                        <li><span class="tag tag-add">ADD</span><code>statusLine.refreshInterval</code> JSON setting — Re-run status line command every N seconds</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
+                    <h3>CC v2.1.94 <span class="version-date">2026-04-07</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_USE_MANTLE=1</code> env var — Enable Amazon Bedrock powered by Mantle</li>
+                        <li><span class="tag tag-add">ADD</span><code>keep-coding-instructions</code> skill frontmatter field — Control plugin output style for coding tasks</li>
+                        <li><span class="tag tag-add">ADD</span><code>UserPromptSubmit</code> hook event — Fires on user prompt submit; supports <code>hookSpecificOutput.sessionTitle</code> to set session title</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
                     <h3>CC v2.1.92 <span class="version-date">2026-04-04</span></h3>
                     <ul class="change-list">
                         <li><span class="tag tag-add">ADD</span><code>forceRemoteSettingsRefresh</code> JSON setting — Block startup until remote managed settings are freshly fetched; fail-closed on fetch failure</li>
