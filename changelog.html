@@ -203,6 +203,17 @@
                 <span class="change-category-title cat-content">Content / CC Release Updates</span>
 
                 <div class="change-section">
+                    <h3>CC v2.1.98 <span class="version-date">2026-04-09</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_PERFORCE_MODE</code> env var — Edit/Write/NotebookEdit fail on read-only files with a <code>p4 edit</code> hint</li>
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_SCRIPT_CAPS</code> env var — Limit per-session script invocations (subprocess sandboxing)</li>
+                        <li><span class="tag tag-change">CHG</span><code>CLAUDE_CODE_SUBPROCESS_ENV_SCRUB</code> — Description updated to include PID namespace isolation on Linux</li>
+                        <li><span class="tag tag-add">ADD</span><code>--exclude-dynamic-system-prompt-sections</code> CLI flag — Exclude dynamic prompt sections in print mode for cross-user prompt caching</li>
+                        <li><span class="tag tag-add">ADD</span><code>workspace.git_worktree</code> status line JSON input field — Set when current directory is inside a linked git worktree</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
                     <h3>CC v2.1.97 <span class="version-date">2026-04-08</span></h3>
                     <ul class="change-list">
                         <li><span class="tag tag-change">CHG</span><code>Ctrl O</code> — Description updated to note focus view toggle in NO_FLICKER mode</li>

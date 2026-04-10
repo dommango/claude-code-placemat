@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.97</span>
+            <span class="release-tag">As of release: v2.1.98</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -504,6 +504,7 @@
                     <tr class="search-item"><td><code>--output-format json</code></td><td class="desc">Structured JSON output</td></tr>
                     <tr class="search-item"><td><code>--json-schema</code></td><td class="desc">Strict JSON schema validation</td></tr>
                     <tr class="search-item"><td><code>--dangerously-skip-permissions</code></td><td class="desc">Skip all approval prompts</td></tr>
+                    <tr class="search-item"><td><code class="new">--exclude-dynamic-system-prompt-sections</code></td><td class="desc">Exclude dynamic prompt sections in print mode for cross-user prompt caching</td></tr> <!-- added:v2.1.98 -->
                 </table>
             </div>
 
@@ -547,6 +548,7 @@
                     <tr class="search-item"><td><code>disableSkillShellExecution</code></td><td class="desc">Disable inline shell execution in skills and custom slash commands</td></tr>
                     <tr class="search-item"><td><code>forceRemoteSettingsRefresh</code></td><td class="desc">Block startup until remote managed settings are freshly fetched; fail-closed on fetch failure</td></tr>
                     <tr class="search-item"><td><code class="new">statusLine.refreshInterval</code></td><td class="desc">Re-run status line command every N seconds</td></tr> <!-- added:v2.1.97 -->
+                    <tr class="search-item"><td><code class="new">workspace.git_worktree</code></td><td class="desc">Status line JSON input field — set when current directory is inside a linked git worktree</td></tr> <!-- added:v2.1.97 -->
                 </table>
             </div>
 
@@ -560,12 +562,14 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_PLUGIN_SEED_DIR</code></td><td class="desc">Multiple plugin seed directories</td></tr>
                     <tr class="search-item"><td><code>IS_DEMO</code></td><td class="desc">Demo mode (hides email/org)</td></tr>
                     <tr class="search-item"><td><code>CLAUDECODE</code></td><td class="desc">Detects if running inside CC shell</td></tr>
-                    <tr class="search-item"><td><code>CLAUDE_CODE_SUBPROCESS_ENV_SCRUB</code></td><td class="desc">Strip credentials from subprocesses</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_SUBPROCESS_ENV_SCRUB</code></td><td class="desc">Strip credentials from subprocesses; enables PID namespace isolation on Linux (sandboxing)</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MCP_SERVER_NAME</code> / <code>CLAUDE_CODE_MCP_SERVER_URL</code></td><td class="desc">Inject server identity into MCP headerHelper scripts</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_NO_FLICKER=1</code></td><td class="desc">Opt into flicker-free alt-screen rendering with virtualized scrollback</td></tr>
                     <tr class="search-item"><td><code>MCP_CONNECTION_NONBLOCKING=true</code></td><td class="desc">Skip MCP connection wait in headless (-p) mode</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_PLUGIN_KEEP_MARKETPLACE_ON_FAILURE</code></td><td class="desc">Keep marketplace cache when git pull fails (offline envs)</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_USE_MANTLE=1</code></td><td class="desc">Enable Amazon Bedrock powered by Mantle</td></tr> <!-- added:v2.1.94 -->
+                    <tr class="search-item"><td><code>CLAUDE_CODE_USE_MANTLE=1</code></td><td class="desc">Enable Amazon Bedrock powered by Mantle</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_PERFORCE_MODE</code></td><td class="desc">When set, Edit/Write/NotebookEdit fail on read-only files with a p4 edit hint</td></tr> <!-- added:v2.1.98 -->
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_SCRIPT_CAPS</code></td><td class="desc">Limit per-session script invocations (subprocess sandboxing)</td></tr> <!-- added:v2.1.98 -->
                 </table>
             </div>
         </div>
@@ -596,7 +600,7 @@
                     <tr class="search-item"><td><code class="unverified">$FILE_PATH</code></td><td class="desc">File path resolution (hook strings only)</td></tr>
                     <tr class="search-item"><td><code>${CLAUDE_SKILL_DIR}</code></td><td class="desc">Reference the skill's own directory</td></tr>
                     <tr class="search-item"><td><code>! 'cmd'</code></td><td class="desc">Dynamic bash execution context injection</td></tr>
-                    <tr class="search-item"><td><code class="new">keep-coding-instructions</code></td><td class="desc">Control plugin output style for coding tasks</td></tr> <!-- added:v2.1.94 -->
+                    <tr class="search-item"><td><code>keep-coding-instructions</code></td><td class="desc">Control plugin output style for coding tasks</td></tr>
                 </table>
             </div>
 
@@ -638,7 +642,7 @@
                     <tr class="search-item"><td><code>if:</code> (hook field)</td><td class="desc">Conditional execution (permission rule syntax)</td></tr>
                     <tr class="search-item"><td><code>PermissionDenied</code></td><td class="desc">Fires after auto mode classifier denials; return {retry:true} to allow retry</td></tr>
                     <tr class="search-item"><td><code>"defer"</code> (PreToolUse)</td><td class="desc">Headless sessions pause at tool call; resume with -p --resume to re-evaluate</td></tr>
-                    <tr class="search-item"><td><code class="new">UserPromptSubmit</code></td><td class="desc">Fires on user prompt submit; supports hookSpecificOutput.sessionTitle to set session title</td></tr> <!-- added:v2.1.94 -->
+                    <tr class="search-item"><td><code>UserPromptSubmit</code></td><td class="desc">Fires on user prompt submit; supports hookSpecificOutput.sessionTitle to set session title</td></tr>
                 </table>
             </div>
 
@@ -826,14 +830,14 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.97",
-        "date": "2026-04-08",
+        "version": "v2.1.98",
+        "date": "2026-04-09",
         "changes": [
-            {"tag": "CHG", "text": "<code>Ctrl O</code> — In NO_FLICKER mode, now toggles focus view (prompt + tool summary + response)"},
-            {"tag": "ADD", "text": "<code>statusLine.refreshInterval</code> setting — Re-run status line command every N seconds"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_USE_MANTLE=1</code> env var — Enable Amazon Bedrock powered by Mantle"},
-            {"tag": "ADD", "text": "<code>keep-coding-instructions</code> skill frontmatter field — Control plugin output style for coding tasks"},
-            {"tag": "ADD", "text": "<code>UserPromptSubmit</code> hook event — Fires on user prompt submit; supports <code>hookSpecificOutput.sessionTitle</code>"}
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_PERFORCE_MODE</code> env var — Edit/Write/NotebookEdit fail on read-only files with a <code>p4 edit</code> hint"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_SCRIPT_CAPS</code> env var — Limit per-session script invocations (subprocess sandboxing)"},
+            {"tag": "CHG", "text": "<code>CLAUDE_CODE_SUBPROCESS_ENV_SCRUB</code> — Description updated to include PID namespace isolation on Linux"},
+            {"tag": "ADD", "text": "<code>--exclude-dynamic-system-prompt-sections</code> CLI flag — Exclude dynamic prompt sections in print mode for cross-user prompt caching"},
+            {"tag": "ADD", "text": "<code>workspace.git_worktree</code> status line JSON input field — Set when current directory is inside a linked git worktree"}
         ]
     }
     </script>
