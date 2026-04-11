@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.98</span>
+            <span class="release-tag">As of release: v2.1.101</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -478,6 +478,7 @@
                     <tr class="search-item"><td><code>/stats</code> / <code>/insights</code></td><td class="desc">Usage streaks / HTML sessions report</td></tr>
                     <tr class="search-item"><td><code>/desktop</code></td><td class="desc">Continue session in Desktop app</td></tr>
                     <tr class="search-item"><td><code>/remote-control</code></td><td class="desc">Bridge session to claude.ai/code</td></tr>
+                    <tr class="search-item"><td><code class="new">/team-onboarding</code></td><td class="desc">Generate teammate ramp-up guide from local CC usage</td></tr> <!-- added:v2.1.101 -->
                 </table>
             </div>
         </div>
@@ -570,6 +571,8 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_USE_MANTLE=1</code></td><td class="desc">Enable Amazon Bedrock powered by Mantle</td></tr>
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_PERFORCE_MODE</code></td><td class="desc">When set, Edit/Write/NotebookEdit fail on read-only files with a p4 edit hint</td></tr> <!-- added:v2.1.98 -->
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_SCRIPT_CAPS</code></td><td class="desc">Limit per-session script invocations (subprocess sandboxing)</td></tr> <!-- added:v2.1.98 -->
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_CERT_STORE=bundled</code></td><td class="desc">Use only bundled CAs; by default OS CA cert store is trusted (enterprise TLS proxy support)</td></tr> <!-- added:v2.1.101 -->
+                    <tr class="search-item"><td><code class="new">OTEL_LOG_USER_PROMPTS</code> / <code class="new">OTEL_LOG_TOOL_DETAILS</code> / <code class="new">OTEL_LOG_TOOL_CONTENT</code></td><td class="desc">OTEL beta tracing: opt in to emit sensitive span attributes (prompts/tool details/tool content)</td></tr> <!-- added:v2.1.101 -->
                 </table>
             </div>
         </div>
@@ -830,14 +833,12 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.98",
-        "date": "2026-04-09",
+        "version": "v2.1.101",
+        "date": "2026-04-10",
         "changes": [
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_PERFORCE_MODE</code> env var — Edit/Write/NotebookEdit fail on read-only files with a <code>p4 edit</code> hint"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_SCRIPT_CAPS</code> env var — Limit per-session script invocations (subprocess sandboxing)"},
-            {"tag": "CHG", "text": "<code>CLAUDE_CODE_SUBPROCESS_ENV_SCRUB</code> — Description updated to include PID namespace isolation on Linux"},
-            {"tag": "ADD", "text": "<code>--exclude-dynamic-system-prompt-sections</code> CLI flag — Exclude dynamic prompt sections in print mode for cross-user prompt caching"},
-            {"tag": "ADD", "text": "<code>workspace.git_worktree</code> status line JSON input field — Set when current directory is inside a linked git worktree"}
+            {"tag": "ADD", "text": "<code>/team-onboarding</code> slash command — Generate teammate ramp-up guide from local CC usage"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_CERT_STORE=bundled</code> env var — Use only bundled CAs; by default OS CA cert store is now trusted"},
+            {"tag": "ADD", "text": "<code>OTEL_LOG_USER_PROMPTS</code> / <code>OTEL_LOG_TOOL_DETAILS</code> / <code>OTEL_LOG_TOOL_CONTENT</code> — OTEL beta tracing: opt in to emit sensitive span attributes"}
         ]
     }
     </script>

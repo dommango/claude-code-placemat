@@ -203,6 +203,15 @@
                 <span class="change-category-title cat-content">Content / CC Release Updates</span>
 
                 <div class="change-section">
+                    <h3>CC v2.1.101 <span class="version-date">2026-04-10</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>/team-onboarding</code> slash command — Generate teammate ramp-up guide from local CC usage</li>
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_CERT_STORE=bundled</code> env var — Use only bundled CAs; by default OS CA cert store is now trusted (enterprise TLS proxy support)</li>
+                        <li><span class="tag tag-add">ADD</span><code>OTEL_LOG_USER_PROMPTS</code> / <code>OTEL_LOG_TOOL_DETAILS</code> / <code>OTEL_LOG_TOOL_CONTENT</code> env vars — OTEL beta tracing: opt in to emit sensitive span attributes</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
                     <h3>CC v2.1.98 <span class="version-date">2026-04-09</span></h3>
                     <ul class="change-list">
                         <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_PERFORCE_MODE</code> env var — Edit/Write/NotebookEdit fail on read-only files with a <code>p4 edit</code> hint</li>
