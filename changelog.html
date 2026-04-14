@@ -203,6 +203,15 @@
                 <span class="change-category-title cat-content">Content / CC Release Updates</span>
 
                 <div class="change-section">
+                    <h3>CC v2.1.105 <span class="version-date">2026-04-13</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>/proactive</code> slash command — alias for <code>/loop</code></li>
+                        <li><span class="tag tag-add">ADD</span><code>PreCompact</code> hook event — fires before compaction; block by exiting with code 2 or returning <code>{"decision":"block"}</code></li>
+                        <li><span class="tag tag-add">ADD</span><code>monitors</code> plugin manifest key — background monitor support; auto-arms at session start or on skill invoke</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
                     <h3>CC v2.1.101 <span class="version-date">2026-04-10</span></h3>
                     <ul class="change-list">
                         <li><span class="tag tag-add">ADD</span><code>/team-onboarding</code> slash command — Generate teammate ramp-up guide from local CC usage</li>

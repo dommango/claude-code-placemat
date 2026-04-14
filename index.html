@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.101</span>
+            <span class="release-tag">As of release: v2.1.107</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -469,6 +469,7 @@
                     <tr class="search-item"><td><code>/btw &lt;query&gt;</code></td><td class="desc">Side question (does not alter context)</td></tr>
                     <tr class="search-item"><td><code class="unverified">/plan [desc]</code></td><td class="desc">Switch to Plan Mode directly</td></tr>
                     <tr class="search-item"><td><code>/loop [interval]</code></td><td class="desc">Schedule recurring background task</td></tr>
+                    <tr class="search-item"><td><code class="new">/proactive</code></td><td class="desc">Alias for /loop — schedule recurring background task</td></tr> <!-- added:v2.1.105 -->
                     <tr class="search-item"><td><code>/schedule</code></td><td class="desc">Cloud scheduled tasks</td></tr>
                     <tr class="search-item"><td><code>/voice</code></td><td class="desc">Push-to-talk voice prompting</td></tr>
                     <tr class="search-item"><td><code>/doctor</code></td><td class="desc">Diagnose installation/env issues</td></tr>
@@ -505,7 +506,7 @@
                     <tr class="search-item"><td><code>--output-format json</code></td><td class="desc">Structured JSON output</td></tr>
                     <tr class="search-item"><td><code>--json-schema</code></td><td class="desc">Strict JSON schema validation</td></tr>
                     <tr class="search-item"><td><code>--dangerously-skip-permissions</code></td><td class="desc">Skip all approval prompts</td></tr>
-                    <tr class="search-item"><td><code class="new">--exclude-dynamic-system-prompt-sections</code></td><td class="desc">Exclude dynamic prompt sections in print mode for cross-user prompt caching</td></tr> <!-- added:v2.1.98 -->
+                    <tr class="search-item"><td><code>--exclude-dynamic-system-prompt-sections</code></td><td class="desc">Exclude dynamic prompt sections in print mode for cross-user prompt caching</td></tr>
                 </table>
             </div>
 
@@ -548,8 +549,8 @@
                     <tr class="search-item"><td><code>showThinkingSummaries</code></td><td class="desc">Show thinking summaries in interactive sessions (default: false)</td></tr>
                     <tr class="search-item"><td><code>disableSkillShellExecution</code></td><td class="desc">Disable inline shell execution in skills and custom slash commands</td></tr>
                     <tr class="search-item"><td><code>forceRemoteSettingsRefresh</code></td><td class="desc">Block startup until remote managed settings are freshly fetched; fail-closed on fetch failure</td></tr>
-                    <tr class="search-item"><td><code class="new">statusLine.refreshInterval</code></td><td class="desc">Re-run status line command every N seconds</td></tr> <!-- added:v2.1.97 -->
-                    <tr class="search-item"><td><code class="new">workspace.git_worktree</code></td><td class="desc">Status line JSON input field — set when current directory is inside a linked git worktree</td></tr> <!-- added:v2.1.97 -->
+                    <tr class="search-item"><td><code>statusLine.refreshInterval</code></td><td class="desc">Re-run status line command every N seconds</td></tr>
+                    <tr class="search-item"><td><code>workspace.git_worktree</code></td><td class="desc">Status line JSON input field — set when current directory is inside a linked git worktree</td></tr>
                 </table>
             </div>
 
@@ -569,8 +570,8 @@
                     <tr class="search-item"><td><code>MCP_CONNECTION_NONBLOCKING=true</code></td><td class="desc">Skip MCP connection wait in headless (-p) mode</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_PLUGIN_KEEP_MARKETPLACE_ON_FAILURE</code></td><td class="desc">Keep marketplace cache when git pull fails (offline envs)</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_USE_MANTLE=1</code></td><td class="desc">Enable Amazon Bedrock powered by Mantle</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_PERFORCE_MODE</code></td><td class="desc">When set, Edit/Write/NotebookEdit fail on read-only files with a p4 edit hint</td></tr> <!-- added:v2.1.98 -->
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_SCRIPT_CAPS</code></td><td class="desc">Limit per-session script invocations (subprocess sandboxing)</td></tr> <!-- added:v2.1.98 -->
+                    <tr class="search-item"><td><code>CLAUDE_CODE_PERFORCE_MODE</code></td><td class="desc">When set, Edit/Write/NotebookEdit fail on read-only files with a p4 edit hint</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_SCRIPT_CAPS</code></td><td class="desc">Limit per-session script invocations (subprocess sandboxing)</td></tr>
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_CERT_STORE=bundled</code></td><td class="desc">Use only bundled CAs; by default OS CA cert store is trusted (enterprise TLS proxy support)</td></tr> <!-- added:v2.1.101 -->
                     <tr class="search-item"><td><code class="new">OTEL_LOG_USER_PROMPTS</code> / <code class="new">OTEL_LOG_TOOL_DETAILS</code> / <code class="new">OTEL_LOG_TOOL_CONTENT</code></td><td class="desc">OTEL beta tracing: opt in to emit sensitive span attributes (prompts/tool details/tool content)</td></tr> <!-- added:v2.1.101 -->
                 </table>
@@ -604,6 +605,7 @@
                     <tr class="search-item"><td><code>${CLAUDE_SKILL_DIR}</code></td><td class="desc">Reference the skill's own directory</td></tr>
                     <tr class="search-item"><td><code>! 'cmd'</code></td><td class="desc">Dynamic bash execution context injection</td></tr>
                     <tr class="search-item"><td><code>keep-coding-instructions</code></td><td class="desc">Control plugin output style for coding tasks</td></tr>
+                    <tr class="search-item"><td><code class="new">monitors</code> (plugin manifest)</td><td class="desc">Background monitor support for plugins; auto-arms at session start or on skill invoke</td></tr> <!-- added:v2.1.105 -->
                 </table>
             </div>
 
@@ -646,6 +648,7 @@
                     <tr class="search-item"><td><code>PermissionDenied</code></td><td class="desc">Fires after auto mode classifier denials; return {retry:true} to allow retry</td></tr>
                     <tr class="search-item"><td><code>"defer"</code> (PreToolUse)</td><td class="desc">Headless sessions pause at tool call; resume with -p --resume to re-evaluate</td></tr>
                     <tr class="search-item"><td><code>UserPromptSubmit</code></td><td class="desc">Fires on user prompt submit; supports hookSpecificOutput.sessionTitle to set session title</td></tr>
+                    <tr class="search-item"><td><code class="new">PreCompact</code></td><td class="desc">Fires before compaction; block by exiting with code 2 or returning {"decision":"block"}</td></tr> <!-- added:v2.1.105 -->
                 </table>
             </div>
 
@@ -833,12 +836,12 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.101",
-        "date": "2026-04-10",
+        "version": "v2.1.107",
+        "date": "2026-04-14",
         "changes": [
-            {"tag": "ADD", "text": "<code>/team-onboarding</code> slash command — Generate teammate ramp-up guide from local CC usage"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_CERT_STORE=bundled</code> env var — Use only bundled CAs; by default OS CA cert store is now trusted"},
-            {"tag": "ADD", "text": "<code>OTEL_LOG_USER_PROMPTS</code> / <code>OTEL_LOG_TOOL_DETAILS</code> / <code>OTEL_LOG_TOOL_CONTENT</code> — OTEL beta tracing: opt in to emit sensitive span attributes"}
+            {"tag": "ADD", "text": "<code>/proactive</code> slash command — alias for <code>/loop</code>, schedules recurring background task"},
+            {"tag": "ADD", "text": "<code>PreCompact</code> hook event — fires before compaction; block by exiting with code 2 or returning <code>{\"decision\":\"block\"}</code>"},
+            {"tag": "ADD", "text": "<code>monitors</code> plugin manifest key — background monitor support; auto-arms at session start or on skill invoke"}
         ]
     }
     </script>
