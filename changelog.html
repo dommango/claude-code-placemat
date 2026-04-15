@@ -203,6 +203,20 @@
                 <span class="change-category-title cat-content">Content / CC Release Updates</span>
 
                 <div class="change-section">
+                    <h3>CC v2.1.108–v2.1.109 <span class="version-date">2026-04-14</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>/recap</code> slash command — Summarize away context; auto-triggered on return or invoke manually</li>
+                        <li><span class="tag tag-add">ADD</span><code>/rewind</code> / <code>/undo</code> slash commands — Rewind conversation; <code>/undo</code> is new alias for <code>/rewind</code></li>
+                        <li><span class="tag tag-add">ADD</span><code>Ctrl A</code> session picker key — Show all projects (picker now defaults to current directory)</li>
+                        <li><span class="tag tag-add">ADD</span><code>ENABLE_PROMPT_CACHING_1H</code> env var — Opt into 1-hour prompt cache TTL (API key, Bedrock, Vertex, Foundry)</li>
+                        <li><span class="tag tag-add">ADD</span><code>FORCE_PROMPT_CACHING_5M</code> env var — Force 5-minute prompt cache TTL</li>
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_ENABLE_AWAY_SUMMARY</code> env var — Force-enable recap/away summary when telemetry disabled</li>
+                        <li><span class="tag tag-change">CHG</span><code>/model</code> — Now warns before switching models mid-conversation</li>
+                        <li><span class="tag tag-change">CHG</span><code>/doctor</code> — Press f to auto-fix reported issues (v2.1.105, missed in prior update)</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
                     <h3>CC v2.1.105 <span class="version-date">2026-04-13</span></h3>
                     <ul class="change-list">
                         <li><span class="tag tag-add">ADD</span><code>/proactive</code> slash command — alias for <code>/loop</code></li>
