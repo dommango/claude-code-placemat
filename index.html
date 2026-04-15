@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.107</span>
+            <span class="release-tag">As of release: v2.1.109</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -405,6 +405,7 @@
                     <tr class="search-item"><td><code>P</code> / <code>R</code></td><td class="desc">Preview / Rename session</td></tr>
                     <tr class="search-item"><td><code>/</code></td><td class="desc">Search sessions</td></tr>
                     <tr class="search-item"><td><code>A</code> / <code>B</code></td><td class="desc">Filter All projects / Current branch</td></tr>
+                    <tr class="search-item"><td><code class="new">Ctrl A</code></td><td class="desc">Show all projects in /resume picker (picker defaults to current dir)</td></tr> <!-- added:v2.1.108 -->
                 </table>
             </div>
         </div>
@@ -425,6 +426,8 @@
                     <tr class="search-item"><td><code>/diff</code></td><td class="desc">Interactive diff viewer</td></tr>
                     <tr class="search-item"><td><code>/copy</code></td><td class="desc">Copy last response</td></tr>
                     <tr class="search-item"><td><code>/export</code></td><td class="desc">Export conversation</td></tr>
+                    <tr class="search-item"><td><code class="new">/recap</code></td><td class="desc">Summarize away context; auto-triggered on return or invoke manually</td></tr> <!-- added:v2.1.108 -->
+                    <tr class="search-item"><td><code class="new">/rewind</code> / <code class="new">/undo</code></td><td class="desc">Rewind conversation to previous state; /undo is alias</td></tr> <!-- added:v2.1.108 -->
                 </table>
             </div>
 
@@ -432,7 +435,7 @@
                 <h3>Configuration</h3>
                 <table>
                     <tr class="search-item"><td><code>/config</code></td><td class="desc">Open settings interface</td></tr>
-                    <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model manually</td></tr>
+                    <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model manually; warns before switching mid-conversation</td></tr>
                     <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/auto)</td></tr>
                     <tr class="search-item"><td><code class="unverified">/fast [on/off]</code></td><td class="desc">Toggle Fast mode</td></tr>
                     <tr class="search-item"><td><code>/permissions</code></td><td class="desc">View/update tool permissions</td></tr>
@@ -472,7 +475,7 @@
                     <tr class="search-item"><td><code class="new">/proactive</code></td><td class="desc">Alias for /loop — schedule recurring background task</td></tr> <!-- added:v2.1.105 -->
                     <tr class="search-item"><td><code>/schedule</code></td><td class="desc">Cloud scheduled tasks</td></tr>
                     <tr class="search-item"><td><code>/voice</code></td><td class="desc">Push-to-talk voice prompting</td></tr>
-                    <tr class="search-item"><td><code>/doctor</code></td><td class="desc">Diagnose installation/env issues</td></tr>
+                    <tr class="search-item"><td><code>/doctor</code></td><td class="desc">Diagnose installation/env issues; press f to auto-fix</td></tr>
                     <tr class="search-item"><td><code>/pr-comments [PR]</code></td><td class="desc">Fetch GitHub PR comments</td></tr>
                     <tr class="search-item"><td><code>/security-review</code></td><td class="desc">Security analysis of uncommitted code</td></tr>
                     <tr class="search-item"><td><code>/powerup</code></td><td class="desc">Interactive lessons teaching CC features with animated demos</td></tr>
@@ -574,6 +577,9 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_SCRIPT_CAPS</code></td><td class="desc">Limit per-session script invocations (subprocess sandboxing)</td></tr>
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_CERT_STORE=bundled</code></td><td class="desc">Use only bundled CAs; by default OS CA cert store is trusted (enterprise TLS proxy support)</td></tr> <!-- added:v2.1.101 -->
                     <tr class="search-item"><td><code class="new">OTEL_LOG_USER_PROMPTS</code> / <code class="new">OTEL_LOG_TOOL_DETAILS</code> / <code class="new">OTEL_LOG_TOOL_CONTENT</code></td><td class="desc">OTEL beta tracing: opt in to emit sensitive span attributes (prompts/tool details/tool content)</td></tr> <!-- added:v2.1.101 -->
+                    <tr class="search-item"><td><code class="new">ENABLE_PROMPT_CACHING_1H</code></td><td class="desc">Opt into 1-hour prompt cache TTL (API key, Bedrock, Vertex, Foundry)</td></tr> <!-- added:v2.1.108 -->
+                    <tr class="search-item"><td><code class="new">FORCE_PROMPT_CACHING_5M</code></td><td class="desc">Force 5-minute prompt cache TTL</td></tr> <!-- added:v2.1.108 -->
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_ENABLE_AWAY_SUMMARY</code></td><td class="desc">Force-enable recap/away summary (useful when telemetry disabled)</td></tr> <!-- added:v2.1.108 -->
                 </table>
             </div>
         </div>
@@ -836,12 +842,16 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.107",
-        "date": "2026-04-14",
+        "version": "v2.1.109",
+        "date": "2026-04-15",
         "changes": [
-            {"tag": "ADD", "text": "<code>/proactive</code> slash command — alias for <code>/loop</code>, schedules recurring background task"},
-            {"tag": "ADD", "text": "<code>PreCompact</code> hook event — fires before compaction; block by exiting with code 2 or returning <code>{\"decision\":\"block\"}</code>"},
-            {"tag": "ADD", "text": "<code>monitors</code> plugin manifest key — background monitor support; auto-arms at session start or on skill invoke"}
+            {"tag": "ADD", "text": "<code>/recap</code> — Summarize away context; auto-triggered on return or invoke manually"},
+            {"tag": "ADD", "text": "<code>/rewind</code> / <code>/undo</code> — Rewind conversation; <code>/undo</code> is new alias"},
+            {"tag": "ADD", "text": "<code>ENABLE_PROMPT_CACHING_1H</code> / <code>FORCE_PROMPT_CACHING_5M</code> env vars — Control prompt cache TTL"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_ENABLE_AWAY_SUMMARY</code> env var — Force-enable recap when telemetry disabled"},
+            {"tag": "ADD", "text": "<code>Ctrl A</code> session picker key — Show all projects (picker defaults to current dir)"},
+            {"tag": "CHG", "text": "<code>/model</code> — Now warns before switching models mid-conversation"},
+            {"tag": "CHG", "text": "<code>/doctor</code> — Press f to auto-fix reported issues"}
         ]
     }
     </script>
