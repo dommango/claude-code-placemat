@@ -203,6 +203,53 @@
                 <span class="change-category-title cat-content">Content / CC Release Updates</span>
 
                 <div class="change-section">
+                    <h3>CC v2.1.110 <span class="version-date">2026-04-15</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-change">CHG</span><code>Ctrl O</code> — Now toggles between normal and verbose transcript only; focus view moved to <code>/focus</code></li>
+                        <li><span class="tag tag-add">ADD</span><code>/tui [fullscreen]</code> slash command — Switch to flicker-free fullscreen rendering in current session</li>
+                        <li><span class="tag tag-add">ADD</span><code>/focus</code> slash command — Toggle focus view in fullscreen mode</li>
+                        <li><span class="tag tag-add">ADD</span><code>autoScrollEnabled</code> JSON setting — Disable conversation auto-scroll in fullscreen mode</li>
+                        <li><span class="tag tag-add">ADD</span><code>tui</code> JSON setting — Configure TUI rendering mode</li>
+                        <li><span class="tag tag-add">ADD</span><code>Ctrl A</code> session picker shortcut — Show all projects (overrides current-dir default filter)</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
+                    <h3>CC v2.1.108 <span class="version-date">2026-04-14</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>/recap</code> slash command — Display session recap on return to conversation; configurable in <code>/config</code></li>
+                        <li><span class="tag tag-add">ADD</span><code>/undo</code> slash command — Alias for <code>/rewind</code></li>
+                        <li><span class="tag tag-add">ADD</span><code>ENABLE_PROMPT_CACHING_1H</code> env var — Opt into 1-hour prompt cache TTL (API key, Bedrock, Vertex, Foundry)</li>
+                        <li><span class="tag tag-add">ADD</span><code>FORCE_PROMPT_CACHING_5M</code> env var — Force 5-minute prompt cache TTL</li>
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_ENABLE_AWAY_SUMMARY</code> env var — Enable session recap for telemetry-disabled users; set 0 to opt out</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
+                    <h3>CC v2.1.105 <span class="version-date">2026-04-13</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>PreCompact</code> hook event — Runs before compaction; block with exit 2 or <code>{"decision":"block"}</code></li>
+                        <li><span class="tag tag-change">CHG</span><code>/loop [interval]</code> — Added note that <code>/proactive</code> is an alias</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
+                    <h3>CC v2.1.101 <span class="version-date">2026-04-10</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>/team-onboarding</code> slash command — Generate teammate ramp-up guide from local CC usage</li>
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_CERT_STORE=bundled</code> env var — Use only bundled CAs; skip OS certificate store trust</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
+                    <h3>CC v2.1.98 <span class="version-date">2026-04-09</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_PERFORCE_MODE</code> env var — Fail on read-only files with p4 edit hint instead of overwriting</li>
+                        <li><span class="tag tag-add">ADD</span><code>--exclude-dynamic-system-prompt-sections</code> CLI flag — Exclude dynamic system prompt sections for improved cross-user prompt caching</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
                     <h3>CC v2.1.97 <span class="version-date">2026-04-08</span></h3>
                     <ul class="change-list">
                         <li><span class="tag tag-change">CHG</span><code>Ctrl O</code> — Description updated to note focus view toggle in NO_FLICKER mode</li>
