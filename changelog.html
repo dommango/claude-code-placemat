@@ -203,6 +203,28 @@
                 <span class="change-category-title cat-content">Content / CC Release Updates</span>
 
                 <div class="change-section">
+                    <h3>CC v2.1.110–v2.1.112 <span class="version-date">2026-04-16</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>/tui [fullscreen]</code> slash command — Switch to flicker-free fullscreen TUI rendering in same conversation</li>
+                        <li><span class="tag tag-add">ADD</span><code>/focus</code> slash command — Toggle focus view in fullscreen/TUI mode</li>
+                        <li><span class="tag tag-change">CHG</span><code>Ctrl O</code> — Now toggles between normal and verbose transcript only; focus view moved to <code>/focus</code></li>
+                        <li><span class="tag tag-add">ADD</span><code>autoScrollEnabled</code> JSON setting — Disable conversation auto-scroll in fullscreen mode</li>
+                        <li><span class="tag tag-add">ADD</span><code>tui</code> JSON setting — Default TUI mode; set to "fullscreen" for flicker-free alt-screen rendering</li>
+                        <li><span class="tag tag-add">ADD</span><code>TRACEPARENT</code> / <code>TRACESTATE</code> env vars — Distributed trace context for SDK/headless sessions</li>
+                        <li><span class="tag tag-change">CHG</span><code>/effort [level]</code> — Added <code>xhigh</code> level (Opus 4.7 only); no-arg invocation opens interactive slider</li>
+                        <li><span class="tag tag-change">CHG</span><code>--effort</code> — Updated to include <code>xhigh</code> level (Opus 4.7 only)</li>
+                        <li><span class="tag tag-add">ADD</span><code>/less-permission-prompts</code> skill — Scan transcripts for read-only Bash/MCP calls; propose settings.json allowlist</li>
+                        <li><span class="tag tag-add">ADD</span><code>/ultrareview [PR#]</code> skill — Cloud code review via parallel agents; no args for current branch, PR# for specific PR</li>
+                        <li><span class="tag tag-add">ADD</span><code>Ctrl U</code> key — Clear entire input buffer</li>
+                        <li><span class="tag tag-add">ADD</span><code>Ctrl Y</code> key — Restore input buffer cleared by Ctrl+U</li>
+                        <li><span class="tag tag-add">ADD</span>Transcript view: <code>[</code> dump to scrollback, <code>v</code> open in editor</li>
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_USE_POWERSHELL_TOOL</code> env var — Enable PowerShell tool; Windows opt in/out, Linux/macOS requires pwsh on PATH</li>
+                        <li><span class="tag tag-add">ADD</span><code>OTEL_LOG_RAW_API_BODIES</code> env var — Emit full API request/response bodies as OTEL log events for debugging</li>
+                        <li><span class="tag tag-change">CHG</span><code>/theme</code> — Added "Auto (match terminal)" option</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
                     <h3>CC v2.1.108–v2.1.109 <span class="version-date">2026-04-14</span></h3>
                     <ul class="change-list">
                         <li><span class="tag tag-add">ADD</span><code>/recap</code> slash command — Summarize away context; auto-triggered on return or invoke manually</li>

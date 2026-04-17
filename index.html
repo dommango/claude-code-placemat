@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.109</span>
+            <span class="release-tag">As of release: v2.1.112</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -377,12 +377,14 @@
                 <table>
                     <tr class="search-item"><td><code>Ctrl C</code> / <code>D</code></td><td class="desc">Cancel input / Exit session</td></tr>
                     <tr class="search-item"><td><code>Ctrl L</code></td><td class="desc">Clear screen + full redraw</td></tr>
-                    <tr class="search-item"><td><code>Ctrl O</code></td><td class="desc">Toggle verbose output; in NO_FLICKER mode, toggles focus view</td></tr>
+                    <tr class="search-item"><td><code>Ctrl O</code></td><td class="desc">Toggle between normal and verbose transcript; focus view toggled with /focus</td></tr>
                     <tr class="search-item"><td><code>Ctrl R</code></td><td class="desc">Reverse search history</td></tr>
                     <tr class="search-item"><td><code>Ctrl G</code></td><td class="desc">Open prompt in external editor</td></tr>
                     <tr class="search-item"><td><code>Ctrl B</code></td><td class="desc">Background running task</td></tr>
                     <tr class="search-item"><td><code>Ctrl T</code></td><td class="desc">Toggle task list</td></tr>
                     <tr class="search-item"><td><code>Ctrl V</code></td><td class="desc">Paste image from clipboard</td></tr>
+                    <tr class="search-item"><td><code class="new">Ctrl U</code></td><td class="desc">Clear entire input buffer (Ctrl+Y to restore)</td></tr> <!-- added:v2.1.111 -->
+                    <tr class="search-item"><td><code class="new">Ctrl Y</code></td><td class="desc">Restore input buffer cleared by Ctrl+U</td></tr> <!-- added:v2.1.111 -->
                     <tr class="search-item"><td><code>Ctrl X K</code></td><td class="desc">Kill background agents (chord, x2)</td></tr>
                     <tr class="search-item"><td><code>Esc Esc</code></td><td class="desc">Rewind / undo state</td></tr>
                 </table>
@@ -405,7 +407,15 @@
                     <tr class="search-item"><td><code>P</code> / <code>R</code></td><td class="desc">Preview / Rename session</td></tr>
                     <tr class="search-item"><td><code>/</code></td><td class="desc">Search sessions</td></tr>
                     <tr class="search-item"><td><code>A</code> / <code>B</code></td><td class="desc">Filter All projects / Current branch</td></tr>
-                    <tr class="search-item"><td><code class="new">Ctrl A</code></td><td class="desc">Show all projects in /resume picker (picker defaults to current dir)</td></tr> <!-- added:v2.1.108 -->
+                    <tr class="search-item"><td><code>Ctrl A</code></td><td class="desc">Show all projects in /resume picker (picker defaults to current dir)</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Transcript View</h3>
+                <table>
+                    <tr class="search-item"><td><code class="new">[</code></td><td class="desc">Dump transcript to scrollback</td></tr> <!-- added:v2.1.111 -->
+                    <tr class="search-item"><td><code class="new">v</code></td><td class="desc">Open transcript in editor</td></tr> <!-- added:v2.1.111 -->
                 </table>
             </div>
         </div>
@@ -426,8 +436,8 @@
                     <tr class="search-item"><td><code>/diff</code></td><td class="desc">Interactive diff viewer</td></tr>
                     <tr class="search-item"><td><code>/copy</code></td><td class="desc">Copy last response</td></tr>
                     <tr class="search-item"><td><code>/export</code></td><td class="desc">Export conversation</td></tr>
-                    <tr class="search-item"><td><code class="new">/recap</code></td><td class="desc">Summarize away context; auto-triggered on return or invoke manually</td></tr> <!-- added:v2.1.108 -->
-                    <tr class="search-item"><td><code class="new">/rewind</code> / <code class="new">/undo</code></td><td class="desc">Rewind conversation to previous state; /undo is alias</td></tr> <!-- added:v2.1.108 -->
+                    <tr class="search-item"><td><code>/recap</code></td><td class="desc">Summarize away context; auto-triggered on return or invoke manually</td></tr>
+                    <tr class="search-item"><td><code>/rewind</code> / <code>/undo</code></td><td class="desc">Rewind conversation to previous state; /undo is alias</td></tr>
                 </table>
             </div>
 
@@ -436,13 +446,15 @@
                 <table>
                     <tr class="search-item"><td><code>/config</code></td><td class="desc">Open settings interface</td></tr>
                     <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model manually; warns before switching mid-conversation</td></tr>
-                    <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/auto)</td></tr>
+                    <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/xhigh/auto); no args opens interactive slider; xhigh is Opus 4.7 only</td></tr>
                     <tr class="search-item"><td><code class="unverified">/fast [on/off]</code></td><td class="desc">Toggle Fast mode</td></tr>
                     <tr class="search-item"><td><code>/permissions</code></td><td class="desc">View/update tool permissions</td></tr>
                     <tr class="search-item"><td><code>/color [color]</code></td><td class="desc">Set prompt-bar color</td></tr>
                     <tr class="search-item"><td><code>/keybindings</code></td><td class="desc">Customize keyboard shortcuts</td></tr>
                     <tr class="search-item"><td><code>/terminal-setup</code></td><td class="desc">Configure terminal integration</td></tr>
-                    <tr class="search-item"><td><code>/theme</code></td><td class="desc">Change color theme</td></tr>
+                    <tr class="search-item"><td><code>/theme</code></td><td class="desc">Change color theme; includes "Auto (match terminal)" option</td></tr>
+                    <tr class="search-item"><td><code class="new">/tui [fullscreen]</code></td><td class="desc">Switch to flicker-free fullscreen TUI rendering in same conversation</td></tr> <!-- added:v2.1.110 -->
+                    <tr class="search-item"><td><code class="new">/focus</code></td><td class="desc">Toggle focus view (fullscreen/TUI mode)</td></tr> <!-- added:v2.1.110 -->
                     <tr class="search-item"><td><code>/release-notes</code></td><td class="desc">Interactive version picker for release notes</td></tr>
                 </table>
             </div>
@@ -472,7 +484,7 @@
                     <tr class="search-item"><td><code>/btw &lt;query&gt;</code></td><td class="desc">Side question (does not alter context)</td></tr>
                     <tr class="search-item"><td><code class="unverified">/plan [desc]</code></td><td class="desc">Switch to Plan Mode directly</td></tr>
                     <tr class="search-item"><td><code>/loop [interval]</code></td><td class="desc">Schedule recurring background task</td></tr>
-                    <tr class="search-item"><td><code class="new">/proactive</code></td><td class="desc">Alias for /loop — schedule recurring background task</td></tr> <!-- added:v2.1.105 -->
+                    <tr class="search-item"><td><code>/proactive</code></td><td class="desc">Alias for /loop — schedule recurring background task</td></tr>
                     <tr class="search-item"><td><code>/schedule</code></td><td class="desc">Cloud scheduled tasks</td></tr>
                     <tr class="search-item"><td><code>/voice</code></td><td class="desc">Push-to-talk voice prompting</td></tr>
                     <tr class="search-item"><td><code>/doctor</code></td><td class="desc">Diagnose installation/env issues; press f to auto-fix</td></tr>
@@ -482,7 +494,7 @@
                     <tr class="search-item"><td><code>/stats</code> / <code>/insights</code></td><td class="desc">Usage streaks / HTML sessions report</td></tr>
                     <tr class="search-item"><td><code>/desktop</code></td><td class="desc">Continue session in Desktop app</td></tr>
                     <tr class="search-item"><td><code>/remote-control</code></td><td class="desc">Bridge session to claude.ai/code</td></tr>
-                    <tr class="search-item"><td><code class="new">/team-onboarding</code></td><td class="desc">Generate teammate ramp-up guide from local CC usage</td></tr> <!-- added:v2.1.101 -->
+                    <tr class="search-item"><td><code>/team-onboarding</code></td><td class="desc">Generate teammate ramp-up guide from local CC usage</td></tr>
                 </table>
             </div>
         </div>
@@ -517,7 +529,7 @@
                 <h3>State & Behavior</h3>
                 <table>
                     <tr class="search-item"><td><code>-w</code> / <code>--worktree</code></td><td class="desc">Start in isolated git worktree</td></tr>
-                    <tr class="search-item"><td><code>--effort</code></td><td class="desc">Set effort level (low/med/high)</td></tr>
+                    <tr class="search-item"><td><code>--effort</code></td><td class="desc">Set effort level (low/med/high/xhigh); xhigh is Opus 4.7 only</td></tr>
                     <tr class="search-item"><td><code>--model</code></td><td class="desc">Override specific model at launch</td></tr>
                     <tr class="search-item"><td><code>--fallback-model</code></td><td class="desc">Fallback if primary is overloaded</td></tr>
                     <tr class="search-item"><td><code>--permission-mode plan</code></td><td class="desc">Start in read-only plan mode</td></tr>
@@ -554,6 +566,8 @@
                     <tr class="search-item"><td><code>forceRemoteSettingsRefresh</code></td><td class="desc">Block startup until remote managed settings are freshly fetched; fail-closed on fetch failure</td></tr>
                     <tr class="search-item"><td><code>statusLine.refreshInterval</code></td><td class="desc">Re-run status line command every N seconds</td></tr>
                     <tr class="search-item"><td><code>workspace.git_worktree</code></td><td class="desc">Status line JSON input field — set when current directory is inside a linked git worktree</td></tr>
+                    <tr class="search-item"><td><code class="new">autoScrollEnabled</code></td><td class="desc">Disable conversation auto-scroll in fullscreen mode</td></tr> <!-- added:v2.1.110 -->
+                    <tr class="search-item"><td><code class="new">tui</code></td><td class="desc">Default TUI mode; set to "fullscreen" for flicker-free alt-screen rendering</td></tr> <!-- added:v2.1.110 -->
                 </table>
             </div>
 
@@ -575,11 +589,14 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_USE_MANTLE=1</code></td><td class="desc">Enable Amazon Bedrock powered by Mantle</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_PERFORCE_MODE</code></td><td class="desc">When set, Edit/Write/NotebookEdit fail on read-only files with a p4 edit hint</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_SCRIPT_CAPS</code></td><td class="desc">Limit per-session script invocations (subprocess sandboxing)</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_CERT_STORE=bundled</code></td><td class="desc">Use only bundled CAs; by default OS CA cert store is trusted (enterprise TLS proxy support)</td></tr> <!-- added:v2.1.101 -->
-                    <tr class="search-item"><td><code class="new">OTEL_LOG_USER_PROMPTS</code> / <code class="new">OTEL_LOG_TOOL_DETAILS</code> / <code class="new">OTEL_LOG_TOOL_CONTENT</code></td><td class="desc">OTEL beta tracing: opt in to emit sensitive span attributes (prompts/tool details/tool content)</td></tr> <!-- added:v2.1.101 -->
-                    <tr class="search-item"><td><code class="new">ENABLE_PROMPT_CACHING_1H</code></td><td class="desc">Opt into 1-hour prompt cache TTL (API key, Bedrock, Vertex, Foundry)</td></tr> <!-- added:v2.1.108 -->
-                    <tr class="search-item"><td><code class="new">FORCE_PROMPT_CACHING_5M</code></td><td class="desc">Force 5-minute prompt cache TTL</td></tr> <!-- added:v2.1.108 -->
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_ENABLE_AWAY_SUMMARY</code></td><td class="desc">Force-enable recap/away summary (useful when telemetry disabled)</td></tr> <!-- added:v2.1.108 -->
+                    <tr class="search-item"><td><code>CLAUDE_CODE_CERT_STORE=bundled</code></td><td class="desc">Use only bundled CAs; by default OS CA cert store is trusted (enterprise TLS proxy support)</td></tr>
+                    <tr class="search-item"><td><code>OTEL_LOG_USER_PROMPTS</code> / <code>OTEL_LOG_TOOL_DETAILS</code> / <code>OTEL_LOG_TOOL_CONTENT</code></td><td class="desc">OTEL beta tracing: opt in to emit sensitive span attributes (prompts/tool details/tool content)</td></tr>
+                    <tr class="search-item"><td><code>ENABLE_PROMPT_CACHING_1H</code></td><td class="desc">Opt into 1-hour prompt cache TTL (API key, Bedrock, Vertex, Foundry)</td></tr>
+                    <tr class="search-item"><td><code>FORCE_PROMPT_CACHING_5M</code></td><td class="desc">Force 5-minute prompt cache TTL</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_AWAY_SUMMARY</code></td><td class="desc">Force-enable recap/away summary (useful when telemetry disabled)</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_USE_POWERSHELL_TOOL</code></td><td class="desc">Enable PowerShell tool; on Windows opt in/out, on Linux/macOS requires pwsh on PATH</td></tr> <!-- added:v2.1.111 -->
+                    <tr class="search-item"><td><code class="new">OTEL_LOG_RAW_API_BODIES</code></td><td class="desc">Emit full API request/response bodies as OTEL log events for debugging</td></tr> <!-- added:v2.1.111 -->
+                    <tr class="search-item"><td><code class="new">TRACEPARENT</code> / <code class="new">TRACESTATE</code></td><td class="desc">Distributed trace context injected from environment for SDK/headless sessions</td></tr> <!-- added:v2.1.110 -->
                 </table>
             </div>
         </div>
@@ -593,6 +610,8 @@
                     <tr class="search-item"><td><code>/simplify</code></td><td class="desc">Code review (3 parallel agents)</td></tr>
                     <tr class="search-item"><td><code>/batch</code></td><td class="desc">Large parallel changes (5-30 worktrees)</td></tr>
                     <tr class="search-item"><td><code>/claude-api</code></td><td class="desc">Load API + SDK reference into context</td></tr>
+                    <tr class="search-item"><td><code class="new">/less-permission-prompts</code></td><td class="desc">Scan transcripts for read-only Bash/MCP calls; propose settings.json allowlist</td></tr> <!-- added:v2.1.111 -->
+                    <tr class="search-item"><td><code class="new">/ultrareview [PR#]</code></td><td class="desc">Cloud code review via parallel agents; no args for current branch, PR# for specific PR</td></tr> <!-- added:v2.1.111 -->
                     <tr class="search-item"><td><code>.claude/skills/&lt;name&gt;/</code></td><td class="desc">Project specific skill directory</td></tr>
                     <tr class="search-item"><td><code>~/.claude/skills/&lt;name&gt;/</code></td><td class="desc">Global personal skill directory</td></tr>
                     <tr class="search-item"><td><code>plugin: bin/</code></td><td class="desc">Plugin executables in bin/ invocable as bare commands from Bash tool</td></tr>
@@ -611,7 +630,7 @@
                     <tr class="search-item"><td><code>${CLAUDE_SKILL_DIR}</code></td><td class="desc">Reference the skill's own directory</td></tr>
                     <tr class="search-item"><td><code>! 'cmd'</code></td><td class="desc">Dynamic bash execution context injection</td></tr>
                     <tr class="search-item"><td><code>keep-coding-instructions</code></td><td class="desc">Control plugin output style for coding tasks</td></tr>
-                    <tr class="search-item"><td><code class="new">monitors</code> (plugin manifest)</td><td class="desc">Background monitor support for plugins; auto-arms at session start or on skill invoke</td></tr> <!-- added:v2.1.105 -->
+                    <tr class="search-item"><td><code>monitors</code> (plugin manifest)</td><td class="desc">Background monitor support for plugins; auto-arms at session start or on skill invoke</td></tr>
                 </table>
             </div>
 
@@ -654,7 +673,7 @@
                     <tr class="search-item"><td><code>PermissionDenied</code></td><td class="desc">Fires after auto mode classifier denials; return {retry:true} to allow retry</td></tr>
                     <tr class="search-item"><td><code>"defer"</code> (PreToolUse)</td><td class="desc">Headless sessions pause at tool call; resume with -p --resume to re-evaluate</td></tr>
                     <tr class="search-item"><td><code>UserPromptSubmit</code></td><td class="desc">Fires on user prompt submit; supports hookSpecificOutput.sessionTitle to set session title</td></tr>
-                    <tr class="search-item"><td><code class="new">PreCompact</code></td><td class="desc">Fires before compaction; block by exiting with code 2 or returning {"decision":"block"}</td></tr> <!-- added:v2.1.105 -->
+                    <tr class="search-item"><td><code>PreCompact</code></td><td class="desc">Fires before compaction; block by exiting with code 2 or returning {"decision":"block"}</td></tr>
                 </table>
             </div>
 
@@ -842,16 +861,21 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.109",
-        "date": "2026-04-15",
+        "version": "v2.1.112",
+        "date": "2026-04-16",
         "changes": [
-            {"tag": "ADD", "text": "<code>/recap</code> — Summarize away context; auto-triggered on return or invoke manually"},
-            {"tag": "ADD", "text": "<code>/rewind</code> / <code>/undo</code> — Rewind conversation; <code>/undo</code> is new alias"},
-            {"tag": "ADD", "text": "<code>ENABLE_PROMPT_CACHING_1H</code> / <code>FORCE_PROMPT_CACHING_5M</code> env vars — Control prompt cache TTL"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_ENABLE_AWAY_SUMMARY</code> env var — Force-enable recap when telemetry disabled"},
-            {"tag": "ADD", "text": "<code>Ctrl A</code> session picker key — Show all projects (picker defaults to current dir)"},
-            {"tag": "CHG", "text": "<code>/model</code> — Now warns before switching models mid-conversation"},
-            {"tag": "CHG", "text": "<code>/doctor</code> — Press f to auto-fix reported issues"}
+            {"tag": "ADD", "text": "<code>/tui [fullscreen]</code> — Switch to flicker-free fullscreen TUI rendering in same conversation"},
+            {"tag": "ADD", "text": "<code>/focus</code> — Toggle focus view in fullscreen/TUI mode"},
+            {"tag": "CHG", "text": "<code>Ctrl O</code> — Now toggles verbose transcript only; focus view moved to <code>/focus</code>"},
+            {"tag": "ADD", "text": "<code>autoScrollEnabled</code> / <code>tui</code> JSON settings — Control fullscreen auto-scroll and default TUI mode"},
+            {"tag": "ADD", "text": "<code>TRACEPARENT</code> / <code>TRACESTATE</code> env vars — Distributed trace linking for SDK/headless sessions"},
+            {"tag": "ADD", "text": "<code>/effort</code> <code>xhigh</code> level — Sits between high and max; Opus 4.7 only; interactive slider when invoked without args"},
+            {"tag": "ADD", "text": "<code>/less-permission-prompts</code> skill — Propose read-only tool allowlist for settings.json"},
+            {"tag": "ADD", "text": "<code>/ultrareview [PR#]</code> skill — Cloud code review via parallel agents"},
+            {"tag": "ADD", "text": "<code>Ctrl U</code> — Clear input buffer; <code>Ctrl Y</code> to restore"},
+            {"tag": "ADD", "text": "Transcript view keys: <code>[</code> dump to scrollback, <code>v</code> open in editor"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_USE_POWERSHELL_TOOL</code> env var — Enable PowerShell tool"},
+            {"tag": "ADD", "text": "<code>OTEL_LOG_RAW_API_BODIES</code> env var — Emit full API request/response bodies as OTEL log events"}
         ]
     }
     </script>
