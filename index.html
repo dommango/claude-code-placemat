@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.112</span>
+            <span class="release-tag">As of release: v2.1.113</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -383,6 +383,7 @@
                     <tr class="search-item"><td><code>Ctrl B</code></td><td class="desc">Background running task</td></tr>
                     <tr class="search-item"><td><code>Ctrl T</code></td><td class="desc">Toggle task list</td></tr>
                     <tr class="search-item"><td><code>Ctrl V</code></td><td class="desc">Paste image from clipboard</td></tr>
+                    <tr class="search-item"><td><code class="new">Ctrl Backspace</code></td><td class="desc">Delete previous word (Windows)</td></tr> <!-- added:v2.1.113 -->
                     <tr class="search-item"><td><code class="new">Ctrl U</code></td><td class="desc">Clear entire input buffer (Ctrl+Y to restore)</td></tr> <!-- added:v2.1.111 -->
                     <tr class="search-item"><td><code class="new">Ctrl Y</code></td><td class="desc">Restore input buffer cleared by Ctrl+U</td></tr> <!-- added:v2.1.111 -->
                     <tr class="search-item"><td><code>Ctrl X K</code></td><td class="desc">Kill background agents (chord, x2)</td></tr>
@@ -398,6 +399,7 @@
                     <tr class="search-item"><td><code>\ T</code></td><td class="desc">Toggle thinking on/off</td></tr>
                     <tr class="search-item"><td><code>\ Enter</code></td><td class="desc">Newline (quick)</td></tr>
                     <tr class="search-item"><td><code>Ctrl J</code></td><td class="desc">Newline (control seq)</td></tr>
+                    <tr class="search-item"><td><code class="new">Ctrl A</code> / <code class="new">Ctrl E</code></td><td class="desc">Move to start/end of current logical line (multiline input)</td></tr> <!-- added:v2.1.113 -->
                 </table>
             </div>
 
@@ -432,6 +434,7 @@
                     <tr class="search-item"><td><code>/rename [name]</code></td><td class="desc">Name current session</td></tr>
                     <tr class="search-item"><td><code>/branch [name]</code></td><td class="desc">Branch convo (formerly /fork)</td></tr>
                     <tr class="search-item"><td><code>/cost</code></td><td class="desc">Token usage & per-model cost breakdown</td></tr>
+                    <tr class="search-item"><td><code class="new">/extra-usage</code></td><td class="desc">Request extra usage allowance; works from Remote Control clients</td></tr> <!-- added:v2.1.113 -->
                     <tr class="search-item"><td><code>/context</code></td><td class="desc">Visualize context window (grid)</td></tr>
                     <tr class="search-item"><td><code>/diff</code></td><td class="desc">Interactive diff viewer</td></tr>
                     <tr class="search-item"><td><code>/copy</code></td><td class="desc">Copy last response</td></tr>
@@ -453,8 +456,8 @@
                     <tr class="search-item"><td><code>/keybindings</code></td><td class="desc">Customize keyboard shortcuts</td></tr>
                     <tr class="search-item"><td><code>/terminal-setup</code></td><td class="desc">Configure terminal integration</td></tr>
                     <tr class="search-item"><td><code>/theme</code></td><td class="desc">Change color theme; includes "Auto (match terminal)" option</td></tr>
-                    <tr class="search-item"><td><code class="new">/tui [fullscreen]</code></td><td class="desc">Switch to flicker-free fullscreen TUI rendering in same conversation</td></tr> <!-- added:v2.1.110 -->
-                    <tr class="search-item"><td><code class="new">/focus</code></td><td class="desc">Toggle focus view (fullscreen/TUI mode)</td></tr> <!-- added:v2.1.110 -->
+                    <tr class="search-item"><td><code>/tui [fullscreen]</code></td><td class="desc">Switch to flicker-free fullscreen TUI rendering in same conversation</td></tr>
+                    <tr class="search-item"><td><code>/focus</code></td><td class="desc">Toggle focus view (fullscreen/TUI mode)</td></tr>
                     <tr class="search-item"><td><code>/release-notes</code></td><td class="desc">Interactive version picker for release notes</td></tr>
                 </table>
             </div>
@@ -566,8 +569,9 @@
                     <tr class="search-item"><td><code>forceRemoteSettingsRefresh</code></td><td class="desc">Block startup until remote managed settings are freshly fetched; fail-closed on fetch failure</td></tr>
                     <tr class="search-item"><td><code>statusLine.refreshInterval</code></td><td class="desc">Re-run status line command every N seconds</td></tr>
                     <tr class="search-item"><td><code>workspace.git_worktree</code></td><td class="desc">Status line JSON input field — set when current directory is inside a linked git worktree</td></tr>
-                    <tr class="search-item"><td><code class="new">autoScrollEnabled</code></td><td class="desc">Disable conversation auto-scroll in fullscreen mode</td></tr> <!-- added:v2.1.110 -->
-                    <tr class="search-item"><td><code class="new">tui</code></td><td class="desc">Default TUI mode; set to "fullscreen" for flicker-free alt-screen rendering</td></tr> <!-- added:v2.1.110 -->
+                    <tr class="search-item"><td><code>autoScrollEnabled</code></td><td class="desc">Disable conversation auto-scroll in fullscreen mode</td></tr>
+                    <tr class="search-item"><td><code>tui</code></td><td class="desc">Default TUI mode; set to "fullscreen" for flicker-free alt-screen rendering</td></tr>
+                    <tr class="search-item"><td><code class="new">sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr> <!-- added:v2.1.113 -->
                 </table>
             </div>
 
@@ -596,7 +600,7 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_AWAY_SUMMARY</code></td><td class="desc">Force-enable recap/away summary (useful when telemetry disabled)</td></tr>
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_USE_POWERSHELL_TOOL</code></td><td class="desc">Enable PowerShell tool; on Windows opt in/out, on Linux/macOS requires pwsh on PATH</td></tr> <!-- added:v2.1.111 -->
                     <tr class="search-item"><td><code class="new">OTEL_LOG_RAW_API_BODIES</code></td><td class="desc">Emit full API request/response bodies as OTEL log events for debugging</td></tr> <!-- added:v2.1.111 -->
-                    <tr class="search-item"><td><code class="new">TRACEPARENT</code> / <code class="new">TRACESTATE</code></td><td class="desc">Distributed trace context injected from environment for SDK/headless sessions</td></tr> <!-- added:v2.1.110 -->
+                    <tr class="search-item"><td><code>TRACEPARENT</code> / <code>TRACESTATE</code></td><td class="desc">Distributed trace context injected from environment for SDK/headless sessions</td></tr>
                 </table>
             </div>
         </div>
@@ -861,21 +865,13 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.112",
-        "date": "2026-04-16",
+        "version": "v2.1.113",
+        "date": "2026-04-17",
         "changes": [
-            {"tag": "ADD", "text": "<code>/tui [fullscreen]</code> — Switch to flicker-free fullscreen TUI rendering in same conversation"},
-            {"tag": "ADD", "text": "<code>/focus</code> — Toggle focus view in fullscreen/TUI mode"},
-            {"tag": "CHG", "text": "<code>Ctrl O</code> — Now toggles verbose transcript only; focus view moved to <code>/focus</code>"},
-            {"tag": "ADD", "text": "<code>autoScrollEnabled</code> / <code>tui</code> JSON settings — Control fullscreen auto-scroll and default TUI mode"},
-            {"tag": "ADD", "text": "<code>TRACEPARENT</code> / <code>TRACESTATE</code> env vars — Distributed trace linking for SDK/headless sessions"},
-            {"tag": "ADD", "text": "<code>/effort</code> <code>xhigh</code> level — Sits between high and max; Opus 4.7 only; interactive slider when invoked without args"},
-            {"tag": "ADD", "text": "<code>/less-permission-prompts</code> skill — Propose read-only tool allowlist for settings.json"},
-            {"tag": "ADD", "text": "<code>/ultrareview [PR#]</code> skill — Cloud code review via parallel agents"},
-            {"tag": "ADD", "text": "<code>Ctrl U</code> — Clear input buffer; <code>Ctrl Y</code> to restore"},
-            {"tag": "ADD", "text": "Transcript view keys: <code>[</code> dump to scrollback, <code>v</code> open in editor"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_USE_POWERSHELL_TOOL</code> env var — Enable PowerShell tool"},
-            {"tag": "ADD", "text": "<code>OTEL_LOG_RAW_API_BODIES</code> env var — Emit full API request/response bodies as OTEL log events"}
+            {"tag": "ADD", "text": "<code>sandbox.network.deniedDomains</code> JSON setting — Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them"},
+            {"tag": "ADD", "text": "<code>Ctrl A</code> / <code>Ctrl E</code> (multiline input) — Move to start/end of current logical line"},
+            {"tag": "ADD", "text": "<code>Ctrl Backspace</code> (Windows) — Delete previous word"},
+            {"tag": "ADD", "text": "<code>/extra-usage</code> slash command — Request extra usage allowance; works from Remote Control clients"}
         ]
     }
     </script>
