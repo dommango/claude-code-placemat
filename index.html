@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.113</span>
+            <span class="release-tag">As of release: v2.1.114</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -384,8 +384,8 @@
                     <tr class="search-item"><td><code>Ctrl T</code></td><td class="desc">Toggle task list</td></tr>
                     <tr class="search-item"><td><code>Ctrl V</code></td><td class="desc">Paste image from clipboard</td></tr>
                     <tr class="search-item"><td><code class="new">Ctrl Backspace</code></td><td class="desc">Delete previous word (Windows)</td></tr> <!-- added:v2.1.113 -->
-                    <tr class="search-item"><td><code class="new">Ctrl U</code></td><td class="desc">Clear entire input buffer (Ctrl+Y to restore)</td></tr> <!-- added:v2.1.111 -->
-                    <tr class="search-item"><td><code class="new">Ctrl Y</code></td><td class="desc">Restore input buffer cleared by Ctrl+U</td></tr> <!-- added:v2.1.111 -->
+                    <tr class="search-item"><td><code>Ctrl U</code></td><td class="desc">Clear entire input buffer (Ctrl+Y to restore)</td></tr>
+                    <tr class="search-item"><td><code>Ctrl Y</code></td><td class="desc">Restore input buffer cleared by Ctrl+U</td></tr>
                     <tr class="search-item"><td><code>Ctrl X K</code></td><td class="desc">Kill background agents (chord, x2)</td></tr>
                     <tr class="search-item"><td><code>Esc Esc</code></td><td class="desc">Rewind / undo state</td></tr>
                 </table>
@@ -416,8 +416,8 @@
             <div class="search-group">
                 <h3>Transcript View</h3>
                 <table>
-                    <tr class="search-item"><td><code class="new">[</code></td><td class="desc">Dump transcript to scrollback</td></tr> <!-- added:v2.1.111 -->
-                    <tr class="search-item"><td><code class="new">v</code></td><td class="desc">Open transcript in editor</td></tr> <!-- added:v2.1.111 -->
+                    <tr class="search-item"><td><code>[</code></td><td class="desc">Dump transcript to scrollback</td></tr>
+                    <tr class="search-item"><td><code>v</code></td><td class="desc">Open transcript in editor</td></tr>
                 </table>
             </div>
         </div>
@@ -598,8 +598,8 @@
                     <tr class="search-item"><td><code>ENABLE_PROMPT_CACHING_1H</code></td><td class="desc">Opt into 1-hour prompt cache TTL (API key, Bedrock, Vertex, Foundry)</td></tr>
                     <tr class="search-item"><td><code>FORCE_PROMPT_CACHING_5M</code></td><td class="desc">Force 5-minute prompt cache TTL</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_AWAY_SUMMARY</code></td><td class="desc">Force-enable recap/away summary (useful when telemetry disabled)</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_USE_POWERSHELL_TOOL</code></td><td class="desc">Enable PowerShell tool; on Windows opt in/out, on Linux/macOS requires pwsh on PATH</td></tr> <!-- added:v2.1.111 -->
-                    <tr class="search-item"><td><code class="new">OTEL_LOG_RAW_API_BODIES</code></td><td class="desc">Emit full API request/response bodies as OTEL log events for debugging</td></tr> <!-- added:v2.1.111 -->
+                    <tr class="search-item"><td><code>CLAUDE_CODE_USE_POWERSHELL_TOOL</code></td><td class="desc">Enable PowerShell tool; on Windows opt in/out, on Linux/macOS requires pwsh on PATH</td></tr>
+                    <tr class="search-item"><td><code>OTEL_LOG_RAW_API_BODIES</code></td><td class="desc">Emit full API request/response bodies as OTEL log events for debugging</td></tr>
                     <tr class="search-item"><td><code>TRACEPARENT</code> / <code>TRACESTATE</code></td><td class="desc">Distributed trace context injected from environment for SDK/headless sessions</td></tr>
                 </table>
             </div>
@@ -614,8 +614,8 @@
                     <tr class="search-item"><td><code>/simplify</code></td><td class="desc">Code review (3 parallel agents)</td></tr>
                     <tr class="search-item"><td><code>/batch</code></td><td class="desc">Large parallel changes (5-30 worktrees)</td></tr>
                     <tr class="search-item"><td><code>/claude-api</code></td><td class="desc">Load API + SDK reference into context</td></tr>
-                    <tr class="search-item"><td><code class="new">/less-permission-prompts</code></td><td class="desc">Scan transcripts for read-only Bash/MCP calls; propose settings.json allowlist</td></tr> <!-- added:v2.1.111 -->
-                    <tr class="search-item"><td><code class="new">/ultrareview [PR#]</code></td><td class="desc">Cloud code review via parallel agents; no args for current branch, PR# for specific PR</td></tr> <!-- added:v2.1.111 -->
+                    <tr class="search-item"><td><code>/less-permission-prompts</code></td><td class="desc">Scan transcripts for read-only Bash/MCP calls; propose settings.json allowlist</td></tr>
+                    <tr class="search-item"><td><code>/ultrareview [PR#]</code></td><td class="desc">Cloud code review via parallel agents; no args for current branch, PR# for specific PR</td></tr>
                     <tr class="search-item"><td><code>.claude/skills/&lt;name&gt;/</code></td><td class="desc">Project specific skill directory</td></tr>
                     <tr class="search-item"><td><code>~/.claude/skills/&lt;name&gt;/</code></td><td class="desc">Global personal skill directory</td></tr>
                     <tr class="search-item"><td><code>plugin: bin/</code></td><td class="desc">Plugin executables in bin/ invocable as bare commands from Bash tool</td></tr>
@@ -865,14 +865,9 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.113",
-        "date": "2026-04-17",
-        "changes": [
-            {"tag": "ADD", "text": "<code>sandbox.network.deniedDomains</code> JSON setting — Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them"},
-            {"tag": "ADD", "text": "<code>Ctrl A</code> / <code>Ctrl E</code> (multiline input) — Move to start/end of current logical line"},
-            {"tag": "ADD", "text": "<code>Ctrl Backspace</code> (Windows) — Delete previous word"},
-            {"tag": "ADD", "text": "<code>/extra-usage</code> slash command — Request extra usage allowance; works from Remote Control clients"}
-        ]
+        "version": "v2.1.114",
+        "date": "2026-04-18",
+        "changes": []
     }
     </script>
 </body>
