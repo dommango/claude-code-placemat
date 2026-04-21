@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.114</span>
+            <span class="release-tag">As of release: v2.1.116</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -447,14 +447,14 @@
             <div class="search-group">
                 <h3>Configuration</h3>
                 <table>
-                    <tr class="search-item"><td><code>/config</code></td><td class="desc">Open settings interface</td></tr>
+                    <tr class="search-item"><td><code>/config</code></td><td class="desc">Open settings interface; search matches option values</td></tr>
                     <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model manually; warns before switching mid-conversation</td></tr>
                     <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/xhigh/auto); no args opens interactive slider; xhigh is Opus 4.7 only</td></tr>
                     <tr class="search-item"><td><code class="unverified">/fast [on/off]</code></td><td class="desc">Toggle Fast mode</td></tr>
                     <tr class="search-item"><td><code>/permissions</code></td><td class="desc">View/update tool permissions</td></tr>
                     <tr class="search-item"><td><code>/color [color]</code></td><td class="desc">Set prompt-bar color</td></tr>
                     <tr class="search-item"><td><code>/keybindings</code></td><td class="desc">Customize keyboard shortcuts</td></tr>
-                    <tr class="search-item"><td><code>/terminal-setup</code></td><td class="desc">Configure terminal integration</td></tr>
+                    <tr class="search-item"><td><code>/terminal-setup</code></td><td class="desc">Configure terminal integration; configures scroll sensitivity in VS Code, Cursor, and Windsurf</td></tr>
                     <tr class="search-item"><td><code>/theme</code></td><td class="desc">Change color theme; includes "Auto (match terminal)" option</td></tr>
                     <tr class="search-item"><td><code>/tui [fullscreen]</code></td><td class="desc">Switch to flicker-free fullscreen TUI rendering in same conversation</td></tr>
                     <tr class="search-item"><td><code>/focus</code></td><td class="desc">Toggle focus view (fullscreen/TUI mode)</td></tr>
@@ -477,7 +477,7 @@
                     <tr class="search-item"><td><code>/agents</code></td><td class="desc">Manage sub-agents</td></tr>
                     <tr class="search-item"><td><code>/chrome</code></td><td class="desc">Chrome browser integration</td></tr>
                     <tr class="search-item"><td><code>/add-dir &lt;path&gt;</code></td><td class="desc">Add working directory to context</td></tr>
-                    <tr class="search-item"><td><code>/reload-plugins</code></td><td class="desc">Hot-reload local plugins</td></tr>
+                    <tr class="search-item"><td><code>/reload-plugins</code></td><td class="desc">Hot-reload local plugins; auto-installs missing dependencies from added marketplaces</td></tr>
                 </table>
             </div>
 
@@ -490,7 +490,7 @@
                     <tr class="search-item"><td><code>/proactive</code></td><td class="desc">Alias for /loop — schedule recurring background task</td></tr>
                     <tr class="search-item"><td><code>/schedule</code></td><td class="desc">Cloud scheduled tasks</td></tr>
                     <tr class="search-item"><td><code>/voice</code></td><td class="desc">Push-to-talk voice prompting</td></tr>
-                    <tr class="search-item"><td><code>/doctor</code></td><td class="desc">Diagnose installation/env issues; press f to auto-fix</td></tr>
+                    <tr class="search-item"><td><code>/doctor</code></td><td class="desc">Diagnose installation/env issues; press f to auto-fix; openable while Claude is responding</td></tr>
                     <tr class="search-item"><td><code>/pr-comments [PR]</code></td><td class="desc">Fetch GitHub PR comments</td></tr>
                     <tr class="search-item"><td><code>/security-review</code></td><td class="desc">Security analysis of uncommitted code</td></tr>
                     <tr class="search-item"><td><code>/powerup</code></td><td class="desc">Interactive lessons teaching CC features with animated demos</td></tr>
@@ -647,6 +647,7 @@
                     <tr class="search-item"><td><code>background: true</code></td><td class="desc">Run entirely as background task</td></tr>
                     <tr class="search-item"><td><code>initialPrompt</code></td><td class="desc">Auto-submit first turn on spawn</td></tr>
                     <tr class="search-item"><td><code>SendMessage</code></td><td class="desc">Auto-resumes stopped agents</td></tr>
+                    <tr class="search-item"><td><code class="new">hooks:</code></td><td class="desc">Agent lifecycle hooks; fire when running as main-thread agent via <code>--agent</code></td></tr> <!-- added:v2.1.116 -->
                 </table>
             </div>
         </div>
@@ -865,9 +866,15 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.114",
-        "date": "2026-04-18",
-        "changes": []
+        "version": "v2.1.116",
+        "date": "2026-04-20",
+        "changes": [
+            {"tag": "CHG", "text": "<code>/terminal-setup</code> — now also configures scroll sensitivity in VS Code, Cursor, and Windsurf"},
+            {"tag": "CHG", "text": "<code>/config</code> — search now matches option values (e.g. searching \"vim\" finds the Editor mode setting)"},
+            {"tag": "CHG", "text": "<code>/doctor</code> — now openable while Claude is responding, without waiting for the current turn to finish"},
+            {"tag": "CHG", "text": "<code>/reload-plugins</code> — now auto-installs missing plugin dependencies from marketplaces you've already added"},
+            {"tag": "ADD", "text": "<code>hooks:</code> agent frontmatter field — fires when running as main-thread agent via <code>--agent</code>"}
+        ]
     }
     </script>
 </body>
