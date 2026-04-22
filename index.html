@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.116</span>
+            <span class="release-tag">As of release: v2.1.117</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -383,7 +383,7 @@
                     <tr class="search-item"><td><code>Ctrl B</code></td><td class="desc">Background running task</td></tr>
                     <tr class="search-item"><td><code>Ctrl T</code></td><td class="desc">Toggle task list</td></tr>
                     <tr class="search-item"><td><code>Ctrl V</code></td><td class="desc">Paste image from clipboard</td></tr>
-                    <tr class="search-item"><td><code class="new">Ctrl Backspace</code></td><td class="desc">Delete previous word (Windows)</td></tr> <!-- added:v2.1.113 -->
+                    <tr class="search-item"><td><code>Ctrl Backspace</code></td><td class="desc">Delete previous word (Windows)</td></tr>
                     <tr class="search-item"><td><code>Ctrl U</code></td><td class="desc">Clear entire input buffer (Ctrl+Y to restore)</td></tr>
                     <tr class="search-item"><td><code>Ctrl Y</code></td><td class="desc">Restore input buffer cleared by Ctrl+U</td></tr>
                     <tr class="search-item"><td><code>Ctrl X K</code></td><td class="desc">Kill background agents (chord, x2)</td></tr>
@@ -399,7 +399,7 @@
                     <tr class="search-item"><td><code>\ T</code></td><td class="desc">Toggle thinking on/off</td></tr>
                     <tr class="search-item"><td><code>\ Enter</code></td><td class="desc">Newline (quick)</td></tr>
                     <tr class="search-item"><td><code>Ctrl J</code></td><td class="desc">Newline (control seq)</td></tr>
-                    <tr class="search-item"><td><code class="new">Ctrl A</code> / <code class="new">Ctrl E</code></td><td class="desc">Move to start/end of current logical line (multiline input)</td></tr> <!-- added:v2.1.113 -->
+                    <tr class="search-item"><td><code>Ctrl A</code> / <code>Ctrl E</code></td><td class="desc">Move to start/end of current logical line (multiline input)</td></tr>
                 </table>
             </div>
 
@@ -430,11 +430,11 @@
                 <table>
                     <tr class="search-item"><td><code>/clear</code></td><td class="desc">Clear conversation context</td></tr>
                     <tr class="search-item"><td><code>/compact [focus]</code></td><td class="desc">Compact context to free space</td></tr>
-                    <tr class="search-item"><td><code class="unverified">/resume</code></td><td class="desc">Display session picker menu</td></tr>
+                    <tr class="search-item"><td><code>/resume</code></td><td class="desc">Display session picker menu; offers to summarize stale large sessions before re-reading</td></tr>
                     <tr class="search-item"><td><code>/rename [name]</code></td><td class="desc">Name current session</td></tr>
                     <tr class="search-item"><td><code>/branch [name]</code></td><td class="desc">Branch convo (formerly /fork)</td></tr>
                     <tr class="search-item"><td><code>/cost</code></td><td class="desc">Token usage & per-model cost breakdown</td></tr>
-                    <tr class="search-item"><td><code class="new">/extra-usage</code></td><td class="desc">Request extra usage allowance; works from Remote Control clients</td></tr> <!-- added:v2.1.113 -->
+                    <tr class="search-item"><td><code>/extra-usage</code></td><td class="desc">Request extra usage allowance; works from Remote Control clients</td></tr>
                     <tr class="search-item"><td><code>/context</code></td><td class="desc">Visualize context window (grid)</td></tr>
                     <tr class="search-item"><td><code>/diff</code></td><td class="desc">Interactive diff viewer</td></tr>
                     <tr class="search-item"><td><code>/copy</code></td><td class="desc">Copy last response</td></tr>
@@ -448,7 +448,7 @@
                 <h3>Configuration</h3>
                 <table>
                     <tr class="search-item"><td><code>/config</code></td><td class="desc">Open settings interface; search matches option values</td></tr>
-                    <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model manually; warns before switching mid-conversation</td></tr>
+                    <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model manually; warns before switching mid-conversation; selections persist across restarts; startup header shows model pin source</td></tr>
                     <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/xhigh/auto); no args opens interactive slider; xhigh is Opus 4.7 only</td></tr>
                     <tr class="search-item"><td><code class="unverified">/fast [on/off]</code></td><td class="desc">Toggle Fast mode</td></tr>
                     <tr class="search-item"><td><code>/permissions</code></td><td class="desc">View/update tool permissions</td></tr>
@@ -571,7 +571,7 @@
                     <tr class="search-item"><td><code>workspace.git_worktree</code></td><td class="desc">Status line JSON input field — set when current directory is inside a linked git worktree</td></tr>
                     <tr class="search-item"><td><code>autoScrollEnabled</code></td><td class="desc">Disable conversation auto-scroll in fullscreen mode</td></tr>
                     <tr class="search-item"><td><code>tui</code></td><td class="desc">Default TUI mode; set to "fullscreen" for flicker-free alt-screen rendering</td></tr>
-                    <tr class="search-item"><td><code class="new">sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr> <!-- added:v2.1.113 -->
+                    <tr class="search-item"><td><code>sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr>
                 </table>
             </div>
 
@@ -601,6 +601,7 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_USE_POWERSHELL_TOOL</code></td><td class="desc">Enable PowerShell tool; on Windows opt in/out, on Linux/macOS requires pwsh on PATH</td></tr>
                     <tr class="search-item"><td><code>OTEL_LOG_RAW_API_BODIES</code></td><td class="desc">Emit full API request/response bodies as OTEL log events for debugging</td></tr>
                     <tr class="search-item"><td><code>TRACEPARENT</code> / <code>TRACESTATE</code></td><td class="desc">Distributed trace context injected from environment for SDK/headless sessions</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_FORK_SUBAGENT=1</code></td><td class="desc">Enable forked subagents on external (non-Anthropic) builds</td></tr> <!-- added:v2.1.117 -->
                 </table>
             </div>
         </div>
@@ -648,6 +649,7 @@
                     <tr class="search-item"><td><code>initialPrompt</code></td><td class="desc">Auto-submit first turn on spawn</td></tr>
                     <tr class="search-item"><td><code>SendMessage</code></td><td class="desc">Auto-resumes stopped agents</td></tr>
                     <tr class="search-item"><td><code class="new">hooks:</code></td><td class="desc">Agent lifecycle hooks; fire when running as main-thread agent via <code>--agent</code></td></tr> <!-- added:v2.1.116 -->
+                    <tr class="search-item"><td><code class="new">mcpServers</code></td><td class="desc">MCP servers for the agent; now loaded for main-thread agent sessions via <code>--agent</code></td></tr> <!-- added:v2.1.117 -->
                 </table>
             </div>
         </div>
@@ -866,14 +868,13 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.116",
-        "date": "2026-04-20",
+        "version": "v2.1.117",
+        "date": "2026-04-22",
         "changes": [
-            {"tag": "CHG", "text": "<code>/terminal-setup</code> — now also configures scroll sensitivity in VS Code, Cursor, and Windsurf"},
-            {"tag": "CHG", "text": "<code>/config</code> — search now matches option values (e.g. searching \"vim\" finds the Editor mode setting)"},
-            {"tag": "CHG", "text": "<code>/doctor</code> — now openable while Claude is responding, without waiting for the current turn to finish"},
-            {"tag": "CHG", "text": "<code>/reload-plugins</code> — now auto-installs missing plugin dependencies from marketplaces you've already added"},
-            {"tag": "ADD", "text": "<code>hooks:</code> agent frontmatter field — fires when running as main-thread agent via <code>--agent</code>"}
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_FORK_SUBAGENT=1</code> env var — enable forked subagents on external builds"},
+            {"tag": "ADD", "text": "<code>mcpServers</code> agent frontmatter — now loaded for main-thread agent sessions via <code>--agent</code>"},
+            {"tag": "CHG", "text": "<code>/model</code> — selections persist across restarts; startup header shows model pin source"},
+            {"tag": "CHG", "text": "<code>/resume</code> — offers to summarize stale large sessions before re-reading"}
         ]
     }
     </script>
