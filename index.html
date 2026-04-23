@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.117</span>
+            <span class="release-tag">As of release: v2.1.118</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -420,6 +420,13 @@
                     <tr class="search-item"><td><code>v</code></td><td class="desc">Open transcript in editor</td></tr>
                 </table>
             </div>
+
+            <div class="search-group">
+                <h3>Vim Mode</h3>
+                <table>
+                    <tr class="search-item"><td><code class="new">v</code> / <code class="new">V</code></td><td class="desc">Visual / visual-line selection mode (NORMAL mode)</td></tr> <!-- added:v2.1.118 -->
+                </table>
+            </div>
         </div>
 
         <div class="card">
@@ -433,7 +440,7 @@
                     <tr class="search-item"><td><code>/resume</code></td><td class="desc">Display session picker menu; offers to summarize stale large sessions before re-reading</td></tr>
                     <tr class="search-item"><td><code>/rename [name]</code></td><td class="desc">Name current session</td></tr>
                     <tr class="search-item"><td><code>/branch [name]</code></td><td class="desc">Branch convo (formerly /fork)</td></tr>
-                    <tr class="search-item"><td><code>/cost</code></td><td class="desc">Token usage & per-model cost breakdown</td></tr>
+                    <tr class="search-item"><td><code class="new">/usage</code></td><td class="desc">Unified usage view (cost + stats tabs); <code>/cost</code> and <code>/stats</code> are shortcuts that open the relevant tab</td></tr> <!-- added:v2.1.118 -->
                     <tr class="search-item"><td><code>/extra-usage</code></td><td class="desc">Request extra usage allowance; works from Remote Control clients</td></tr>
                     <tr class="search-item"><td><code>/context</code></td><td class="desc">Visualize context window (grid)</td></tr>
                     <tr class="search-item"><td><code>/diff</code></td><td class="desc">Interactive diff viewer</td></tr>
@@ -455,7 +462,7 @@
                     <tr class="search-item"><td><code>/color [color]</code></td><td class="desc">Set prompt-bar color</td></tr>
                     <tr class="search-item"><td><code>/keybindings</code></td><td class="desc">Customize keyboard shortcuts</td></tr>
                     <tr class="search-item"><td><code>/terminal-setup</code></td><td class="desc">Configure terminal integration; configures scroll sensitivity in VS Code, Cursor, and Windsurf</td></tr>
-                    <tr class="search-item"><td><code>/theme</code></td><td class="desc">Change color theme; includes "Auto (match terminal)" option</td></tr>
+                    <tr class="search-item"><td><code>/theme</code></td><td class="desc">Change color theme; create/switch named custom themes, hand-edit <code>~/.claude/themes/</code>; plugins ship via <code>themes/</code> dir; includes "Auto (match terminal)"</td></tr>
                     <tr class="search-item"><td><code>/tui [fullscreen]</code></td><td class="desc">Switch to flicker-free fullscreen TUI rendering in same conversation</td></tr>
                     <tr class="search-item"><td><code>/focus</code></td><td class="desc">Toggle focus view (fullscreen/TUI mode)</td></tr>
                     <tr class="search-item"><td><code>/release-notes</code></td><td class="desc">Interactive version picker for release notes</td></tr>
@@ -494,7 +501,7 @@
                     <tr class="search-item"><td><code>/pr-comments [PR]</code></td><td class="desc">Fetch GitHub PR comments</td></tr>
                     <tr class="search-item"><td><code>/security-review</code></td><td class="desc">Security analysis of uncommitted code</td></tr>
                     <tr class="search-item"><td><code>/powerup</code></td><td class="desc">Interactive lessons teaching CC features with animated demos</td></tr>
-                    <tr class="search-item"><td><code>/stats</code> / <code>/insights</code></td><td class="desc">Usage streaks / HTML sessions report</td></tr>
+                    <tr class="search-item"><td><code>/stats</code> / <code>/insights</code></td><td class="desc">Shortcut to /usage stats tab / HTML sessions report</td></tr>
                     <tr class="search-item"><td><code>/desktop</code></td><td class="desc">Continue session in Desktop app</td></tr>
                     <tr class="search-item"><td><code>/remote-control</code></td><td class="desc">Bridge session to claude.ai/code</td></tr>
                     <tr class="search-item"><td><code>/team-onboarding</code></td><td class="desc">Generate teammate ramp-up guide from local CC usage</td></tr>
@@ -572,6 +579,8 @@
                     <tr class="search-item"><td><code>autoScrollEnabled</code></td><td class="desc">Disable conversation auto-scroll in fullscreen mode</td></tr>
                     <tr class="search-item"><td><code>tui</code></td><td class="desc">Default TUI mode; set to "fullscreen" for flicker-free alt-screen rendering</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr>
+                    <tr class="search-item"><td><code class="new">wslInheritsWindowsSettings</code></td><td class="desc">WSL sessions inherit Windows-side managed settings (policy key)</td></tr> <!-- added:v2.1.118 -->
+                    <tr class="search-item"><td><code class="new">"$defaults"</code> (autoMode)</td><td class="desc">Include in <code>autoMode.allow</code>, <code>autoMode.soft_deny</code>, or <code>autoMode.environment</code> to add custom rules alongside the built-in list</td></tr> <!-- added:v2.1.118 -->
                 </table>
             </div>
 
@@ -602,6 +611,7 @@
                     <tr class="search-item"><td><code>OTEL_LOG_RAW_API_BODIES</code></td><td class="desc">Emit full API request/response bodies as OTEL log events for debugging</td></tr>
                     <tr class="search-item"><td><code>TRACEPARENT</code> / <code>TRACESTATE</code></td><td class="desc">Distributed trace context injected from environment for SDK/headless sessions</td></tr>
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_FORK_SUBAGENT=1</code></td><td class="desc">Enable forked subagents on external (non-Anthropic) builds</td></tr> <!-- added:v2.1.117 -->
+                    <tr class="search-item"><td><code class="new">DISABLE_UPDATES</code></td><td class="desc">Block all update paths including manual <code>claude update</code>; stricter than <code>DISABLE_AUTOUPDATER</code></td></tr> <!-- added:v2.1.118 -->
                 </table>
             </div>
         </div>
@@ -652,6 +662,13 @@
                     <tr class="search-item"><td><code class="new">mcpServers</code></td><td class="desc">MCP servers for the agent; now loaded for main-thread agent sessions via <code>--agent</code></td></tr> <!-- added:v2.1.117 -->
                 </table>
             </div>
+
+            <div class="search-group">
+                <h3>Plugin CLI Commands</h3>
+                <table>
+                    <tr class="search-item"><td><code class="new">claude plugin tag</code></td><td class="desc">Create release git tags for plugins with version validation</td></tr> <!-- added:v2.1.118 -->
+                </table>
+            </div>
         </div>
 
         <div class="card">
@@ -681,6 +698,7 @@
                     <tr class="search-item"><td><code>"defer"</code> (PreToolUse)</td><td class="desc">Headless sessions pause at tool call; resume with -p --resume to re-evaluate</td></tr>
                     <tr class="search-item"><td><code>UserPromptSubmit</code></td><td class="desc">Fires on user prompt submit; supports hookSpecificOutput.sessionTitle to set session title</td></tr>
                     <tr class="search-item"><td><code>PreCompact</code></td><td class="desc">Fires before compaction; block by exiting with code 2 or returning {"decision":"block"}</td></tr>
+                    <tr class="search-item"><td><code class="new">type: "mcp_tool"</code> (hook)</td><td class="desc">Hook directly invokes an MCP tool</td></tr> <!-- added:v2.1.118 -->
                 </table>
             </div>
 
@@ -868,13 +886,17 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.117",
-        "date": "2026-04-22",
+        "version": "v2.1.118",
+        "date": "2026-04-23",
         "changes": [
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_FORK_SUBAGENT=1</code> env var — enable forked subagents on external builds"},
-            {"tag": "ADD", "text": "<code>mcpServers</code> agent frontmatter — now loaded for main-thread agent sessions via <code>--agent</code>"},
-            {"tag": "CHG", "text": "<code>/model</code> — selections persist across restarts; startup header shows model pin source"},
-            {"tag": "CHG", "text": "<code>/resume</code> — offers to summarize stale large sessions before re-reading"}
+            {"tag": "ADD", "text": "<code>/usage</code> — unified usage view; <code>/cost</code> and <code>/stats</code> are now shortcuts to tabs"},
+            {"tag": "ADD", "text": "<code>v</code> / <code>V</code> vim visual / visual-line selection mode (NORMAL mode)"},
+            {"tag": "ADD", "text": "<code>type: \"mcp_tool\"</code> hook type — directly invoke an MCP tool from hooks"},
+            {"tag": "ADD", "text": "<code>DISABLE_UPDATES</code> env var — block all update paths including manual <code>claude update</code>"},
+            {"tag": "ADD", "text": "<code>wslInheritsWindowsSettings</code> policy key — WSL inherits Windows-side managed settings"},
+            {"tag": "ADD", "text": "<code>\"$defaults\"</code> in <code>autoMode.allow</code>/<code>soft_deny</code>/<code>environment</code> — add custom rules alongside built-in list"},
+            {"tag": "ADD", "text": "<code>claude plugin tag</code> — create release git tags for plugins with version validation"},
+            {"tag": "CHG", "text": "<code>/theme</code> — supports named custom themes via <code>~/.claude/themes/</code>"}
         ]
     }
     </script>

@@ -203,6 +203,21 @@
                 <span class="change-category-title cat-content">Content / CC Release Updates</span>
 
                 <div class="change-section">
+                    <h3>CC v2.1.118 <span class="version-date">2026-04-23</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>/usage</code> slash command — Unified usage view (cost + stats tabs); <code>/cost</code> and <code>/stats</code> become shortcuts that open the relevant tab</li>
+                        <li><span class="tag tag-change">CHG</span><code>/stats</code> — Description updated to note it is now a shortcut to the /usage stats tab</li>
+                        <li><span class="tag tag-add">ADD</span>Vim Mode section in Keys &amp; Shortcuts — <code>v</code> / <code>V</code> enter visual / visual-line selection mode in NORMAL mode</li>
+                        <li><span class="tag tag-add">ADD</span><code>type: "mcp_tool"</code> hook type — Hooks can now directly invoke MCP tools</li>
+                        <li><span class="tag tag-add">ADD</span><code>DISABLE_UPDATES</code> env var — Block all update paths including manual <code>claude update</code>; stricter than <code>DISABLE_AUTOUPDATER</code></li>
+                        <li><span class="tag tag-add">ADD</span><code>wslInheritsWindowsSettings</code> JSON setting (policy key) — WSL sessions inherit Windows-side managed settings</li>
+                        <li><span class="tag tag-add">ADD</span><code>"$defaults"</code> (autoMode) JSON setting — Include in <code>autoMode.allow</code>, <code>autoMode.soft_deny</code>, or <code>autoMode.environment</code> to add custom rules alongside the built-in list</li>
+                        <li><span class="tag tag-add">ADD</span><code>claude plugin tag</code> CLI command — Create release git tags for plugins with version validation</li>
+                        <li><span class="tag tag-change">CHG</span><code>/theme</code> — Description updated to note named custom themes via <code>~/.claude/themes/</code> and plugin theme shipping</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
                     <h3>CC v2.1.117 <span class="version-date">2026-04-22</span></h3>
                     <ul class="change-list">
                         <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_FORK_SUBAGENT=1</code> env var — Enable forked subagents on external builds</li>
