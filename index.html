@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.118</span>
+            <span class="release-tag">As of release: v2.1.119</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -518,7 +518,7 @@
                     <tr class="search-item"><td><code>claude</code></td><td class="desc">Start interactive REPL</td></tr>
                     <tr class="search-item"><td><code>claude -p "q"</code></td><td class="desc">Headless execution (scripting)</td></tr>
                     <tr class="search-item"><td><code>claude -c</code> / <code>-r "n"</code></td><td class="desc">Continue last / Resume specific</td></tr>
-                    <tr class="search-item"><td><code>claude --from-pr</code></td><td class="desc">Resume session linked to a PR</td></tr>
+                    <tr class="search-item"><td><code>claude --from-pr</code></td><td class="desc">Resume session linked to a PR; accepts GitHub, GitLab MR, Bitbucket PR, and GitHub Enterprise URLs</td></tr>
                     <tr class="search-item"><td><code>claude --fork-session</code></td><td class="desc">Fork existing session on resume</td></tr>
                 </table>
             </div>
@@ -576,11 +576,13 @@
                     <tr class="search-item"><td><code>forceRemoteSettingsRefresh</code></td><td class="desc">Block startup until remote managed settings are freshly fetched; fail-closed on fetch failure</td></tr>
                     <tr class="search-item"><td><code>statusLine.refreshInterval</code></td><td class="desc">Re-run status line command every N seconds</td></tr>
                     <tr class="search-item"><td><code>workspace.git_worktree</code></td><td class="desc">Status line JSON input field — set when current directory is inside a linked git worktree</td></tr>
+                    <tr class="search-item"><td><code class="new">effort.level</code> / <code class="new">thinking.enabled</code></td><td class="desc">Status line stdin JSON input fields — current effort level and thinking state</td></tr> <!-- added:v2.1.119 -->
                     <tr class="search-item"><td><code>autoScrollEnabled</code></td><td class="desc">Disable conversation auto-scroll in fullscreen mode</td></tr>
                     <tr class="search-item"><td><code>tui</code></td><td class="desc">Default TUI mode; set to "fullscreen" for flicker-free alt-screen rendering</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr>
                     <tr class="search-item"><td><code class="new">wslInheritsWindowsSettings</code></td><td class="desc">WSL sessions inherit Windows-side managed settings (policy key)</td></tr> <!-- added:v2.1.118 -->
                     <tr class="search-item"><td><code class="new">"$defaults"</code> (autoMode)</td><td class="desc">Include in <code>autoMode.allow</code>, <code>autoMode.soft_deny</code>, or <code>autoMode.environment</code> to add custom rules alongside the built-in list</td></tr> <!-- added:v2.1.118 -->
+                    <tr class="search-item"><td><code class="new">prUrlTemplate</code></td><td class="desc">Point footer PR badge at a custom code-review URL instead of github.com</td></tr> <!-- added:v2.1.119 -->
                 </table>
             </div>
 
@@ -612,6 +614,7 @@
                     <tr class="search-item"><td><code>TRACEPARENT</code> / <code>TRACESTATE</code></td><td class="desc">Distributed trace context injected from environment for SDK/headless sessions</td></tr>
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_FORK_SUBAGENT=1</code></td><td class="desc">Enable forked subagents on external (non-Anthropic) builds</td></tr> <!-- added:v2.1.117 -->
                     <tr class="search-item"><td><code class="new">DISABLE_UPDATES</code></td><td class="desc">Block all update paths including manual <code>claude update</code>; stricter than <code>DISABLE_AUTOUPDATER</code></td></tr> <!-- added:v2.1.118 -->
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_HIDE_CWD</code></td><td class="desc">Hide working directory in the startup logo</td></tr> <!-- added:v2.1.119 -->
                 </table>
             </div>
         </div>
@@ -658,7 +661,7 @@
                     <tr class="search-item"><td><code>background: true</code></td><td class="desc">Run entirely as background task</td></tr>
                     <tr class="search-item"><td><code>initialPrompt</code></td><td class="desc">Auto-submit first turn on spawn</td></tr>
                     <tr class="search-item"><td><code>SendMessage</code></td><td class="desc">Auto-resumes stopped agents</td></tr>
-                    <tr class="search-item"><td><code class="new">hooks:</code></td><td class="desc">Agent lifecycle hooks; fire when running as main-thread agent via <code>--agent</code></td></tr> <!-- added:v2.1.116 -->
+                    <tr class="search-item"><td><code>hooks:</code></td><td class="desc">Agent lifecycle hooks; fire when running as main-thread agent via <code>--agent</code></td></tr>
                     <tr class="search-item"><td><code class="new">mcpServers</code></td><td class="desc">MCP servers for the agent; now loaded for main-thread agent sessions via <code>--agent</code></td></tr> <!-- added:v2.1.117 -->
                 </table>
             </div>
@@ -688,7 +691,8 @@
             <div class="search-group">
                 <h3>Event Hooks</h3>
                 <table>
-                    <tr class="search-item"><td><code>PreToolUse</code> / <code>PostToolUse</code></td><td class="desc">Intercept before/after tool execution</td></tr>
+                    <tr class="search-item"><td><code>PreToolUse</code> / <code>PostToolUse</code></td><td class="desc">Intercept before/after tool execution; <code>PostToolUse</code> hook input includes <code>duration_ms</code> (tool exec time)</td></tr>
+                    <tr class="search-item"><td><code class="new">PostToolUseFailure</code></td><td class="desc">Fires when a tool call fails; hook input includes <code>duration_ms</code></td></tr> <!-- added:v2.1.119 -->
                     <tr class="search-item"><td><code>SubagentStart</code> / <code>Stop</code></td><td class="desc">Lifecycle triggers for agent spawning</td></tr>
                     <tr class="search-item"><td><code>SessionEnd</code></td><td class="desc">Run cleanup script when session closes</td></tr>
                     <tr class="search-item"><td><code>CwdChanged</code> / <code>FileChanged</code></td><td class="desc">React to directory or file changes</td></tr>
@@ -886,17 +890,15 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.118",
+        "version": "v2.1.119",
         "date": "2026-04-23",
         "changes": [
-            {"tag": "ADD", "text": "<code>/usage</code> — unified usage view; <code>/cost</code> and <code>/stats</code> are now shortcuts to tabs"},
-            {"tag": "ADD", "text": "<code>v</code> / <code>V</code> vim visual / visual-line selection mode (NORMAL mode)"},
-            {"tag": "ADD", "text": "<code>type: \"mcp_tool\"</code> hook type — directly invoke an MCP tool from hooks"},
-            {"tag": "ADD", "text": "<code>DISABLE_UPDATES</code> env var — block all update paths including manual <code>claude update</code>"},
-            {"tag": "ADD", "text": "<code>wslInheritsWindowsSettings</code> policy key — WSL inherits Windows-side managed settings"},
-            {"tag": "ADD", "text": "<code>\"$defaults\"</code> in <code>autoMode.allow</code>/<code>soft_deny</code>/<code>environment</code> — add custom rules alongside built-in list"},
-            {"tag": "ADD", "text": "<code>claude plugin tag</code> — create release git tags for plugins with version validation"},
-            {"tag": "CHG", "text": "<code>/theme</code> — supports named custom themes via <code>~/.claude/themes/</code>"}
+            {"tag": "ADD", "text": "<code>prUrlTemplate</code> JSON setting — point footer PR badge at a custom code-review URL"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_HIDE_CWD</code> env var — hide working directory in the startup logo"},
+            {"tag": "ADD", "text": "<code>PostToolUseFailure</code> hook event — fires when a tool call fails; input includes <code>duration_ms</code>"},
+            {"tag": "ADD", "text": "<code>effort.level</code> / <code>thinking.enabled</code> — status line stdin JSON input fields"},
+            {"tag": "CHG", "text": "<code>--from-pr</code> — now accepts GitLab MR, Bitbucket PR, and GitHub Enterprise URLs"},
+            {"tag": "CHG", "text": "<code>PostToolUse</code> hook input now includes <code>duration_ms</code> (tool exec time)"}
         ]
     }
     </script>
