@@ -203,6 +203,18 @@
                 <span class="change-category-title cat-content">Content / CC Release Updates</span>
 
                 <div class="change-section">
+                    <h3>CC v2.1.119 <span class="version-date">2026-04-23</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>prUrlTemplate</code> JSON setting — Point footer PR badge at a custom code-review URL instead of github.com</li>
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_HIDE_CWD</code> env var — Hide working directory in the startup logo</li>
+                        <li><span class="tag tag-add">ADD</span><code>PostToolUseFailure</code> hook event — Fires when a tool call fails; hook input includes <code>duration_ms</code></li>
+                        <li><span class="tag tag-add">ADD</span><code>effort.level</code> / <code>thinking.enabled</code> status line stdin JSON input fields — current effort level and thinking state</li>
+                        <li><span class="tag tag-change">CHG</span><code>--from-pr</code> — Description updated to note it now accepts GitLab MR, Bitbucket PR, and GitHub Enterprise URLs</li>
+                        <li><span class="tag tag-change">CHG</span><code>PreToolUse</code> / <code>PostToolUse</code> — Description updated to note <code>PostToolUse</code> hook input now includes <code>duration_ms</code> (tool exec time)</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
                     <h3>CC v2.1.118 <span class="version-date">2026-04-23</span></h3>
                     <ul class="change-list">
                         <li><span class="tag tag-add">ADD</span><code>/usage</code> slash command — Unified usage view (cost + stats tabs); <code>/cost</code> and <code>/stats</code> become shortcuts that open the relevant tab</li>
