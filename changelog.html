@@ -203,6 +203,21 @@
                 <span class="change-category-title cat-content">Content / CC Release Updates</span>
 
                 <div class="change-section">
+                    <h3>CC v2.1.120–v2.1.121 <span class="version-date">2026-04-28</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>claude ultrareview [target]</code> CLI subcommand — Run <code>/ultrareview</code> non-interactively from CI or scripts; prints findings to stdout; <code>--json</code> for raw output</li>
+                        <li><span class="tag tag-add">ADD</span><code>${CLAUDE_EFFORT}</code> skill template variable — Reference current effort level in skill content</li>
+                        <li><span class="tag tag-add">ADD</span><code>alwaysLoad</code> MCP server config option — All tools from that server skip tool-search deferral when <code>true</code></li>
+                        <li><span class="tag tag-add">ADD</span><code>claude plugin prune</code> CLI command — Remove orphaned auto-installed plugin dependencies; <code>plugin uninstall --prune</code> cascades</li>
+                        <li><span class="tag tag-change">CHG</span><code>/skills</code> — Now includes a type-to-filter search box for long skill lists</li>
+                        <li><span class="tag tag-change">CHG</span><code>PostToolUse</code> — Can now replace tool output via <code>hookSpecificOutput.updatedToolOutput</code> for all tools (was MCP-only)</li>
+                        <li><span class="tag tag-change">CHG</span><code>CLAUDE_CODE_FORK_SUBAGENT=1</code> — Now also works in non-interactive sessions</li>
+                        <li><span class="tag tag-change">CHG</span><code>--dangerously-skip-permissions</code> — No longer prompts for writes to <code>.claude/skills/</code>, <code>.claude/agents/</code>, and <code>.claude/commands/</code></li>
+                        <li><span class="tag tag-change">CHG</span><code>/terminal-setup</code> — Now also enables iTerm2 clipboard access for <code>/copy</code></li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
                     <h3>CC v2.1.119 <span class="version-date">2026-04-23</span></h3>
                     <ul class="change-list">
                         <li><span class="tag tag-add">ADD</span><code>prUrlTemplate</code> JSON setting — Point footer PR badge at a custom code-review URL instead of github.com</li>
