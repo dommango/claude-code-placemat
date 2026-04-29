@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.121</span>
+            <span class="release-tag">As of release: v2.1.123</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -520,7 +520,7 @@
                     <tr class="search-item"><td><code>claude -c</code> / <code>-r "n"</code></td><td class="desc">Continue last / Resume specific</td></tr>
                     <tr class="search-item"><td><code>claude --from-pr</code></td><td class="desc">Resume session linked to a PR; accepts GitHub, GitLab MR, Bitbucket PR, and GitHub Enterprise URLs</td></tr>
                     <tr class="search-item"><td><code>claude --fork-session</code></td><td class="desc">Fork existing session on resume</td></tr>
-                    <tr class="search-item"><td><code class="new">claude ultrareview [target]</code></td><td class="desc">Run <code>/ultrareview</code> non-interactively from CI or scripts; prints findings to stdout; use <code>--json</code> for raw output</td></tr> <!-- added:v2.1.120 -->
+                    <tr class="search-item"><td><code>claude ultrareview [target]</code></td><td class="desc">Run <code>/ultrareview</code> non-interactively from CI or scripts; prints findings to stdout; use <code>--json</code> for raw output</td></tr>
                 </table>
             </div>
 
@@ -577,13 +577,13 @@
                     <tr class="search-item"><td><code>forceRemoteSettingsRefresh</code></td><td class="desc">Block startup until remote managed settings are freshly fetched; fail-closed on fetch failure</td></tr>
                     <tr class="search-item"><td><code>statusLine.refreshInterval</code></td><td class="desc">Re-run status line command every N seconds</td></tr>
                     <tr class="search-item"><td><code>workspace.git_worktree</code></td><td class="desc">Status line JSON input field — set when current directory is inside a linked git worktree</td></tr>
-                    <tr class="search-item"><td><code class="new">effort.level</code> / <code class="new">thinking.enabled</code></td><td class="desc">Status line stdin JSON input fields — current effort level and thinking state</td></tr> <!-- added:v2.1.119 -->
+                    <tr class="search-item"><td><code>effort.level</code> / <code>thinking.enabled</code></td><td class="desc">Status line stdin JSON input fields — current effort level and thinking state</td></tr>
                     <tr class="search-item"><td><code>autoScrollEnabled</code></td><td class="desc">Disable conversation auto-scroll in fullscreen mode</td></tr>
                     <tr class="search-item"><td><code>tui</code></td><td class="desc">Default TUI mode; set to "fullscreen" for flicker-free alt-screen rendering</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr>
                     <tr class="search-item"><td><code>wslInheritsWindowsSettings</code></td><td class="desc">WSL sessions inherit Windows-side managed settings (policy key)</td></tr>
                     <tr class="search-item"><td><code>"$defaults"</code> (autoMode)</td><td class="desc">Include in <code>autoMode.allow</code>, <code>autoMode.soft_deny</code>, or <code>autoMode.environment</code> to add custom rules alongside the built-in list</td></tr>
-                    <tr class="search-item"><td><code class="new">prUrlTemplate</code></td><td class="desc">Point footer PR badge at a custom code-review URL instead of github.com</td></tr> <!-- added:v2.1.119 -->
+                    <tr class="search-item"><td><code>prUrlTemplate</code></td><td class="desc">Point footer PR badge at a custom code-review URL instead of github.com</td></tr>
                 </table>
             </div>
 
@@ -615,7 +615,8 @@
                     <tr class="search-item"><td><code>TRACEPARENT</code> / <code>TRACESTATE</code></td><td class="desc">Distributed trace context injected from environment for SDK/headless sessions</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_FORK_SUBAGENT=1</code></td><td class="desc">Enable forked subagents on external (non-Anthropic) builds; also works in non-interactive sessions</td></tr>
                     <tr class="search-item"><td><code>DISABLE_UPDATES</code></td><td class="desc">Block all update paths including manual <code>claude update</code>; stricter than <code>DISABLE_AUTOUPDATER</code></td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_HIDE_CWD</code></td><td class="desc">Hide working directory in the startup logo</td></tr> <!-- added:v2.1.119 -->
+                    <tr class="search-item"><td><code>CLAUDE_CODE_HIDE_CWD</code></td><td class="desc">Hide working directory in the startup logo</td></tr>
+                    <tr class="search-item"><td><code class="new">ANTHROPIC_BEDROCK_SERVICE_TIER</code></td><td class="desc">Select a Bedrock service tier (<code>default</code>, <code>flex</code>, or <code>priority</code>); sent as the <code>X-Amzn-Bedrock-Service-Tier</code> header</td></tr> <!-- added:v2.1.122 -->
                 </table>
             </div>
         </div>
@@ -647,7 +648,7 @@
                     <tr class="search-item"><td><code>$ARGUMENTS</code></td><td class="desc">User input placeholder replacement</td></tr>
                     <tr class="search-item"><td><code class="unverified">$FILE_PATH</code></td><td class="desc">File path resolution (hook strings only)</td></tr>
                     <tr class="search-item"><td><code>${CLAUDE_SKILL_DIR}</code></td><td class="desc">Reference the skill's own directory</td></tr>
-                    <tr class="search-item"><td><code class="new">${CLAUDE_EFFORT}</code></td><td class="desc">Current effort level — reference in skill content</td></tr> <!-- added:v2.1.120 -->
+                    <tr class="search-item"><td><code>${CLAUDE_EFFORT}</code></td><td class="desc">Current effort level — reference in skill content</td></tr>
                     <tr class="search-item"><td><code>! 'cmd'</code></td><td class="desc">Dynamic bash execution context injection</td></tr>
                     <tr class="search-item"><td><code>keep-coding-instructions</code></td><td class="desc">Control plugin output style for coding tasks</td></tr>
                     <tr class="search-item"><td><code>monitors</code> (plugin manifest)</td><td class="desc">Background monitor support for plugins; auto-arms at session start or on skill invoke</td></tr>
@@ -695,7 +696,7 @@
                 <h3>Event Hooks</h3>
                 <table>
                     <tr class="search-item"><td><code>PreToolUse</code> / <code>PostToolUse</code></td><td class="desc">Intercept before/after tool execution; <code>PostToolUse</code> hook input includes <code>duration_ms</code>; can replace tool output via <code>hookSpecificOutput.updatedToolOutput</code> for all tools</td></tr>
-                    <tr class="search-item"><td><code class="new">PostToolUseFailure</code></td><td class="desc">Fires when a tool call fails; hook input includes <code>duration_ms</code></td></tr> <!-- added:v2.1.119 -->
+                    <tr class="search-item"><td><code>PostToolUseFailure</code></td><td class="desc">Fires when a tool call fails; hook input includes <code>duration_ms</code></td></tr>
                     <tr class="search-item"><td><code>SubagentStart</code> / <code>Stop</code></td><td class="desc">Lifecycle triggers for agent spawning</td></tr>
                     <tr class="search-item"><td><code>SessionEnd</code></td><td class="desc">Run cleanup script when session closes</td></tr>
                     <tr class="search-item"><td><code>CwdChanged</code> / <code>FileChanged</code></td><td class="desc">React to directory or file changes</td></tr>
@@ -894,17 +895,10 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.121",
-        "date": "2026-04-28",
+        "version": "v2.1.123",
+        "date": "2026-04-29",
         "changes": [
-            {"tag": "ADD", "text": "<code>claude ultrareview [target]</code> CLI subcommand — run <code>/ultrareview</code> non-interactively from CI or scripts"},
-            {"tag": "ADD", "text": "<code>${CLAUDE_EFFORT}</code> skill template variable — reference current effort level in skill content"},
-            {"tag": "ADD", "text": "<code>alwaysLoad</code> MCP server config option — all tools skip tool-search deferral when <code>true</code>"},
-            {"tag": "ADD", "text": "<code>claude plugin prune</code> — remove orphaned auto-installed plugin dependencies"},
-            {"tag": "CHG", "text": "<code>/skills</code> — now includes a type-to-filter search box for long lists"},
-            {"tag": "CHG", "text": "<code>PostToolUse</code> — can now replace tool output via <code>hookSpecificOutput.updatedToolOutput</code> for all tools"},
-            {"tag": "CHG", "text": "<code>--dangerously-skip-permissions</code> — no longer prompts for writes to <code>.claude/skills/</code>, <code>.claude/agents/</code>, <code>.claude/commands/</code>"},
-            {"tag": "CHG", "text": "<code>CLAUDE_CODE_FORK_SUBAGENT=1</code> — now also works in non-interactive sessions"}
+            {"tag": "ADD", "text": "<code>ANTHROPIC_BEDROCK_SERVICE_TIER</code> env var — Select a Bedrock service tier (<code>default</code>, <code>flex</code>, or <code>priority</code>)"}
         ]
     }
     </script>
