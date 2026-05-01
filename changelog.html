@@ -203,6 +203,16 @@
                 <span class="change-category-title cat-content">Content / CC Release Updates</span>
 
                 <div class="change-section">
+                    <h3>CC v2.1.126 <span class="version-date">2026-05-01</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>claude project purge [path]</code> CLI subcommand — Delete all Claude Code state for a project (transcripts, tasks, file history, config entry); supports <code>--dry-run</code>, <code>-y/--yes</code>, <code>-i/--interactive</code>, and <code>--all</code></li>
+                        <li><span class="tag tag-change">CHG</span><code>--dangerously-skip-permissions</code> — Now bypasses prompts for writes to <code>.claude/</code>, <code>.git/</code>, <code>.vscode/</code>, shell config files, and other protected paths (catastrophic removal commands still prompt)</li>
+                        <li><span class="tag tag-change">CHG</span><code>/model</code> — Picker lists models from gateway's <code>/v1/models</code> endpoint when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway</li>
+                        <li><span class="tag tag-change">CHG</span><code>claude auth login</code> — Accepts OAuth code pasted in terminal when browser callback can't reach localhost (WSL2, SSH, containers)</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
                     <h3>CC v2.1.122–v2.1.123 <span class="version-date">2026-04-29</span></h3>
                     <ul class="change-list">
                         <li><span class="tag tag-add">ADD</span><code>ANTHROPIC_BEDROCK_SERVICE_TIER</code> env var — Select a Bedrock service tier (<code>default</code>, <code>flex</code>, or <code>priority</code>); sent as the <code>X-Amzn-Bedrock-Service-Tier</code> header</li>

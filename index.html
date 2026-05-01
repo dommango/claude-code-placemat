@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.123</span>
+            <span class="release-tag">As of release: v2.1.126</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -455,7 +455,7 @@
                 <h3>Configuration</h3>
                 <table>
                     <tr class="search-item"><td><code>/config</code></td><td class="desc">Open settings interface; search matches option values</td></tr>
-                    <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model manually; warns before switching mid-conversation; selections persist across restarts; startup header shows model pin source</td></tr>
+                    <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model manually; warns before switching mid-conversation; selections persist across restarts; startup header shows model pin source; lists models from gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway</td></tr>
                     <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/xhigh/auto); no args opens interactive slider; xhigh is Opus 4.7 only</td></tr>
                     <tr class="search-item"><td><code class="unverified">/fast [on/off]</code></td><td class="desc">Toggle Fast mode</td></tr>
                     <tr class="search-item"><td><code>/permissions</code></td><td class="desc">View/update tool permissions</td></tr>
@@ -521,6 +521,7 @@
                     <tr class="search-item"><td><code>claude --from-pr</code></td><td class="desc">Resume session linked to a PR; accepts GitHub, GitLab MR, Bitbucket PR, and GitHub Enterprise URLs</td></tr>
                     <tr class="search-item"><td><code>claude --fork-session</code></td><td class="desc">Fork existing session on resume</td></tr>
                     <tr class="search-item"><td><code>claude ultrareview [target]</code></td><td class="desc">Run <code>/ultrareview</code> non-interactively from CI or scripts; prints findings to stdout; use <code>--json</code> for raw output</td></tr>
+                    <tr class="search-item"><td><code class="new">claude project purge [path]</code></td><td class="desc">Delete all Claude Code state for a project (transcripts, tasks, file history, config entry); supports <code>--dry-run</code>, <code>-y/--yes</code>, <code>-i/--interactive</code>, and <code>--all</code></td></tr> <!-- added:v2.1.126 -->
                 </table>
             </div>
 
@@ -531,7 +532,7 @@
                     <tr class="search-item"><td><code>--channels</code></td><td class="desc">Permission relay / MCP push msg</td></tr>
                     <tr class="search-item"><td><code>--output-format json</code></td><td class="desc">Structured JSON output</td></tr>
                     <tr class="search-item"><td><code>--json-schema</code></td><td class="desc">Strict JSON schema validation</td></tr>
-                    <tr class="search-item"><td><code>--dangerously-skip-permissions</code></td><td class="desc">Skip all approval prompts; no longer prompts for writes to <code>.claude/skills/</code>, <code>.claude/agents/</code>, and <code>.claude/commands/</code></td></tr>
+                    <tr class="search-item"><td><code>--dangerously-skip-permissions</code></td><td class="desc">Skip all approval prompts; bypasses prompts for writes to <code>.claude/</code>, <code>.git/</code>, <code>.vscode/</code>, shell config files, and other protected paths (catastrophic removal commands still prompt)</td></tr>
                     <tr class="search-item"><td><code>--exclude-dynamic-system-prompt-sections</code></td><td class="desc">Exclude dynamic prompt sections in print mode for cross-user prompt caching</td></tr>
                 </table>
             </div>
@@ -673,7 +674,7 @@
                 <h3>Plugin CLI Commands</h3>
                 <table>
                     <tr class="search-item"><td><code>claude plugin tag</code></td><td class="desc">Create release git tags for plugins with version validation</td></tr>
-                    <tr class="search-item"><td><code class="new">claude plugin prune</code></td><td class="desc">Remove orphaned auto-installed plugin dependencies; <code>plugin uninstall --prune</code> cascades</td></tr> <!-- added:v2.1.121 -->
+                    <tr class="search-item"><td><code>claude plugin prune</code></td><td class="desc">Remove orphaned auto-installed plugin dependencies; <code>plugin uninstall --prune</code> cascades</td></tr>
                 </table>
             </div>
         </div>
@@ -718,14 +719,14 @@
                     <tr class="search-item"><td><code>--transport http/stdio/sse</code></td><td class="desc">Protocol connection methods</td></tr>
                     <tr class="search-item"><td><code>Elicitation</code></td><td class="desc">Servers can request input mid-task</td></tr>
                     <tr class="search-item"><td><code>_meta["anthropic/maxResultSizeChars"]</code></td><td class="desc">Override max MCP result size per call (up to 500K chars)</td></tr>
-                    <tr class="search-item"><td><code class="new">alwaysLoad</code> (MCP server config)</td><td class="desc">When <code>true</code>, all tools from that server skip tool-search deferral and are always available</td></tr> <!-- added:v2.1.121 -->
+                    <tr class="search-item"><td><code>alwaysLoad</code> (MCP server config)</td><td class="desc">When <code>true</code>, all tools from that server skip tool-search deferral and are always available</td></tr>
                 </table>
             </div>
 
             <div class="search-group">
                 <h3>Auth Commands</h3>
                 <table>
-                    <tr class="search-item"><td><code>claude auth login/logout</code></td><td class="desc">Session authentication control</td></tr>
+                    <tr class="search-item"><td><code>claude auth login/logout</code></td><td class="desc">Session authentication control; <code>auth login</code> accepts OAuth code pasted in terminal when browser callback can't reach localhost (WSL2, SSH, containers)</td></tr>
                     <tr class="search-item"><td><code>claude auth status</code></td><td class="desc">Check current authentication validity</td></tr>
                 </table>
             </div>
@@ -895,10 +896,13 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.123",
-        "date": "2026-04-29",
+        "version": "v2.1.126",
+        "date": "2026-05-01",
         "changes": [
-            {"tag": "ADD", "text": "<code>ANTHROPIC_BEDROCK_SERVICE_TIER</code> env var — Select a Bedrock service tier (<code>default</code>, <code>flex</code>, or <code>priority</code>)"}
+            {"tag": "ADD", "text": "<code>claude project purge [path]</code> — Delete all Claude Code state for a project (transcripts, tasks, file history, config entry); supports <code>--dry-run</code>, <code>-y/--yes</code>, <code>-i/--interactive</code>, and <code>--all</code>"},
+            {"tag": "CHG", "text": "<code>--dangerously-skip-permissions</code> — Now bypasses prompts for writes to <code>.claude/</code>, <code>.git/</code>, <code>.vscode/</code>, shell config files, and other protected paths"},
+            {"tag": "CHG", "text": "<code>/model</code> — Picker lists models from gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway"},
+            {"tag": "CHG", "text": "<code>claude auth login</code> — Accepts OAuth code pasted in terminal when browser callback can't reach localhost (WSL2, SSH, containers)"}
         ]
     }
     </script>
