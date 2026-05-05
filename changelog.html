@@ -203,6 +203,17 @@
                 <span class="change-category-title cat-content">Content / CC Release Updates</span>
 
                 <div class="change-section">
+                    <h3>CC v2.1.128 <span class="version-date">2026-05-04</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-change">CHG</span><code>/color [color]</code> — Bare <code>/color</code> with no args now picks a random session color</li>
+                        <li><span class="tag tag-change">CHG</span><code>/mcp</code> — Now shows tool count for each connected server and flags servers with 0 tools</li>
+                        <li><span class="tag tag-change">CHG</span><code>--channels</code> — Now works with console (API key) auth; console orgs with managed settings must set <code>channelsEnabled: true</code></li>
+                        <li><span class="tag tag-add">ADD</span><code>channelsEnabled</code> JSON setting — Enable <code>--channels</code> with console auth for managed-settings orgs</li>
+                        <li><span class="tag tag-add">ADD</span><code>--plugin-dir &lt;path&gt;</code> CLI flag — Load plugins from a directory or <code>.zip</code> archive at launch</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
                     <h3>CC v2.1.126 <span class="version-date">2026-05-01</span></h3>
                     <ul class="change-list">
                         <li><span class="tag tag-add">ADD</span><code>claude project purge [path]</code> CLI subcommand — Delete all Claude Code state for a project (transcripts, tasks, file history, config entry); supports <code>--dry-run</code>, <code>-y/--yes</code>, <code>-i/--interactive</code>, and <code>--all</code></li>

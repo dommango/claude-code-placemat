@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.126</span>
+            <span class="release-tag">As of release: v2.1.128</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -459,7 +459,7 @@
                     <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/xhigh/auto); no args opens interactive slider; xhigh is Opus 4.7 only</td></tr>
                     <tr class="search-item"><td><code class="unverified">/fast [on/off]</code></td><td class="desc">Toggle Fast mode</td></tr>
                     <tr class="search-item"><td><code>/permissions</code></td><td class="desc">View/update tool permissions</td></tr>
-                    <tr class="search-item"><td><code>/color [color]</code></td><td class="desc">Set prompt-bar color</td></tr>
+                    <tr class="search-item"><td><code class="new">/color [color]</code></td><td class="desc">Set prompt-bar color; bare <code>/color</code> with no args picks a random session color</td></tr> <!-- added:v2.1.128 -->
                     <tr class="search-item"><td><code>/keybindings</code></td><td class="desc">Customize keyboard shortcuts</td></tr>
                     <tr class="search-item"><td><code>/terminal-setup</code></td><td class="desc">Configure terminal integration; configures scroll sensitivity in VS Code, Cursor, and Windsurf; enables iTerm2 clipboard access for <code>/copy</code></td></tr>
                     <tr class="search-item"><td><code>/theme</code></td><td class="desc">Change color theme; create/switch named custom themes, hand-edit <code>~/.claude/themes/</code>; plugins ship via <code>themes/</code> dir; includes "Auto (match terminal)"</td></tr>
@@ -478,7 +478,7 @@
                 <table>
                     <tr class="search-item"><td><code>/init</code></td><td class="desc">Create CLAUDE.md memory</td></tr>
                     <tr class="search-item"><td><code>/memory</code></td><td class="desc">Edit CLAUDE.md files directly</td></tr>
-                    <tr class="search-item"><td><code>/mcp</code></td><td class="desc">Manage MCP servers</td></tr>
+                    <tr class="search-item"><td><code class="new">/mcp</code></td><td class="desc">Manage MCP servers; shows tool count for each connected server and flags servers with 0 tools</td></tr> <!-- added:v2.1.128 -->
                     <tr class="search-item"><td><code>/hooks</code></td><td class="desc">Manage event lifecycle hooks</td></tr>
                     <tr class="search-item"><td><code>/skills</code></td><td class="desc">List available active skills; includes type-to-filter search box for long lists</td></tr>
                     <tr class="search-item"><td><code>/agents</code></td><td class="desc">Manage sub-agents</td></tr>
@@ -529,7 +529,7 @@
                 <h3>Headless & CI Flags</h3>
                 <table>
                     <tr class="search-item"><td><code>--bare</code></td><td class="desc">Minimal headless (no hooks/LSP)</td></tr>
-                    <tr class="search-item"><td><code>--channels</code></td><td class="desc">Permission relay / MCP push msg</td></tr>
+                    <tr class="search-item"><td><code class="new">--channels</code></td><td class="desc">Permission relay / MCP push msg; now works with console (API key) auth — console orgs with managed settings must set <code>channelsEnabled: true</code></td></tr> <!-- added:v2.1.128 -->
                     <tr class="search-item"><td><code>--output-format json</code></td><td class="desc">Structured JSON output</td></tr>
                     <tr class="search-item"><td><code>--json-schema</code></td><td class="desc">Strict JSON schema validation</td></tr>
                     <tr class="search-item"><td><code>--dangerously-skip-permissions</code></td><td class="desc">Skip all approval prompts; bypasses prompts for writes to <code>.claude/</code>, <code>.git/</code>, <code>.vscode/</code>, shell config files, and other protected paths (catastrophic removal commands still prompt)</td></tr>
@@ -548,6 +548,7 @@
                     <tr class="search-item"><td><code>--max-budget-usd</code></td><td class="desc">Set cost cap for session</td></tr>
                     <tr class="search-item"><td><code>--remote</code></td><td class="desc">Start web-accessible session</td></tr>
                     <tr class="search-item"><td><code>--remote-control-session-name-prefix</code></td><td class="desc">Custom hostname prefix for Remote Control session names</td></tr>
+                    <tr class="search-item"><td><code class="new">--plugin-dir &lt;path&gt;</code></td><td class="desc">Load plugins from a directory or <code>.zip</code> archive at launch</td></tr> <!-- added:v2.1.128 -->
                 </table>
             </div>
         </div>
@@ -585,6 +586,7 @@
                     <tr class="search-item"><td><code>wslInheritsWindowsSettings</code></td><td class="desc">WSL sessions inherit Windows-side managed settings (policy key)</td></tr>
                     <tr class="search-item"><td><code>"$defaults"</code> (autoMode)</td><td class="desc">Include in <code>autoMode.allow</code>, <code>autoMode.soft_deny</code>, or <code>autoMode.environment</code> to add custom rules alongside the built-in list</td></tr>
                     <tr class="search-item"><td><code>prUrlTemplate</code></td><td class="desc">Point footer PR badge at a custom code-review URL instead of github.com</td></tr>
+                    <tr class="search-item"><td><code class="new">channelsEnabled</code></td><td class="desc">Set to <code>true</code> in managed settings to allow <code>--channels</code> with console (API key) auth</td></tr> <!-- added:v2.1.128 -->
                 </table>
             </div>
 
@@ -617,7 +619,7 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_FORK_SUBAGENT=1</code></td><td class="desc">Enable forked subagents on external (non-Anthropic) builds; also works in non-interactive sessions</td></tr>
                     <tr class="search-item"><td><code>DISABLE_UPDATES</code></td><td class="desc">Block all update paths including manual <code>claude update</code>; stricter than <code>DISABLE_AUTOUPDATER</code></td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_HIDE_CWD</code></td><td class="desc">Hide working directory in the startup logo</td></tr>
-                    <tr class="search-item"><td><code class="new">ANTHROPIC_BEDROCK_SERVICE_TIER</code></td><td class="desc">Select a Bedrock service tier (<code>default</code>, <code>flex</code>, or <code>priority</code>); sent as the <code>X-Amzn-Bedrock-Service-Tier</code> header</td></tr> <!-- added:v2.1.122 -->
+                    <tr class="search-item"><td><code>ANTHROPIC_BEDROCK_SERVICE_TIER</code></td><td class="desc">Select a Bedrock service tier (<code>default</code>, <code>flex</code>, or <code>priority</code>); sent as the <code>X-Amzn-Bedrock-Service-Tier</code> header</td></tr>
                 </table>
             </div>
         </div>
@@ -896,13 +898,14 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.126",
-        "date": "2026-05-01",
+        "version": "v2.1.128",
+        "date": "2026-05-04",
         "changes": [
-            {"tag": "ADD", "text": "<code>claude project purge [path]</code> — Delete all Claude Code state for a project (transcripts, tasks, file history, config entry); supports <code>--dry-run</code>, <code>-y/--yes</code>, <code>-i/--interactive</code>, and <code>--all</code>"},
-            {"tag": "CHG", "text": "<code>--dangerously-skip-permissions</code> — Now bypasses prompts for writes to <code>.claude/</code>, <code>.git/</code>, <code>.vscode/</code>, shell config files, and other protected paths"},
-            {"tag": "CHG", "text": "<code>/model</code> — Picker lists models from gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway"},
-            {"tag": "CHG", "text": "<code>claude auth login</code> — Accepts OAuth code pasted in terminal when browser callback can't reach localhost (WSL2, SSH, containers)"}
+            {"tag": "CHG", "text": "<code>/color [color]</code> — Bare <code>/color</code> with no args now picks a random session color"},
+            {"tag": "CHG", "text": "<code>/mcp</code> — Now shows tool count for each connected server and flags servers with 0 tools"},
+            {"tag": "CHG", "text": "<code>--channels</code> — Now works with console (API key) auth; console orgs with managed settings must set <code>channelsEnabled: true</code>"},
+            {"tag": "ADD", "text": "<code>channelsEnabled</code> JSON setting — Enable <code>--channels</code> with console auth for managed-settings orgs"},
+            {"tag": "ADD", "text": "<code>--plugin-dir &lt;path&gt;</code> CLI flag — Load plugins from a directory or <code>.zip</code> archive at launch"}
         ]
     }
     </script>
