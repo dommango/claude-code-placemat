@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.128</span>
+            <span class="release-tag">As of release: v2.1.131</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -378,7 +378,7 @@
                     <tr class="search-item"><td><code>Ctrl C</code> / <code>D</code></td><td class="desc">Cancel input / Exit session</td></tr>
                     <tr class="search-item"><td><code>Ctrl L</code></td><td class="desc">Clear screen + full redraw</td></tr>
                     <tr class="search-item"><td><code>Ctrl O</code></td><td class="desc">Toggle between normal and verbose transcript; focus view toggled with /focus</td></tr>
-                    <tr class="search-item"><td><code>Ctrl R</code></td><td class="desc">Reverse search history</td></tr>
+                    <tr class="search-item"><td><code>Ctrl R</code></td><td class="desc">History picker — searches all projects by default; press <code>Ctrl S</code> to narrow to current project or session</td></tr>
                     <tr class="search-item"><td><code>Ctrl G</code></td><td class="desc">Open prompt in external editor</td></tr>
                     <tr class="search-item"><td><code>Ctrl B</code></td><td class="desc">Background running task</td></tr>
                     <tr class="search-item"><td><code>Ctrl T</code></td><td class="desc">Toggle task list</td></tr>
@@ -521,7 +521,7 @@
                     <tr class="search-item"><td><code>claude --from-pr</code></td><td class="desc">Resume session linked to a PR; accepts GitHub, GitLab MR, Bitbucket PR, and GitHub Enterprise URLs</td></tr>
                     <tr class="search-item"><td><code>claude --fork-session</code></td><td class="desc">Fork existing session on resume</td></tr>
                     <tr class="search-item"><td><code>claude ultrareview [target]</code></td><td class="desc">Run <code>/ultrareview</code> non-interactively from CI or scripts; prints findings to stdout; use <code>--json</code> for raw output</td></tr>
-                    <tr class="search-item"><td><code class="new">claude project purge [path]</code></td><td class="desc">Delete all Claude Code state for a project (transcripts, tasks, file history, config entry); supports <code>--dry-run</code>, <code>-y/--yes</code>, <code>-i/--interactive</code>, and <code>--all</code></td></tr> <!-- added:v2.1.126 -->
+                    <tr class="search-item"><td><code>claude project purge [path]</code></td><td class="desc">Delete all Claude Code state for a project (transcripts, tasks, file history, config entry); supports <code>--dry-run</code>, <code>-y/--yes</code>, <code>-i/--interactive</code>, and <code>--all</code></td></tr>
                 </table>
             </div>
 
@@ -549,6 +549,7 @@
                     <tr class="search-item"><td><code>--remote</code></td><td class="desc">Start web-accessible session</td></tr>
                     <tr class="search-item"><td><code>--remote-control-session-name-prefix</code></td><td class="desc">Custom hostname prefix for Remote Control session names</td></tr>
                     <tr class="search-item"><td><code class="new">--plugin-dir &lt;path&gt;</code></td><td class="desc">Load plugins from a directory or <code>.zip</code> archive at launch</td></tr> <!-- added:v2.1.128 -->
+                    <tr class="search-item"><td><code class="new">--plugin-url &lt;url&gt;</code></td><td class="desc">Fetch a plugin <code>.zip</code> archive from a URL for the current session</td></tr> <!-- added:v2.1.129 -->
                 </table>
             </div>
         </div>
@@ -576,6 +577,7 @@
                     <tr class="search-item"><td><code>worktree.sparsePaths</code></td><td class="desc">Sparse checkout dirs for agents</td></tr>
                     <tr class="search-item"><td><code>showThinkingSummaries</code></td><td class="desc">Show thinking summaries in interactive sessions (default: false)</td></tr>
                     <tr class="search-item"><td><code>disableSkillShellExecution</code></td><td class="desc">Disable inline shell execution in skills and custom slash commands</td></tr>
+                    <tr class="search-item"><td><code class="new">skillOverrides</code></td><td class="desc"><code>off</code> hides skill from model and <code>/</code>; <code>user-invocable-only</code> hides from model only; <code>name-only</code> collapses description</td></tr> <!-- added:v2.1.129 -->
                     <tr class="search-item"><td><code>forceRemoteSettingsRefresh</code></td><td class="desc">Block startup until remote managed settings are freshly fetched; fail-closed on fetch failure</td></tr>
                     <tr class="search-item"><td><code>statusLine.refreshInterval</code></td><td class="desc">Re-run status line command every N seconds</td></tr>
                     <tr class="search-item"><td><code>workspace.git_worktree</code></td><td class="desc">Status line JSON input field — set when current directory is inside a linked git worktree</td></tr>
@@ -620,6 +622,9 @@
                     <tr class="search-item"><td><code>DISABLE_UPDATES</code></td><td class="desc">Block all update paths including manual <code>claude update</code>; stricter than <code>DISABLE_AUTOUPDATER</code></td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_HIDE_CWD</code></td><td class="desc">Hide working directory in the startup logo</td></tr>
                     <tr class="search-item"><td><code>ANTHROPIC_BEDROCK_SERVICE_TIER</code></td><td class="desc">Select a Bedrock service tier (<code>default</code>, <code>flex</code>, or <code>priority</code>); sent as the <code>X-Amzn-Bedrock-Service-Tier</code> header</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_FORCE_SYNC_OUTPUT=1</code></td><td class="desc">Force-enable synchronized output on terminals that auto-detection misses (e.g. Emacs <code>eat</code>)</td></tr> <!-- added:v2.1.129 -->
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE</code></td><td class="desc">On Homebrew or WinGet installs, runs the upgrade command in the background and prompts to restart when set</td></tr> <!-- added:v2.1.129 -->
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1</code></td><td class="desc">Opt in to listing gateway <code>/v1/models</code> in the <code>/model</code> picker when using a custom <code>ANTHROPIC_BASE_URL</code> gateway (was automatic in v2.1.126–v2.1.128)</td></tr> <!-- added:v2.1.129 -->
                 </table>
             </div>
         </div>
@@ -898,14 +903,15 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.128",
-        "date": "2026-05-04",
+        "version": "v2.1.131",
+        "date": "2026-05-06",
         "changes": [
-            {"tag": "CHG", "text": "<code>/color [color]</code> — Bare <code>/color</code> with no args now picks a random session color"},
-            {"tag": "CHG", "text": "<code>/mcp</code> — Now shows tool count for each connected server and flags servers with 0 tools"},
-            {"tag": "CHG", "text": "<code>--channels</code> — Now works with console (API key) auth; console orgs with managed settings must set <code>channelsEnabled: true</code>"},
-            {"tag": "ADD", "text": "<code>channelsEnabled</code> JSON setting — Enable <code>--channels</code> with console auth for managed-settings orgs"},
-            {"tag": "ADD", "text": "<code>--plugin-dir &lt;path&gt;</code> CLI flag — Load plugins from a directory or <code>.zip</code> archive at launch"}
+            {"tag": "CHG", "text": "<code>Ctrl R</code> — History picker now searches all projects by default; press <code>Ctrl+S</code> to narrow to current project or session"},
+            {"tag": "ADD", "text": "<code>--plugin-url &lt;url&gt;</code> CLI flag — Fetch a plugin <code>.zip</code> archive from a URL for the current session"},
+            {"tag": "ADD", "text": "<code>skillOverrides</code> JSON setting — <code>off</code> hides from model and <code>/</code>; <code>user-invocable-only</code> hides from model only; <code>name-only</code> collapses description"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_FORCE_SYNC_OUTPUT=1</code> env var — Force-enable synchronized output on terminals that auto-detection misses"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE</code> env var — On Homebrew/WinGet installs, runs upgrade in background and prompts to restart"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1</code> env var — Opt in to gateway <code>/v1/models</code> in the <code>/model</code> picker (was automatic in v2.1.126–v2.1.128)"}
         ]
     }
     </script>
