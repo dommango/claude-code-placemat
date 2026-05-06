@@ -203,6 +203,18 @@
                 <span class="change-category-title cat-content">Content / CC Release Updates</span>
 
                 <div class="change-section">
+                    <h3>CC v2.1.129 <span class="version-date">2026-05-06</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-change">CHG</span><code>Ctrl R</code> — History picker now searches all projects by default; press <code>Ctrl+S</code> to narrow to current project or session</li>
+                        <li><span class="tag tag-add">ADD</span><code>--plugin-url &lt;url&gt;</code> CLI flag — Fetch a plugin <code>.zip</code> archive from a URL for the current session</li>
+                        <li><span class="tag tag-add">ADD</span><code>skillOverrides</code> JSON setting — <code>off</code> hides from model and <code>/</code>; <code>user-invocable-only</code> hides from model only; <code>name-only</code> collapses description</li>
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_FORCE_SYNC_OUTPUT=1</code> env var — Force-enable synchronized output on terminals that auto-detection misses (e.g. Emacs <code>eat</code>)</li>
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE</code> env var — On Homebrew or WinGet installs, runs the upgrade command in the background and prompts to restart when set</li>
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1</code> env var — Opt in to listing gateway <code>/v1/models</code> in the <code>/model</code> picker when using a custom <code>ANTHROPIC_BASE_URL</code> gateway (was automatic in v2.1.126–v2.1.128)</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
                     <h3>CC v2.1.128 <span class="version-date">2026-05-04</span></h3>
                     <ul class="change-list">
                         <li><span class="tag tag-change">CHG</span><code>/color [color]</code> — Bare <code>/color</code> with no args now picks a random session color</li>
