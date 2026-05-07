@@ -203,6 +203,14 @@
                 <span class="change-category-title cat-content">Content / CC Release Updates</span>
 
                 <div class="change-section">
+                    <h3>CC v2.1.132 <span class="version-date">2026-05-06</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_SESSION_ID</code> env var — Session ID injected into Bash tool subprocess environment, matching the <code>session_id</code> passed to hooks</li>
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1</code> env var — Opt out of the fullscreen alternate-screen renderer; keeps conversation in the terminal's native scrollback</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
                     <h3>CC v2.1.129 <span class="version-date">2026-05-06</span></h3>
                     <ul class="change-list">
                         <li><span class="tag tag-change">CHG</span><code>Ctrl R</code> — History picker now searches all projects by default; press <code>Ctrl+S</code> to narrow to current project or session</li>
