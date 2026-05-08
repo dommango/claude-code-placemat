@@ -203,6 +203,18 @@
                 <span class="change-category-title cat-content">Content / CC Release Updates</span>
 
                 <div class="change-section">
+                    <h3>CC v2.1.133 <span class="version-date">2026-05-07</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>worktree.baseRef</code> JSON setting — <code>fresh</code> (default) branches worktrees from <code>origin/&lt;default&gt;</code>; <code>head</code> branches from local <code>HEAD</code>; applies to <code>--worktree</code>, <code>EnterWorktree</code>, and agent-isolation</li>
+                        <li><span class="tag tag-add">ADD</span><code>sandbox.bwrapPath</code> / <code>sandbox.socatPath</code> managed settings — custom bubblewrap and socat binary paths (Linux/WSL)</li>
+                        <li><span class="tag tag-add">ADD</span><code>parentSettingsBehavior</code> admin-tier key — <code>first-wins</code> or <code>merge</code>; opts SDK <code>managedSettings</code> parent tier into policy merge</li>
+                        <li><span class="tag tag-add">ADD</span><code>--remote-control</code> CLI flag — enable Remote Control mode; bridges CLI session to claude.ai/code</li>
+                        <li><span class="tag tag-change">CHG</span><code>effort.level</code> JSON input field — now also injected into hooks; previously status line only</li>
+                        <li><span class="tag tag-change">CHG</span><code>${CLAUDE_EFFORT}</code> description — now available in hooks and Bash tool commands, not just skill content</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
                     <h3>CC v2.1.132 <span class="version-date">2026-05-06</span></h3>
                     <ul class="change-list">
                         <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_SESSION_ID</code> env var — Session ID injected into Bash tool subprocess environment, matching the <code>session_id</code> passed to hooks</li>
