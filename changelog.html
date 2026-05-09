@@ -203,6 +203,14 @@
                 <span class="change-category-title cat-content">Content / CC Release Updates</span>
 
                 <div class="change-section">
+                    <h3>CC v2.1.136 <span class="version-date">2026-05-08</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>autoMode.hard_deny</code> JSON setting — auto mode classifier rules that block unconditionally regardless of user intent; unlike <code>autoMode.soft_deny</code>, cannot be overridden by allow exceptions</li>
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL</code> env var — re-enable session quality survey for enterprises capturing responses through OpenTelemetry</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
                     <h3>CC v2.1.133 <span class="version-date">2026-05-07</span></h3>
                     <ul class="change-list">
                         <li><span class="tag tag-add">ADD</span><code>worktree.baseRef</code> JSON setting — <code>fresh</code> (default) branches worktrees from <code>origin/&lt;default&gt;</code>; <code>head</code> branches from local <code>HEAD</code>; applies to <code>--worktree</code>, <code>EnterWorktree</code>, and agent-isolation</li>
