@@ -203,6 +203,20 @@
                 <span class="change-category-title cat-content">Content / CC Release Updates</span>
 
                 <div class="change-section">
+                    <h3>CC v2.1.139 <span class="version-date">2026-05-11</span></h3>
+                    <ul class="change-list">
+                        <li><span class="tag tag-add">ADD</span><code>claude agents</code> CLI command — agent view (Research Preview): a single list of every CC session — running, blocked on you, or done</li>
+                        <li><span class="tag tag-add">ADD</span><code>/goal [condition]</code> slash command — set a completion condition; Claude keeps working across turns until met; works in interactive, <code>-p</code>, and Remote Control; shows elapsed/turns/tokens overlay</li>
+                        <li><span class="tag tag-add">ADD</span><code>/scroll-speed</code> slash command — tune mouse wheel scroll speed with a live preview</li>
+                        <li><span class="tag tag-add">ADD</span><code>claude plugin details &lt;name&gt;</code> CLI command — show plugin component inventory and projected per-session token cost</li>
+                        <li><span class="tag tag-add">ADD</span>Transcript view nav keys: <code>?</code> for shortcuts, <code>{</code>/<code>}</code> to jump between user prompts, <code>v</code> to toggle shortcut panel</li>
+                        <li><span class="tag tag-add">ADD</span><code>args: string[]</code> hook field (exec form) — spawns command directly without a shell; path placeholders never need quoting</li>
+                        <li><span class="tag tag-add">ADD</span><code>continueOnBlock</code> hook option for <code>PostToolUse</code> — feeds hook's rejection reason back to Claude and continues the turn</li>
+                        <li><span class="tag tag-add">ADD</span><code>CLAUDE_PROJECT_DIR</code> env var — injected into MCP stdio server environments; referenceable as <code>${CLAUDE_PROJECT_DIR}</code> in plugin configs</li>
+                    </ul>
+                </div>
+
+                <div class="change-section">
                     <h3>CC v2.1.136 <span class="version-date">2026-05-08</span></h3>
                     <ul class="change-list">
                         <li><span class="tag tag-add">ADD</span><code>autoMode.hard_deny</code> JSON setting — auto mode classifier rules that block unconditionally regardless of user intent; unlike <code>autoMode.soft_deny</code>, cannot be overridden by allow exceptions</li>

@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.138</span>
+            <span class="release-tag">As of release: v2.1.139</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -418,6 +418,9 @@
                 <table>
                     <tr class="search-item"><td><code>[</code></td><td class="desc">Dump transcript to scrollback</td></tr>
                     <tr class="search-item"><td><code>v</code></td><td class="desc">Open transcript in editor</td></tr>
+                    <tr class="search-item"><td><code class="new">?</code></td><td class="desc">Show keyboard shortcuts in transcript nav view</td></tr> <!-- added:v2.1.139 -->
+                    <tr class="search-item"><td><code class="new">{</code> / <code class="new">}</code></td><td class="desc">Jump between user prompts in transcript nav view</td></tr> <!-- added:v2.1.139 -->
+                    <tr class="search-item"><td><code class="new">v</code> (nav view)</td><td class="desc">Toggle shortcut panel in transcript nav view</td></tr> <!-- added:v2.1.139 -->
                 </table>
             </div>
 
@@ -448,6 +451,7 @@
                     <tr class="search-item"><td><code>/export</code></td><td class="desc">Export conversation</td></tr>
                     <tr class="search-item"><td><code>/recap</code></td><td class="desc">Summarize away context; auto-triggered on return or invoke manually</td></tr>
                     <tr class="search-item"><td><code>/rewind</code> / <code>/undo</code></td><td class="desc">Rewind conversation to previous state; /undo is alias</td></tr>
+                    <tr class="search-item"><td><code class="new">/goal [condition]</code></td><td class="desc">Set a completion condition; Claude keeps working across turns until met; works in interactive, <code>-p</code>, and Remote Control; shows live elapsed/turns/tokens overlay</td></tr> <!-- added:v2.1.139 -->
                 </table>
             </div>
 
@@ -466,6 +470,7 @@
                     <tr class="search-item"><td><code>/tui [fullscreen]</code></td><td class="desc">Switch to flicker-free fullscreen TUI rendering in same conversation</td></tr>
                     <tr class="search-item"><td><code>/focus</code></td><td class="desc">Toggle focus view (fullscreen/TUI mode)</td></tr>
                     <tr class="search-item"><td><code>/release-notes</code></td><td class="desc">Interactive version picker for release notes</td></tr>
+                    <tr class="search-item"><td><code class="new">/scroll-speed</code></td><td class="desc">Tune mouse wheel scroll speed with a live preview</td></tr> <!-- added:v2.1.139 -->
                 </table>
             </div>
         </div>
@@ -522,6 +527,7 @@
                     <tr class="search-item"><td><code>claude --fork-session</code></td><td class="desc">Fork existing session on resume</td></tr>
                     <tr class="search-item"><td><code>claude ultrareview [target]</code></td><td class="desc">Run <code>/ultrareview</code> non-interactively from CI or scripts; prints findings to stdout; use <code>--json</code> for raw output</td></tr>
                     <tr class="search-item"><td><code>claude project purge [path]</code></td><td class="desc">Delete all Claude Code state for a project (transcripts, tasks, file history, config entry); supports <code>--dry-run</code>, <code>-y/--yes</code>, <code>-i/--interactive</code>, and <code>--all</code></td></tr>
+                    <tr class="search-item"><td><code class="new">claude agents</code></td><td class="desc">Agent view (Research Preview) — a single list of every CC session; running, blocked on you, or done</td></tr> <!-- added:v2.1.139 -->
                 </table>
             </div>
 
@@ -591,7 +597,7 @@
                     <tr class="search-item"><td><code>wslInheritsWindowsSettings</code></td><td class="desc">WSL sessions inherit Windows-side managed settings (policy key)</td></tr>
                     <tr class="search-item"><td><code>parentSettingsBehavior</code></td><td class="desc">Admin-tier key: <code>first-wins</code> (default) or <code>merge</code> — opts SDK <code>managedSettings</code> parent tier into policy merge</td></tr>
                     <tr class="search-item"><td><code>"$defaults"</code> (autoMode)</td><td class="desc">Include in <code>autoMode.allow</code>, <code>autoMode.soft_deny</code>, or <code>autoMode.environment</code> to add custom rules alongside the built-in list</td></tr>
-                    <tr class="search-item"><td><code class="new">autoMode.hard_deny</code></td><td class="desc">Auto mode classifier rules that block unconditionally regardless of user intent — unlike <code>autoMode.soft_deny</code>, cannot be overridden by allow exceptions</td></tr> <!-- added:v2.1.136 -->
+                    <tr class="search-item"><td><code>autoMode.hard_deny</code></td><td class="desc">Auto mode classifier rules that block unconditionally regardless of user intent — unlike <code>autoMode.soft_deny</code>, cannot be overridden by allow exceptions</td></tr>
                     <tr class="search-item"><td><code>prUrlTemplate</code></td><td class="desc">Point footer PR badge at a custom code-review URL instead of github.com</td></tr>
                     <tr class="search-item"><td><code>channelsEnabled</code></td><td class="desc">Set to <code>true</code> in managed settings to allow <code>--channels</code> with console (API key) auth</td></tr>
                 </table>
@@ -632,7 +638,8 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1</code></td><td class="desc">Opt in to listing gateway <code>/v1/models</code> in the <code>/model</code> picker when using a custom <code>ANTHROPIC_BASE_URL</code> gateway (was automatic in v2.1.126–v2.1.128)</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_SESSION_ID</code></td><td class="desc">Session ID injected into Bash tool subprocess environment, matching the <code>session_id</code> passed to hooks</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1</code></td><td class="desc">Opt out of the fullscreen alternate-screen renderer; keeps conversation in the terminal's native scrollback</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL</code></td><td class="desc">Re-enable the session quality survey for enterprises capturing responses through OpenTelemetry</td></tr> <!-- added:v2.1.136 -->
+                    <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL</code></td><td class="desc">Re-enable the session quality survey for enterprises capturing responses through OpenTelemetry</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_PROJECT_DIR</code></td><td class="desc">Injected into MCP stdio server environments; referenceable as <code>${CLAUDE_PROJECT_DIR}</code> in plugin configs</td></tr> <!-- added:v2.1.139 -->
                 </table>
             </div>
         </div>
@@ -690,6 +697,7 @@
                 <table>
                     <tr class="search-item"><td><code>claude plugin tag</code></td><td class="desc">Create release git tags for plugins with version validation</td></tr>
                     <tr class="search-item"><td><code>claude plugin prune</code></td><td class="desc">Remove orphaned auto-installed plugin dependencies; <code>plugin uninstall --prune</code> cascades</td></tr>
+                    <tr class="search-item"><td><code class="new">claude plugin details &lt;name&gt;</code></td><td class="desc">Show a plugin's component inventory and projected per-session token cost</td></tr> <!-- added:v2.1.139 -->
                 </table>
             </div>
         </div>
@@ -723,6 +731,8 @@
                     <tr class="search-item"><td><code>UserPromptSubmit</code></td><td class="desc">Fires on user prompt submit; supports hookSpecificOutput.sessionTitle to set session title</td></tr>
                     <tr class="search-item"><td><code>PreCompact</code></td><td class="desc">Fires before compaction; block by exiting with code 2 or returning {"decision":"block"}</td></tr>
                     <tr class="search-item"><td><code>type: "mcp_tool"</code> (hook)</td><td class="desc">Hook directly invokes an MCP tool</td></tr>
+                    <tr class="search-item"><td><code class="new">args: string[]</code> (hook field)</td><td class="desc">Exec form — spawns command directly without a shell; path placeholders never need quoting</td></tr> <!-- added:v2.1.139 -->
+                    <tr class="search-item"><td><code class="new">continueOnBlock</code> (PostToolUse)</td><td class="desc">Set to <code>true</code> to feed the hook's rejection reason back to Claude and continue the turn</td></tr> <!-- added:v2.1.139 -->
                 </table>
             </div>
 
@@ -911,11 +921,17 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.138",
-        "date": "2026-05-09",
+        "version": "v2.1.139",
+        "date": "2026-05-11",
         "changes": [
-            {"tag": "ADD", "text": "<code>autoMode.hard_deny</code> setting — auto mode classifier rules that block unconditionally regardless of user intent"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL</code> env var — re-enable session quality survey for enterprises capturing responses through OpenTelemetry"}
+            {"tag": "ADD", "text": "<code>claude agents</code> — agent view (Research Preview) of all CC sessions: running, blocked, or done"},
+            {"tag": "ADD", "text": "<code>/goal [condition]</code> — set a completion condition; Claude keeps working across turns until met"},
+            {"tag": "ADD", "text": "<code>/scroll-speed</code> — tune mouse wheel scroll speed with a live preview"},
+            {"tag": "ADD", "text": "<code>claude plugin details &lt;name&gt;</code> — show plugin component inventory and projected token cost"},
+            {"tag": "ADD", "text": "Transcript nav view keys: <code>?</code> shortcuts, <code>{</code>/<code>}</code> prompt navigation, <code>v</code> toggle panel"},
+            {"tag": "ADD", "text": "<code>args: string[]</code> hook field — exec form, spawns command without a shell"},
+            {"tag": "ADD", "text": "<code>continueOnBlock</code> hook option for <code>PostToolUse</code> — feeds rejection back to Claude and continues"},
+            {"tag": "ADD", "text": "<code>CLAUDE_PROJECT_DIR</code> env var — injected into MCP stdio server environments"}
         ]
     }
     </script>
