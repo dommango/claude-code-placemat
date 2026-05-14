@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.140</span>
+            <span class="release-tag">As of release: v2.1.141</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -527,7 +527,7 @@
                     <tr class="search-item"><td><code>claude --fork-session</code></td><td class="desc">Fork existing session on resume</td></tr>
                     <tr class="search-item"><td><code>claude ultrareview [target]</code></td><td class="desc">Run <code>/ultrareview</code> non-interactively from CI or scripts; prints findings to stdout; use <code>--json</code> for raw output</td></tr>
                     <tr class="search-item"><td><code>claude project purge [path]</code></td><td class="desc">Delete all Claude Code state for a project (transcripts, tasks, file history, config entry); supports <code>--dry-run</code>, <code>-y/--yes</code>, <code>-i/--interactive</code>, and <code>--all</code></td></tr>
-                    <tr class="search-item"><td><code class="new">claude agents</code></td><td class="desc">Agent view (Research Preview) — a single list of every CC session; running, blocked on you, or done</td></tr> <!-- added:v2.1.139 -->
+                    <tr class="search-item"><td><code class="new">claude agents [--cwd &lt;path&gt;]</code></td><td class="desc">Agent view (Research Preview) — a single list of every CC session; running, blocked on you, or done; <code>--cwd &lt;path&gt;</code> scopes list to a directory</td></tr> <!-- added:v2.1.139 -->
                 </table>
             </div>
 
@@ -640,6 +640,8 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1</code></td><td class="desc">Opt out of the fullscreen alternate-screen renderer; keeps conversation in the terminal's native scrollback</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL</code></td><td class="desc">Re-enable the session quality survey for enterprises capturing responses through OpenTelemetry</td></tr>
                     <tr class="search-item"><td><code class="new">CLAUDE_PROJECT_DIR</code></td><td class="desc">Injected into MCP stdio server environments; referenceable as <code>${CLAUDE_PROJECT_DIR}</code> in plugin configs</td></tr> <!-- added:v2.1.139 -->
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_PLUGIN_PREFER_HTTPS</code></td><td class="desc">Clone GitHub plugin sources over HTTPS instead of SSH; for environments without a GitHub SSH key</td></tr> <!-- added:v2.1.141 -->
+                    <tr class="search-item"><td><code class="new">ANTHROPIC_WORKSPACE_ID</code></td><td class="desc">Workload identity federation — scopes the minted token to a specific workspace when the federation rule covers more than one</td></tr> <!-- added:v2.1.141 -->
                 </table>
             </div>
         </div>
@@ -733,6 +735,7 @@
                     <tr class="search-item"><td><code>type: "mcp_tool"</code> (hook)</td><td class="desc">Hook directly invokes an MCP tool</td></tr>
                     <tr class="search-item"><td><code class="new">args: string[]</code> (hook field)</td><td class="desc">Exec form — spawns command directly without a shell; path placeholders never need quoting</td></tr> <!-- added:v2.1.139 -->
                     <tr class="search-item"><td><code class="new">continueOnBlock</code> (PostToolUse)</td><td class="desc">Set to <code>true</code> to feed the hook's rejection reason back to Claude and continue the turn</td></tr> <!-- added:v2.1.139 -->
+                    <tr class="search-item"><td><code class="new">terminalSequence</code> (hook output)</td><td class="desc">Hook JSON output field — emit desktop notifications, window titles, and bells without a controlling terminal</td></tr> <!-- added:v2.1.141 -->
                 </table>
             </div>
 
@@ -921,9 +924,14 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.140",
-        "date": "2026-05-12",
-        "changes": []
+        "version": "v2.1.141",
+        "date": "2026-05-13",
+        "changes": [
+            {"tag": "ADD", "text": "<code>terminalSequence</code> hook output field — emit desktop notifications, window titles, and bells without a controlling terminal"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_PLUGIN_PREFER_HTTPS</code> env var — clone GitHub plugin sources over HTTPS instead of SSH"},
+            {"tag": "ADD", "text": "<code>ANTHROPIC_WORKSPACE_ID</code> env var — scopes workload identity federation token to a specific workspace"},
+            {"tag": "CHG", "text": "<code>claude agents</code> — new <code>--cwd &lt;path&gt;</code> flag scopes the session list to a directory"}
+        ]
     }
     </script>
 </body>
