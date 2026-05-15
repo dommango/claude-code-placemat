@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.141</span>
+            <span class="release-tag">As of release: v2.1.142</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -418,9 +418,9 @@
                 <table>
                     <tr class="search-item"><td><code>[</code></td><td class="desc">Dump transcript to scrollback</td></tr>
                     <tr class="search-item"><td><code>v</code></td><td class="desc">Open transcript in editor</td></tr>
-                    <tr class="search-item"><td><code class="new">?</code></td><td class="desc">Show keyboard shortcuts in transcript nav view</td></tr> <!-- added:v2.1.139 -->
-                    <tr class="search-item"><td><code class="new">{</code> / <code class="new">}</code></td><td class="desc">Jump between user prompts in transcript nav view</td></tr> <!-- added:v2.1.139 -->
-                    <tr class="search-item"><td><code class="new">v</code> (nav view)</td><td class="desc">Toggle shortcut panel in transcript nav view</td></tr> <!-- added:v2.1.139 -->
+                    <tr class="search-item"><td><code>?</code></td><td class="desc">Show keyboard shortcuts in transcript nav view</td></tr>
+                    <tr class="search-item"><td><code>{</code> / <code>}</code></td><td class="desc">Jump between user prompts in transcript nav view</td></tr>
+                    <tr class="search-item"><td><code>v</code> (nav view)</td><td class="desc">Toggle shortcut panel in transcript nav view</td></tr>
                 </table>
             </div>
 
@@ -451,7 +451,7 @@
                     <tr class="search-item"><td><code>/export</code></td><td class="desc">Export conversation</td></tr>
                     <tr class="search-item"><td><code>/recap</code></td><td class="desc">Summarize away context; auto-triggered on return or invoke manually</td></tr>
                     <tr class="search-item"><td><code>/rewind</code> / <code>/undo</code></td><td class="desc">Rewind conversation to previous state; /undo is alias</td></tr>
-                    <tr class="search-item"><td><code class="new">/goal [condition]</code></td><td class="desc">Set a completion condition; Claude keeps working across turns until met; works in interactive, <code>-p</code>, and Remote Control; shows live elapsed/turns/tokens overlay</td></tr> <!-- added:v2.1.139 -->
+                    <tr class="search-item"><td><code>/goal [condition]</code></td><td class="desc">Set a completion condition; Claude keeps working across turns until met; works in interactive, <code>-p</code>, and Remote Control; shows live elapsed/turns/tokens overlay</td></tr>
                 </table>
             </div>
 
@@ -470,7 +470,7 @@
                     <tr class="search-item"><td><code>/tui [fullscreen]</code></td><td class="desc">Switch to flicker-free fullscreen TUI rendering in same conversation</td></tr>
                     <tr class="search-item"><td><code>/focus</code></td><td class="desc">Toggle focus view (fullscreen/TUI mode)</td></tr>
                     <tr class="search-item"><td><code>/release-notes</code></td><td class="desc">Interactive version picker for release notes</td></tr>
-                    <tr class="search-item"><td><code class="new">/scroll-speed</code></td><td class="desc">Tune mouse wheel scroll speed with a live preview</td></tr> <!-- added:v2.1.139 -->
+                    <tr class="search-item"><td><code>/scroll-speed</code></td><td class="desc">Tune mouse wheel scroll speed with a live preview</td></tr>
                 </table>
             </div>
         </div>
@@ -527,7 +527,7 @@
                     <tr class="search-item"><td><code>claude --fork-session</code></td><td class="desc">Fork existing session on resume</td></tr>
                     <tr class="search-item"><td><code>claude ultrareview [target]</code></td><td class="desc">Run <code>/ultrareview</code> non-interactively from CI or scripts; prints findings to stdout; use <code>--json</code> for raw output</td></tr>
                     <tr class="search-item"><td><code>claude project purge [path]</code></td><td class="desc">Delete all Claude Code state for a project (transcripts, tasks, file history, config entry); supports <code>--dry-run</code>, <code>-y/--yes</code>, <code>-i/--interactive</code>, and <code>--all</code></td></tr>
-                    <tr class="search-item"><td><code class="new">claude agents [--cwd &lt;path&gt;]</code></td><td class="desc">Agent view (Research Preview) — a single list of every CC session; running, blocked on you, or done; <code>--cwd &lt;path&gt;</code> scopes list to a directory</td></tr> <!-- added:v2.1.139 -->
+                    <tr class="search-item"><td><code>claude agents</code></td><td class="desc">Agent view (Research Preview) — single list of every CC session; running, blocked on you, or done; <code>--cwd &lt;path&gt;</code> scopes list to a directory; dispatch flags for background sessions: <code>--add-dir</code>, <code>--settings</code>, <code>--mcp-config</code>, <code>--plugin-dir</code>, <code>--permission-mode</code>, <code>--model</code>, <code>--effort</code>, <code>--dangerously-skip-permissions</code></td></tr>
                 </table>
             </div>
 
@@ -639,9 +639,10 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_SESSION_ID</code></td><td class="desc">Session ID injected into Bash tool subprocess environment, matching the <code>session_id</code> passed to hooks</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1</code></td><td class="desc">Opt out of the fullscreen alternate-screen renderer; keeps conversation in the terminal's native scrollback</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL</code></td><td class="desc">Re-enable the session quality survey for enterprises capturing responses through OpenTelemetry</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_PROJECT_DIR</code></td><td class="desc">Injected into MCP stdio server environments; referenceable as <code>${CLAUDE_PROJECT_DIR}</code> in plugin configs</td></tr> <!-- added:v2.1.139 -->
+                    <tr class="search-item"><td><code>CLAUDE_PROJECT_DIR</code></td><td class="desc">Injected into MCP stdio server environments; referenceable as <code>${CLAUDE_PROJECT_DIR}</code> in plugin configs</td></tr>
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_PLUGIN_PREFER_HTTPS</code></td><td class="desc">Clone GitHub plugin sources over HTTPS instead of SSH; for environments without a GitHub SSH key</td></tr> <!-- added:v2.1.141 -->
                     <tr class="search-item"><td><code class="new">ANTHROPIC_WORKSPACE_ID</code></td><td class="desc">Workload identity federation — scopes the minted token to a specific workspace when the federation rule covers more than one</td></tr> <!-- added:v2.1.141 -->
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE=1</code></td><td class="desc">Pin Fast mode to Opus 4.6; fast mode now uses Opus 4.7 by default</td></tr> <!-- added:v2.1.142 -->
                 </table>
             </div>
         </div>
@@ -699,7 +700,7 @@
                 <table>
                     <tr class="search-item"><td><code>claude plugin tag</code></td><td class="desc">Create release git tags for plugins with version validation</td></tr>
                     <tr class="search-item"><td><code>claude plugin prune</code></td><td class="desc">Remove orphaned auto-installed plugin dependencies; <code>plugin uninstall --prune</code> cascades</td></tr>
-                    <tr class="search-item"><td><code class="new">claude plugin details &lt;name&gt;</code></td><td class="desc">Show a plugin's component inventory and projected per-session token cost</td></tr> <!-- added:v2.1.139 -->
+                    <tr class="search-item"><td><code>claude plugin details &lt;name&gt;</code></td><td class="desc">Show a plugin's component inventory and projected per-session token cost</td></tr>
                 </table>
             </div>
         </div>
@@ -733,8 +734,8 @@
                     <tr class="search-item"><td><code>UserPromptSubmit</code></td><td class="desc">Fires on user prompt submit; supports hookSpecificOutput.sessionTitle to set session title</td></tr>
                     <tr class="search-item"><td><code>PreCompact</code></td><td class="desc">Fires before compaction; block by exiting with code 2 or returning {"decision":"block"}</td></tr>
                     <tr class="search-item"><td><code>type: "mcp_tool"</code> (hook)</td><td class="desc">Hook directly invokes an MCP tool</td></tr>
-                    <tr class="search-item"><td><code class="new">args: string[]</code> (hook field)</td><td class="desc">Exec form — spawns command directly without a shell; path placeholders never need quoting</td></tr> <!-- added:v2.1.139 -->
-                    <tr class="search-item"><td><code class="new">continueOnBlock</code> (PostToolUse)</td><td class="desc">Set to <code>true</code> to feed the hook's rejection reason back to Claude and continue the turn</td></tr> <!-- added:v2.1.139 -->
+                    <tr class="search-item"><td><code>args: string[]</code> (hook field)</td><td class="desc">Exec form — spawns command directly without a shell; path placeholders never need quoting</td></tr>
+                    <tr class="search-item"><td><code>continueOnBlock</code> (PostToolUse)</td><td class="desc">Set to <code>true</code> to feed the hook's rejection reason back to Claude and continue the turn</td></tr>
                     <tr class="search-item"><td><code class="new">terminalSequence</code> (hook output)</td><td class="desc">Hook JSON output field — emit desktop notifications, window titles, and bells without a controlling terminal</td></tr> <!-- added:v2.1.141 -->
                 </table>
             </div>
@@ -924,13 +925,11 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.141",
-        "date": "2026-05-13",
+        "version": "v2.1.142",
+        "date": "2026-05-14",
         "changes": [
-            {"tag": "ADD", "text": "<code>terminalSequence</code> hook output field — emit desktop notifications, window titles, and bells without a controlling terminal"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_PLUGIN_PREFER_HTTPS</code> env var — clone GitHub plugin sources over HTTPS instead of SSH"},
-            {"tag": "ADD", "text": "<code>ANTHROPIC_WORKSPACE_ID</code> env var — scopes workload identity federation token to a specific workspace"},
-            {"tag": "CHG", "text": "<code>claude agents</code> — new <code>--cwd &lt;path&gt;</code> flag scopes the session list to a directory"}
+            {"tag": "CHG", "text": "<code>claude agents</code> — new dispatch flags for background sessions: <code>--add-dir</code>, <code>--settings</code>, <code>--mcp-config</code>, <code>--plugin-dir</code>, <code>--permission-mode</code>, <code>--model</code>, <code>--effort</code>, <code>--dangerously-skip-permissions</code>"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE=1</code> env var — pin Fast mode to Opus 4.6 (fast mode now uses Opus 4.7 by default)"}
         ]
     }
     </script>
