@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.142</span>
+            <span class="release-tag">As of release: v2.1.143</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -583,6 +583,7 @@
                     <tr class="search-item"><td><code>autoMemoryDirectory</code></td><td class="desc">Custom auto-loaded memory dir</td></tr>
                     <tr class="search-item"><td><code>worktree.sparsePaths</code></td><td class="desc">Sparse checkout dirs for agents</td></tr>
                     <tr class="search-item"><td><code>worktree.baseRef</code></td><td class="desc"><code>fresh</code> (default) branches worktrees from <code>origin/&lt;default&gt;</code>; <code>head</code> branches from local <code>HEAD</code> — applies to <code>--worktree</code>, <code>EnterWorktree</code>, and agent-isolation</td></tr>
+                    <tr class="search-item"><td><code class="new">worktree.bgIsolation</code></td><td class="desc">Set to <code>"none"</code> to disable worktree isolation for background sessions</td></tr> <!-- added:v2.1.143 -->
                     <tr class="search-item"><td><code>showThinkingSummaries</code></td><td class="desc">Show thinking summaries in interactive sessions (default: false)</td></tr>
                     <tr class="search-item"><td><code>disableSkillShellExecution</code></td><td class="desc">Disable inline shell execution in skills and custom slash commands</td></tr>
                     <tr class="search-item"><td><code>skillOverrides</code></td><td class="desc"><code>off</code> hides skill from model and <code>/</code>; <code>user-invocable-only</code> hides from model only; <code>name-only</code> collapses description</td></tr>
@@ -925,11 +926,10 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.142",
-        "date": "2026-05-14",
+        "version": "v2.1.143",
+        "date": "2026-05-15",
         "changes": [
-            {"tag": "CHG", "text": "<code>claude agents</code> — new dispatch flags for background sessions: <code>--add-dir</code>, <code>--settings</code>, <code>--mcp-config</code>, <code>--plugin-dir</code>, <code>--permission-mode</code>, <code>--model</code>, <code>--effort</code>, <code>--dangerously-skip-permissions</code>"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE=1</code> env var — pin Fast mode to Opus 4.6 (fast mode now uses Opus 4.7 by default)"}
+            {"tag": "ADD", "text": "<code>worktree.bgIsolation</code> setting — set to <code>\"none\"</code> to disable worktree isolation for background sessions"}
         ]
     }
     </script>
