@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.143</span>
+            <span class="release-tag">As of release: v2.1.144</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -440,11 +440,11 @@
                 <table>
                     <tr class="search-item"><td><code>/clear</code></td><td class="desc">Clear conversation context</td></tr>
                     <tr class="search-item"><td><code>/compact [focus]</code></td><td class="desc">Compact context to free space</td></tr>
-                    <tr class="search-item"><td><code>/resume</code></td><td class="desc">Display session picker menu; offers to summarize stale large sessions before re-reading</td></tr>
+                    <tr class="search-item"><td><code>/resume</code></td><td class="desc">Display session picker menu; background sessions (from <code>--bg</code> or agent view) now appear alongside interactive sessions, marked with <code>bg</code>; offers to summarize stale large sessions before re-reading</td></tr>
                     <tr class="search-item"><td><code>/rename [name]</code></td><td class="desc">Name current session</td></tr>
                     <tr class="search-item"><td><code>/branch [name]</code></td><td class="desc">Branch convo (formerly /fork)</td></tr>
                     <tr class="search-item"><td><code>/usage</code></td><td class="desc">Unified usage view (cost + stats tabs); <code>/cost</code> and <code>/stats</code> are shortcuts that open the relevant tab</td></tr>
-                    <tr class="search-item"><td><code>/extra-usage</code></td><td class="desc">Request extra usage allowance; works from Remote Control clients</td></tr>
+                    <tr class="search-item"><td><code>/usage-credits</code></td><td class="desc">Request extra usage allowance; old name <code>/extra-usage</code> still works; accessible from Remote Control clients</td></tr>
                     <tr class="search-item"><td><code>/context</code></td><td class="desc">Visualize context window (grid)</td></tr>
                     <tr class="search-item"><td><code>/diff</code></td><td class="desc">Interactive diff viewer</td></tr>
                     <tr class="search-item"><td><code>/copy</code></td><td class="desc">Copy last response</td></tr>
@@ -459,7 +459,7 @@
                 <h3>Configuration</h3>
                 <table>
                     <tr class="search-item"><td><code>/config</code></td><td class="desc">Open settings interface; search matches option values</td></tr>
-                    <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model manually; warns before switching mid-conversation; selections persist across restarts; startup header shows model pin source; lists models from gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway</td></tr>
+                    <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model for current session; press <code>d</code> in the picker to set a default for new sessions; warns before switching mid-conversation; startup header shows model pin source; lists models from gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway</td></tr>
                     <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/xhigh/auto); no args opens interactive slider; xhigh is Opus 4.7 only</td></tr>
                     <tr class="search-item"><td><code class="unverified">/fast [on/off]</code></td><td class="desc">Toggle Fast mode</td></tr>
                     <tr class="search-item"><td><code>/permissions</code></td><td class="desc">View/update tool permissions</td></tr>
@@ -641,8 +641,8 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1</code></td><td class="desc">Opt out of the fullscreen alternate-screen renderer; keeps conversation in the terminal's native scrollback</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL</code></td><td class="desc">Re-enable the session quality survey for enterprises capturing responses through OpenTelemetry</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_PROJECT_DIR</code></td><td class="desc">Injected into MCP stdio server environments; referenceable as <code>${CLAUDE_PROJECT_DIR}</code> in plugin configs</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_PLUGIN_PREFER_HTTPS</code></td><td class="desc">Clone GitHub plugin sources over HTTPS instead of SSH; for environments without a GitHub SSH key</td></tr> <!-- added:v2.1.141 -->
-                    <tr class="search-item"><td><code class="new">ANTHROPIC_WORKSPACE_ID</code></td><td class="desc">Workload identity federation — scopes the minted token to a specific workspace when the federation rule covers more than one</td></tr> <!-- added:v2.1.141 -->
+                    <tr class="search-item"><td><code>CLAUDE_CODE_PLUGIN_PREFER_HTTPS</code></td><td class="desc">Clone GitHub plugin sources over HTTPS instead of SSH; for environments without a GitHub SSH key</td></tr>
+                    <tr class="search-item"><td><code>ANTHROPIC_WORKSPACE_ID</code></td><td class="desc">Workload identity federation — scopes the minted token to a specific workspace when the federation rule covers more than one</td></tr>
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE=1</code></td><td class="desc">Pin Fast mode to Opus 4.6; fast mode now uses Opus 4.7 by default</td></tr> <!-- added:v2.1.142 -->
                 </table>
             </div>
@@ -737,7 +737,7 @@
                     <tr class="search-item"><td><code>type: "mcp_tool"</code> (hook)</td><td class="desc">Hook directly invokes an MCP tool</td></tr>
                     <tr class="search-item"><td><code>args: string[]</code> (hook field)</td><td class="desc">Exec form — spawns command directly without a shell; path placeholders never need quoting</td></tr>
                     <tr class="search-item"><td><code>continueOnBlock</code> (PostToolUse)</td><td class="desc">Set to <code>true</code> to feed the hook's rejection reason back to Claude and continue the turn</td></tr>
-                    <tr class="search-item"><td><code class="new">terminalSequence</code> (hook output)</td><td class="desc">Hook JSON output field — emit desktop notifications, window titles, and bells without a controlling terminal</td></tr> <!-- added:v2.1.141 -->
+                    <tr class="search-item"><td><code>terminalSequence</code> (hook output)</td><td class="desc">Hook JSON output field — emit desktop notifications, window titles, and bells without a controlling terminal</td></tr>
                 </table>
             </div>
 
@@ -926,10 +926,12 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.143",
-        "date": "2026-05-15",
+        "version": "v2.1.144",
+        "date": "2026-05-19",
         "changes": [
-            {"tag": "ADD", "text": "<code>worktree.bgIsolation</code> setting — set to <code>\"none\"</code> to disable worktree isolation for background sessions"}
+            {"tag": "CHG", "text": "<code>/usage-credits</code> — replaces <code>/extra-usage</code> (old name still works)"},
+            {"tag": "CHG", "text": "<code>/model</code> — now changes model for current session only; press <code>d</code> in the picker to set a default for new sessions"},
+            {"tag": "CHG", "text": "<code>/resume</code> — background sessions now appear alongside interactive sessions in the picker, marked with <code>bg</code>"}
         ]
     }
     </script>
