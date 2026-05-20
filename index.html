@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.144</span>
+            <span class="release-tag">As of release: v2.1.145</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -527,7 +527,7 @@
                     <tr class="search-item"><td><code>claude --fork-session</code></td><td class="desc">Fork existing session on resume</td></tr>
                     <tr class="search-item"><td><code>claude ultrareview [target]</code></td><td class="desc">Run <code>/ultrareview</code> non-interactively from CI or scripts; prints findings to stdout; use <code>--json</code> for raw output</td></tr>
                     <tr class="search-item"><td><code>claude project purge [path]</code></td><td class="desc">Delete all Claude Code state for a project (transcripts, tasks, file history, config entry); supports <code>--dry-run</code>, <code>-y/--yes</code>, <code>-i/--interactive</code>, and <code>--all</code></td></tr>
-                    <tr class="search-item"><td><code>claude agents</code></td><td class="desc">Agent view (Research Preview) — single list of every CC session; running, blocked on you, or done; <code>--cwd &lt;path&gt;</code> scopes list to a directory; dispatch flags for background sessions: <code>--add-dir</code>, <code>--settings</code>, <code>--mcp-config</code>, <code>--plugin-dir</code>, <code>--permission-mode</code>, <code>--model</code>, <code>--effort</code>, <code>--dangerously-skip-permissions</code></td></tr>
+                    <tr class="search-item"><td><code>claude agents</code></td><td class="desc">Agent view (Research Preview) — single list of every CC session; running, blocked on you, or done; <code>--cwd &lt;path&gt;</code> scopes list to a directory; <code class="new">--json</code> <!-- added:v2.1.145 --> lists live sessions as JSON for scripting; dispatch flags for background sessions: <code>--add-dir</code>, <code>--settings</code>, <code>--mcp-config</code>, <code>--plugin-dir</code>, <code>--permission-mode</code>, <code>--model</code>, <code>--effort</code>, <code>--dangerously-skip-permissions</code></td></tr>
                 </table>
             </div>
 
@@ -643,7 +643,7 @@
                     <tr class="search-item"><td><code>CLAUDE_PROJECT_DIR</code></td><td class="desc">Injected into MCP stdio server environments; referenceable as <code>${CLAUDE_PROJECT_DIR}</code> in plugin configs</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_PLUGIN_PREFER_HTTPS</code></td><td class="desc">Clone GitHub plugin sources over HTTPS instead of SSH; for environments without a GitHub SSH key</td></tr>
                     <tr class="search-item"><td><code>ANTHROPIC_WORKSPACE_ID</code></td><td class="desc">Workload identity federation — scopes the minted token to a specific workspace when the federation rule covers more than one</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE=1</code></td><td class="desc">Pin Fast mode to Opus 4.6; fast mode now uses Opus 4.7 by default</td></tr> <!-- added:v2.1.142 -->
+                    <tr class="search-item"><td><code>CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE=1</code></td><td class="desc">Pin Fast mode to Opus 4.6; fast mode now uses Opus 4.7 by default</td></tr>
                 </table>
             </div>
         </div>
@@ -725,7 +725,7 @@
                 <table>
                     <tr class="search-item"><td><code>PreToolUse</code> / <code>PostToolUse</code></td><td class="desc">Intercept before/after tool execution; <code>PostToolUse</code> hook input includes <code>duration_ms</code>; can replace tool output via <code>hookSpecificOutput.updatedToolOutput</code> for all tools</td></tr>
                     <tr class="search-item"><td><code>PostToolUseFailure</code></td><td class="desc">Fires when a tool call fails; hook input includes <code>duration_ms</code></td></tr>
-                    <tr class="search-item"><td><code>SubagentStart</code> / <code>Stop</code></td><td class="desc">Lifecycle triggers for agent spawning</td></tr>
+                    <tr class="search-item"><td><code>SubagentStart</code> / <code>Stop</code> / <code>SubagentStop</code></td><td class="desc">Lifecycle triggers for agent spawning; Stop and SubagentStop hook input includes <code class="new">background_tasks</code> <!-- added:v2.1.145 --> and <code class="new">session_crons</code> <!-- added:v2.1.145 --> fields</td></tr>
                     <tr class="search-item"><td><code>SessionEnd</code></td><td class="desc">Run cleanup script when session closes</td></tr>
                     <tr class="search-item"><td><code>CwdChanged</code> / <code>FileChanged</code></td><td class="desc">React to directory or file changes</td></tr>
                     <tr class="search-item"><td><code>TaskCreated</code></td><td class="desc">Fires when task created via TaskCreate</td></tr>
@@ -926,12 +926,11 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.144",
+        "version": "v2.1.145",
         "date": "2026-05-19",
         "changes": [
-            {"tag": "CHG", "text": "<code>/usage-credits</code> — replaces <code>/extra-usage</code> (old name still works)"},
-            {"tag": "CHG", "text": "<code>/model</code> — now changes model for current session only; press <code>d</code> in the picker to set a default for new sessions"},
-            {"tag": "CHG", "text": "<code>/resume</code> — background sessions now appear alongside interactive sessions in the picker, marked with <code>bg</code>"}
+            {"tag": "ADD", "text": "<code>claude agents --json</code> — list live sessions as JSON for scripting"},
+            {"tag": "CHG", "text": "<code>Stop</code> / <code>SubagentStop</code> hook input — now includes <code>background_tasks</code> and <code>session_crons</code> fields"}
         ]
     }
     </script>
