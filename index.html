@@ -334,7 +334,7 @@
             <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: 400;">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.148</span>
+            <span class="release-tag">As of release: v2.1.150</span>
             <a href="changelog.html" class="header-link">Changelog</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
             <input type="text" id="dashboardSearch" placeholder="Search... (Ctrl+K)">
@@ -381,7 +381,7 @@
                     <tr class="search-item"><td><code>Ctrl R</code></td><td class="desc">History picker — searches all projects by default; press <code>Ctrl S</code> to narrow to current project or session</td></tr>
                     <tr class="search-item"><td><code>Ctrl G</code></td><td class="desc">Open prompt in external editor</td></tr>
                     <tr class="search-item"><td><code>Ctrl B</code></td><td class="desc">Background running task</td></tr>
-                    <tr class="search-item"><td><code>Ctrl T</code></td><td class="desc">Toggle task list; in <code>claude agents</code>: <code class="new">pin/unpin background session</code> <!-- added:v2.1.147 --> (pinned sessions stay alive when idle, restart in place for CC updates)</td></tr>
+                    <tr class="search-item"><td><code>Ctrl T</code></td><td class="desc">Toggle task list; in <code>claude agents</code>: pin/unpin background session (pinned sessions stay alive when idle, restart in place for CC updates)</td></tr>
                     <tr class="search-item"><td><code>Ctrl V</code></td><td class="desc">Paste image from clipboard</td></tr>
                     <tr class="search-item"><td><code>Ctrl Backspace</code></td><td class="desc">Delete previous word (Windows)</td></tr>
                     <tr class="search-item"><td><code>Ctrl U</code></td><td class="desc">Clear entire input buffer (Ctrl+Y to restore)</td></tr>
@@ -443,10 +443,10 @@
                     <tr class="search-item"><td><code>/resume</code></td><td class="desc">Display session picker menu; background sessions (from <code>--bg</code> or agent view) now appear alongside interactive sessions, marked with <code>bg</code>; offers to summarize stale large sessions before re-reading</td></tr>
                     <tr class="search-item"><td><code>/rename [name]</code></td><td class="desc">Name current session</td></tr>
                     <tr class="search-item"><td><code>/branch [name]</code></td><td class="desc">Branch convo (formerly /fork)</td></tr>
-                    <tr class="search-item"><td><code>/usage</code></td><td class="desc">Unified usage view (cost + stats tabs); <code>/cost</code> and <code>/stats</code> are shortcuts that open the relevant tab</td></tr>
+                    <tr class="search-item"><td><code>/usage</code></td><td class="desc">Unified usage view (cost + stats tabs); per-category limits breakdown (skills, subagents, plugins, per-MCP-server cost); <code>/cost</code> and <code>/stats</code> are shortcuts that open the relevant tab</td></tr>
                     <tr class="search-item"><td><code>/usage-credits</code></td><td class="desc">Request extra usage allowance; old name <code>/extra-usage</code> still works; accessible from Remote Control clients</td></tr>
                     <tr class="search-item"><td><code>/context</code></td><td class="desc">Visualize context window (grid)</td></tr>
-                    <tr class="search-item"><td><code>/diff</code></td><td class="desc">Interactive diff viewer</td></tr>
+                    <tr class="search-item"><td><code>/diff</code></td><td class="desc">Interactive diff viewer; detail view scrollable with arrows, <code>j</code>/<code>k</code>, <code>PgUp</code>/<code>PgDn</code>, <code>Space</code>, <code>Home</code>/<code>End</code></td></tr>
                     <tr class="search-item"><td><code>/copy</code></td><td class="desc">Copy last response</td></tr>
                     <tr class="search-item"><td><code>/export</code></td><td class="desc">Export conversation</td></tr>
                     <tr class="search-item"><td><code>/recap</code></td><td class="desc">Summarize away context; auto-triggered on return or invoke manually</td></tr>
@@ -601,6 +601,7 @@
                     <tr class="search-item"><td><code>autoMode.hard_deny</code></td><td class="desc">Auto mode classifier rules that block unconditionally regardless of user intent — unlike <code>autoMode.soft_deny</code>, cannot be overridden by allow exceptions</td></tr>
                     <tr class="search-item"><td><code>prUrlTemplate</code></td><td class="desc">Point footer PR badge at a custom code-review URL instead of github.com</td></tr>
                     <tr class="search-item"><td><code>channelsEnabled</code></td><td class="desc">Set to <code>true</code> in managed settings to allow <code>--channels</code> with console (API key) auth</td></tr>
+                    <tr class="search-item"><td><code class="new">allowAllClaudeAiMcps</code> <!-- added:v2.1.149 --></td><td class="desc">Enterprise managed setting — load claude.ai cloud MCP connectors alongside <code>managed-mcp.json</code></td></tr>
                 </table>
             </div>
 
@@ -654,7 +655,7 @@
             <div class="search-group">
                 <h3>Built-in Skills & Locations</h3>
                 <table>
-                    <tr class="search-item"><td><code class="new">/code-review [effort]</code> <!-- added:v2.1.146 --></td><td class="desc">Code review (3 parallel agents); renamed from <code>/simplify</code>; optional effort level (e.g. <code>/code-review high</code>)</td></tr>
+                    <tr class="search-item"><td><code>/code-review [effort]</code></td><td class="desc">Code review (3 parallel agents); renamed from <code>/simplify</code>; optional effort level (e.g. <code>/code-review high</code>)</td></tr>
                     <tr class="search-item"><td><code>/batch</code></td><td class="desc">Large parallel changes (5-30 worktrees)</td></tr>
                     <tr class="search-item"><td><code>/claude-api</code></td><td class="desc">Load API + SDK reference into context</td></tr>
                     <tr class="search-item"><td><code>/less-permission-prompts</code></td><td class="desc">Scan transcripts for read-only Bash/MCP calls; propose settings.json allowlist</td></tr>
@@ -926,10 +927,12 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.148",
-        "date": "2026-05-22",
+        "version": "v2.1.150",
+        "date": "2026-05-23",
         "changes": [
-            {"tag": "CHG", "text": "<code>Ctrl T</code> — in <code>claude agents</code>: pin/unpin background session (pinned sessions stay alive when idle, restart in place for CC updates)"}
+            {"tag": "CHG", "text": "<code>/usage</code> — per-category limits breakdown (skills, subagents, plugins, per-MCP-server cost)"},
+            {"tag": "CHG", "text": "<code>/diff</code> detail view — now scrollable with arrows, <code>j</code>/<code>k</code>, <code>PgUp</code>/<code>PgDn</code>, <code>Space</code>, <code>Home</code>/<code>End</code>"},
+            {"tag": "ADD", "text": "<code>allowAllClaudeAiMcps</code> — enterprise managed setting to load claude.ai cloud MCP connectors alongside <code>managed-mcp.json</code>"}
         ]
     }
     </script>
