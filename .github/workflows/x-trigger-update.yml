@@ -1,0 +1,75 @@
+name: X-Triggered Placemat Update
+
+# Polls @ClaudeDevs on X every 15 minutes. When a post matches the relevance
+# filter (Claude Code release announcement) and we're outside the debounce
+# window, invokes the placemat update routine (see .github/routine-prompt.md).
+#
+# Required repo secrets:
+#   X_API_TOKEN         X API v2 bearer token with read access
+#   ANTHROPIC_API_KEY   for the Claude Code invocation
+#
+# This trigger is ADDITIVE: it runs alongside the existing desktop routine.
+# Both invocations share the same routine prompt, which is idempotent — if
+# the placemat is already current, the routine no-ops at STEP 3.
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: "Detect only — do not invoke the routine"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: x-trigger
+  cancel-in-progress: false
+
+jobs:
+  check-and-trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Detect relevant X post
+        id: detect
+        env:
+          X_API_TOKEN: ${{ secrets.X_API_TOKEN }}
+          X_WATCH_HANDLE: ClaudeDevs
+          STATE_FILE: .github/x-trigger-state.json
+          DEBOUNCE_SECONDS: "1800"
+          DRY_RUN: ${{ inputs.dry-run || 'false' }}
+        run: python3 .github/scripts/check_x_trigger.py
+
+      - name: Invoke placemat update routine
+        if: steps.detect.outputs.should_fire == 'true'
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt_file: .github/routine-prompt.md
+          context: |
+            Triggered by @ClaudeDevs post (ID ${{ steps.detect.outputs.matched_post_id }}):
+            ${{ steps.detect.outputs.matched_post_text }}
+
+      - name: Commit updated trigger state
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet .github/x-trigger-state.json; then
+            git add .github/x-trigger-state.json
+            git commit -m "chore: update x-trigger state"
+            git push
+          fi
