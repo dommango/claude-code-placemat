@@ -19,7 +19,7 @@ versions/           — Archived snapshots (read-only, never edit)
 
 ## Style Guide
 
-- Dark-first design using Anthropic brand colors (`--anthropic-coral: #d97757`, `--anthropic-teal: #879d86`)
+- OS-preference theme detection with localStorage persistence; Anthropic brand colors (`--coral: #d97757`, `--teal: #879d86`)
 - All content is searchable via the global search (Ctrl+K)
 - Tables use `0.8rem` font, `4px 6px` cell padding, fixed first-column width at 42%
 - Every `<code>` element is click-to-copy

@@ -5,8 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Claude Code Placemat</title>
     <link rel="stylesheet" href="placemat.css">
+    <script>
+        (function() {
+            var stored = localStorage.getItem('placemat-theme');
+            var theme = (stored === 'light' || stored === 'dark')
+                ? stored
+                : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.dataset.theme = theme;
+        })();
+    </script>
 </head>
-<body data-theme="dark">
+<body>
 
     <header class="global-header">
         <div class="header-title">
@@ -475,14 +484,15 @@
         function toggleTheme() {
             const root = document.documentElement;
             const btn = document.getElementById('themeBtn');
-            if (root.dataset.theme === 'dark') {
-                root.dataset.theme = 'light';
-                btn.innerHTML = '&#127769;';
-            } else {
-                root.dataset.theme = 'dark';
-                btn.innerHTML = '&#9728;&#65039;';
-            }
+            const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+            root.dataset.theme = next;
+            localStorage.setItem('placemat-theme', next);
+            btn.innerHTML = next === 'dark' ? '&#9728;&#65039;' : '&#127769;';
         }
+        (function() {
+            const btn = document.getElementById('themeBtn');
+            if (btn) btn.innerHTML = document.documentElement.dataset.theme === 'dark' ? '&#9728;&#65039;' : '&#127769;';
+        })();
 
         // --- CLICK TO COPY LOGIC ---
         document.querySelectorAll('code').forEach(el => {
