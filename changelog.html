@@ -198,8 +198,25 @@
 
             <!-- May 2026 -->
             <details class="month-group" open>
-                <summary>May 2026 <span class="version-date">v2.1.126 – v2.1.149</span> <span class="month-count">15 releases</span></summary>
+                <summary>May 2026 <span class="version-date">v2.1.126 – v2.1.152</span> <span class="month-count">17 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.152 <span class="version-date">2026-05-27</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>/reload-skills</code> slash command — re-scan skill directories without restarting the session</li>
+                            <li><span class="tag tag-add">ADD</span><code>/simplify</code> built-in skill — back as alias for <code>/code-review --fix</code>; applies review findings to working tree</li>
+                            <li><span class="tag tag-change">CHG</span><code>/code-review</code> — new <code>--fix</code> flag applies findings to working tree (surfacing reuse/simplification/efficiency suggestions)</li>
+                            <li><span class="tag tag-add">ADD</span><code>disallowed-tools</code> frontmatter field — remove tools from the model while a skill or slash command is active</li>
+                            <li><span class="tag tag-add">ADD</span><code>SessionStart</code> hook — return <code>reloadSkills: true</code> to re-scan skills; set <code>hookSpecificOutput.sessionTitle</code> to name the session on startup/resume</li>
+                            <li><span class="tag tag-add">ADD</span><code>MessageDisplay</code> hook event — transform or hide assistant message text as it is displayed</li>
+                            <li><span class="tag tag-add">ADD</span><code>pluginSuggestionMarketplaces</code> managed setting — allowlist org marketplaces whose plugins may be suggested via context-aware tips</li>
+                            <li><span class="tag tag-change">CHG</span><code>--fallback-model</code> — now activates for the rest of the session when the primary model is not found, not just overloaded</li>
+                            <li><span class="tag tag-change">CHG</span><code>Ctrl+O</code> — in a collapsed thinking group, shows the full thinking</li>
+                            <li><span class="tag tag-add">ADD</span>Vim NORMAL mode <code>/</code> key — opens reverse history search (like Ctrl+R), matching bash/zsh vi-mode</li>
+                            <li><span class="tag tag-add">ADD</span><code>OTEL_METRICS_INCLUDE_ENTRYPOINT=true</code> env var — opt in to <code>app.entrypoint</code> as an OpenTelemetry metric attribute</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.149 <span class="version-date">2026-05-22</span></h3>
