@@ -36,6 +36,7 @@ versions/           — Archived snapshots (read-only, never edit)
 
 - Only include features that are verified against official docs or the changelog
 - Mark unverified items with the `unverified` class on the `<code>` element
+- Promote unverified items by removing the `unverified` class once they appear in the official CC changelog. The routine must check current `class="unverified"` items against the latest fetched changelog on every run and strip the class from any item that now has changelog confirmation.
 - Mark new items (recent release) with the `new` class — remove after 3+ versions
 - Never truncate code text with `...` — always show the full command/flag/path
 - Changelog entries use tags: `ADD`, `CHG`, `FIX`, `DEL` with corresponding CSS classes
@@ -46,6 +47,7 @@ versions/           — Archived snapshots (read-only, never edit)
 A cloud-scheduled task (`RemoteTrigger`) runs daily at 9:00 AM UTC to check for new CC releases.
 
 **Flow:**
+
 1. Scheduled agent reads current CC version from `index.html` header
 2. Fetches official changelog, filters entries newer than current version
 3. If no updates → exits silently
@@ -67,6 +69,7 @@ A cloud-scheduled task (`RemoteTrigger`) runs daily at 9:00 AM UTC to check for 
 ## Manual Validation Workflow
 
 When updating manually for a new Claude Code version:
+
 1. Fetch the changelog: `https://code.claude.com/docs/en/changelog`
 2. Check cursor date in `~/.claude/changelog_cursor.txt`
 3. Cross-reference new features against existing placemat content
