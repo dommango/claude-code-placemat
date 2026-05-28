@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.152</span>
+            <span class="release-tag">As of release: v2.1.153</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -169,7 +169,7 @@
                 <h3>Configuration</h3>
                 <table>
                     <tr class="search-item"><td><code>/config</code></td><td class="desc">Open settings interface; search matches option values</td></tr>
-                    <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model for current session; press <code>d</code> in the picker to set a default for new sessions; warns before switching mid-conversation; startup header shows model pin source; lists models from gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway</td></tr>
+                    <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model; selection saved as default for new sessions; press <code class="new">s</code> <!-- added:v2.1.153 --> in picker to switch for current session only; warns before switching mid-conversation; startup header shows model pin source; lists models from gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway</td></tr>
                     <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/xhigh/auto); no args opens interactive slider; xhigh is Opus 4.7 only</td></tr>
                     <tr class="search-item"><td><code>/fast [on/off]</code></td><td class="desc">Toggle Fast mode</td></tr>
                     <tr class="search-item"><td><code>/permissions</code></td><td class="desc">View/update tool permissions</td></tr>
@@ -213,7 +213,7 @@
                     <tr class="search-item"><td><code>/proactive</code></td><td class="desc">Alias for /loop — schedule recurring background task</td></tr>
                     <tr class="search-item"><td><code>/schedule</code></td><td class="desc">Cloud scheduled tasks</td></tr>
                     <tr class="search-item"><td><code>/voice</code></td><td class="desc">Push-to-talk voice prompting</td></tr>
-                    <tr class="search-item"><td><code>/doctor</code></td><td class="desc">Diagnose installation/env issues; press f to auto-fix; openable while Claude is responding</td></tr>
+                    <tr class="search-item"><td><code>/doctor</code></td><td class="desc">Diagnose installation/env issues; press f to auto-fix; openable while Claude is responding; shows result of last update attempt; lists npm auto-update fix hints</td></tr>
                     <tr class="search-item"><td><code>/pr-comments [PR]</code></td><td class="desc">Fetch GitHub PR comments</td></tr>
                     <tr class="search-item"><td><code>/security-review</code></td><td class="desc">Security analysis of uncommitted code</td></tr>
                     <tr class="search-item"><td><code>/powerup</code></td><td class="desc">Interactive lessons teaching CC features with animated demos</td></tr>
@@ -312,7 +312,7 @@
                     <tr class="search-item"><td><code>autoMode.hard_deny</code></td><td class="desc">Auto mode classifier rules that block unconditionally regardless of user intent — unlike <code>autoMode.soft_deny</code>, cannot be overridden by allow exceptions</td></tr>
                     <tr class="search-item"><td><code>prUrlTemplate</code></td><td class="desc">Point footer PR badge at a custom code-review URL instead of github.com</td></tr>
                     <tr class="search-item"><td><code>channelsEnabled</code></td><td class="desc">Set to <code>true</code> in managed settings to allow <code>--channels</code> with console (API key) auth</td></tr>
-                    <tr class="search-item"><td><code class="new">allowAllClaudeAiMcps</code> <!-- added:v2.1.149 --></td><td class="desc">Enterprise managed setting — load claude.ai cloud MCP connectors alongside <code>managed-mcp.json</code></td></tr>
+                    <tr class="search-item"><td><code>allowAllClaudeAiMcps</code></td><td class="desc">Enterprise managed setting — load claude.ai cloud MCP connectors alongside <code>managed-mcp.json</code></td></tr>
                     <tr class="search-item"><td><code class="new">pluginSuggestionMarketplaces</code> <!-- added:v2.1.152 --></td><td class="desc">Managed setting — allowlist org marketplaces whose plugins may be suggested via context-aware tips</td></tr>
                 </table>
             </div>
@@ -358,6 +358,7 @@
                     <tr class="search-item"><td><code>ANTHROPIC_WORKSPACE_ID</code></td><td class="desc">Workload identity federation — scopes the minted token to a specific workspace when the federation rule covers more than one</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE=1</code></td><td class="desc">Pin Fast mode to Opus 4.6; fast mode now uses Opus 4.7 by default</td></tr>
                     <tr class="search-item"><td><code class="new">OTEL_METRICS_INCLUDE_ENTRYPOINT=true</code> <!-- added:v2.1.152 --></td><td class="desc">Opt in to including session entrypoint as an OpenTelemetry metric attribute (<code>app.entrypoint</code>)</td></tr>
+                    <tr class="search-item"><td><code class="new">COLUMNS</code> / <code class="new">LINES</code> <!-- added:v2.1.153 --></td><td class="desc">Injected into status line command subprocesses so scripts can size output to the terminal width</td></tr>
                 </table>
             </div>
         </div>
@@ -645,20 +646,12 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.152",
-        "date": "2026-05-27",
+        "version": "v2.1.153",
+        "date": "2026-05-28",
         "changes": [
-            {"tag": "ADD", "text": "<code>/reload-skills</code> — re-scan skill directories without restarting the session"},
-            {"tag": "ADD", "text": "<code>/simplify</code> — back as a built-in skill; invokes <code>/code-review --fix</code>"},
-            {"tag": "CHG", "text": "<code>/code-review --fix</code> — applies review findings to working tree; surfacing reuse/simplification/efficiency suggestions"},
-            {"tag": "ADD", "text": "<code>disallowed-tools</code> frontmatter — remove tools from the model while a skill or slash command is active"},
-            {"tag": "ADD", "text": "<code>SessionStart</code> hook — return <code>reloadSkills: true</code> to re-scan skills; set <code>hookSpecificOutput.sessionTitle</code> to name the session"},
-            {"tag": "ADD", "text": "<code>MessageDisplay</code> hook — transform or hide assistant message text as it is displayed"},
-            {"tag": "ADD", "text": "<code>pluginSuggestionMarketplaces</code> — managed setting to allowlist org marketplaces for context-aware plugin suggestions"},
-            {"tag": "CHG", "text": "<code>--fallback-model</code> — now used for the rest of the session when the primary model is not found, not just when overloaded"},
-            {"tag": "CHG", "text": "<code>Ctrl+O</code> — in a collapsed thinking group, now shows the full thinking"},
-            {"tag": "ADD", "text": "Vim NORMAL mode <code>/</code> — opens reverse history search (like Ctrl+R)"},
-            {"tag": "ADD", "text": "<code>OTEL_METRICS_INCLUDE_ENTRYPOINT=true</code> — opt in to <code>app.entrypoint</code> as an OpenTelemetry metric attribute"}
+            {"tag": "CHG", "text": "<code>/model</code> — selection now saved as default for new sessions; press <code>s</code> in picker to switch for current session only"},
+            {"tag": "CHG", "text": "<code>/doctor</code> — shows result of last update attempt; lists npm auto-update fix hints"},
+            {"tag": "ADD", "text": "<code>COLUMNS</code> / <code>LINES</code> — injected into status line command subprocesses for terminal-width sizing"}
         ]
     }
     </script>
