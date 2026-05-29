@@ -198,8 +198,23 @@
 
             <!-- May 2026 -->
             <details class="month-group" open>
-                <summary>May 2026 <span class="version-date">v2.1.126 – v2.1.153</span> <span class="month-count">18 releases</span></summary>
+                <summary>May 2026 <span class="version-date">v2.1.126 – v2.1.156</span> <span class="month-count">20 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.154 <span class="version-date">2026-05-28</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>/workflows</code> slash command — view and manage dynamic workflow runs; orchestrates work across tens to hundreds of background agents for large, complex tasks</li>
+                            <li><span class="tag tag-add">ADD</span><code>claude --bg --exec '&lt;cmd&gt;'</code> CLI flag — run a shell command as a background session you can attach to and detach from; also available as <code>! &lt;cmd&gt;</code> in the <code>claude agents</code> TUI</li>
+                            <li><span class="tag tag-change">CHG</span><code>/simplify</code> — now runs cleanup-only review (reuse, simplification, efficiency, altitude) and applies fixes; no longer invokes the full <code>/code-review --fix</code> bug hunt</li>
+                            <li><span class="tag tag-change">CHG</span><code>/effort</code> / <code>--effort</code> — interactive slider labels renamed from Speed/Intelligence to Faster/Smarter; xhigh now Opus 4.8 only (was 4.7)</li>
+                            <li><span class="tag tag-change">CHG</span><code>CLAUDE_CODE_SESSION_ID</code> / <code>CLAUDECODE</code> — now also injected into stdio MCP server subprocess environments</li>
+                            <li><span class="tag tag-change">CHG</span><code>claude mcp list</code>/<code>get</code> — unapproved <code>.mcp.json</code> servers now shown as <code>⏸ Pending approval</code> instead of auto-connecting</li>
+                            <li><span class="tag tag-remove">DEL</span><code>CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE</code> — deprecated; use <code>/model claude-opus-4-6[1m]</code> then <code>/fast on</code> for Opus 4.6 fast mode</li>
+                            <li><span class="tag tag-add">ADD</span><code>defaultEnabled: false</code> plugin manifest field (<code>plugin.json</code>) — plugin starts disabled; enable with <code>/plugin</code> or <code>claude plugin enable</code></li>
+                            <li><span class="tag tag-change">CHG</span><code>/chrome</code> — now shows browser selector to pick which connected browser to use when multiple are connected</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.153 <span class="version-date">2026-05-28</span></h3>
