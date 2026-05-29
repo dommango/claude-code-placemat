@@ -1,13 +1,24 @@
-# Claude Code Placemat
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 Single-page HTML reference for Claude Code commands, shortcuts, flags, config, and extensibility.
+
+**Live site:** https://dommango.github.io/claude-code-placemat/ — GitHub Pages auto-deploys from `main`.
 
 ## Structure
 
 ```
 index.html          — Current placemat (edit this)
+placemat.css        — Shared styles for index + versioned snapshots
 changelog.html      — Detailed changelog across versions
 versions/           — Archived snapshots (read-only, never edit)
+```
+
+## Local Preview
+
+```bash
+python3 -m http.server 8000   # then open http://localhost:8000
 ```
 
 ## Versioning
@@ -30,7 +41,7 @@ versions/           — Archived snapshots (read-only, never edit)
 - A legend at the top of the placemat explains the shading
 - Card headings are uppercase with letter-spacing
 - Code elements use `word-break: break-word` — never truncate with `...`
-- No external dependencies — everything is self-contained in a single HTML file
+- No external dependencies — only `index.html`, `placemat.css`, and `changelog.html`, all self-hosted
 
 ## Content Rules
 
