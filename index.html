@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.153</span>
+            <span class="release-tag">As of release: v2.1.156</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -137,7 +137,7 @@
                 <h3>Vim Mode</h3>
                 <table>
                     <tr class="search-item"><td><code>v</code> / <code>V</code></td><td class="desc">Visual / visual-line selection mode (NORMAL mode)</td></tr>
-                    <tr class="search-item"><td><code class="new">/ (NORMAL mode)</code> <!-- added:v2.1.152 --></td><td class="desc">Open reverse history search (like Ctrl+R), matching bash/zsh vi-mode</td></tr>
+                    <tr class="search-item"><td><code>/ (NORMAL mode)</code></td><td class="desc">Open reverse history search (like Ctrl+R), matching bash/zsh vi-mode</td></tr>
                 </table>
             </div>
         </div>
@@ -170,7 +170,7 @@
                 <table>
                     <tr class="search-item"><td><code>/config</code></td><td class="desc">Open settings interface; search matches option values</td></tr>
                     <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model; selection saved as default for new sessions; press <code class="new">s</code> <!-- added:v2.1.153 --> in picker to switch for current session only; warns before switching mid-conversation; startup header shows model pin source; lists models from gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway</td></tr>
-                    <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/xhigh/auto); no args opens interactive slider; xhigh is Opus 4.7 only</td></tr>
+                    <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/xhigh/auto); no args opens interactive slider (Faster/Smarter labels); xhigh is Opus 4.8 only</td></tr>
                     <tr class="search-item"><td><code>/fast [on/off]</code></td><td class="desc">Toggle Fast mode</td></tr>
                     <tr class="search-item"><td><code>/permissions</code></td><td class="desc">View/update tool permissions</td></tr>
                     <tr class="search-item"><td><code>/color [color]</code></td><td class="desc">Set prompt-bar color; bare <code>/color</code> with no args picks a random session color</td></tr>
@@ -197,10 +197,10 @@
                     <tr class="search-item"><td><code>/hooks</code></td><td class="desc">Manage event lifecycle hooks</td></tr>
                     <tr class="search-item"><td><code>/skills</code></td><td class="desc">List available active skills; includes type-to-filter search box for long lists</td></tr>
                     <tr class="search-item"><td><code>/agents</code></td><td class="desc">Manage sub-agents</td></tr>
-                    <tr class="search-item"><td><code>/chrome</code></td><td class="desc">Chrome browser integration</td></tr>
+                    <tr class="search-item"><td><code>/chrome</code></td><td class="desc">Chrome browser integration; pick which connected browser to use via <code>/chrome</code> → "Select browser…", or in-chat when a browser action runs with multiple connected</td></tr>
                     <tr class="search-item"><td><code>/add-dir &lt;path&gt;</code></td><td class="desc">Add working directory to context</td></tr>
                     <tr class="search-item"><td><code>/reload-plugins</code></td><td class="desc">Hot-reload local plugins; auto-installs missing dependencies from added marketplaces</td></tr>
-                    <tr class="search-item"><td><code class="new">/reload-skills</code> <!-- added:v2.1.152 --></td><td class="desc">Re-scan skill directories without restarting the session</td></tr>
+                    <tr class="search-item"><td><code>/reload-skills</code></td><td class="desc">Re-scan skill directories without restarting the session</td></tr>
                 </table>
             </div>
 
@@ -212,6 +212,7 @@
                     <tr class="search-item"><td><code>/loop [interval]</code></td><td class="desc">Schedule recurring background task</td></tr>
                     <tr class="search-item"><td><code>/proactive</code></td><td class="desc">Alias for /loop — schedule recurring background task</td></tr>
                     <tr class="search-item"><td><code>/schedule</code></td><td class="desc">Cloud scheduled tasks</td></tr>
+                    <tr class="search-item"><td><code class="new">/workflows</code> <!-- added:v2.1.154 --></td><td class="desc">View and manage dynamic workflow runs; workflows orchestrate work across tens to hundreds of background agents for large, complex tasks</td></tr>
                     <tr class="search-item"><td><code>/voice</code></td><td class="desc">Push-to-talk voice prompting</td></tr>
                     <tr class="search-item"><td><code>/doctor</code></td><td class="desc">Diagnose installation/env issues; press f to auto-fix; openable while Claude is responding; shows result of last update attempt; lists npm auto-update fix hints</td></tr>
                     <tr class="search-item"><td><code>/pr-comments [PR]</code></td><td class="desc">Fetch GitHub PR comments</td></tr>
@@ -238,7 +239,8 @@
                     <tr class="search-item"><td><code>claude --fork-session</code></td><td class="desc">Fork existing session on resume</td></tr>
                     <tr class="search-item"><td><code>claude ultrareview [target]</code></td><td class="desc">Run <code>/ultrareview</code> non-interactively from CI or scripts; prints findings to stdout; use <code>--json</code> for raw output</td></tr>
                     <tr class="search-item"><td><code>claude project purge [path]</code></td><td class="desc">Delete all Claude Code state for a project (transcripts, tasks, file history, config entry); supports <code>--dry-run</code>, <code>-y/--yes</code>, <code>-i/--interactive</code>, and <code>--all</code></td></tr>
-                    <tr class="search-item"><td><code>claude agents</code></td><td class="desc">Agent view (Research Preview) — single list of every CC session; running, blocked on you, or done; <code>--cwd &lt;path&gt;</code> scopes list to a directory; <code>--json</code> lists live sessions as JSON for scripting; dispatch flags for background sessions: <code>--add-dir</code>, <code>--settings</code>, <code>--mcp-config</code>, <code>--plugin-dir</code>, <code>--permission-mode</code>, <code>--model</code>, <code>--effort</code>, <code>--dangerously-skip-permissions</code></td></tr>
+                    <tr class="search-item"><td><code>claude agents</code></td><td class="desc">Agent view (Research Preview) — single list of every CC session; running, blocked on you, or done; type <code>! &lt;cmd&gt;</code> to launch a shell command as a background session you can attach/detach; <code>--cwd &lt;path&gt;</code> scopes list to a directory; <code>--json</code> lists live sessions as JSON for scripting; dispatch flags for background sessions: <code>--add-dir</code>, <code>--settings</code>, <code>--mcp-config</code>, <code>--plugin-dir</code>, <code>--permission-mode</code>, <code>--model</code>, <code>--effort</code>, <code>--dangerously-skip-permissions</code></td></tr>
+                    <tr class="search-item"><td><code class="new">claude --bg --exec '&lt;cmd&gt;'</code> <!-- added:v2.1.154 --></td><td class="desc">Run a shell command as a background session you can attach to and detach from; equivalent to typing <code>! &lt;cmd&gt;</code> inside <code>claude agents</code></td></tr>
                 </table>
             </div>
 
@@ -258,7 +260,7 @@
                 <h3>State & Behavior</h3>
                 <table>
                     <tr class="search-item"><td><code>-w</code> / <code>--worktree</code></td><td class="desc">Start in isolated git worktree</td></tr>
-                    <tr class="search-item"><td><code>--effort</code></td><td class="desc">Set effort level (low/med/high/xhigh); xhigh is Opus 4.7 only</td></tr>
+                    <tr class="search-item"><td><code>--effort</code></td><td class="desc">Set effort level (low/med/high/xhigh); xhigh is Opus 4.8 only</td></tr>
                     <tr class="search-item"><td><code>--model</code></td><td class="desc">Override specific model at launch</td></tr>
                     <tr class="search-item"><td><code>--fallback-model</code></td><td class="desc">Fallback model used for the rest of the session when the primary model is not found or overloaded</td></tr>
                     <tr class="search-item"><td><code>--permission-mode plan</code></td><td class="desc">Start in read-only plan mode</td></tr>
@@ -313,7 +315,7 @@
                     <tr class="search-item"><td><code>prUrlTemplate</code></td><td class="desc">Point footer PR badge at a custom code-review URL instead of github.com</td></tr>
                     <tr class="search-item"><td><code>channelsEnabled</code></td><td class="desc">Set to <code>true</code> in managed settings to allow <code>--channels</code> with console (API key) auth</td></tr>
                     <tr class="search-item"><td><code>allowAllClaudeAiMcps</code></td><td class="desc">Enterprise managed setting — load claude.ai cloud MCP connectors alongside <code>managed-mcp.json</code></td></tr>
-                    <tr class="search-item"><td><code class="new">pluginSuggestionMarketplaces</code> <!-- added:v2.1.152 --></td><td class="desc">Managed setting — allowlist org marketplaces whose plugins may be suggested via context-aware tips</td></tr>
+                    <tr class="search-item"><td><code>pluginSuggestionMarketplaces</code></td><td class="desc">Managed setting — allowlist org marketplaces whose plugins may be suggested via context-aware tips</td></tr>
                 </table>
             </div>
 
@@ -326,7 +328,7 @@
                     <tr class="search-item"><td><code>MAX_THINKING_TOKENS</code></td><td class="desc">Cap extended thinking limits</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_PLUGIN_SEED_DIR</code></td><td class="desc">Multiple plugin seed directories</td></tr>
                     <tr class="search-item"><td><code>IS_DEMO</code></td><td class="desc">Demo mode (hides email/org)</td></tr>
-                    <tr class="search-item"><td><code>CLAUDECODE</code></td><td class="desc">Detects if running inside CC shell</td></tr>
+                    <tr class="search-item"><td><code>CLAUDECODE</code></td><td class="desc">Detects if running inside CC shell; also injected into stdio MCP server subprocess environments</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_SUBPROCESS_ENV_SCRUB</code></td><td class="desc">Strip credentials from subprocesses; enables PID namespace isolation on Linux (sandboxing)</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MCP_SERVER_NAME</code> / <code>CLAUDE_CODE_MCP_SERVER_URL</code></td><td class="desc">Inject server identity into MCP headerHelper scripts</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_NO_FLICKER=1</code></td><td class="desc">Opt into flicker-free alt-screen rendering with virtualized scrollback</td></tr>
@@ -350,14 +352,13 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_FORCE_SYNC_OUTPUT=1</code></td><td class="desc">Force-enable synchronized output on terminals that auto-detection misses (e.g. Emacs <code>eat</code>)</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE</code></td><td class="desc">On Homebrew or WinGet installs, runs the upgrade command in the background and prompts to restart when set</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1</code></td><td class="desc">Opt in to listing gateway <code>/v1/models</code> in the <code>/model</code> picker when using a custom <code>ANTHROPIC_BASE_URL</code> gateway (was automatic in v2.1.126–v2.1.128)</td></tr>
-                    <tr class="search-item"><td><code>CLAUDE_CODE_SESSION_ID</code></td><td class="desc">Session ID injected into Bash tool subprocess environment, matching the <code>session_id</code> passed to hooks</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_SESSION_ID</code></td><td class="desc">Session ID injected into Bash tool subprocess environment and stdio MCP server subprocess environments, matching the <code>session_id</code> passed to hooks</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1</code></td><td class="desc">Opt out of the fullscreen alternate-screen renderer; keeps conversation in the terminal's native scrollback</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL</code></td><td class="desc">Re-enable the session quality survey for enterprises capturing responses through OpenTelemetry</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_PROJECT_DIR</code></td><td class="desc">Injected into MCP stdio server environments; referenceable as <code>${CLAUDE_PROJECT_DIR}</code> in plugin configs</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_PLUGIN_PREFER_HTTPS</code></td><td class="desc">Clone GitHub plugin sources over HTTPS instead of SSH; for environments without a GitHub SSH key</td></tr>
                     <tr class="search-item"><td><code>ANTHROPIC_WORKSPACE_ID</code></td><td class="desc">Workload identity federation — scopes the minted token to a specific workspace when the federation rule covers more than one</td></tr>
-                    <tr class="search-item"><td><code>CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE=1</code></td><td class="desc">Pin Fast mode to Opus 4.6; fast mode now uses Opus 4.7 by default</td></tr>
-                    <tr class="search-item"><td><code class="new">OTEL_METRICS_INCLUDE_ENTRYPOINT=true</code> <!-- added:v2.1.152 --></td><td class="desc">Opt in to including session entrypoint as an OpenTelemetry metric attribute (<code>app.entrypoint</code>)</td></tr>
+                    <tr class="search-item"><td><code>OTEL_METRICS_INCLUDE_ENTRYPOINT=true</code></td><td class="desc">Opt in to including session entrypoint as an OpenTelemetry metric attribute (<code>app.entrypoint</code>)</td></tr>
                     <tr class="search-item"><td><code class="new">COLUMNS</code> / <code class="new">LINES</code> <!-- added:v2.1.153 --></td><td class="desc">Injected into status line command subprocesses so scripts can size output to the terminal width</td></tr>
                 </table>
             </div>
@@ -369,8 +370,8 @@
             <div class="search-group">
                 <h3>Built-in Skills & Locations</h3>
                 <table>
-                    <tr class="search-item"><td><code>/code-review [effort]</code></td><td class="desc">Code review; pass <code class="new">--fix</code> <!-- added:v2.1.152 --> to apply findings to working tree (surfacing reuse/simplification/efficiency suggestions); pass <code>--comment</code> to post findings as inline PR comments; optional effort level (e.g. <code>/code-review high</code>)</td></tr>
-                    <tr class="search-item"><td><code class="new">/simplify</code> <!-- added:v2.1.152 --></td><td class="desc">Apply code-review findings to working tree — invokes <code>/code-review --fix</code></td></tr>
+                    <tr class="search-item"><td><code>/code-review [effort]</code></td><td class="desc">Code review; pass <code>--fix</code> to apply findings to working tree (surfacing reuse/simplification/efficiency suggestions); pass <code>--comment</code> to post findings as inline PR comments; optional effort level (e.g. <code>/code-review high</code>)</td></tr>
+                    <tr class="search-item"><td><code>/simplify</code></td><td class="desc">Cleanup-only review (reuse, simplification, efficiency, altitude) applied to working tree; does not run the full <code>/code-review --fix</code> bug hunt</td></tr>
                     <tr class="search-item"><td><code>/batch</code></td><td class="desc">Large parallel changes (5-30 worktrees)</td></tr>
                     <tr class="search-item"><td><code>/claude-api</code></td><td class="desc">Load API + SDK reference into context</td></tr>
                     <tr class="search-item"><td><code>/less-permission-prompts</code></td><td class="desc">Scan transcripts for read-only Bash/MCP calls; propose settings.json allowlist</td></tr>
@@ -387,7 +388,7 @@
                     <tr class="search-item"><td><code>description</code></td><td class="desc">Auto-invocation trigger string</td></tr>
                     <tr class="search-item"><td><code>effort</code></td><td class="desc">Override effort level specifically for skill</td></tr>
                     <tr class="search-item"><td><code>allowed-tools</code></td><td class="desc">Skip permission prompts for skill</td></tr>
-                    <tr class="search-item"><td><code class="new">disallowed-tools</code> <!-- added:v2.1.152 --></td><td class="desc">Remove tools from the model while the skill or slash command is active</td></tr>
+                    <tr class="search-item"><td><code>disallowed-tools</code></td><td class="desc">Remove tools from the model while the skill or slash command is active</td></tr>
                     <tr class="search-item"><td><code>context: fork</code></td><td class="desc">Run skill logic in an isolated subagent</td></tr>
                     <tr class="search-item"><td><code>$ARGUMENTS</code></td><td class="desc">User input placeholder replacement</td></tr>
                     <tr class="search-item"><td><code class="unverified">$FILE_PATH</code></td><td class="desc">File path resolution (hook strings only)</td></tr>
@@ -396,6 +397,7 @@
                     <tr class="search-item"><td><code>! 'cmd'</code></td><td class="desc">Dynamic bash execution context injection</td></tr>
                     <tr class="search-item"><td><code>keep-coding-instructions</code></td><td class="desc">Control plugin output style for coding tasks</td></tr>
                     <tr class="search-item"><td><code>monitors</code> (plugin manifest)</td><td class="desc">Background monitor support for plugins; auto-arms at session start or on skill invoke</td></tr>
+                    <tr class="search-item"><td><code class="new">defaultEnabled: false</code> <!-- added:v2.1.154 --> (plugin manifest)</td><td class="desc">Plugin starts disabled by default; enable with <code>/plugin</code> or <code>claude plugin enable</code>; dependency plugins of enabled plugins are still enabled automatically</td></tr>
                 </table>
             </div>
 
@@ -442,7 +444,7 @@
                 <table>
                     <tr class="search-item"><td><code>PreToolUse</code> / <code>PostToolUse</code></td><td class="desc">Intercept before/after tool execution; <code>PostToolUse</code> hook input includes <code>duration_ms</code>; can replace tool output via <code>hookSpecificOutput.updatedToolOutput</code> for all tools</td></tr>
                     <tr class="search-item"><td><code>PostToolUseFailure</code></td><td class="desc">Fires when a tool call fails; hook input includes <code>duration_ms</code></td></tr>
-                    <tr class="search-item"><td><code class="new">SessionStart</code> <!-- added:v2.1.152 --></td><td class="desc">Fires on session start/resume; return <code>reloadSkills: true</code> to re-scan skill directories; set <code>hookSpecificOutput.sessionTitle</code> to name the session</td></tr>
+                    <tr class="search-item"><td><code>SessionStart</code></td><td class="desc">Fires on session start/resume; return <code>reloadSkills: true</code> to re-scan skill directories; set <code>hookSpecificOutput.sessionTitle</code> to name the session</td></tr>
                     <tr class="search-item"><td><code>SubagentStart</code> / <code>Stop</code> / <code>SubagentStop</code></td><td class="desc">Lifecycle triggers for agent spawning; Stop and SubagentStop hook input includes <code>background_tasks</code> and <code>session_crons</code> fields</td></tr>
                     <tr class="search-item"><td><code>SessionEnd</code></td><td class="desc">Run cleanup script when session closes</td></tr>
                     <tr class="search-item"><td><code>CwdChanged</code> / <code>FileChanged</code></td><td class="desc">React to directory or file changes</td></tr>
@@ -456,14 +458,14 @@
                     <tr class="search-item"><td><code>args: string[]</code> (hook field)</td><td class="desc">Exec form — spawns command directly without a shell; path placeholders never need quoting</td></tr>
                     <tr class="search-item"><td><code>continueOnBlock</code> (PostToolUse)</td><td class="desc">Set to <code>true</code> to feed the hook's rejection reason back to Claude and continue the turn</td></tr>
                     <tr class="search-item"><td><code>terminalSequence</code> (hook output)</td><td class="desc">Hook JSON output field — emit desktop notifications, window titles, and bells without a controlling terminal</td></tr>
-                    <tr class="search-item"><td><code class="new">MessageDisplay</code> <!-- added:v2.1.152 --></td><td class="desc">Fires as assistant message text is displayed; hooks can transform or hide the output</td></tr>
+                    <tr class="search-item"><td><code>MessageDisplay</code></td><td class="desc">Fires as assistant message text is displayed; hooks can transform or hide the output</td></tr>
                 </table>
             </div>
 
             <div class="search-group">
                 <h3>MCP Servers</h3>
                 <table>
-                    <tr class="search-item"><td><code>claude mcp list/add/remove</code></td><td class="desc">Standard MCP server management</td></tr>
+                    <tr class="search-item"><td><code>claude mcp list/add/remove</code></td><td class="desc">Standard MCP server management; <code>claude mcp list</code>/<code>get</code> show unapproved <code>.mcp.json</code> servers as <code>⏸ Pending approval</code> instead of auto-connecting</td></tr>
                     <tr class="search-item"><td><code>claude mcp serve</code></td><td class="desc">Run Claude Code as an MCP server</td></tr>
                     <tr class="search-item"><td><code>--transport http/stdio/sse</code></td><td class="desc">Protocol connection methods</td></tr>
                     <tr class="search-item"><td><code>Elicitation</code></td><td class="desc">Servers can request input mid-task</td></tr>
@@ -646,12 +648,17 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.153",
-        "date": "2026-05-28",
+        "version": "v2.1.156",
+        "date": "2026-05-29",
         "changes": [
-            {"tag": "CHG", "text": "<code>/model</code> — selection now saved as default for new sessions; press <code>s</code> in picker to switch for current session only"},
-            {"tag": "CHG", "text": "<code>/doctor</code> — shows result of last update attempt; lists npm auto-update fix hints"},
-            {"tag": "ADD", "text": "<code>COLUMNS</code> / <code>LINES</code> — injected into status line command subprocesses for terminal-width sizing"}
+            {"tag": "ADD", "text": "<code>/workflows</code> — view and manage dynamic workflow runs (orchestrates tens to hundreds of background agents)"},
+            {"tag": "ADD", "text": "<code>claude --bg --exec '&lt;cmd&gt;'</code> — run shell command as background session (also <code>! &lt;cmd&gt;</code> in agents view)"},
+            {"tag": "CHG", "text": "<code>/simplify</code> — now cleanup-only review (reuse/simplification/efficiency/altitude); no longer invokes full <code>/code-review --fix</code>"},
+            {"tag": "CHG", "text": "<code>/effort</code> / <code>--effort</code> — slider labels renamed Faster/Smarter; xhigh now requires Opus 4.8 (was 4.7)"},
+            {"tag": "CHG", "text": "<code>CLAUDE_CODE_SESSION_ID</code> / <code>CLAUDECODE</code> — now also injected into stdio MCP server subprocess environments"},
+            {"tag": "CHG", "text": "<code>claude mcp list</code>/<code>get</code> — unapproved <code>.mcp.json</code> servers shown as ⏸ Pending approval"},
+            {"tag": "DEL", "text": "<code>CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE</code> — deprecated; use <code>/model claude-opus-4-6[1m]</code> then <code>/fast on</code>"},
+            {"tag": "ADD", "text": "<code>defaultEnabled: false</code> plugin manifest field — plugin starts disabled; enable with <code>/plugin</code> or <code>claude plugin enable</code>"}
         ]
     }
     </script>
