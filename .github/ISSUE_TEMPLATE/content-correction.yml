@@ -1,0 +1,48 @@
+name: Content correction
+description: An entry on the placemat is wrong, outdated, or missing.
+title: "[content] "
+labels: ["content"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for fixes to **existing** entries or **missing** entries that should be there.
+        New features from a CC release are handled by the auto-update pipeline — but if the bot
+        missed something, file it here.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Type of correction
+      options:
+        - Wrong (the entry is incorrect)
+        - Outdated (the entry used to be right, but CC changed)
+        - Missing (should exist but doesn't)
+        - Misclassified (verified vs unverified vs new)
+    validations:
+      required: true
+  - type: input
+    id: section
+    attributes:
+      label: Section
+      description: Which card / table on the placemat? (e.g. "Slash commands", "Hooks", "MCP")
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current entry
+      description: Paste the current content (or "missing" if it doesn't exist yet).
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed correction
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: Link to the official changelog entry, docs page, or PR that confirms this.
+      placeholder: "https://code.claude.com/docs/en/changelog#vX.Y.Z"
+    validations:
+      required: true
