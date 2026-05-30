@@ -198,8 +198,27 @@
 
             <!-- May 2026 -->
             <details class="month-group" open>
-                <summary>May 2026 <span class="version-date">v2.1.126 – v2.1.156</span> <span class="month-count">20 releases</span></summary>
+                <summary>May 2026 <span class="version-date">v2.1.126 – v2.1.158</span> <span class="month-count">22 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.158 <span class="version-date">2026-05-30</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_ENABLE_AUTO_MODE=1</code> env var — opt in to Auto mode on Bedrock, Vertex, and Foundry for Opus 4.7 and Opus 4.8</li>
+                        </ul>
+                    </div>
+
+                    <div class="change-section">
+                        <h3>CC v2.1.157 <span class="version-date">2026-05-29</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>claude plugin init &lt;name&gt;</code> CLI command — scaffold a new plugin in <code>.claude/skills</code></li>
+                            <li><span class="tag tag-add">ADD</span><code>agent</code> JSON setting — default agent name honored for dispatched sessions in <code>claude agents</code>; override per-session with <code>--agent &lt;name&gt;</code></li>
+                            <li><span class="tag tag-add">ADD</span><code>EnterWorktree</code> hook event — fires on worktree entry; can now switch between Claude-managed worktrees mid-session</li>
+                            <li><span class="tag tag-change">CHG</span><code>claude agents</code> — dispatch flags now include <code>--agent &lt;name&gt;</code></li>
+                            <li><span class="tag tag-change">CHG</span><code>.claude/skills/&lt;name&gt;/</code> — plugins in <code>.claude/skills</code> directories now auto-loaded, no marketplace required</li>
+                            <li><span class="tag tag-change">CHG</span><code>/terminal-setup</code> — now also disables GPU acceleration in VS Code, Cursor, and Windsurf to prevent garbled-text rendering</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.154 <span class="version-date">2026-05-28</span></h3>
