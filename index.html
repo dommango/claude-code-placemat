@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.159</span>
+            <span class="release-tag">As of release: v2.1.160</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -213,6 +213,7 @@
                     <tr class="search-item"><td><code>/proactive</code></td><td class="desc">Alias for /loop — schedule recurring background task</td></tr>
                     <tr class="search-item"><td><code>/schedule</code></td><td class="desc">Cloud scheduled tasks</td></tr>
                     <tr class="search-item"><td><code>/workflows</code></td><td class="desc">View and manage dynamic workflow runs; workflows orchestrate work across tens to hundreds of background agents for large, complex tasks</td></tr>
+                    <tr class="search-item"><td><code class="new">ultracode</code> <!-- added:v2.1.160 --></td><td class="desc">Prompt trigger keyword — type in the prompt to start a dynamic workflow; highlighted in violet in the prompt input</td></tr>
                     <tr class="search-item"><td><code>/voice</code></td><td class="desc">Push-to-talk voice prompting</td></tr>
                     <tr class="search-item"><td><code>/doctor</code></td><td class="desc">Diagnose installation/env issues; press f to auto-fix; openable while Claude is responding; shows result of last update attempt; lists npm auto-update fix hints</td></tr>
                     <tr class="search-item"><td><code>/pr-comments [PR]</code></td><td class="desc">Fetch GitHub PR comments</td></tr>
@@ -297,7 +298,7 @@
                     <tr class="search-item"><td><code>worktree.sparsePaths</code></td><td class="desc">Sparse checkout dirs for agents</td></tr>
                     <tr class="search-item"><td><code>worktree.baseRef</code></td><td class="desc"><code>fresh</code> (default) branches worktrees from <code>origin/&lt;default&gt;</code>; <code>head</code> branches from local <code>HEAD</code> — applies to <code>--worktree</code>, <code>EnterWorktree</code>, and agent-isolation</td></tr>
                     <tr class="search-item"><td><code>worktree.bgIsolation</code></td><td class="desc">Set to <code>"none"</code> to disable worktree isolation for background sessions</td></tr>
-                    <tr class="search-item"><td><code class="new">agent</code> <!-- added:v2.1.157 --></td><td class="desc">Default agent name for dispatched sessions in <code>claude agents</code>; override per-session with <code>--agent &lt;name&gt;</code></td></tr>
+                    <tr class="search-item"><td><code>agent</code></td><td class="desc">Default agent name for dispatched sessions in <code>claude agents</code>; override per-session with <code>--agent &lt;name&gt;</code></td></tr>
                     <tr class="search-item"><td><code>showThinkingSummaries</code></td><td class="desc">Show thinking summaries in interactive sessions (default: false)</td></tr>
                     <tr class="search-item"><td><code>disableSkillShellExecution</code></td><td class="desc">Disable inline shell execution in skills and custom slash commands</td></tr>
                     <tr class="search-item"><td><code>skillOverrides</code></td><td class="desc"><code>off</code> hides skill from model and <code>/</code>; <code>user-invocable-only</code> hides from model only; <code>name-only</code> collapses description</td></tr>
@@ -420,7 +421,7 @@
             <div class="search-group">
                 <h3>Plugin CLI Commands</h3>
                 <table>
-                    <tr class="search-item"><td><code class="new">claude plugin init &lt;name&gt;</code> <!-- added:v2.1.157 --></td><td class="desc">Scaffold a new plugin in <code>.claude/skills</code></td></tr>
+                    <tr class="search-item"><td><code>claude plugin init &lt;name&gt;</code></td><td class="desc">Scaffold a new plugin in <code>.claude/skills</code></td></tr>
                     <tr class="search-item"><td><code>claude plugin tag</code></td><td class="desc">Create release git tags for plugins with version validation</td></tr>
                     <tr class="search-item"><td><code>claude plugin prune</code></td><td class="desc">Remove orphaned auto-installed plugin dependencies; <code>plugin uninstall --prune</code> cascades</td></tr>
                     <tr class="search-item"><td><code>claude plugin details &lt;name&gt;</code></td><td class="desc">Show a plugin's component inventory and projected per-session token cost</td></tr>
@@ -462,7 +463,7 @@
                     <tr class="search-item"><td><code>continueOnBlock</code> (PostToolUse)</td><td class="desc">Set to <code>true</code> to feed the hook's rejection reason back to Claude and continue the turn</td></tr>
                     <tr class="search-item"><td><code>terminalSequence</code> (hook output)</td><td class="desc">Hook JSON output field — emit desktop notifications, window titles, and bells without a controlling terminal</td></tr>
                     <tr class="search-item"><td><code>MessageDisplay</code></td><td class="desc">Fires as assistant message text is displayed; hooks can transform or hide the output</td></tr>
-                    <tr class="search-item"><td><code class="new">EnterWorktree</code> <!-- added:v2.1.157 --></td><td class="desc">Fires when entering a worktree; can now switch between Claude-managed worktrees mid-session</td></tr>
+                    <tr class="search-item"><td><code>EnterWorktree</code></td><td class="desc">Fires when entering a worktree; can now switch between Claude-managed worktrees mid-session</td></tr>
                 </table>
             </div>
 
@@ -652,16 +653,10 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.158",
-        "date": "2026-05-30",
+        "version": "v2.1.160",
+        "date": "2026-06-02",
         "changes": [
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_ENABLE_AUTO_MODE=1</code> — opt in to Auto mode on Bedrock, Vertex, and Foundry for Opus 4.7 and Opus 4.8"},
-            {"tag": "ADD", "text": "<code>claude plugin init &lt;name&gt;</code> — scaffold a new plugin in <code>.claude/skills</code>"},
-            {"tag": "ADD", "text": "<code>agent</code> JSON setting — default agent name for dispatched sessions; override with <code>--agent &lt;name&gt;</code>"},
-            {"tag": "ADD", "text": "<code>EnterWorktree</code> hook — fires on worktree entry; can now switch between Claude-managed worktrees mid-session"},
-            {"tag": "CHG", "text": "<code>claude agents</code> — dispatch flags now include <code>--agent &lt;name&gt;</code>"},
-            {"tag": "CHG", "text": "<code>.claude/skills/</code> — plugins in <code>.claude/skills</code> directories now auto-loaded, no marketplace required"},
-            {"tag": "CHG", "text": "<code>/terminal-setup</code> — now also disables GPU acceleration in VS Code, Cursor, and Windsurf to prevent garbled-text rendering"}
+            {"tag": "ADD", "text": "<code>ultracode</code> — prompt trigger keyword for dynamic workflows; type in the prompt to start a workflow; highlighted in violet in the prompt input"}
         ]
     }
     </script>
