@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Claude Code official changelog
+    url: https://code.claude.com/docs/en/changelog
+    about: For questions about Claude Code itself, check the official changelog first.
+  - name: Security report
+    url: https://github.com/dommango/claude-code-placemat/security/advisories/new
+    about: Report a vulnerability privately via GitHub Security Advisories.

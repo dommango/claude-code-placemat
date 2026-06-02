@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code Reference Dashboard</title>
+    <style>
+        :root {
+            --bg-page: #0f172a;
+            --bg-card: #1e293b;
+            --border-color: #334155;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --code-bg: #0b1120;
+            --code-color: #7dd3fc;
+            --tip-bg: rgba(56, 189, 248, 0.1);
+            --tip-border: #0ea5e9;
+            --success-bg: #059669;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: var(--accent);
+            margin: 0 0 10px 0;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--border-color);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+            color: #f8fafc;
+            font-size: 1.25rem;
+        }
+
+        .card h3 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin: 20px 0 10px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        th {
+            text-align: left;
+            padding: 8px 12px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        td {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            background-color: var(--code-bg);
+            color: var(--code-color);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            word-break: break-word;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+            display: inline-block;
+        }
+
+        code:hover {
+            border-color: var(--accent);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        code:active {
+            transform: translateY(0);
+        }
+
+        .tip {
+            background-color: var(--tip-bg);
+            border-left: 4px solid var(--tip-border);
+            padding: 12px 16px;
+            border-radius: 0 4px 4px 0;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        .tip strong {
+            color: var(--accent);
+        }
+
+        .col-2 {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 10px;
+        }
+        .col-2:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .col-2 .label {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Claude Code Reference Dashboard</h1>
+        <p>Click any <code>command</code> or <code>shortcut</code> to copy it to your clipboard.</p>
+    </div>
+
+    <div class="dashboard-grid">
+
+        <div class="card">
+            <h2>Keyboard Shortcuts</h2>
+            
+            <h3>Essential</h3>
+            <table>
+                <tr><td style="width: 30%"><code>Enter</code></td><td>Send message / submit</td></tr>
+                <tr><td><code>Esc</code></td><td>Interrupt / stop generation</td></tr>
+                <tr><td><code>Esc Esc</code></td><td>Open rewind menu (go back in conversation or code)</td></tr>
+                <tr><td><code>Ctrl+C</code></td><td>Cancel current operation (hard stop)</td></tr>
+                <tr><td><code>Ctrl+D</code></td><td>Exit Claude Code</td></tr>
+                <tr><td><code>Shift+Tab</code></td><td>Cycle modes: Normal → Auto-Accept → Plan</td></tr>
+            </table>
+
+            <h3>Navigation</h3>
+            <table>
+                <tr><td style="width: 30%"><code>Ctrl+R</code></td><td>Search command history</td></tr>
+                <tr><td><code>Ctrl+T</code></td><td>Toggle task list</td></tr>
+                <tr><td><code>Ctrl+O</code></td><td>Toggle verbose transcript</td></tr>
+                <tr><td><code>Ctrl+G</code></td><td>Open external editor (write long prompts)</td></tr>
+                <tr><td><code>Ctrl+V</code></td><td>Paste image (screenshots, diagrams)</td></tr>
+                <tr><td><code>Ctrl+S</code></td><td>Stash current prompt (save for later)</td></tr>
+                <tr><td><code>Cmd+P</code></td><td>Open model picker (switch models quick)</td></tr>
+                <tr><td><code>Cmd+T</code></td><td>Toggle extended thinking</td></tr>
+            </table>
+
+            <h3>Editing (Bash-style)</h3>
+            <table>
+                <tr><td style="width: 30%"><code>Ctrl+A</code> / <code>Ctrl+E</code></td><td>Start / end of line</td></tr>
+                <tr><td><code>Opt+F</code> / <code>Opt+B</code></td><td>Word forward / back</td></tr>
+                <tr><td><code>Ctrl+W</code></td><td>Delete previous word</td></tr>
+                <tr><td><code>\ + Enter</code></td><td>New line (without sending)</td></tr>
+            </table>
+
+            <h3>Background Tasks</h3>
+            <table>
+                <tr><td style="width: 30%"><code>Ctrl+B</code></td><td>Send running task to background</td></tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>Slash Commands</h2>
+            
+            <h3>Session Control</h3>
+            <table>
+                <tr><td style="width: 35%"><code>/clear</code></td><td>Reset conversation history (fresh start)</td></tr>
+                <tr><td><code>/compact</code></td><td>Compress context to save tokens.</td></tr>
+                <tr><td><code>/rewind</code></td><td>Go back in conversation AND/OR code changes</td></tr>
+                <tr><td><code>/export</code></td><td>Export conversation to file or clipboard</td></tr>
+                <tr><td><code>/cost</code></td><td>Show session cost & token usage</td></tr>
+            </table>
+
+            <h3>Configuration</h3>
+            <table>
+                <tr><td style="width: 35%"><code>/config</code></td><td>Open settings panel</td></tr>
+                <tr><td><code>/model</code></td><td>Switch between Sonnet / Opus / Haiku</td></tr>
+                <tr><td><code>/terminal-setup</code></td><td>Setup Shift+Enter for multi-line input</td></tr>
+            </table>
+
+            <h3>Development</h3>
+            <table>
+                <tr><td style="width: 35%"><code>/init</code></td><td>Create CLAUDE.md for your project</td></tr>
+                <tr><td><code>/doctor</code></td><td>Environment diagnostics & health check</td></tr>
+                <tr><td><code>/mcp</code></td><td>Manage MCP servers</td></tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>CLI Launch Flags</h2>
+
+            <h3>Starting Sessions</h3>
+            <table>
+                <tr><td style="width: 40%"><code>claude</code></td><td>Start interactive session</td></tr>
+                <tr><td><code>claude -p "query"</code></td><td>Print mode — answer & exit (for scripting)</td></tr>
+                <tr><td><code>claude -c</code></td><td>Continue last conversation</td></tr>
+                <tr><td><code>claude -w name</code></td><td>Start in isolated git worktree</td></tr>
+            </table>
+
+            <h3>Model & Context</h3>
+            <table>
+                <tr><td style="width: 40%"><code>--model sonnet</code></td><td>Use Sonnet (fast, cheap)</td></tr>
+                <tr><td><code>--permission-mode plan</code></td><td>Start in plan mode</td></tr>
+                <tr><td><code>--add-dir ../path</code></td><td>Add extra directories to context</td></tr>
+            </table>
+
+            <h3>Output Formats (for -p mode)</h3>
+            <table>
+                <tr><td style="width: 40%"><code>--output-format json</code></td><td>Structured JSON</td></tr>
+            </table>
+
+            <div class="tip">
+                <strong>Tip:</strong> Pipe data in! <code>git diff | claude -p "review this"</code>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.querySelectorAll('code').forEach(el => {
+            el.title = "Click to copy";
+            el.addEventListener('click', async () => {
+                const textToCopy = el.innerText;
+                try {
+                    await navigator.clipboard.writeText(textToCopy);
+                    
+                    // Visual feedback
+                    const originalBg = el.style.backgroundColor;
+                    const originalColor = el.style.color;
+                    
+                    el.style.backgroundColor = 'var(--success-bg)';
+                    el.style.color = '#ffffff';
+                    
+                    setTimeout(() => {
+                        el.style.backgroundColor = originalBg;
+                        el.style.color = originalColor;
+                    }, 400);
+                } catch (err) {
+                    console.error('Failed to copy text: ', err);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

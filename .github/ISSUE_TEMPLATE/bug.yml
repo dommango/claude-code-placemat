@@ -1,0 +1,49 @@
+name: Bug report
+description: Something on the placemat is broken — layout, link, search, copy-to-clipboard, etc.
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. For *wrong-but-not-broken* content (an entry has a typo, a flag is wrong),
+        please use the **Content correction** template instead.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did you see, and what did you expect?
+      placeholder: "e.g. The search input doesn't focus when I press Ctrl+K on Firefox 132."
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: URL / version
+      description: Live site link, or which version under `versions/` you were viewing.
+      placeholder: "https://dommango.github.io/claude-code-placemat/"
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      options:
+        - Chrome / Edge / Brave
+        - Firefox
+        - Safari
+        - Mobile Safari
+        - Mobile Chrome
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Go to ...
+        2. Click ...
+        3. ...
+  - type: textarea
+    id: extras
+    attributes:
+      label: Console errors / screenshots

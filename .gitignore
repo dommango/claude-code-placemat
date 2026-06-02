@@ -1,1 +1,18 @@
 draft.html
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS junk
+.DS_Store
+Thumbs.db
+*:Zone.Identifier
+
+# Logs / scratch
+*.log
+.cache/
+.tmp/
