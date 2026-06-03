@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.160</span>
+            <span class="release-tag">As of release: v2.1.161</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -362,7 +362,8 @@
                     <tr class="search-item"><td><code>ANTHROPIC_WORKSPACE_ID</code></td><td class="desc">Workload identity federation — scopes the minted token to a specific workspace when the federation rule covers more than one</td></tr>
                     <tr class="search-item"><td><code>OTEL_METRICS_INCLUDE_ENTRYPOINT=true</code></td><td class="desc">Opt in to including session entrypoint as an OpenTelemetry metric attribute (<code>app.entrypoint</code>)</td></tr>
                     <tr class="search-item"><td><code>COLUMNS</code> / <code>LINES</code></td><td class="desc">Injected into status line command subprocesses so scripts can size output to the terminal width</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_ENABLE_AUTO_MODE=1</code> <!-- added:v2.1.158 --></td><td class="desc">Opt in to Auto mode on Bedrock, Vertex, and Foundry for Opus 4.7 and Opus 4.8</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_AUTO_MODE=1</code></td><td class="desc">Opt in to Auto mode on Bedrock, Vertex, and Foundry for Opus 4.7 and Opus 4.8</td></tr>
+                    <tr class="search-item"><td><code class="new">OTEL_RESOURCE_ATTRIBUTES</code> <!-- added:v2.1.161 --></td><td class="desc">Standard OTEL env var — values are now used as labels on metric datapoints, so you can slice usage metrics by custom dimensions (e.g. team, repo)</td></tr>
                 </table>
             </div>
         </div>
@@ -653,10 +654,10 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.160",
+        "version": "v2.1.161",
         "date": "2026-06-02",
         "changes": [
-            {"tag": "ADD", "text": "<code>ultracode</code> — prompt trigger keyword for dynamic workflows; type in the prompt to start a workflow; highlighted in violet in the prompt input"}
+            {"tag": "ADD", "text": "<code>OTEL_RESOURCE_ATTRIBUTES</code> — values now used as labels on metric datapoints; slice usage metrics by custom dimensions (e.g. team, repo)"}
         ]
     }
     </script>
