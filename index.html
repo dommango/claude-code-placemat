@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.162</span>
+            <span class="release-tag">As of release: v2.1.165</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -201,19 +201,20 @@
                     <tr class="search-item"><td><code>/add-dir &lt;path&gt;</code></td><td class="desc">Add working directory to context</td></tr>
                     <tr class="search-item"><td><code>/reload-plugins</code></td><td class="desc">Hot-reload local plugins; auto-installs missing dependencies from added marketplaces</td></tr>
                     <tr class="search-item"><td><code>/reload-skills</code></td><td class="desc">Re-scan skill directories without restarting the session</td></tr>
+                    <tr class="search-item"><td><code class="new">/plugin list</code> <!-- added:v2.1.163 --></td><td class="desc">List installed plugins; <code>--enabled</code>/<code>--disabled</code> filters</td></tr>
                 </table>
             </div>
 
             <div class="search-group">
                 <h3>Special & Utility</h3>
                 <table>
-                    <tr class="search-item"><td><code>/btw &lt;query&gt;</code></td><td class="desc">Side question (does not alter context)</td></tr>
+                    <tr class="search-item"><td><code>/btw &lt;query&gt;</code></td><td class="desc">Side question (does not alter context); press <code>c</code> to copy raw markdown answer to clipboard</td></tr>
                     <tr class="search-item"><td><code>/plan [desc]</code></td><td class="desc">Switch to Plan Mode directly</td></tr>
                     <tr class="search-item"><td><code>/loop [interval]</code></td><td class="desc">Schedule recurring background task</td></tr>
                     <tr class="search-item"><td><code>/proactive</code></td><td class="desc">Alias for /loop — schedule recurring background task</td></tr>
                     <tr class="search-item"><td><code>/schedule</code></td><td class="desc">Cloud scheduled tasks</td></tr>
                     <tr class="search-item"><td><code>/workflows</code></td><td class="desc">View and manage dynamic workflow runs; workflows orchestrate work across tens to hundreds of background agents for large, complex tasks</td></tr>
-                    <tr class="search-item"><td><code class="new">ultracode</code> <!-- added:v2.1.160 --></td><td class="desc">Prompt trigger keyword — type in the prompt to start a dynamic workflow; highlighted in violet in the prompt input</td></tr>
+                    <tr class="search-item"><td><code>ultracode</code></td><td class="desc">Prompt trigger keyword — type in the prompt to start a dynamic workflow; highlighted in violet in the prompt input</td></tr>
                     <tr class="search-item"><td><code>/voice</code></td><td class="desc">Push-to-talk voice prompting</td></tr>
                     <tr class="search-item"><td><code>/doctor</code></td><td class="desc">Diagnose installation/env issues; press f to auto-fix; openable while Claude is responding; shows result of last update attempt; lists npm auto-update fix hints</td></tr>
                     <tr class="search-item"><td><code>/pr-comments [PR]</code></td><td class="desc">Fetch GitHub PR comments</td></tr>
@@ -318,6 +319,7 @@
                     <tr class="search-item"><td><code>channelsEnabled</code></td><td class="desc">Set to <code>true</code> in managed settings to allow <code>--channels</code> with console (API key) auth</td></tr>
                     <tr class="search-item"><td><code>allowAllClaudeAiMcps</code></td><td class="desc">Enterprise managed setting — load claude.ai cloud MCP connectors alongside <code>managed-mcp.json</code></td></tr>
                     <tr class="search-item"><td><code>pluginSuggestionMarketplaces</code></td><td class="desc">Managed setting — allowlist org marketplaces whose plugins may be suggested via context-aware tips</td></tr>
+                    <tr class="search-item"><td><code class="new">requiredMinimumVersion</code> / <code class="new">requiredMaximumVersion</code> <!-- added:v2.1.163 --></td><td class="desc">Managed settings — CC refuses to start if its version is outside the allowed range; directs user to an approved version</td></tr>
                 </table>
             </div>
 
@@ -395,6 +397,7 @@
                     <tr class="search-item"><td><code>disallowed-tools</code></td><td class="desc">Remove tools from the model while the skill or slash command is active</td></tr>
                     <tr class="search-item"><td><code>context: fork</code></td><td class="desc">Run skill logic in an isolated subagent</td></tr>
                     <tr class="search-item"><td><code>$ARGUMENTS</code></td><td class="desc">User input placeholder replacement</td></tr>
+                    <tr class="search-item"><td><code class="new">\$</code> <!-- added:v2.1.163 --></td><td class="desc">Escape to include a literal <code>$</code> before a digit in skill command bodies</td></tr>
                     <tr class="search-item"><td><code class="unverified">$FILE_PATH</code></td><td class="desc">File path resolution (hook strings only)</td></tr>
                     <tr class="search-item"><td><code>${CLAUDE_SKILL_DIR}</code></td><td class="desc">Reference the skill's own directory</td></tr>
                     <tr class="search-item"><td><code>${CLAUDE_EFFORT}</code></td><td class="desc">Current effort level — available in hooks, Bash tool commands, and skill content</td></tr>
@@ -450,7 +453,7 @@
                     <tr class="search-item"><td><code>PreToolUse</code> / <code>PostToolUse</code></td><td class="desc">Intercept before/after tool execution; <code>PostToolUse</code> hook input includes <code>duration_ms</code>; can replace tool output via <code>hookSpecificOutput.updatedToolOutput</code> for all tools</td></tr>
                     <tr class="search-item"><td><code>PostToolUseFailure</code></td><td class="desc">Fires when a tool call fails; hook input includes <code>duration_ms</code></td></tr>
                     <tr class="search-item"><td><code>SessionStart</code></td><td class="desc">Fires on session start/resume; return <code>reloadSkills: true</code> to re-scan skill directories; set <code>hookSpecificOutput.sessionTitle</code> to name the session</td></tr>
-                    <tr class="search-item"><td><code>SubagentStart</code> / <code>Stop</code> / <code>SubagentStop</code></td><td class="desc">Lifecycle triggers for agent spawning; Stop and SubagentStop hook input includes <code>background_tasks</code> and <code>session_crons</code> fields</td></tr>
+                    <tr class="search-item"><td><code>SubagentStart</code> / <code>Stop</code> / <code>SubagentStop</code></td><td class="desc">Lifecycle triggers for agent spawning; Stop and SubagentStop hook input includes <code>background_tasks</code> and <code>session_crons</code> fields; Stop and SubagentStop can return <code>hookSpecificOutput.additionalContext</code> to give Claude feedback and continue the turn</td></tr>
                     <tr class="search-item"><td><code>SessionEnd</code></td><td class="desc">Run cleanup script when session closes</td></tr>
                     <tr class="search-item"><td><code>CwdChanged</code> / <code>FileChanged</code></td><td class="desc">React to directory or file changes</td></tr>
                     <tr class="search-item"><td><code>TaskCreated</code></td><td class="desc">Fires when task created via TaskCreate</td></tr>
@@ -654,12 +657,14 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.162",
-        "date": "2026-06-03",
+        "version": "v2.1.165",
+        "date": "2026-06-04",
         "changes": [
-            {"tag": "CHG", "text": "<code>/terminal-setup</code> — renamed Windsurf to Devin Desktop following the editor's rebrand"},
-            {"tag": "CHG", "text": "<code>claude agents --json</code> — output now includes <code>waitingFor</code> field showing what a waiting session is blocked on"},
-            {"tag": "CHG", "text": "<code>/effort</code> — now confirms when your chosen level will persist as the default for new sessions"}
+            {"tag": "ADD", "text": "<code>requiredMinimumVersion</code> / <code>requiredMaximumVersion</code> — managed settings; CC refuses to start if version is outside the allowed range"},
+            {"tag": "ADD", "text": "<code>/plugin list</code> — list installed plugins; <code>--enabled</code>/<code>--disabled</code> filters"},
+            {"tag": "CHG", "text": "<code>/btw</code> — press <code>c</code> to copy raw markdown answer to clipboard"},
+            {"tag": "CHG", "text": "<code>Stop</code> / <code>SubagentStop</code> hooks — can now return <code>hookSpecificOutput.additionalContext</code> to give Claude feedback and continue the turn"},
+            {"tag": "ADD", "text": "<code>\\$</code> — escape syntax to include a literal <code>$</code> before a digit in skill command bodies"}
         ]
     }
     </script>
