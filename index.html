@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.165</span>
+            <span class="release-tag">As of release: v2.1.167</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -201,7 +201,7 @@
                     <tr class="search-item"><td><code>/add-dir &lt;path&gt;</code></td><td class="desc">Add working directory to context</td></tr>
                     <tr class="search-item"><td><code>/reload-plugins</code></td><td class="desc">Hot-reload local plugins; auto-installs missing dependencies from added marketplaces</td></tr>
                     <tr class="search-item"><td><code>/reload-skills</code></td><td class="desc">Re-scan skill directories without restarting the session</td></tr>
-                    <tr class="search-item"><td><code class="new">/plugin list</code> <!-- added:v2.1.163 --></td><td class="desc">List installed plugins; <code>--enabled</code>/<code>--disabled</code> filters</td></tr>
+                    <tr class="search-item"><td><code>/plugin list</code></td><td class="desc">List installed plugins; <code>--enabled</code>/<code>--disabled</code> filters</td></tr>
                 </table>
             </div>
 
@@ -264,7 +264,8 @@
                     <tr class="search-item"><td><code>-w</code> / <code>--worktree</code></td><td class="desc">Start in isolated git worktree</td></tr>
                     <tr class="search-item"><td><code>--effort</code></td><td class="desc">Set effort level (low/med/high/xhigh); xhigh is Opus 4.8 only</td></tr>
                     <tr class="search-item"><td><code>--model</code></td><td class="desc">Override specific model at launch</td></tr>
-                    <tr class="search-item"><td><code>--fallback-model</code></td><td class="desc">Fallback model used for the rest of the session when the primary model is not found or overloaded</td></tr>
+                    <tr class="search-item"><td><code>--fallback-model</code></td><td class="desc">Fallback model for when the primary model is overloaded or unavailable; applies to interactive sessions and headless (-p) mode; configure up to three in order via <code>fallbackModel</code> JSON setting</td></tr>
+                    <tr class="search-item"><td><code class="new">--thinking disabled</code> <!-- added:v2.1.166 --></td><td class="desc">Disable thinking on models that think by default; equivalent to <code>MAX_THINKING_TOKENS=0</code> or toggling the per-model thinking switch</td></tr>
                     <tr class="search-item"><td><code>--permission-mode plan</code></td><td class="desc">Start in read-only plan mode</td></tr>
                     <tr class="search-item"><td><code>--max-budget-usd</code></td><td class="desc">Set cost cap for session</td></tr>
                     <tr class="search-item"><td><code>--remote</code></td><td class="desc">Start web-accessible session</td></tr>
@@ -300,6 +301,7 @@
                     <tr class="search-item"><td><code>worktree.baseRef</code></td><td class="desc"><code>fresh</code> (default) branches worktrees from <code>origin/&lt;default&gt;</code>; <code>head</code> branches from local <code>HEAD</code> — applies to <code>--worktree</code>, <code>EnterWorktree</code>, and agent-isolation</td></tr>
                     <tr class="search-item"><td><code>worktree.bgIsolation</code></td><td class="desc">Set to <code>"none"</code> to disable worktree isolation for background sessions</td></tr>
                     <tr class="search-item"><td><code>agent</code></td><td class="desc">Default agent name for dispatched sessions in <code>claude agents</code>; override per-session with <code>--agent &lt;name&gt;</code></td></tr>
+                    <tr class="search-item"><td><code class="new">fallbackModel</code> <!-- added:v2.1.166 --></td><td class="desc">Configure up to three fallback models tried in order when the primary model is overloaded or unavailable; paired with <code>--fallback-model</code> CLI flag</td></tr>
                     <tr class="search-item"><td><code>showThinkingSummaries</code></td><td class="desc">Show thinking summaries in interactive sessions (default: false)</td></tr>
                     <tr class="search-item"><td><code>disableSkillShellExecution</code></td><td class="desc">Disable inline shell execution in skills and custom slash commands</td></tr>
                     <tr class="search-item"><td><code>skillOverrides</code></td><td class="desc"><code>off</code> hides skill from model and <code>/</code>; <code>user-invocable-only</code> hides from model only; <code>name-only</code> collapses description</td></tr>
@@ -315,11 +317,12 @@
                     <tr class="search-item"><td><code>parentSettingsBehavior</code></td><td class="desc">Admin-tier key: <code>first-wins</code> (default) or <code>merge</code> — opts SDK <code>managedSettings</code> parent tier into policy merge</td></tr>
                     <tr class="search-item"><td><code>"$defaults"</code> (autoMode)</td><td class="desc">Include in <code>autoMode.allow</code>, <code>autoMode.soft_deny</code>, or <code>autoMode.environment</code> to add custom rules alongside the built-in list</td></tr>
                     <tr class="search-item"><td><code>autoMode.hard_deny</code></td><td class="desc">Auto mode classifier rules that block unconditionally regardless of user intent — unlike <code>autoMode.soft_deny</code>, cannot be overridden by allow exceptions</td></tr>
+                    <tr class="search-item"><td><code class="new">"*"</code> (deny rule glob) <!-- added:v2.1.166 --></td><td class="desc">Glob patterns supported in deny rule tool-name position; <code>"*"</code> denies all tools; allow rules reject non-MCP globs; unknown tool names in deny rules warn at startup</td></tr>
                     <tr class="search-item"><td><code>prUrlTemplate</code></td><td class="desc">Point footer PR badge at a custom code-review URL instead of github.com</td></tr>
                     <tr class="search-item"><td><code>channelsEnabled</code></td><td class="desc">Set to <code>true</code> in managed settings to allow <code>--channels</code> with console (API key) auth</td></tr>
                     <tr class="search-item"><td><code>allowAllClaudeAiMcps</code></td><td class="desc">Enterprise managed setting — load claude.ai cloud MCP connectors alongside <code>managed-mcp.json</code></td></tr>
                     <tr class="search-item"><td><code>pluginSuggestionMarketplaces</code></td><td class="desc">Managed setting — allowlist org marketplaces whose plugins may be suggested via context-aware tips</td></tr>
-                    <tr class="search-item"><td><code class="new">requiredMinimumVersion</code> / <code class="new">requiredMaximumVersion</code> <!-- added:v2.1.163 --></td><td class="desc">Managed settings — CC refuses to start if its version is outside the allowed range; directs user to an approved version</td></tr>
+                    <tr class="search-item"><td><code>requiredMinimumVersion</code> / <code>requiredMaximumVersion</code></td><td class="desc">Managed settings — CC refuses to start if its version is outside the allowed range; directs user to an approved version</td></tr>
                 </table>
             </div>
 
@@ -329,7 +332,7 @@
                     <tr class="search-item"><td><code>ANTHROPIC_API_KEY</code></td><td class="desc">Auth override</td></tr>
                     <tr class="search-item"><td><code>ANTHROPIC_MODEL</code></td><td class="desc">Default model override</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_EFFORT_LEVEL</code></td><td class="desc">Default effort (low/med/high)</td></tr>
-                    <tr class="search-item"><td><code>MAX_THINKING_TOKENS</code></td><td class="desc">Cap extended thinking limits</td></tr>
+                    <tr class="search-item"><td><code>MAX_THINKING_TOKENS</code></td><td class="desc">Cap extended thinking limits; set to <code>0</code> to disable thinking on models that think by default via the Claude API</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_PLUGIN_SEED_DIR</code></td><td class="desc">Multiple plugin seed directories</td></tr>
                     <tr class="search-item"><td><code>IS_DEMO</code></td><td class="desc">Demo mode (hides email/org)</td></tr>
                     <tr class="search-item"><td><code>CLAUDECODE</code></td><td class="desc">Detects if running inside CC shell; also injected into stdio MCP server subprocess environments</td></tr>
@@ -365,7 +368,7 @@
                     <tr class="search-item"><td><code>OTEL_METRICS_INCLUDE_ENTRYPOINT=true</code></td><td class="desc">Opt in to including session entrypoint as an OpenTelemetry metric attribute (<code>app.entrypoint</code>)</td></tr>
                     <tr class="search-item"><td><code>COLUMNS</code> / <code>LINES</code></td><td class="desc">Injected into status line command subprocesses so scripts can size output to the terminal width</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_AUTO_MODE=1</code></td><td class="desc">Opt in to Auto mode on Bedrock, Vertex, and Foundry for Opus 4.7 and Opus 4.8</td></tr>
-                    <tr class="search-item"><td><code class="new">OTEL_RESOURCE_ATTRIBUTES</code> <!-- added:v2.1.161 --></td><td class="desc">Standard OTEL env var — values are now used as labels on metric datapoints, so you can slice usage metrics by custom dimensions (e.g. team, repo)</td></tr>
+                    <tr class="search-item"><td><code>OTEL_RESOURCE_ATTRIBUTES</code></td><td class="desc">Standard OTEL env var — values are now used as labels on metric datapoints, so you can slice usage metrics by custom dimensions (e.g. team, repo)</td></tr>
                 </table>
             </div>
         </div>
@@ -397,7 +400,7 @@
                     <tr class="search-item"><td><code>disallowed-tools</code></td><td class="desc">Remove tools from the model while the skill or slash command is active</td></tr>
                     <tr class="search-item"><td><code>context: fork</code></td><td class="desc">Run skill logic in an isolated subagent</td></tr>
                     <tr class="search-item"><td><code>$ARGUMENTS</code></td><td class="desc">User input placeholder replacement</td></tr>
-                    <tr class="search-item"><td><code class="new">\$</code> <!-- added:v2.1.163 --></td><td class="desc">Escape to include a literal <code>$</code> before a digit in skill command bodies</td></tr>
+                    <tr class="search-item"><td><code>\$</code></td><td class="desc">Escape to include a literal <code>$</code> before a digit in skill command bodies</td></tr>
                     <tr class="search-item"><td><code class="unverified">$FILE_PATH</code></td><td class="desc">File path resolution (hook strings only)</td></tr>
                     <tr class="search-item"><td><code>${CLAUDE_SKILL_DIR}</code></td><td class="desc">Reference the skill's own directory</td></tr>
                     <tr class="search-item"><td><code>${CLAUDE_EFFORT}</code></td><td class="desc">Current effort level — available in hooks, Bash tool commands, and skill content</td></tr>
@@ -657,14 +660,14 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.165",
-        "date": "2026-06-04",
+        "version": "v2.1.167",
+        "date": "2026-06-06",
         "changes": [
-            {"tag": "ADD", "text": "<code>requiredMinimumVersion</code> / <code>requiredMaximumVersion</code> — managed settings; CC refuses to start if version is outside the allowed range"},
-            {"tag": "ADD", "text": "<code>/plugin list</code> — list installed plugins; <code>--enabled</code>/<code>--disabled</code> filters"},
-            {"tag": "CHG", "text": "<code>/btw</code> — press <code>c</code> to copy raw markdown answer to clipboard"},
-            {"tag": "CHG", "text": "<code>Stop</code> / <code>SubagentStop</code> hooks — can now return <code>hookSpecificOutput.additionalContext</code> to give Claude feedback and continue the turn"},
-            {"tag": "ADD", "text": "<code>\\$</code> — escape syntax to include a literal <code>$</code> before a digit in skill command bodies"}
+            {"tag": "ADD", "text": "<code>fallbackModel</code> — JSON setting; configure up to three fallback models tried in order when the primary is overloaded or unavailable"},
+            {"tag": "ADD", "text": "<code>--thinking disabled</code> — disable thinking on models that think by default"},
+            {"tag": "CHG", "text": "<code>--fallback-model</code> — now also applies to interactive sessions"},
+            {"tag": "CHG", "text": "<code>MAX_THINKING_TOKENS</code> — set to <code>0</code> to disable thinking on models that think by default via the Claude API"},
+            {"tag": "ADD", "text": "<code>\"*\"</code> (deny rule glob) — glob patterns now supported in deny rule tool-name position; <code>\"*\"</code> denies all tools"}
         ]
     }
     </script>

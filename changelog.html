@@ -198,8 +198,19 @@
 
             <!-- June 2026 -->
             <details class="month-group" open>
-                <summary>June 2026 <span class="version-date">v2.1.160 – v2.1.165</span> <span class="month-count">6 releases</span></summary>
+                <summary>June 2026 <span class="version-date">v2.1.160 – v2.1.167</span> <span class="month-count">8 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.166 <span class="version-date">2026-06-06</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>fallbackModel</code> JSON setting — configure up to three fallback models tried in order when the primary model is overloaded or unavailable</li>
+                            <li><span class="tag tag-add">ADD</span><code>--thinking disabled</code> CLI flag — disable thinking on models that think by default; equivalent to <code>MAX_THINKING_TOKENS=0</code> or the per-model thinking toggle</li>
+                            <li><span class="tag tag-change">CHG</span><code>--fallback-model</code> — now also applies to interactive sessions (previously headless only)</li>
+                            <li><span class="tag tag-change">CHG</span><code>MAX_THINKING_TOKENS</code> — setting to <code>0</code> now disables thinking on models that think by default via the Claude API</li>
+                            <li><span class="tag tag-add">ADD</span><code>"*"</code> (deny rule glob) — glob patterns now supported in deny rule tool-name position; <code>"*"</code> denies all tools; allow rules reject non-MCP globs; unknown tool names warn at startup</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.163 <span class="version-date">2026-06-04</span></h3>
