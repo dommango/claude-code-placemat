@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.167</span>
+            <span class="release-tag">As of release: v2.1.168</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -625,6 +625,7 @@
             const data = JSON.parse(dataEl.textContent);
             const seen = localStorage.getItem('placemat-seen-version');
             if (seen === data.version) return;
+            if (!data.changes || !data.changes.length) return;
 
             const tagClass = { ADD: 'tag-add', CHG: 'tag-change', DEL: 'tag-remove', FIX: 'tag-fix' };
             const items = data.changes.map(c =>
@@ -660,15 +661,9 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.167",
+        "version": "v2.1.168",
         "date": "2026-06-06",
-        "changes": [
-            {"tag": "ADD", "text": "<code>fallbackModel</code> — JSON setting; configure up to three fallback models tried in order when the primary is overloaded or unavailable"},
-            {"tag": "ADD", "text": "<code>--thinking disabled</code> — disable thinking on models that think by default"},
-            {"tag": "CHG", "text": "<code>--fallback-model</code> — now also applies to interactive sessions"},
-            {"tag": "CHG", "text": "<code>MAX_THINKING_TOKENS</code> — set to <code>0</code> to disable thinking on models that think by default via the Claude API"},
-            {"tag": "ADD", "text": "<code>\"*\"</code> (deny rule glob) — glob patterns now supported in deny rule tool-name position; <code>\"*\"</code> denies all tools"}
-        ]
+        "changes": []
     }
     </script>
 </body>
