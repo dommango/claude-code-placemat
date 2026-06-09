@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.168</span>
+            <span class="release-tag">As of release: v2.1.169</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -162,6 +162,7 @@
                     <tr class="search-item"><td><code>/recap</code></td><td class="desc">Summarize away context; auto-triggered on return or invoke manually</td></tr>
                     <tr class="search-item"><td><code>/rewind</code> / <code>/undo</code></td><td class="desc">Rewind conversation to previous state; /undo is alias</td></tr>
                     <tr class="search-item"><td><code>/goal [condition]</code></td><td class="desc">Set a completion condition; Claude keeps working across turns until met; works in interactive, <code>-p</code>, and Remote Control; shows live elapsed/turns/tokens overlay</td></tr>
+                    <tr class="search-item"><td><code class="new">/cd</code> <!-- added:v2.1.169 --></td><td class="desc">Move session to a new working directory without breaking the prompt cache mid-session</td></tr>
                 </table>
             </div>
 
@@ -241,7 +242,7 @@
                     <tr class="search-item"><td><code>claude --fork-session</code></td><td class="desc">Fork existing session on resume</td></tr>
                     <tr class="search-item"><td><code>claude ultrareview [target]</code></td><td class="desc">Run <code>/ultrareview</code> non-interactively from CI or scripts; prints findings to stdout; use <code>--json</code> for raw output</td></tr>
                     <tr class="search-item"><td><code>claude project purge [path]</code></td><td class="desc">Delete all Claude Code state for a project (transcripts, tasks, file history, config entry); supports <code>--dry-run</code>, <code>-y/--yes</code>, <code>-i/--interactive</code>, and <code>--all</code></td></tr>
-                    <tr class="search-item"><td><code>claude agents</code></td><td class="desc">Agent view (Research Preview) — single list of every CC session; running, blocked on you, or done; type <code>! &lt;cmd&gt;</code> to launch a shell command as a background session you can attach/detach; <code>--cwd &lt;path&gt;</code> scopes list to a directory; <code>--json</code> lists live sessions as JSON (includes <code>waitingFor</code> field showing what a waiting session is blocked on); dispatch flags for background sessions: <code>--add-dir</code>, <code>--settings</code>, <code>--mcp-config</code>, <code>--plugin-dir</code>, <code>--permission-mode</code>, <code>--model</code>, <code>--effort</code>, <code>--agent</code>, <code>--dangerously-skip-permissions</code></td></tr>
+                    <tr class="search-item"><td><code>claude agents</code></td><td class="desc">Agent view (Research Preview) — single list of every CC session; running, blocked on you, or done; type <code>! &lt;cmd&gt;</code> to launch a shell command as a background session you can attach/detach; <code>--cwd &lt;path&gt;</code> scopes list to a directory; <code>--json</code> lists live sessions as JSON (includes <code>waitingFor</code>, <code>id</code>, and <code>state</code> fields); <code>--all</code> flag includes completed sessions; dispatch flags for background sessions: <code>--add-dir</code>, <code>--settings</code>, <code>--mcp-config</code>, <code>--plugin-dir</code>, <code>--permission-mode</code>, <code>--model</code>, <code>--effort</code>, <code>--agent</code>, <code>--dangerously-skip-permissions</code></td></tr>
                     <tr class="search-item"><td><code>claude --bg --exec '&lt;cmd&gt;'</code></td><td class="desc">Run a shell command as a background session you can attach to and detach from; equivalent to typing <code>! &lt;cmd&gt;</code> inside <code>claude agents</code></td></tr>
                 </table>
             </div>
@@ -265,7 +266,7 @@
                     <tr class="search-item"><td><code>--effort</code></td><td class="desc">Set effort level (low/med/high/xhigh); xhigh is Opus 4.8 only</td></tr>
                     <tr class="search-item"><td><code>--model</code></td><td class="desc">Override specific model at launch</td></tr>
                     <tr class="search-item"><td><code>--fallback-model</code></td><td class="desc">Fallback model for when the primary model is overloaded or unavailable; applies to interactive sessions and headless (-p) mode; configure up to three in order via <code>fallbackModel</code> JSON setting</td></tr>
-                    <tr class="search-item"><td><code class="new">--thinking disabled</code> <!-- added:v2.1.166 --></td><td class="desc">Disable thinking on models that think by default; equivalent to <code>MAX_THINKING_TOKENS=0</code> or toggling the per-model thinking switch</td></tr>
+                    <tr class="search-item"><td><code>--thinking disabled</code></td><td class="desc">Disable thinking on models that think by default; equivalent to <code>MAX_THINKING_TOKENS=0</code> or toggling the per-model thinking switch</td></tr>
                     <tr class="search-item"><td><code>--permission-mode plan</code></td><td class="desc">Start in read-only plan mode</td></tr>
                     <tr class="search-item"><td><code>--max-budget-usd</code></td><td class="desc">Set cost cap for session</td></tr>
                     <tr class="search-item"><td><code>--remote</code></td><td class="desc">Start web-accessible session</td></tr>
@@ -273,6 +274,7 @@
                     <tr class="search-item"><td><code>--remote-control-session-name-prefix</code></td><td class="desc">Custom hostname prefix for Remote Control session names</td></tr>
                     <tr class="search-item"><td><code>--plugin-dir &lt;path&gt;</code></td><td class="desc">Load plugins from a directory or <code>.zip</code> archive at launch</td></tr>
                     <tr class="search-item"><td><code>--plugin-url &lt;url&gt;</code></td><td class="desc">Fetch a plugin <code>.zip</code> archive from a URL for the current session</td></tr>
+                    <tr class="search-item"><td><code class="new">--safe-mode</code> <!-- added:v2.1.169 --></td><td class="desc">Start with all customizations (CLAUDE.md, plugins, skills, hooks, MCP servers) disabled for troubleshooting; paired with <code>CLAUDE_CODE_SAFE_MODE</code> env var</td></tr>
                 </table>
             </div>
         </div>
@@ -301,7 +303,7 @@
                     <tr class="search-item"><td><code>worktree.baseRef</code></td><td class="desc"><code>fresh</code> (default) branches worktrees from <code>origin/&lt;default&gt;</code>; <code>head</code> branches from local <code>HEAD</code> — applies to <code>--worktree</code>, <code>EnterWorktree</code>, and agent-isolation</td></tr>
                     <tr class="search-item"><td><code>worktree.bgIsolation</code></td><td class="desc">Set to <code>"none"</code> to disable worktree isolation for background sessions</td></tr>
                     <tr class="search-item"><td><code>agent</code></td><td class="desc">Default agent name for dispatched sessions in <code>claude agents</code>; override per-session with <code>--agent &lt;name&gt;</code></td></tr>
-                    <tr class="search-item"><td><code class="new">fallbackModel</code> <!-- added:v2.1.166 --></td><td class="desc">Configure up to three fallback models tried in order when the primary model is overloaded or unavailable; paired with <code>--fallback-model</code> CLI flag</td></tr>
+                    <tr class="search-item"><td><code>fallbackModel</code></td><td class="desc">Configure up to three fallback models tried in order when the primary model is overloaded or unavailable; paired with <code>--fallback-model</code> CLI flag</td></tr>
                     <tr class="search-item"><td><code>showThinkingSummaries</code></td><td class="desc">Show thinking summaries in interactive sessions (default: false)</td></tr>
                     <tr class="search-item"><td><code>disableSkillShellExecution</code></td><td class="desc">Disable inline shell execution in skills and custom slash commands</td></tr>
                     <tr class="search-item"><td><code>skillOverrides</code></td><td class="desc"><code>off</code> hides skill from model and <code>/</code>; <code>user-invocable-only</code> hides from model only; <code>name-only</code> collapses description</td></tr>
@@ -317,12 +319,13 @@
                     <tr class="search-item"><td><code>parentSettingsBehavior</code></td><td class="desc">Admin-tier key: <code>first-wins</code> (default) or <code>merge</code> — opts SDK <code>managedSettings</code> parent tier into policy merge</td></tr>
                     <tr class="search-item"><td><code>"$defaults"</code> (autoMode)</td><td class="desc">Include in <code>autoMode.allow</code>, <code>autoMode.soft_deny</code>, or <code>autoMode.environment</code> to add custom rules alongside the built-in list</td></tr>
                     <tr class="search-item"><td><code>autoMode.hard_deny</code></td><td class="desc">Auto mode classifier rules that block unconditionally regardless of user intent — unlike <code>autoMode.soft_deny</code>, cannot be overridden by allow exceptions</td></tr>
-                    <tr class="search-item"><td><code class="new">"*"</code> (deny rule glob) <!-- added:v2.1.166 --></td><td class="desc">Glob patterns supported in deny rule tool-name position; <code>"*"</code> denies all tools; allow rules reject non-MCP globs; unknown tool names in deny rules warn at startup</td></tr>
+                    <tr class="search-item"><td><code>"*"</code> (deny rule glob)</td><td class="desc">Glob patterns supported in deny rule tool-name position; <code>"*"</code> denies all tools; allow rules reject non-MCP globs; unknown tool names in deny rules warn at startup</td></tr>
                     <tr class="search-item"><td><code>prUrlTemplate</code></td><td class="desc">Point footer PR badge at a custom code-review URL instead of github.com</td></tr>
                     <tr class="search-item"><td><code>channelsEnabled</code></td><td class="desc">Set to <code>true</code> in managed settings to allow <code>--channels</code> with console (API key) auth</td></tr>
                     <tr class="search-item"><td><code>allowAllClaudeAiMcps</code></td><td class="desc">Enterprise managed setting — load claude.ai cloud MCP connectors alongside <code>managed-mcp.json</code></td></tr>
                     <tr class="search-item"><td><code>pluginSuggestionMarketplaces</code></td><td class="desc">Managed setting — allowlist org marketplaces whose plugins may be suggested via context-aware tips</td></tr>
                     <tr class="search-item"><td><code>requiredMinimumVersion</code> / <code>requiredMaximumVersion</code></td><td class="desc">Managed settings — CC refuses to start if its version is outside the allowed range; directs user to an approved version</td></tr>
+                    <tr class="search-item"><td><code class="new">disableBundledSkills</code> <!-- added:v2.1.169 --></td><td class="desc">Hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code> env var</td></tr>
                 </table>
             </div>
 
@@ -369,6 +372,9 @@
                     <tr class="search-item"><td><code>COLUMNS</code> / <code>LINES</code></td><td class="desc">Injected into status line command subprocesses so scripts can size output to the terminal width</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_AUTO_MODE=1</code></td><td class="desc">Opt in to Auto mode on Bedrock, Vertex, and Foundry for Opus 4.7 and Opus 4.8</td></tr>
                     <tr class="search-item"><td><code>OTEL_RESOURCE_ATTRIBUTES</code></td><td class="desc">Standard OTEL env var — values are now used as labels on metric datapoints, so you can slice usage metrics by custom dimensions (e.g. team, repo)</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_SAFE_MODE</code> <!-- added:v2.1.169 --></td><td class="desc">Start with all customizations (CLAUDE.md, plugins, skills, hooks, MCP servers) disabled; paired with <code>--safe-mode</code> CLI flag</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code> <!-- added:v2.1.169 --></td><td class="desc">Hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>disableBundledSkills</code> JSON setting</td></tr>
+                    <tr class="search-item"><td><code class="new">API_FORCE_IDLE_TIMEOUT=0</code> <!-- added:v2.1.169 --></td><td class="desc">Opt out of the default 5-minute idle timeout on Vertex/Foundry; stalled streams will hang indefinitely instead of aborting</td></tr>
                 </table>
             </div>
         </div>
@@ -661,9 +667,15 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.168",
-        "date": "2026-06-06",
-        "changes": []
+        "version": "v2.1.169",
+        "date": "2026-06-08",
+        "changes": [
+            {"tag": "ADD", "text": "<code>/cd</code> slash command — move session to a new working directory without breaking the prompt cache mid-session"},
+            {"tag": "ADD", "text": "<code>--safe-mode</code> CLI flag + <code>CLAUDE_CODE_SAFE_MODE</code> env var — start with all customizations disabled for troubleshooting"},
+            {"tag": "ADD", "text": "<code>disableBundledSkills</code> JSON setting + <code>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code> env var — hide bundled skills, workflows, and built-in slash commands from the model"},
+            {"tag": "ADD", "text": "<code>API_FORCE_IDLE_TIMEOUT=0</code> env var — opt out of the default 5-minute idle timeout on Vertex/Foundry"},
+            {"tag": "CHG", "text": "<code>claude agents --json</code> — now includes <code>id</code> and <code>state</code> fields; new <code>--all</code> flag includes completed sessions"}
+        ]
     }
     </script>
 </body>
