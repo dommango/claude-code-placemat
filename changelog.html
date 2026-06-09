@@ -198,8 +198,21 @@
 
             <!-- June 2026 -->
             <details class="month-group" open>
-                <summary>June 2026 <span class="version-date">v2.1.160 – v2.1.167</span> <span class="month-count">8 releases</span></summary>
+                <summary>June 2026 <span class="version-date">v2.1.160 – v2.1.169</span> <span class="month-count">10 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.169 <span class="version-date">2026-06-08</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>/cd</code> slash command — move session to a new working directory without breaking the prompt cache mid-session</li>
+                            <li><span class="tag tag-add">ADD</span><code>--safe-mode</code> CLI flag — start with all customizations (CLAUDE.md, plugins, skills, hooks, MCP servers) disabled for troubleshooting; paired with <code>CLAUDE_CODE_SAFE_MODE</code> env var</li>
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_SAFE_MODE</code> env var — paired with <code>--safe-mode</code> CLI flag</li>
+                            <li><span class="tag tag-add">ADD</span><code>disableBundledSkills</code> JSON setting — hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code> env var</li>
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code> env var — hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>disableBundledSkills</code> JSON setting</li>
+                            <li><span class="tag tag-add">ADD</span><code>API_FORCE_IDLE_TIMEOUT=0</code> env var — opt out of the default 5-minute idle timeout on Vertex/Foundry</li>
+                            <li><span class="tag tag-change">CHG</span><code>claude agents --json</code> — now includes <code>id</code> and <code>state</code> fields; new <code>--all</code> flag includes completed sessions</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.166 <span class="version-date">2026-06-06</span></h3>
