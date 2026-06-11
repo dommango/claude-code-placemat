@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.170</span>
+            <span class="release-tag">As of release: v2.1.173</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -162,7 +162,7 @@
                     <tr class="search-item"><td><code>/recap</code></td><td class="desc">Summarize away context; auto-triggered on return or invoke manually</td></tr>
                     <tr class="search-item"><td><code>/rewind</code> / <code>/undo</code></td><td class="desc">Rewind conversation to previous state; /undo is alias</td></tr>
                     <tr class="search-item"><td><code>/goal [condition]</code></td><td class="desc">Set a completion condition; Claude keeps working across turns until met; works in interactive, <code>-p</code>, and Remote Control; shows live elapsed/turns/tokens overlay</td></tr>
-                    <tr class="search-item"><td><code class="new">/cd</code> <!-- added:v2.1.169 --></td><td class="desc">Move session to a new working directory without breaking the prompt cache mid-session</td></tr>
+                    <tr class="search-item"><td><code>/cd</code></td><td class="desc">Move session to a new working directory without breaking the prompt cache mid-session</td></tr>
                 </table>
             </div>
 
@@ -202,7 +202,7 @@
                     <tr class="search-item"><td><code>/add-dir &lt;path&gt;</code></td><td class="desc">Add working directory to context</td></tr>
                     <tr class="search-item"><td><code>/reload-plugins</code></td><td class="desc">Hot-reload local plugins; auto-installs missing dependencies from added marketplaces</td></tr>
                     <tr class="search-item"><td><code>/reload-skills</code></td><td class="desc">Re-scan skill directories without restarting the session</td></tr>
-                    <tr class="search-item"><td><code>/plugin list</code></td><td class="desc">List installed plugins; <code>--enabled</code>/<code>--disabled</code> filters</td></tr>
+                    <tr class="search-item"><td><code>/plugin list</code></td><td class="desc">List installed plugins; <code>--enabled</code>/<code>--disabled</code> filters; search bar available when browsing marketplace plugins</td></tr>
                 </table>
             </div>
 
@@ -274,7 +274,7 @@
                     <tr class="search-item"><td><code>--remote-control-session-name-prefix</code></td><td class="desc">Custom hostname prefix for Remote Control session names</td></tr>
                     <tr class="search-item"><td><code>--plugin-dir &lt;path&gt;</code></td><td class="desc">Load plugins from a directory or <code>.zip</code> archive at launch</td></tr>
                     <tr class="search-item"><td><code>--plugin-url &lt;url&gt;</code></td><td class="desc">Fetch a plugin <code>.zip</code> archive from a URL for the current session</td></tr>
-                    <tr class="search-item"><td><code class="new">--safe-mode</code> <!-- added:v2.1.169 --></td><td class="desc">Start with all customizations (CLAUDE.md, plugins, skills, hooks, MCP servers) disabled for troubleshooting; paired with <code>CLAUDE_CODE_SAFE_MODE</code> env var</td></tr>
+                    <tr class="search-item"><td><code>--safe-mode</code></td><td class="desc">Start with all customizations (CLAUDE.md, plugins, skills, hooks, MCP servers) disabled for troubleshooting; paired with <code>CLAUDE_CODE_SAFE_MODE</code> env var</td></tr>
                 </table>
             </div>
         </div>
@@ -325,7 +325,7 @@
                     <tr class="search-item"><td><code>allowAllClaudeAiMcps</code></td><td class="desc">Enterprise managed setting — load claude.ai cloud MCP connectors alongside <code>managed-mcp.json</code></td></tr>
                     <tr class="search-item"><td><code>pluginSuggestionMarketplaces</code></td><td class="desc">Managed setting — allowlist org marketplaces whose plugins may be suggested via context-aware tips</td></tr>
                     <tr class="search-item"><td><code>requiredMinimumVersion</code> / <code>requiredMaximumVersion</code></td><td class="desc">Managed settings — CC refuses to start if its version is outside the allowed range; directs user to an approved version</td></tr>
-                    <tr class="search-item"><td><code class="new">disableBundledSkills</code> <!-- added:v2.1.169 --></td><td class="desc">Hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code> env var</td></tr>
+                    <tr class="search-item"><td><code>disableBundledSkills</code></td><td class="desc">Hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code> env var</td></tr>
                 </table>
             </div>
 
@@ -372,9 +372,9 @@
                     <tr class="search-item"><td><code>COLUMNS</code> / <code>LINES</code></td><td class="desc">Injected into status line command subprocesses so scripts can size output to the terminal width</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_AUTO_MODE=1</code></td><td class="desc">Opt in to Auto mode on Bedrock, Vertex, and Foundry for Opus 4.7 and Opus 4.8</td></tr>
                     <tr class="search-item"><td><code>OTEL_RESOURCE_ATTRIBUTES</code></td><td class="desc">Standard OTEL env var — values are now used as labels on metric datapoints, so you can slice usage metrics by custom dimensions (e.g. team, repo)</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_SAFE_MODE</code> <!-- added:v2.1.169 --></td><td class="desc">Start with all customizations (CLAUDE.md, plugins, skills, hooks, MCP servers) disabled; paired with <code>--safe-mode</code> CLI flag</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code> <!-- added:v2.1.169 --></td><td class="desc">Hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>disableBundledSkills</code> JSON setting</td></tr>
-                    <tr class="search-item"><td><code class="new">API_FORCE_IDLE_TIMEOUT=0</code> <!-- added:v2.1.169 --></td><td class="desc">Opt out of the default 5-minute idle timeout on Vertex/Foundry; stalled streams will hang indefinitely instead of aborting</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_SAFE_MODE</code></td><td class="desc">Start with all customizations (CLAUDE.md, plugins, skills, hooks, MCP servers) disabled; paired with <code>--safe-mode</code> CLI flag</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code></td><td class="desc">Hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>disableBundledSkills</code> JSON setting</td></tr>
+                    <tr class="search-item"><td><code>API_FORCE_IDLE_TIMEOUT=0</code></td><td class="desc">Opt out of the default 5-minute idle timeout on Vertex/Foundry; stalled streams will hang indefinitely instead of aborting</td></tr>
                 </table>
             </div>
         </div>
@@ -462,7 +462,7 @@
                     <tr class="search-item"><td><code>PreToolUse</code> / <code>PostToolUse</code></td><td class="desc">Intercept before/after tool execution; <code>PostToolUse</code> hook input includes <code>duration_ms</code>; can replace tool output via <code>hookSpecificOutput.updatedToolOutput</code> for all tools</td></tr>
                     <tr class="search-item"><td><code>PostToolUseFailure</code></td><td class="desc">Fires when a tool call fails; hook input includes <code>duration_ms</code></td></tr>
                     <tr class="search-item"><td><code>SessionStart</code></td><td class="desc">Fires on session start/resume; return <code>reloadSkills: true</code> to re-scan skill directories; set <code>hookSpecificOutput.sessionTitle</code> to name the session</td></tr>
-                    <tr class="search-item"><td><code>SubagentStart</code> / <code>Stop</code> / <code>SubagentStop</code></td><td class="desc">Lifecycle triggers for agent spawning; Stop and SubagentStop hook input includes <code>background_tasks</code> and <code>session_crons</code> fields; Stop and SubagentStop can return <code>hookSpecificOutput.additionalContext</code> to give Claude feedback and continue the turn</td></tr>
+                    <tr class="search-item"><td><code>SubagentStart</code> / <code>Stop</code> / <code>SubagentStop</code></td><td class="desc">Lifecycle triggers for agent spawning; sub-agents can spawn their own sub-agents (up to 5 levels deep); Stop and SubagentStop hook input includes <code>background_tasks</code> and <code>session_crons</code> fields; Stop and SubagentStop can return <code>hookSpecificOutput.additionalContext</code> to give Claude feedback and continue the turn</td></tr>
                     <tr class="search-item"><td><code>SessionEnd</code></td><td class="desc">Run cleanup script when session closes</td></tr>
                     <tr class="search-item"><td><code>CwdChanged</code> / <code>FileChanged</code></td><td class="desc">React to directory or file changes</td></tr>
                     <tr class="search-item"><td><code>TaskCreated</code></td><td class="desc">Fires when task created via TaskCreate</td></tr>
@@ -667,9 +667,18 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.170",
-        "date": "2026-06-09",
-        "changes": []
+        "version": "v2.1.173",
+        "date": "2026-06-11",
+        "changes": [
+            {
+                "tag": "CHG",
+                "text": "<code>SubagentStart</code> / <code>SubagentStop</code> — sub-agents can now spawn their own sub-agents, up to 5 levels deep"
+            },
+            {
+                "tag": "CHG",
+                "text": "<code>/plugin</code> — search bar added when browsing marketplace plugins"
+            }
+        ]
     }
     </script>
 </body>
