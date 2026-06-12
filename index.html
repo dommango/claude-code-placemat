@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.173</span>
+            <span class="release-tag">As of release: v2.1.175</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -312,6 +312,7 @@
                     <tr class="search-item"><td><code>workspace.git_worktree</code></td><td class="desc">Status line JSON input field — set when current directory is inside a linked git worktree</td></tr>
                     <tr class="search-item"><td><code>effort.level</code> / <code>thinking.enabled</code></td><td class="desc">Hooks and status line stdin JSON input fields — current effort level and thinking state</td></tr>
                     <tr class="search-item"><td><code>autoScrollEnabled</code></td><td class="desc">Disable conversation auto-scroll in fullscreen mode</td></tr>
+                    <tr class="search-item"><td><code class="new">wheelScrollAccelerationEnabled</code> <!-- added:v2.1.174 --></td><td class="desc">Set to <code>false</code> to disable mouse-wheel scroll acceleration in fullscreen mode</td></tr>
                     <tr class="search-item"><td><code>tui</code></td><td class="desc">Default TUI mode; set to "fullscreen" for flicker-free alt-screen rendering</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr>
                     <tr class="search-item"><td><code>sandbox.bwrapPath</code> / <code>sandbox.socatPath</code></td><td class="desc">Custom bubblewrap and socat binary paths (Linux/WSL managed settings)</td></tr>
@@ -326,6 +327,7 @@
                     <tr class="search-item"><td><code>pluginSuggestionMarketplaces</code></td><td class="desc">Managed setting — allowlist org marketplaces whose plugins may be suggested via context-aware tips</td></tr>
                     <tr class="search-item"><td><code>requiredMinimumVersion</code> / <code>requiredMaximumVersion</code></td><td class="desc">Managed settings — CC refuses to start if its version is outside the allowed range; directs user to an approved version</td></tr>
                     <tr class="search-item"><td><code>disableBundledSkills</code></td><td class="desc">Hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code> env var</td></tr>
+                    <tr class="search-item"><td><code class="new">enforceAvailableModels</code> <!-- added:v2.1.175 --></td><td class="desc">Managed setting — when enabled, the <code>availableModels</code> allowlist also constrains the Default model (a Default that resolves to a disallowed model falls back to the first allowed model); user or project settings cannot widen a managed <code>availableModels</code> list</td></tr>
                 </table>
             </div>
 
@@ -667,16 +669,16 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.173",
-        "date": "2026-06-11",
+        "version": "v2.1.175",
+        "date": "2026-06-12",
         "changes": [
             {
-                "tag": "CHG",
-                "text": "<code>SubagentStart</code> / <code>SubagentStop</code> — sub-agents can now spawn their own sub-agents, up to 5 levels deep"
+                "tag": "ADD",
+                "text": "<code>wheelScrollAccelerationEnabled</code> — set to <code>false</code> to disable mouse-wheel scroll acceleration in fullscreen mode (v2.1.174)"
             },
             {
-                "tag": "CHG",
-                "text": "<code>/plugin</code> — search bar added when browsing marketplace plugins"
+                "tag": "ADD",
+                "text": "<code>enforceAvailableModels</code> — managed setting that constrains the Default model to the <code>availableModels</code> allowlist and blocks user/project settings from widening it (v2.1.175)"
             }
         ]
     }
