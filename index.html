@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.175</span>
+            <span class="release-tag">As of release: v2.1.176</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -305,6 +305,7 @@
                     <tr class="search-item"><td><code>agent</code></td><td class="desc">Default agent name for dispatched sessions in <code>claude agents</code>; override per-session with <code>--agent &lt;name&gt;</code></td></tr>
                     <tr class="search-item"><td><code>fallbackModel</code></td><td class="desc">Configure up to three fallback models tried in order when the primary model is overloaded or unavailable; paired with <code>--fallback-model</code> CLI flag</td></tr>
                     <tr class="search-item"><td><code>showThinkingSummaries</code></td><td class="desc">Show thinking summaries in interactive sessions (default: false)</td></tr>
+                    <tr class="search-item"><td><code class="new">language</code> <!-- added:v2.1.176 --></td><td class="desc">Pin session-title language; titles auto-detect the conversation language by default — set to a BCP 47 tag (e.g. <code>en</code>, <code>ja</code>) to override</td></tr>
                     <tr class="search-item"><td><code>disableSkillShellExecution</code></td><td class="desc">Disable inline shell execution in skills and custom slash commands</td></tr>
                     <tr class="search-item"><td><code>skillOverrides</code></td><td class="desc"><code>off</code> hides skill from model and <code>/</code>; <code>user-invocable-only</code> hides from model only; <code>name-only</code> collapses description</td></tr>
                     <tr class="search-item"><td><code>forceRemoteSettingsRefresh</code></td><td class="desc">Block startup until remote managed settings are freshly fetched; fail-closed on fetch failure</td></tr>
@@ -322,6 +323,7 @@
                     <tr class="search-item"><td><code>autoMode.hard_deny</code></td><td class="desc">Auto mode classifier rules that block unconditionally regardless of user intent — unlike <code>autoMode.soft_deny</code>, cannot be overridden by allow exceptions</td></tr>
                     <tr class="search-item"><td><code>"*"</code> (deny rule glob)</td><td class="desc">Glob patterns supported in deny rule tool-name position; <code>"*"</code> denies all tools; allow rules reject non-MCP globs; unknown tool names in deny rules warn at startup</td></tr>
                     <tr class="search-item"><td><code>prUrlTemplate</code></td><td class="desc">Point footer PR badge at a custom code-review URL instead of github.com</td></tr>
+                    <tr class="search-item"><td><code class="new">footerLinksRegexes</code> <!-- added:v2.1.176 --></td><td class="desc">Array of regex patterns for regex-matched link badges in the footer row; configurable via user or managed settings</td></tr>
                     <tr class="search-item"><td><code>channelsEnabled</code></td><td class="desc">Set to <code>true</code> in managed settings to allow <code>--channels</code> with console (API key) auth</td></tr>
                     <tr class="search-item"><td><code>allowAllClaudeAiMcps</code></td><td class="desc">Enterprise managed setting — load claude.ai cloud MCP connectors alongside <code>managed-mcp.json</code></td></tr>
                     <tr class="search-item"><td><code>pluginSuggestionMarketplaces</code></td><td class="desc">Managed setting — allowlist org marketplaces whose plugins may be suggested via context-aware tips</td></tr>
@@ -669,16 +671,16 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.175",
+        "version": "v2.1.176",
         "date": "2026-06-12",
         "changes": [
             {
                 "tag": "ADD",
-                "text": "<code>wheelScrollAccelerationEnabled</code> — set to <code>false</code> to disable mouse-wheel scroll acceleration in fullscreen mode (v2.1.174)"
+                "text": "<code>language</code> — pin session-title language; titles auto-detect the conversation language by default, set to a BCP 47 tag to override (v2.1.176)"
             },
             {
                 "tag": "ADD",
-                "text": "<code>enforceAvailableModels</code> — managed setting that constrains the Default model to the <code>availableModels</code> allowlist and blocks user/project settings from widening it (v2.1.175)"
+                "text": "<code>footerLinksRegexes</code> — array of regex patterns for regex-matched link badges in the footer row; configurable via user or managed settings (v2.1.176)"
             }
         ]
     }
