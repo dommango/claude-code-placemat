@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.176</span>
+            <span class="release-tag">As of release: v2.1.178</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -313,7 +313,7 @@
                     <tr class="search-item"><td><code>workspace.git_worktree</code></td><td class="desc">Status line JSON input field — set when current directory is inside a linked git worktree</td></tr>
                     <tr class="search-item"><td><code>effort.level</code> / <code>thinking.enabled</code></td><td class="desc">Hooks and status line stdin JSON input fields — current effort level and thinking state</td></tr>
                     <tr class="search-item"><td><code>autoScrollEnabled</code></td><td class="desc">Disable conversation auto-scroll in fullscreen mode</td></tr>
-                    <tr class="search-item"><td><code class="new">wheelScrollAccelerationEnabled</code> <!-- added:v2.1.174 --></td><td class="desc">Set to <code>false</code> to disable mouse-wheel scroll acceleration in fullscreen mode</td></tr>
+                    <tr class="search-item"><td><code>wheelScrollAccelerationEnabled</code></td><td class="desc">Set to <code>false</code> to disable mouse-wheel scroll acceleration in fullscreen mode</td></tr>
                     <tr class="search-item"><td><code>tui</code></td><td class="desc">Default TUI mode; set to "fullscreen" for flicker-free alt-screen rendering</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr>
                     <tr class="search-item"><td><code>sandbox.bwrapPath</code> / <code>sandbox.socatPath</code></td><td class="desc">Custom bubblewrap and socat binary paths (Linux/WSL managed settings)</td></tr>
@@ -322,6 +322,7 @@
                     <tr class="search-item"><td><code>"$defaults"</code> (autoMode)</td><td class="desc">Include in <code>autoMode.allow</code>, <code>autoMode.soft_deny</code>, or <code>autoMode.environment</code> to add custom rules alongside the built-in list</td></tr>
                     <tr class="search-item"><td><code>autoMode.hard_deny</code></td><td class="desc">Auto mode classifier rules that block unconditionally regardless of user intent — unlike <code>autoMode.soft_deny</code>, cannot be overridden by allow exceptions</td></tr>
                     <tr class="search-item"><td><code>"*"</code> (deny rule glob)</td><td class="desc">Glob patterns supported in deny rule tool-name position; <code>"*"</code> denies all tools; allow rules reject non-MCP globs; unknown tool names in deny rules warn at startup</td></tr>
+                    <tr class="search-item"><td><code class="new">Tool(param:value)</code> <!-- added:v2.1.178 --></td><td class="desc">Permission rule syntax to match a tool's input parameters (supports <code>*</code> wildcard); e.g. <code>Agent(model:opus)</code> to block Opus subagents</td></tr>
                     <tr class="search-item"><td><code>prUrlTemplate</code></td><td class="desc">Point footer PR badge at a custom code-review URL instead of github.com</td></tr>
                     <tr class="search-item"><td><code class="new">footerLinksRegexes</code> <!-- added:v2.1.176 --></td><td class="desc">Array of regex patterns for regex-matched link badges in the footer row; configurable via user or managed settings</td></tr>
                     <tr class="search-item"><td><code>channelsEnabled</code></td><td class="desc">Set to <code>true</code> in managed settings to allow <code>--channels</code> with console (API key) auth</td></tr>
@@ -395,7 +396,7 @@
                     <tr class="search-item"><td><code>/claude-api</code></td><td class="desc">Load API + SDK reference into context</td></tr>
                     <tr class="search-item"><td><code>/less-permission-prompts</code></td><td class="desc">Scan transcripts for read-only Bash/MCP calls; propose settings.json allowlist</td></tr>
                     <tr class="search-item"><td><code>/ultrareview [PR#]</code></td><td class="desc">Cloud code review via parallel agents; no args for current branch, PR# for specific PR</td></tr>
-                    <tr class="search-item"><td><code>.claude/skills/&lt;name&gt;/</code></td><td class="desc">Project specific skill directory; auto-loaded without marketplace</td></tr>
+                    <tr class="search-item"><td><code>.claude/skills/&lt;name&gt;/</code></td><td class="desc">Project skill directory; auto-loaded without marketplace; nested <code>.claude/skills/</code> directories also load when working on files there — on a name clash, the nested skill appears as <code>&lt;dir&gt;:&lt;name&gt;</code></td></tr>
                     <tr class="search-item"><td><code>~/.claude/skills/&lt;name&gt;/</code></td><td class="desc">Global personal skill directory</td></tr>
                     <tr class="search-item"><td><code>plugin: bin/</code></td><td class="desc">Plugin executables in bin/ invocable as bare commands from Bash tool</td></tr>
                 </table>
@@ -671,16 +672,16 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.176",
-        "date": "2026-06-12",
+        "version": "v2.1.178",
+        "date": "2026-06-15",
         "changes": [
             {
                 "tag": "ADD",
-                "text": "<code>language</code> — pin session-title language; titles auto-detect the conversation language by default, set to a BCP 47 tag to override (v2.1.176)"
+                "text": "<code>Tool(param:value)</code> — permission rule syntax to match a tool's input parameters (with <code>*</code> wildcard); e.g. <code>Agent(model:opus)</code> to block Opus subagents"
             },
             {
-                "tag": "ADD",
-                "text": "<code>footerLinksRegexes</code> — array of regex patterns for regex-matched link badges in the footer row; configurable via user or managed settings (v2.1.176)"
+                "tag": "CHG",
+                "text": "<code>.claude/skills/&lt;name&gt;/</code> — nested skill directories also load when working on files there; name clashes use <code>&lt;dir&gt;:&lt;name&gt;</code> form"
             }
         ]
     }
