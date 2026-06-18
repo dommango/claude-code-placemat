@@ -198,8 +198,17 @@
 
             <!-- June 2026 -->
             <details class="month-group" open>
-                <summary>June 2026 <span class="version-date">v2.1.160 – v2.1.178</span> <span class="month-count">17 releases</span></summary>
+                <summary>June 2026 <span class="version-date">v2.1.160 – v2.1.181</span> <span class="month-count">19 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.181 <span class="version-date">2026-06-17</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>/config key=value</code> — set any setting from the prompt (e.g. <code>/config thinking=false</code>); works in interactive, <code>-p</code>, and Remote Control</li>
+                            <li><span class="tag tag-add">ADD</span><code>sandbox.allowAppleEvents</code> JSON setting — opt-in macOS setting to allow sandboxed commands to send Apple Events</li>
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CLIENT_PRESENCE_FILE</code> env var — path to a marker file; while the file exists, mobile push notifications are suppressed</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.178 <span class="version-date">2026-06-15</span></h3>

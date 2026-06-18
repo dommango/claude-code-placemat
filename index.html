@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.179</span>
+            <span class="release-tag">As of release: v2.1.181</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -170,6 +170,7 @@
                 <h3>Configuration</h3>
                 <table>
                     <tr class="search-item"><td><code>/config</code></td><td class="desc">Open settings interface; search matches option values</td></tr>
+                    <tr class="search-item"><td><code class="new">/config key=value</code> <!-- added:v2.1.181 --></td><td class="desc">Set any setting from the prompt (e.g. <code>/config thinking=false</code>) — works in interactive, <code>-p</code>, and Remote Control</td></tr>
                     <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model; selection saved as default for new sessions; press <code>s</code> in picker to switch for current session only; warns before switching mid-conversation; startup header shows model pin source; lists models from gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway</td></tr>
                     <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/xhigh/auto); no args opens interactive slider (Faster/Smarter labels); xhigh is Opus 4.8 only; confirms when chosen level will persist as the default for new sessions</td></tr>
                     <tr class="search-item"><td><code>/fast [on/off]</code></td><td class="desc">Toggle Fast mode</td></tr>
@@ -317,6 +318,7 @@
                     <tr class="search-item"><td><code>tui</code></td><td class="desc">Default TUI mode; set to "fullscreen" for flicker-free alt-screen rendering</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr>
                     <tr class="search-item"><td><code>sandbox.bwrapPath</code> / <code>sandbox.socatPath</code></td><td class="desc">Custom bubblewrap and socat binary paths (Linux/WSL managed settings)</td></tr>
+                    <tr class="search-item"><td><code class="new">sandbox.allowAppleEvents</code> <!-- added:v2.1.181 --></td><td class="desc">Opt-in macOS setting to allow sandboxed commands to send Apple Events</td></tr>
                     <tr class="search-item"><td><code>wslInheritsWindowsSettings</code></td><td class="desc">WSL sessions inherit Windows-side managed settings (policy key)</td></tr>
                     <tr class="search-item"><td><code>parentSettingsBehavior</code></td><td class="desc">Admin-tier key: <code>first-wins</code> (default) or <code>merge</code> — opts SDK <code>managedSettings</code> parent tier into policy merge</td></tr>
                     <tr class="search-item"><td><code>"$defaults"</code> (autoMode)</td><td class="desc">Include in <code>autoMode.allow</code>, <code>autoMode.soft_deny</code>, or <code>autoMode.environment</code> to add custom rules alongside the built-in list</td></tr>
@@ -380,6 +382,7 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_SAFE_MODE</code></td><td class="desc">Start with all customizations (CLAUDE.md, plugins, skills, hooks, MCP servers) disabled; paired with <code>--safe-mode</code> CLI flag</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code></td><td class="desc">Hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>disableBundledSkills</code> JSON setting</td></tr>
                     <tr class="search-item"><td><code>API_FORCE_IDLE_TIMEOUT=0</code></td><td class="desc">Opt out of the default 5-minute idle timeout on Vertex/Foundry; stalled streams will hang indefinitely instead of aborting</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CLIENT_PRESENCE_FILE</code> <!-- added:v2.1.181 --></td><td class="desc">Path to a marker file — while the file exists, mobile push notifications are suppressed (signals you're at the machine)</td></tr>
                 </table>
             </div>
         </div>
@@ -672,9 +675,13 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.179",
-        "date": "2026-06-16",
-        "changes": []
+        "version": "v2.1.181",
+        "date": "2026-06-17",
+        "changes": [
+            {"tag": "ADD", "text": "<code>/config key=value</code> — set any setting from the prompt (e.g. <code>/config thinking=false</code>); works in interactive, <code>-p</code>, and Remote Control"},
+            {"tag": "ADD", "text": "<code>sandbox.allowAppleEvents</code> — opt-in macOS setting to allow sandboxed commands to send Apple Events"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CLIENT_PRESENCE_FILE</code> — suppress mobile push notifications while a marker file exists"}
+        ]
     }
     </script>
 </body>
