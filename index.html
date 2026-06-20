@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.181</span>
+            <span class="release-tag">As of release: v2.1.183</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -169,8 +169,9 @@
             <div class="search-group">
                 <h3>Configuration</h3>
                 <table>
-                    <tr class="search-item"><td><code>/config</code></td><td class="desc">Open settings interface; search matches option values</td></tr>
+                    <tr class="search-item"><td><code>/config</code></td><td class="desc">Open settings interface; search matches option values; Enter and Space change the selected setting; Esc saves and closes</td></tr>
                     <tr class="search-item"><td><code class="new">/config key=value</code> <!-- added:v2.1.181 --></td><td class="desc">Set any setting from the prompt (e.g. <code>/config thinking=false</code>) — works in interactive, <code>-p</code>, and Remote Control</td></tr>
+                    <tr class="search-item"><td><code class="new">/config --help</code> <!-- added:v2.1.183 --></td><td class="desc">List all available shorthand keys for <code>/config key=value</code></td></tr>
                     <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model; selection saved as default for new sessions; press <code>s</code> in picker to switch for current session only; warns before switching mid-conversation; startup header shows model pin source; lists models from gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway</td></tr>
                     <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/xhigh/auto); no args opens interactive slider (Faster/Smarter labels); xhigh is Opus 4.8 only; confirms when chosen level will persist as the default for new sessions</td></tr>
                     <tr class="search-item"><td><code>/fast [on/off]</code></td><td class="desc">Toggle Fast mode</td></tr>
@@ -324,7 +325,8 @@
                     <tr class="search-item"><td><code>"$defaults"</code> (autoMode)</td><td class="desc">Include in <code>autoMode.allow</code>, <code>autoMode.soft_deny</code>, or <code>autoMode.environment</code> to add custom rules alongside the built-in list</td></tr>
                     <tr class="search-item"><td><code>autoMode.hard_deny</code></td><td class="desc">Auto mode classifier rules that block unconditionally regardless of user intent — unlike <code>autoMode.soft_deny</code>, cannot be overridden by allow exceptions</td></tr>
                     <tr class="search-item"><td><code>"*"</code> (deny rule glob)</td><td class="desc">Glob patterns supported in deny rule tool-name position; <code>"*"</code> denies all tools; allow rules reject non-MCP globs; unknown tool names in deny rules warn at startup</td></tr>
-                    <tr class="search-item"><td><code class="new">Tool(param:value)</code> <!-- added:v2.1.178 --></td><td class="desc">Permission rule syntax to match a tool's input parameters (supports <code>*</code> wildcard); e.g. <code>Agent(model:opus)</code> to block Opus subagents</td></tr>
+                    <tr class="search-item"><td><code>Tool(param:value)</code></td><td class="desc">Permission rule syntax to match a tool's input parameters (supports <code>*</code> wildcard); e.g. <code>Agent(model:opus)</code> to block Opus subagents</td></tr>
+                    <tr class="search-item"><td><code class="new">attribution.sessionUrl</code> <!-- added:v2.1.183 --></td><td class="desc">Set to <code>false</code> to omit the claude.ai session link from commits and PRs in web and Remote Control sessions</td></tr>
                     <tr class="search-item"><td><code>prUrlTemplate</code></td><td class="desc">Point footer PR badge at a custom code-review URL instead of github.com</td></tr>
                     <tr class="search-item"><td><code>footerLinksRegexes</code></td><td class="desc">Array of regex patterns for regex-matched link badges in the footer row; configurable via user or managed settings</td></tr>
                     <tr class="search-item"><td><code>channelsEnabled</code></td><td class="desc">Set to <code>true</code> in managed settings to allow <code>--channels</code> with console (API key) auth</td></tr>
@@ -675,12 +677,12 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.181",
-        "date": "2026-06-17",
+        "version": "v2.1.183",
+        "date": "2026-06-19",
         "changes": [
-            {"tag": "ADD", "text": "<code>/config key=value</code> — set any setting from the prompt (e.g. <code>/config thinking=false</code>); works in interactive, <code>-p</code>, and Remote Control"},
-            {"tag": "ADD", "text": "<code>sandbox.allowAppleEvents</code> — opt-in macOS setting to allow sandboxed commands to send Apple Events"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CLIENT_PRESENCE_FILE</code> — suppress mobile push notifications while a marker file exists"}
+            {"tag": "ADD", "text": "<code>attribution.sessionUrl</code> — set to <code>false</code> to omit the claude.ai session link from commits and PRs in web and Remote Control sessions"},
+            {"tag": "ADD", "text": "<code>/config --help</code> — list all available shorthand keys for <code>/config key=value</code>"},
+            {"tag": "CHG", "text": "<code>/config</code> toggle — Enter and Space both change the selected setting; Esc now saves and closes instead of reverting"}
         ]
     }
     </script>
