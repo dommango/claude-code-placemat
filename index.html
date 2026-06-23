@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.185</span>
+            <span class="release-tag">As of release: v2.1.186</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -171,7 +171,7 @@
                 <table>
                     <tr class="search-item"><td><code>/config</code></td><td class="desc">Open settings interface; search matches option values; Enter and Space change the selected setting; Esc saves and closes</td></tr>
                     <tr class="search-item"><td><code>/config key=value</code></td><td class="desc">Set any setting from the prompt (e.g. <code>/config thinking=false</code>) — works in interactive, <code>-p</code>, and Remote Control</td></tr>
-                    <tr class="search-item"><td><code class="new">/config --help</code> <!-- added:v2.1.183 --></td><td class="desc">List all available shorthand keys for <code>/config key=value</code></td></tr>
+                    <tr class="search-item"><td><code>/config --help</code></td><td class="desc">List all available shorthand keys for <code>/config key=value</code></td></tr>
                     <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model; selection saved as default for new sessions; press <code>s</code> in picker to switch for current session only; warns before switching mid-conversation; startup header shows model pin source; lists models from gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway</td></tr>
                     <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/xhigh/auto); no args opens interactive slider (Faster/Smarter labels); xhigh is Opus 4.8 only; confirms when chosen level will persist as the default for new sessions</td></tr>
                     <tr class="search-item"><td><code>/fast [on/off]</code></td><td class="desc">Toggle Fast mode</td></tr>
@@ -216,7 +216,7 @@
                     <tr class="search-item"><td><code>/loop [interval]</code></td><td class="desc">Schedule recurring background task</td></tr>
                     <tr class="search-item"><td><code>/proactive</code></td><td class="desc">Alias for /loop — schedule recurring background task</td></tr>
                     <tr class="search-item"><td><code>/schedule</code></td><td class="desc">Cloud scheduled tasks</td></tr>
-                    <tr class="search-item"><td><code>/workflows</code></td><td class="desc">View and manage dynamic workflow runs; workflows orchestrate work across tens to hundreds of background agents for large, complex tasks</td></tr>
+                    <tr class="search-item"><td><code>/workflows</code></td><td class="desc">View and manage dynamic workflow runs; workflows orchestrate work across tens to hundreds of background agents for large, complex tasks; press <code>f</code> in the agent detail view to filter by status</td></tr>
                     <tr class="search-item"><td><code>ultracode</code></td><td class="desc">Prompt trigger keyword — type in the prompt to start a dynamic workflow; highlighted in violet in the prompt input</td></tr>
                     <tr class="search-item"><td><code>/voice</code></td><td class="desc">Push-to-talk voice prompting</td></tr>
                     <tr class="search-item"><td><code>/doctor</code></td><td class="desc">Diagnose installation/env issues; press f to auto-fix; openable while Claude is responding; shows result of last update attempt; lists npm auto-update fix hints</td></tr>
@@ -326,7 +326,7 @@
                     <tr class="search-item"><td><code>autoMode.hard_deny</code></td><td class="desc">Auto mode classifier rules that block unconditionally regardless of user intent — unlike <code>autoMode.soft_deny</code>, cannot be overridden by allow exceptions</td></tr>
                     <tr class="search-item"><td><code>"*"</code> (deny rule glob)</td><td class="desc">Glob patterns supported in deny rule tool-name position; <code>"*"</code> denies all tools; allow rules reject non-MCP globs; unknown tool names in deny rules warn at startup</td></tr>
                     <tr class="search-item"><td><code>Tool(param:value)</code></td><td class="desc">Permission rule syntax to match a tool's input parameters (supports <code>*</code> wildcard); e.g. <code>Agent(model:opus)</code> to block Opus subagents</td></tr>
-                    <tr class="search-item"><td><code class="new">attribution.sessionUrl</code> <!-- added:v2.1.183 --></td><td class="desc">Set to <code>false</code> to omit the claude.ai session link from commits and PRs in web and Remote Control sessions</td></tr>
+                    <tr class="search-item"><td><code>attribution.sessionUrl</code></td><td class="desc">Set to <code>false</code> to omit the claude.ai session link from commits and PRs in web and Remote Control sessions</td></tr>
                     <tr class="search-item"><td><code>prUrlTemplate</code></td><td class="desc">Point footer PR badge at a custom code-review URL instead of github.com</td></tr>
                     <tr class="search-item"><td><code>footerLinksRegexes</code></td><td class="desc">Array of regex patterns for regex-matched link badges in the footer row; configurable via user or managed settings</td></tr>
                     <tr class="search-item"><td><code>channelsEnabled</code></td><td class="desc">Set to <code>true</code> in managed settings to allow <code>--channels</code> with console (API key) auth</td></tr>
@@ -335,6 +335,9 @@
                     <tr class="search-item"><td><code>requiredMinimumVersion</code> / <code>requiredMaximumVersion</code></td><td class="desc">Managed settings — CC refuses to start if its version is outside the allowed range; directs user to an approved version</td></tr>
                     <tr class="search-item"><td><code>disableBundledSkills</code></td><td class="desc">Hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code> env var</td></tr>
                     <tr class="search-item"><td><code>enforceAvailableModels</code></td><td class="desc">Managed setting — when enabled, the <code>availableModels</code> allowlist also constrains the Default model (a Default that resolves to a disallowed model falls back to the first allowed model); user or project settings cannot widen a managed <code>availableModels</code> list</td></tr>
+                    <tr class="search-item"><td><code class="new">teammateMode: "iterm2"</code> <!-- added:v2.1.186 --></td><td class="desc">Use iTerm2 as the teammate backend; shows a warning when auto mode cannot find the <code>it2</code> CLI</td></tr>
+                    <tr class="search-item"><td><code class="new">awsAuthRefresh</code> <!-- added:v2.1.186 --></td><td class="desc">Configures the "Claude Platform on AWS — refresh credentials" option in <code>/login</code></td></tr>
+                    <tr class="search-item"><td><code class="new">respondToBashCommands</code> <!-- added:v2.1.186 --></td><td class="desc">Set to <code>false</code> to keep <code>!</code> bash command output as context-only; default behavior is for Claude to respond automatically</td></tr>
                 </table>
             </div>
 
@@ -385,6 +388,8 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code></td><td class="desc">Hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>disableBundledSkills</code> JSON setting</td></tr>
                     <tr class="search-item"><td><code>API_FORCE_IDLE_TIMEOUT=0</code></td><td class="desc">Opt out of the default 5-minute idle timeout on Vertex/Foundry; stalled streams will hang indefinitely instead of aborting</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CLIENT_PRESENCE_FILE</code></td><td class="desc">Path to a marker file — while the file exists, mobile push notifications are suppressed (signals you're at the machine)</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_MAX_RETRIES</code> <!-- added:v2.1.186 --></td><td class="desc">Caps retry attempts at 15; for unattended sessions use <code>CLAUDE_CODE_RETRY_WATCHDOG</code> instead</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_RETRY_WATCHDOG</code> <!-- added:v2.1.186 --></td><td class="desc">Retry watchdog for unattended sessions; replaces high <code>CLAUDE_CODE_MAX_RETRIES</code> values</td></tr>
                 </table>
             </div>
         </div>
@@ -494,6 +499,7 @@
                 <h3>MCP Servers</h3>
                 <table>
                     <tr class="search-item"><td><code>claude mcp list/add/remove</code></td><td class="desc">Standard MCP server management; <code>claude mcp list</code>/<code>get</code> show unapproved <code>.mcp.json</code> servers as <code>⏸ Pending approval</code> instead of auto-connecting</td></tr>
+                    <tr class="search-item"><td><code class="new">claude mcp login/logout &lt;name&gt;</code> <!-- added:v2.1.186 --></td><td class="desc">Authenticate or de-authenticate an MCP server from the CLI without opening <code>/mcp</code>; <code>--no-browser</code> redirects auth code to stdin for SSH completion</td></tr>
                     <tr class="search-item"><td><code>claude mcp serve</code></td><td class="desc">Run Claude Code as an MCP server</td></tr>
                     <tr class="search-item"><td><code>--transport http/stdio/sse</code></td><td class="desc">Protocol connection methods</td></tr>
                     <tr class="search-item"><td><code>Elicitation</code></td><td class="desc">Servers can request input mid-task</td></tr>
@@ -677,9 +683,17 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.185",
-        "date": "2026-06-20",
-        "changes": []
+        "version": "v2.1.186",
+        "date": "2026-06-22",
+        "changes": [
+            {"tag": "ADD", "text": "<code>claude mcp login/logout &lt;name&gt;</code> — authenticate MCP servers from the CLI without opening <code>/mcp</code>"},
+            {"tag": "CHG", "text": "<code>/workflows</code> — press <code>f</code> in the agent detail view to filter by status"},
+            {"tag": "ADD", "text": "<code>teammateMode: \"iterm2\"</code> JSON setting — use iTerm2 as the teammate backend"},
+            {"tag": "ADD", "text": "<code>awsAuthRefresh</code> JSON setting — configures AWS credential refresh in <code>/login</code>"},
+            {"tag": "ADD", "text": "<code>respondToBashCommands</code> JSON setting — set to <code>false</code> to disable auto-response to <code>!</code> bash output"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_MAX_RETRIES</code> env var — capped at 15"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_RETRY_WATCHDOG</code> env var — retry watchdog for unattended sessions"}
+        ]
     }
     </script>
 </body>

@@ -198,8 +198,21 @@
 
             <!-- June 2026 -->
             <details class="month-group" open>
-                <summary>June 2026 <span class="version-date">v2.1.160 – v2.1.183</span> <span class="month-count">20 releases</span></summary>
+                <summary>June 2026 <span class="version-date">v2.1.160 – v2.1.186</span> <span class="month-count">23 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.186 <span class="version-date">2026-06-22</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>claude mcp login/logout &lt;name&gt;</code> — authenticate or de-authenticate an MCP server from the CLI without opening <code>/mcp</code>; <code>--no-browser</code> redirects auth code to stdin for SSH completion</li>
+                            <li><span class="tag tag-change">CHG</span><code>/workflows</code> — press <code>f</code> in the agent detail view to filter sessions by status</li>
+                            <li><span class="tag tag-add">ADD</span><code>teammateMode: "iterm2"</code> JSON setting — use iTerm2 as the teammate backend; warns when auto mode cannot find the <code>it2</code> CLI</li>
+                            <li><span class="tag tag-add">ADD</span><code>awsAuthRefresh</code> JSON setting — configures "Claude Platform on AWS — refresh credentials" option in <code>/login</code></li>
+                            <li><span class="tag tag-add">ADD</span><code>respondToBashCommands</code> JSON setting — set to <code>false</code> to keep <code>!</code> bash command output as context-only (default: Claude responds automatically)</li>
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_MAX_RETRIES</code> env var — capped at 15; for unattended sessions use <code>CLAUDE_CODE_RETRY_WATCHDOG</code> instead</li>
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_RETRY_WATCHDOG</code> env var — retry watchdog for unattended sessions; replaces high <code>CLAUDE_CODE_MAX_RETRIES</code> values</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.183 <span class="version-date">2026-06-19</span></h3>
