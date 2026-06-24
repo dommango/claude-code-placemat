@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.186</span>
+            <span class="release-tag">As of release: v2.1.187</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -172,7 +172,7 @@
                     <tr class="search-item"><td><code>/config</code></td><td class="desc">Open settings interface; search matches option values; Enter and Space change the selected setting; Esc saves and closes</td></tr>
                     <tr class="search-item"><td><code>/config key=value</code></td><td class="desc">Set any setting from the prompt (e.g. <code>/config thinking=false</code>) — works in interactive, <code>-p</code>, and Remote Control</td></tr>
                     <tr class="search-item"><td><code>/config --help</code></td><td class="desc">List all available shorthand keys for <code>/config key=value</code></td></tr>
-                    <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model; selection saved as default for new sessions; press <code>s</code> in picker to switch for current session only; warns before switching mid-conversation; startup header shows model pin source; lists models from gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway</td></tr>
+                    <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model; selection saved as default for new sessions; press <code>s</code> in picker to switch for current session only; warns before switching mid-conversation; startup header shows model pin source; lists models from gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway; org-restricted models show "restricted by your organization's settings"</td></tr>
                     <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/xhigh/auto); no args opens interactive slider (Faster/Smarter labels); xhigh is Opus 4.8 only; confirms when chosen level will persist as the default for new sessions</td></tr>
                     <tr class="search-item"><td><code>/fast [on/off]</code></td><td class="desc">Toggle Fast mode</td></tr>
                     <tr class="search-item"><td><code>/permissions</code></td><td class="desc">View/update tool permissions</td></tr>
@@ -198,20 +198,21 @@
                     <tr class="search-item"><td><code>/memory</code></td><td class="desc">Edit CLAUDE.md files directly</td></tr>
                     <tr class="search-item"><td><code>/mcp</code></td><td class="desc">Manage MCP servers; shows tool count for each connected server and flags servers with 0 tools</td></tr>
                     <tr class="search-item"><td><code>/hooks</code></td><td class="desc">Manage event lifecycle hooks</td></tr>
+                    <tr class="search-item"><td><code>/install-github-app</code></td><td class="desc">Install the GitHub App; GitHub Actions workflow and repo secret setup is optional — install just the GitHub App and skip the workflow/secret steps</td></tr>
                     <tr class="search-item"><td><code>/skills</code></td><td class="desc">List available active skills; includes type-to-filter search box for long lists</td></tr>
                     <tr class="search-item"><td><code>/agents</code></td><td class="desc">Manage sub-agents</td></tr>
                     <tr class="search-item"><td><code>/chrome</code></td><td class="desc">Chrome browser integration; pick which connected browser to use via <code>/chrome</code> → "Select browser…", or in-chat when a browser action runs with multiple connected</td></tr>
                     <tr class="search-item"><td><code>/add-dir &lt;path&gt;</code></td><td class="desc">Add working directory to context</td></tr>
                     <tr class="search-item"><td><code>/reload-plugins</code></td><td class="desc">Hot-reload local plugins; auto-installs missing dependencies from added marketplaces</td></tr>
                     <tr class="search-item"><td><code>/reload-skills</code></td><td class="desc">Re-scan skill directories without restarting the session</td></tr>
-                    <tr class="search-item"><td><code>/plugin list</code></td><td class="desc">List installed plugins; <code>--enabled</code>/<code>--disabled</code> filters; search bar available when browsing marketplace plugins</td></tr>
+                    <tr class="search-item"><td><code>/plugin list</code></td><td class="desc">List installed plugins; <code>--enabled</code>/<code>--disabled</code> filters; search bar available when browsing marketplace plugins; surfaces recently-unused plugins for cleanup</td></tr>
                 </table>
             </div>
 
             <div class="search-group">
                 <h3>Special & Utility</h3>
                 <table>
-                    <tr class="search-item"><td><code>/btw &lt;query&gt;</code></td><td class="desc">Side question (does not alter context); press <code>c</code> to copy raw markdown answer to clipboard</td></tr>
+                    <tr class="search-item"><td><code>/btw &lt;query&gt;</code></td><td class="desc">Side question (does not alter context); press <code>c</code> to copy raw markdown answer to clipboard; ←/→ to step through earlier answers</td></tr>
                     <tr class="search-item"><td><code>/plan [desc]</code></td><td class="desc">Switch to Plan Mode directly</td></tr>
                     <tr class="search-item"><td><code>/loop [interval]</code></td><td class="desc">Schedule recurring background task</td></tr>
                     <tr class="search-item"><td><code>/proactive</code></td><td class="desc">Alias for /loop — schedule recurring background task</td></tr>
@@ -320,6 +321,7 @@
                     <tr class="search-item"><td><code>sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr>
                     <tr class="search-item"><td><code>sandbox.bwrapPath</code> / <code>sandbox.socatPath</code></td><td class="desc">Custom bubblewrap and socat binary paths (Linux/WSL managed settings)</td></tr>
                     <tr class="search-item"><td><code>sandbox.allowAppleEvents</code></td><td class="desc">Opt-in macOS setting to allow sandboxed commands to send Apple Events</td></tr>
+                    <tr class="search-item"><td><code class="new">sandbox.credentials</code> <!-- added:v2.1.187 --></td><td class="desc">Block sandboxed commands from reading credential files and secret environment variables</td></tr>
                     <tr class="search-item"><td><code>wslInheritsWindowsSettings</code></td><td class="desc">WSL sessions inherit Windows-side managed settings (policy key)</td></tr>
                     <tr class="search-item"><td><code>parentSettingsBehavior</code></td><td class="desc">Admin-tier key: <code>first-wins</code> (default) or <code>merge</code> — opts SDK <code>managedSettings</code> parent tier into policy merge</td></tr>
                     <tr class="search-item"><td><code>"$defaults"</code> (autoMode)</td><td class="desc">Include in <code>autoMode.allow</code>, <code>autoMode.soft_deny</code>, or <code>autoMode.environment</code> to add custom rules alongside the built-in list</td></tr>
@@ -390,6 +392,7 @@
                     <tr class="search-item"><td><code>CLAUDE_CLIENT_PRESENCE_FILE</code></td><td class="desc">Path to a marker file — while the file exists, mobile push notifications are suppressed (signals you're at the machine)</td></tr>
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_MAX_RETRIES</code> <!-- added:v2.1.186 --></td><td class="desc">Caps retry attempts at 15; for unattended sessions use <code>CLAUDE_CODE_RETRY_WATCHDOG</code> instead</td></tr>
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_RETRY_WATCHDOG</code> <!-- added:v2.1.186 --></td><td class="desc">Retry watchdog for unattended sessions; replaces high <code>CLAUDE_CODE_MAX_RETRIES</code> values</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT</code> <!-- added:v2.1.187 --></td><td class="desc">Override the default 5-minute idle timeout for remote MCP tool calls; stalled calls abort with an error instead of blocking indefinitely</td></tr>
                 </table>
             </div>
         </div>
@@ -683,16 +686,15 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.186",
-        "date": "2026-06-22",
+        "version": "v2.1.187",
+        "date": "2026-06-23",
         "changes": [
-            {"tag": "ADD", "text": "<code>claude mcp login/logout &lt;name&gt;</code> — authenticate MCP servers from the CLI without opening <code>/mcp</code>"},
-            {"tag": "CHG", "text": "<code>/workflows</code> — press <code>f</code> in the agent detail view to filter by status"},
-            {"tag": "ADD", "text": "<code>teammateMode: \"iterm2\"</code> JSON setting — use iTerm2 as the teammate backend"},
-            {"tag": "ADD", "text": "<code>awsAuthRefresh</code> JSON setting — configures AWS credential refresh in <code>/login</code>"},
-            {"tag": "ADD", "text": "<code>respondToBashCommands</code> JSON setting — set to <code>false</code> to disable auto-response to <code>!</code> bash output"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_MAX_RETRIES</code> env var — capped at 15"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_RETRY_WATCHDOG</code> env var — retry watchdog for unattended sessions"}
+            {"tag": "ADD", "text": "<code>sandbox.credentials</code> JSON setting — block sandboxed commands from reading credential files and secret env vars"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT</code> env var — override the default 5-minute remote MCP tool idle timeout"},
+            {"tag": "CHG", "text": "<code>/btw</code> — ←/→ arrow navigation to step through earlier answers"},
+            {"tag": "ADD", "text": "<code>/install-github-app</code> — GitHub Actions workflow setup is now optional"},
+            {"tag": "CHG", "text": "<code>/plugin list</code> — surfaces recently-unused plugins for cleanup"},
+            {"tag": "CHG", "text": "<code>/model</code> — org-restricted models show \"restricted by your organization's settings\""}
         ]
     }
     </script>
