@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.187</span>
+            <span class="release-tag">As of release: v2.1.191</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -160,7 +160,7 @@
                     <tr class="search-item"><td><code>/copy</code></td><td class="desc">Copy last response</td></tr>
                     <tr class="search-item"><td><code>/export</code></td><td class="desc">Export conversation</td></tr>
                     <tr class="search-item"><td><code>/recap</code></td><td class="desc">Summarize away context; auto-triggered on return or invoke manually</td></tr>
-                    <tr class="search-item"><td><code>/rewind</code> / <code>/undo</code></td><td class="desc">Rewind conversation to previous state; /undo is alias</td></tr>
+                    <tr class="search-item"><td><code>/rewind</code> / <code>/undo</code></td><td class="desc">Rewind conversation to previous state; /undo is alias; supports resuming a conversation from before <code>/clear</code> was run</td></tr>
                     <tr class="search-item"><td><code>/goal [condition]</code></td><td class="desc">Set a completion condition; Claude keeps working across turns until met; works in interactive, <code>-p</code>, and Remote Control; shows live elapsed/turns/tokens overlay</td></tr>
                     <tr class="search-item"><td><code>/cd</code></td><td class="desc">Move session to a new working directory without breaking the prompt cache mid-session</td></tr>
                 </table>
@@ -337,9 +337,9 @@
                     <tr class="search-item"><td><code>requiredMinimumVersion</code> / <code>requiredMaximumVersion</code></td><td class="desc">Managed settings — CC refuses to start if its version is outside the allowed range; directs user to an approved version</td></tr>
                     <tr class="search-item"><td><code>disableBundledSkills</code></td><td class="desc">Hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code> env var</td></tr>
                     <tr class="search-item"><td><code>enforceAvailableModels</code></td><td class="desc">Managed setting — when enabled, the <code>availableModels</code> allowlist also constrains the Default model (a Default that resolves to a disallowed model falls back to the first allowed model); user or project settings cannot widen a managed <code>availableModels</code> list</td></tr>
-                    <tr class="search-item"><td><code class="new">teammateMode: "iterm2"</code> <!-- added:v2.1.186 --></td><td class="desc">Use iTerm2 as the teammate backend; shows a warning when auto mode cannot find the <code>it2</code> CLI</td></tr>
-                    <tr class="search-item"><td><code class="new">awsAuthRefresh</code> <!-- added:v2.1.186 --></td><td class="desc">Configures the "Claude Platform on AWS — refresh credentials" option in <code>/login</code></td></tr>
-                    <tr class="search-item"><td><code class="new">respondToBashCommands</code> <!-- added:v2.1.186 --></td><td class="desc">Set to <code>false</code> to keep <code>!</code> bash command output as context-only; default behavior is for Claude to respond automatically</td></tr>
+                    <tr class="search-item"><td><code>teammateMode: "iterm2"</code></td><td class="desc">Use iTerm2 as the teammate backend; shows a warning when auto mode cannot find the <code>it2</code> CLI</td></tr>
+                    <tr class="search-item"><td><code>awsAuthRefresh</code></td><td class="desc">Configures the "Claude Platform on AWS — refresh credentials" option in <code>/login</code></td></tr>
+                    <tr class="search-item"><td><code>respondToBashCommands</code></td><td class="desc">Set to <code>false</code> to keep <code>!</code> bash command output as context-only; default behavior is for Claude to respond automatically</td></tr>
                 </table>
             </div>
 
@@ -390,8 +390,8 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code></td><td class="desc">Hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>disableBundledSkills</code> JSON setting</td></tr>
                     <tr class="search-item"><td><code>API_FORCE_IDLE_TIMEOUT=0</code></td><td class="desc">Opt out of the default 5-minute idle timeout on Vertex/Foundry; stalled streams will hang indefinitely instead of aborting</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CLIENT_PRESENCE_FILE</code></td><td class="desc">Path to a marker file — while the file exists, mobile push notifications are suppressed (signals you're at the machine)</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_MAX_RETRIES</code> <!-- added:v2.1.186 --></td><td class="desc">Caps retry attempts at 15; for unattended sessions use <code>CLAUDE_CODE_RETRY_WATCHDOG</code> instead</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_RETRY_WATCHDOG</code> <!-- added:v2.1.186 --></td><td class="desc">Retry watchdog for unattended sessions; replaces high <code>CLAUDE_CODE_MAX_RETRIES</code> values</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_MAX_RETRIES</code></td><td class="desc">Caps retry attempts at 15; for unattended sessions use <code>CLAUDE_CODE_RETRY_WATCHDOG</code> instead</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_RETRY_WATCHDOG</code></td><td class="desc">Retry watchdog for unattended sessions; replaces high <code>CLAUDE_CODE_MAX_RETRIES</code> values</td></tr>
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT</code> <!-- added:v2.1.187 --></td><td class="desc">Override the default 5-minute idle timeout for remote MCP tool calls; stalled calls abort with an error instead of blocking indefinitely</td></tr>
                 </table>
             </div>
@@ -485,6 +485,7 @@
                     <tr class="search-item"><td><code>CwdChanged</code> / <code>FileChanged</code></td><td class="desc">React to directory or file changes</td></tr>
                     <tr class="search-item"><td><code>TaskCreated</code></td><td class="desc">Fires when task created via TaskCreate</td></tr>
                     <tr class="search-item"><td><code>if:</code> (hook field)</td><td class="desc">Conditional execution (permission rule syntax)</td></tr>
+                    <tr class="search-item"><td><code class="new">"Bash,PowerShell"</code> <!-- added:v2.1.191 --> (hook matcher)</td><td class="desc">Comma-separated tool type names in a hook's matcher field — fires the hook on any of the listed types; e.g. <code>"Bash,PowerShell"</code> fires on both Bash and PowerShell commands</td></tr>
                     <tr class="search-item"><td><code>PermissionDenied</code></td><td class="desc">Fires after auto mode classifier denials; return {retry:true} to allow retry</td></tr>
                     <tr class="search-item"><td><code>"defer"</code> (PreToolUse)</td><td class="desc">Headless sessions pause at tool call; resume with -p --resume to re-evaluate</td></tr>
                     <tr class="search-item"><td><code>UserPromptSubmit</code></td><td class="desc">Fires on user prompt submit; supports hookSpecificOutput.sessionTitle to set session title</td></tr>
@@ -502,7 +503,7 @@
                 <h3>MCP Servers</h3>
                 <table>
                     <tr class="search-item"><td><code>claude mcp list/add/remove</code></td><td class="desc">Standard MCP server management; <code>claude mcp list</code>/<code>get</code> show unapproved <code>.mcp.json</code> servers as <code>⏸ Pending approval</code> instead of auto-connecting</td></tr>
-                    <tr class="search-item"><td><code class="new">claude mcp login/logout &lt;name&gt;</code> <!-- added:v2.1.186 --></td><td class="desc">Authenticate or de-authenticate an MCP server from the CLI without opening <code>/mcp</code>; <code>--no-browser</code> redirects auth code to stdin for SSH completion</td></tr>
+                    <tr class="search-item"><td><code>claude mcp login/logout &lt;name&gt;</code></td><td class="desc">Authenticate or de-authenticate an MCP server from the CLI without opening <code>/mcp</code>; <code>--no-browser</code> redirects auth code to stdin for SSH completion</td></tr>
                     <tr class="search-item"><td><code>claude mcp serve</code></td><td class="desc">Run Claude Code as an MCP server</td></tr>
                     <tr class="search-item"><td><code>--transport http/stdio/sse</code></td><td class="desc">Protocol connection methods</td></tr>
                     <tr class="search-item"><td><code>Elicitation</code></td><td class="desc">Servers can request input mid-task</td></tr>
@@ -686,15 +687,11 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.187",
-        "date": "2026-06-23",
+        "version": "v2.1.191",
+        "date": "2026-06-24",
         "changes": [
-            {"tag": "ADD", "text": "<code>sandbox.credentials</code> JSON setting — block sandboxed commands from reading credential files and secret env vars"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT</code> env var — override the default 5-minute remote MCP tool idle timeout"},
-            {"tag": "CHG", "text": "<code>/btw</code> — ←/→ arrow navigation to step through earlier answers"},
-            {"tag": "ADD", "text": "<code>/install-github-app</code> — GitHub Actions workflow setup is now optional"},
-            {"tag": "CHG", "text": "<code>/plugin list</code> — surfaces recently-unused plugins for cleanup"},
-            {"tag": "CHG", "text": "<code>/model</code> — org-restricted models show \"restricted by your organization's settings\""}
+            {"tag": "CHG", "text": "<code>/rewind</code> — now supports resuming a conversation from before <code>/clear</code> was run"},
+            {"tag": "ADD", "text": "Hook comma-separated matchers (e.g. <code>\"Bash,PowerShell\"</code>) — fires on any of the listed tool types"}
         ]
     }
     </script>
