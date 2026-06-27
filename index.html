@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.193</span>
+            <span class="release-tag">As of release: v2.1.195</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -396,6 +396,7 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_RETRY_WATCHDOG</code></td><td class="desc">Retry watchdog for unattended sessions; replaces high <code>CLAUDE_CODE_MAX_RETRIES</code> values</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT</code></td><td class="desc">Override the default 5-minute idle timeout for remote MCP tool calls; stalled calls abort with an error instead of blocking indefinitely</td></tr>
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP=1</code> <!-- added:v2.1.193 --></td><td class="desc">Disable automatic memory-pressure reaping of idle background shell commands</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_DISABLE_MOUSE_CLICKS</code> <!-- added:v2.1.195 --></td><td class="desc">Disable mouse click/drag/hover in fullscreen mode while keeping wheel scroll active</td></tr>
                 </table>
             </div>
         </div>
@@ -690,12 +691,10 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.193",
-        "date": "2026-06-25",
+        "version": "v2.1.195",
+        "date": "2026-06-26",
         "changes": [
-            {"tag": "ADD", "text": "<code>autoMode.classifyAllShell</code> JSON setting — route all Bash/PowerShell commands through the auto-mode classifier"},
-            {"tag": "ADD", "text": "<code>OTEL_LOG_ASSISTANT_RESPONSES</code> env var — opt in to emitting model response text as an OTEL log event"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP=1</code> env var — disable automatic memory-pressure reaping of idle background shell commands"}
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_DISABLE_MOUSE_CLICKS</code> env var — disable mouse click/drag/hover in fullscreen mode while keeping wheel scroll active"}
         ]
     }
     </script>
