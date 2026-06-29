@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.195</span>
+            <span class="release-tag">As of release: v2.1.196</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -326,7 +326,7 @@
                     <tr class="search-item"><td><code>parentSettingsBehavior</code></td><td class="desc">Admin-tier key: <code>first-wins</code> (default) or <code>merge</code> — opts SDK <code>managedSettings</code> parent tier into policy merge</td></tr>
                     <tr class="search-item"><td><code>"$defaults"</code> (autoMode)</td><td class="desc">Include in <code>autoMode.allow</code>, <code>autoMode.soft_deny</code>, or <code>autoMode.environment</code> to add custom rules alongside the built-in list</td></tr>
                     <tr class="search-item"><td><code>autoMode.hard_deny</code></td><td class="desc">Auto mode classifier rules that block unconditionally regardless of user intent — unlike <code>autoMode.soft_deny</code>, cannot be overridden by allow exceptions</td></tr>
-                    <tr class="search-item"><td><code class="new">autoMode.classifyAllShell</code> <!-- added:v2.1.193 --></td><td class="desc">Route all Bash/PowerShell commands through the auto-mode classifier instead of only arbitrary-code-execution patterns</td></tr>
+                    <tr class="search-item"><td><code>autoMode.classifyAllShell</code></td><td class="desc">Route all Bash/PowerShell commands through the auto-mode classifier instead of only arbitrary-code-execution patterns</td></tr>
                     <tr class="search-item"><td><code>"*"</code> (deny rule glob)</td><td class="desc">Glob patterns supported in deny rule tool-name position; <code>"*"</code> denies all tools; allow rules reject non-MCP globs; unknown tool names in deny rules warn at startup</td></tr>
                     <tr class="search-item"><td><code>Tool(param:value)</code></td><td class="desc">Permission rule syntax to match a tool's input parameters (supports <code>*</code> wildcard); e.g. <code>Agent(model:opus)</code> to block Opus subagents</td></tr>
                     <tr class="search-item"><td><code>attribution.sessionUrl</code></td><td class="desc">Set to <code>false</code> to omit the claude.ai session link from commits and PRs in web and Remote Control sessions</td></tr>
@@ -364,7 +364,7 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_SCRIPT_CAPS</code></td><td class="desc">Limit per-session script invocations (subprocess sandboxing)</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_CERT_STORE=bundled</code></td><td class="desc">Use only bundled CAs; by default OS CA cert store is trusted (enterprise TLS proxy support)</td></tr>
                     <tr class="search-item"><td><code>OTEL_LOG_USER_PROMPTS</code> / <code>OTEL_LOG_TOOL_DETAILS</code> / <code>OTEL_LOG_TOOL_CONTENT</code></td><td class="desc">OTEL beta tracing: opt in to emit sensitive span attributes (prompts/tool details/tool content)</td></tr>
-                    <tr class="search-item"><td><code class="new">OTEL_LOG_ASSISTANT_RESPONSES</code> <!-- added:v2.1.193 --></td><td class="desc">Opt in to emitting the model's response text as an OTEL log event (<code>claude_code.assistant_response</code>); when unset, follows <code>OTEL_LOG_USER_PROMPTS</code>; set to <code>0</code> to log prompts but not responses</td></tr>
+                    <tr class="search-item"><td><code>OTEL_LOG_ASSISTANT_RESPONSES</code></td><td class="desc">Opt in to emitting the model's response text as an OTEL log event (<code>claude_code.assistant_response</code>); when unset, follows <code>OTEL_LOG_USER_PROMPTS</code>; set to <code>0</code> to log prompts but not responses</td></tr>
                     <tr class="search-item"><td><code>ENABLE_PROMPT_CACHING_1H</code></td><td class="desc">Opt into 1-hour prompt cache TTL (API key, Bedrock, Vertex, Foundry)</td></tr>
                     <tr class="search-item"><td><code>FORCE_PROMPT_CACHING_5M</code></td><td class="desc">Force 5-minute prompt cache TTL</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_AWAY_SUMMARY</code></td><td class="desc">Force-enable recap/away summary (useful when telemetry disabled)</td></tr>
@@ -395,7 +395,7 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_MAX_RETRIES</code></td><td class="desc">Caps retry attempts at 15; for unattended sessions use <code>CLAUDE_CODE_RETRY_WATCHDOG</code> instead</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_RETRY_WATCHDOG</code></td><td class="desc">Retry watchdog for unattended sessions; replaces high <code>CLAUDE_CODE_MAX_RETRIES</code> values</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT</code></td><td class="desc">Override the default 5-minute idle timeout for remote MCP tool calls; stalled calls abort with an error instead of blocking indefinitely</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP=1</code> <!-- added:v2.1.193 --></td><td class="desc">Disable automatic memory-pressure reaping of idle background shell commands</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP=1</code></td><td class="desc">Disable automatic memory-pressure reaping of idle background shell commands</td></tr>
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_DISABLE_MOUSE_CLICKS</code> <!-- added:v2.1.195 --></td><td class="desc">Disable mouse click/drag/hover in fullscreen mode while keeping wheel scroll active</td></tr>
                 </table>
             </div>
@@ -489,7 +489,8 @@
                     <tr class="search-item"><td><code>CwdChanged</code> / <code>FileChanged</code></td><td class="desc">React to directory or file changes</td></tr>
                     <tr class="search-item"><td><code>TaskCreated</code></td><td class="desc">Fires when task created via TaskCreate</td></tr>
                     <tr class="search-item"><td><code>if:</code> (hook field)</td><td class="desc">Conditional execution (permission rule syntax)</td></tr>
-                    <tr class="search-item"><td><code class="new">"Bash,PowerShell"</code> <!-- added:v2.1.191 --> (hook matcher)</td><td class="desc">Comma-separated tool type names in a hook's matcher field — fires the hook on any of the listed types; e.g. <code>"Bash,PowerShell"</code> fires on both Bash and PowerShell commands</td></tr>
+                    <tr class="search-item"><td><code>"Bash,PowerShell"</code> (hook matcher)</td><td class="desc">Comma-separated tool type names in a hook's matcher field — fires the hook on any of the listed types; e.g. <code>"Bash,PowerShell"</code> fires on both Bash and PowerShell commands</td></tr>
+                    <tr class="search-item"><td><code class="new">mcp__name__.*</code> <!-- added:v2.1.196 --> (hook matcher pattern)</td><td class="desc">Hyphenated hook matcher identifiers exact-match — use <code>mcp__name__.*</code> glob to match all tools from a hyphenated MCP server (e.g. <code>mcp__brave-search__.*</code>)</td></tr>
                     <tr class="search-item"><td><code>PermissionDenied</code></td><td class="desc">Fires after auto mode classifier denials; return {retry:true} to allow retry</td></tr>
                     <tr class="search-item"><td><code>"defer"</code> (PreToolUse)</td><td class="desc">Headless sessions pause at tool call; resume with -p --resume to re-evaluate</td></tr>
                     <tr class="search-item"><td><code>UserPromptSubmit</code></td><td class="desc">Fires on user prompt submit; supports hookSpecificOutput.sessionTitle to set session title</td></tr>
@@ -691,10 +692,10 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.195",
-        "date": "2026-06-26",
+        "version": "v2.1.196",
+        "date": "2026-06-27",
         "changes": [
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_DISABLE_MOUSE_CLICKS</code> env var — disable mouse click/drag/hover in fullscreen mode while keeping wheel scroll active"}
+            {"tag": "CHG", "text": "Hook matchers with hyphenated identifiers now exact-match — use <code>mcp__name__.*</code> glob to match all tools from a hyphenated MCP server (e.g. <code>mcp__brave-search__.*</code>)"}
         ]
     }
     </script>
