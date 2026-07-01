@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.196</span>
+            <span class="release-tag">As of release: v2.1.197</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -172,7 +172,7 @@
                     <tr class="search-item"><td><code>/config</code></td><td class="desc">Open settings interface; search matches option values; Enter and Space change the selected setting; Esc saves and closes</td></tr>
                     <tr class="search-item"><td><code>/config key=value</code></td><td class="desc">Set any setting from the prompt (e.g. <code>/config thinking=false</code>) — works in interactive, <code>-p</code>, and Remote Control</td></tr>
                     <tr class="search-item"><td><code>/config --help</code></td><td class="desc">List all available shorthand keys for <code>/config key=value</code></td></tr>
-                    <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model; selection saved as default for new sessions; press <code>s</code> in picker to switch for current session only; warns before switching mid-conversation; startup header shows model pin source; lists models from gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway; org-restricted models show "restricted by your organization's settings"</td></tr>
+                    <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model; selection saved as default for new sessions; <code class="new">claude-sonnet-5</code> <!-- added:v2.1.197 --> is now the default (native 1M-token context); press <code>s</code> in picker to switch for current session only; warns before switching mid-conversation; startup header shows model pin source; lists models from gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway; org-restricted models show "restricted by your organization's settings"</td></tr>
                     <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/xhigh/auto); no args opens interactive slider (Faster/Smarter labels); xhigh is Opus 4.8 only; confirms when chosen level will persist as the default for new sessions</td></tr>
                     <tr class="search-item"><td><code>/fast [on/off]</code></td><td class="desc">Toggle Fast mode</td></tr>
                     <tr class="search-item"><td><code>/permissions</code></td><td class="desc">View/update tool permissions</td></tr>
@@ -692,10 +692,10 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.196",
-        "date": "2026-06-27",
+        "version": "v2.1.197",
+        "date": "2026-06-30",
         "changes": [
-            {"tag": "CHG", "text": "Hook matchers with hyphenated identifiers now exact-match — use <code>mcp__name__.*</code> glob to match all tools from a hyphenated MCP server (e.g. <code>mcp__brave-search__.*</code>)"}
+            {"tag": "CHG", "text": "<code>claude-sonnet-5</code> is now the default model in Claude Code with a native 1M-token context window"}
         ]
     }
     </script>
