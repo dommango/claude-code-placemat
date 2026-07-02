@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.197</span>
+            <span class="release-tag">As of release: v2.1.198</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -200,7 +200,6 @@
                     <tr class="search-item"><td><code>/hooks</code></td><td class="desc">Manage event lifecycle hooks</td></tr>
                     <tr class="search-item"><td><code>/install-github-app</code></td><td class="desc">Install the GitHub App; GitHub Actions workflow and repo secret setup is optional — install just the GitHub App and skip the workflow/secret steps</td></tr>
                     <tr class="search-item"><td><code>/skills</code></td><td class="desc">List available active skills; includes type-to-filter search box for long lists</td></tr>
-                    <tr class="search-item"><td><code>/agents</code></td><td class="desc">Manage sub-agents</td></tr>
                     <tr class="search-item"><td><code>/chrome</code></td><td class="desc">Chrome browser integration; pick which connected browser to use via <code>/chrome</code> → "Select browser…", or in-chat when a browser action runs with multiple connected</td></tr>
                     <tr class="search-item"><td><code>/add-dir &lt;path&gt;</code></td><td class="desc">Add working directory to context</td></tr>
                     <tr class="search-item"><td><code>/reload-plugins</code></td><td class="desc">Hot-reload local plugins; auto-installs missing dependencies from added marketplaces</td></tr>
@@ -396,7 +395,7 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_RETRY_WATCHDOG</code></td><td class="desc">Retry watchdog for unattended sessions; replaces high <code>CLAUDE_CODE_MAX_RETRIES</code> values</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT</code></td><td class="desc">Override the default 5-minute idle timeout for remote MCP tool calls; stalled calls abort with an error instead of blocking indefinitely</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP=1</code></td><td class="desc">Disable automatic memory-pressure reaping of idle background shell commands</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_DISABLE_MOUSE_CLICKS</code> <!-- added:v2.1.195 --></td><td class="desc">Disable mouse click/drag/hover in fullscreen mode while keeping wheel scroll active</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_MOUSE_CLICKS</code></td><td class="desc">Disable mouse click/drag/hover in fullscreen mode while keeping wheel scroll active</td></tr>
                 </table>
             </div>
         </div>
@@ -413,6 +412,7 @@
                     <tr class="search-item"><td><code>/claude-api</code></td><td class="desc">Load API + SDK reference into context</td></tr>
                     <tr class="search-item"><td><code>/less-permission-prompts</code></td><td class="desc">Scan transcripts for read-only Bash/MCP calls; propose settings.json allowlist</td></tr>
                     <tr class="search-item"><td><code>/ultrareview [PR#]</code></td><td class="desc">Cloud code review via parallel agents; no args for current branch, PR# for specific PR</td></tr>
+                    <tr class="search-item"><td><code class="new">/dataviz</code> <!-- added:v2.1.198 --></td><td class="desc">Chart and dashboard design guidance with a runnable color-palette validator</td></tr>
                     <tr class="search-item"><td><code>.claude/skills/&lt;name&gt;/</code></td><td class="desc">Project skill directory; auto-loaded without marketplace; nested <code>.claude/skills/</code> directories also load when working on files there — on a name clash, the nested skill appears as <code>&lt;dir&gt;:&lt;name&gt;</code></td></tr>
                     <tr class="search-item"><td><code>~/.claude/skills/&lt;name&gt;/</code></td><td class="desc">Global personal skill directory</td></tr>
                     <tr class="search-item"><td><code>plugin: bin/</code></td><td class="desc">Plugin executables in bin/ invocable as bare commands from Bash tool</td></tr>
@@ -501,6 +501,7 @@
                     <tr class="search-item"><td><code>terminalSequence</code> (hook output)</td><td class="desc">Hook JSON output field — emit desktop notifications, window titles, and bells without a controlling terminal</td></tr>
                     <tr class="search-item"><td><code>MessageDisplay</code></td><td class="desc">Fires as assistant message text is displayed; hooks can transform or hide the output</td></tr>
                     <tr class="search-item"><td><code>EnterWorktree</code></td><td class="desc">Fires when entering a worktree; can now switch between Claude-managed worktrees mid-session</td></tr>
+                    <tr class="search-item"><td><code class="new">Notification</code> <!-- added:v2.1.198 --></td><td class="desc">Fires when a background agent session needs input or finishes; events: <code>agent_needs_input</code> / <code>agent_completed</code></td></tr>
                 </table>
             </div>
 
@@ -692,10 +693,12 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.197",
-        "date": "2026-06-30",
+        "version": "v2.1.198",
+        "date": "2026-07-01",
         "changes": [
-            {"tag": "CHG", "text": "<code>claude-sonnet-5</code> is now the default model in Claude Code with a native 1M-token context window"}
+            {"tag": "ADD", "text": "<code>Notification</code> hook — fires when a background agent session needs input (<code>agent_needs_input</code>) or finishes (<code>agent_completed</code>)"},
+            {"tag": "ADD", "text": "<code>/dataviz</code> skill — chart and dashboard design guidance with a runnable color-palette validator"},
+            {"tag": "DEL", "text": "<code>/agents</code> slash-command wizard removed — create or manage subagents by asking Claude or editing <code>.claude/agents/</code> directly"}
         ]
     }
     </script>
