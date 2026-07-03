@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.198</span>
+            <span class="release-tag">As of release: v2.1.199</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -391,8 +391,8 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code></td><td class="desc">Hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>disableBundledSkills</code> JSON setting</td></tr>
                     <tr class="search-item"><td><code>API_FORCE_IDLE_TIMEOUT=0</code></td><td class="desc">Opt out of the default 5-minute idle timeout on Vertex/Foundry; stalled streams will hang indefinitely instead of aborting</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CLIENT_PRESENCE_FILE</code></td><td class="desc">Path to a marker file — while the file exists, mobile push notifications are suppressed (signals you're at the machine)</td></tr>
-                    <tr class="search-item"><td><code>CLAUDE_CODE_MAX_RETRIES</code></td><td class="desc">Caps retry attempts at 15; for unattended sessions use <code>CLAUDE_CODE_RETRY_WATCHDOG</code> instead</td></tr>
-                    <tr class="search-item"><td><code>CLAUDE_CODE_RETRY_WATCHDOG</code></td><td class="desc">Retry watchdog for unattended sessions; replaces high <code>CLAUDE_CODE_MAX_RETRIES</code> values</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_MAX_RETRIES</code></td><td class="desc">Retry attempt limit; cap of 15 is lifted when <code>CLAUDE_CODE_RETRY_WATCHDOG</code> is set — for unattended sessions use the watchdog instead</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_RETRY_WATCHDOG</code></td><td class="desc">Retry watchdog for unattended sessions; raises default retry count for non-capacity transient errors to 300 and lifts the cap of 15 on <code>CLAUDE_CODE_MAX_RETRIES</code></td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT</code></td><td class="desc">Override the default 5-minute idle timeout for remote MCP tool calls; stalled calls abort with an error instead of blocking indefinitely</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP=1</code></td><td class="desc">Disable automatic memory-pressure reaping of idle background shell commands</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_MOUSE_CLICKS</code></td><td class="desc">Disable mouse click/drag/hover in fullscreen mode while keeping wheel scroll active</td></tr>
@@ -413,6 +413,7 @@
                     <tr class="search-item"><td><code>/less-permission-prompts</code></td><td class="desc">Scan transcripts for read-only Bash/MCP calls; propose settings.json allowlist</td></tr>
                     <tr class="search-item"><td><code>/ultrareview [PR#]</code></td><td class="desc">Cloud code review via parallel agents; no args for current branch, PR# for specific PR</td></tr>
                     <tr class="search-item"><td><code class="new">/dataviz</code> <!-- added:v2.1.198 --></td><td class="desc">Chart and dashboard design guidance with a runnable color-palette validator</td></tr>
+                    <tr class="search-item"><td><code class="new">/skill-a /skill-b [prompt]</code> <!-- added:v2.1.199 --></td><td class="desc">Stacked slash-skill invocations — up to 5 leading skills all load simultaneously (e.g. <code>/skill-a /skill-b do XYZ</code>)</td></tr>
                     <tr class="search-item"><td><code>.claude/skills/&lt;name&gt;/</code></td><td class="desc">Project skill directory; auto-loaded without marketplace; nested <code>.claude/skills/</code> directories also load when working on files there — on a name clash, the nested skill appears as <code>&lt;dir&gt;:&lt;name&gt;</code></td></tr>
                     <tr class="search-item"><td><code>~/.claude/skills/&lt;name&gt;/</code></td><td class="desc">Global personal skill directory</td></tr>
                     <tr class="search-item"><td><code>plugin: bin/</code></td><td class="desc">Plugin executables in bin/ invocable as bare commands from Bash tool</td></tr>
@@ -490,7 +491,7 @@
                     <tr class="search-item"><td><code>TaskCreated</code></td><td class="desc">Fires when task created via TaskCreate</td></tr>
                     <tr class="search-item"><td><code>if:</code> (hook field)</td><td class="desc">Conditional execution (permission rule syntax)</td></tr>
                     <tr class="search-item"><td><code>"Bash,PowerShell"</code> (hook matcher)</td><td class="desc">Comma-separated tool type names in a hook's matcher field — fires the hook on any of the listed types; e.g. <code>"Bash,PowerShell"</code> fires on both Bash and PowerShell commands</td></tr>
-                    <tr class="search-item"><td><code class="new">mcp__name__.*</code> <!-- added:v2.1.196 --> (hook matcher pattern)</td><td class="desc">Hyphenated hook matcher identifiers exact-match — use <code>mcp__name__.*</code> glob to match all tools from a hyphenated MCP server (e.g. <code>mcp__brave-search__.*</code>)</td></tr>
+                    <tr class="search-item"><td><code>mcp__name__.*</code> (hook matcher pattern)</td><td class="desc">Hyphenated hook matcher identifiers exact-match — use <code>mcp__name__.*</code> glob to match all tools from a hyphenated MCP server (e.g. <code>mcp__brave-search__.*</code>)</td></tr>
                     <tr class="search-item"><td><code>PermissionDenied</code></td><td class="desc">Fires after auto mode classifier denials; return {retry:true} to allow retry</td></tr>
                     <tr class="search-item"><td><code>"defer"</code> (PreToolUse)</td><td class="desc">Headless sessions pause at tool call; resume with -p --resume to re-evaluate</td></tr>
                     <tr class="search-item"><td><code>UserPromptSubmit</code></td><td class="desc">Fires on user prompt submit; supports hookSpecificOutput.sessionTitle to set session title</td></tr>
@@ -693,12 +694,12 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.198",
-        "date": "2026-07-01",
+        "version": "v2.1.199",
+        "date": "2026-07-02",
         "changes": [
-            {"tag": "ADD", "text": "<code>Notification</code> hook — fires when a background agent session needs input (<code>agent_needs_input</code>) or finishes (<code>agent_completed</code>)"},
-            {"tag": "ADD", "text": "<code>/dataviz</code> skill — chart and dashboard design guidance with a runnable color-palette validator"},
-            {"tag": "DEL", "text": "<code>/agents</code> slash-command wizard removed — create or manage subagents by asking Claude or editing <code>.claude/agents/</code> directly"}
+            {"tag": "ADD", "text": "<code>/skill-a /skill-b [prompt]</code> — stacked slash-skill invocations load up to 5 leading skills simultaneously"},
+            {"tag": "CHG", "text": "<code>CLAUDE_CODE_RETRY_WATCHDOG</code> — raises default retry count for non-capacity transient errors to 300 and lifts the cap of 15 on <code>CLAUDE_CODE_MAX_RETRIES</code>"},
+            {"tag": "CHG", "text": "<code>CLAUDE_CODE_MAX_RETRIES</code> — cap of 15 is lifted when <code>CLAUDE_CODE_RETRY_WATCHDOG</code> is set"}
         ]
     }
     </script>

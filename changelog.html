@@ -198,8 +198,17 @@
 
             <!-- July 2026 -->
             <details class="month-group" open>
-                <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.198</span> <span class="month-count">1 release</span></summary>
+                <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.199</span> <span class="month-count">2 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.199 <span class="version-date">2026-07-02</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>/skill-a /skill-b [prompt]</code> — stacked slash-skill invocations load up to 5 leading skills simultaneously</li>
+                            <li><span class="tag tag-change">CHG</span><code>CLAUDE_CODE_RETRY_WATCHDOG</code> — raises default retry count for non-capacity transient errors to 300 and lifts the cap of 15 on <code>CLAUDE_CODE_MAX_RETRIES</code></li>
+                            <li><span class="tag tag-change">CHG</span><code>CLAUDE_CODE_MAX_RETRIES</code> — cap of 15 is lifted when <code>CLAUDE_CODE_RETRY_WATCHDOG</code> is set</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.198 <span class="version-date">2026-07-01</span></h3>
