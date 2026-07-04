@@ -40,7 +40,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.199</span>
+            <span class="release-tag">As of release: v2.1.201</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -172,7 +172,7 @@
                     <tr class="search-item"><td><code>/config</code></td><td class="desc">Open settings interface; search matches option values; Enter and Space change the selected setting; Esc saves and closes</td></tr>
                     <tr class="search-item"><td><code>/config key=value</code></td><td class="desc">Set any setting from the prompt (e.g. <code>/config thinking=false</code>) — works in interactive, <code>-p</code>, and Remote Control</td></tr>
                     <tr class="search-item"><td><code>/config --help</code></td><td class="desc">List all available shorthand keys for <code>/config key=value</code></td></tr>
-                    <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model; selection saved as default for new sessions; <code class="new">claude-sonnet-5</code> <!-- added:v2.1.197 --> is now the default (native 1M-token context); press <code>s</code> in picker to switch for current session only; warns before switching mid-conversation; startup header shows model pin source; lists models from gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway; org-restricted models show "restricted by your organization's settings"</td></tr>
+                    <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model; selection saved as default for new sessions; <code>claude-sonnet-5</code> is now the default (native 1M-token context); press <code>s</code> in picker to switch for current session only; warns before switching mid-conversation; startup header shows model pin source; lists models from gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway; org-restricted models show "restricted by your organization's settings"</td></tr>
                     <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/xhigh/auto); no args opens interactive slider (Faster/Smarter labels); xhigh is Opus 4.8 only; confirms when chosen level will persist as the default for new sessions</td></tr>
                     <tr class="search-item"><td><code>/fast [on/off]</code></td><td class="desc">Toggle Fast mode</td></tr>
                     <tr class="search-item"><td><code>/permissions</code></td><td class="desc">View/update tool permissions</td></tr>
@@ -270,6 +270,7 @@
                     <tr class="search-item"><td><code>--fallback-model</code></td><td class="desc">Fallback model for when the primary model is overloaded or unavailable; applies to interactive sessions and headless (-p) mode; configure up to three in order via <code>fallbackModel</code> JSON setting</td></tr>
                     <tr class="search-item"><td><code>--thinking disabled</code></td><td class="desc">Disable thinking on models that think by default; equivalent to <code>MAX_THINKING_TOKENS=0</code> or toggling the per-model thinking switch</td></tr>
                     <tr class="search-item"><td><code>--permission-mode plan</code></td><td class="desc">Start in read-only plan mode</td></tr>
+                    <tr class="search-item"><td><code class="new">--permission-mode manual</code> <!-- added:v2.1.200 --></td><td class="desc">Start in manual (default) permission mode; renamed from <code>default</code> — both values accepted</td></tr>
                     <tr class="search-item"><td><code>--max-budget-usd</code></td><td class="desc">Set cost cap for session</td></tr>
                     <tr class="search-item"><td><code>--remote</code></td><td class="desc">Start web-accessible session</td></tr>
                     <tr class="search-item"><td><code>--remote-control</code></td><td class="desc">Enable Remote Control mode; bridges CLI session to claude.ai/code</td></tr>
@@ -300,6 +301,7 @@
                 <h3>Key JSON Settings</h3>
                 <table>
                     <tr class="search-item"><td><code>modelOverrides</code></td><td class="desc">Map model picker to custom IDs</td></tr>
+                    <tr class="search-item"><td><code class="new">defaultMode</code> <!-- added:v2.1.200 --></td><td class="desc">Set default permission mode; <code>"manual"</code> (formerly <code>"default"</code>) — both values accepted; paired with <code>--permission-mode</code> CLI flag</td></tr>
                     <tr class="search-item"><td><code>autoMemoryDirectory</code></td><td class="desc">Custom auto-loaded memory dir</td></tr>
                     <tr class="search-item"><td><code>worktree.sparsePaths</code></td><td class="desc">Sparse checkout dirs for agents</td></tr>
                     <tr class="search-item"><td><code>worktree.baseRef</code></td><td class="desc"><code>fresh</code> (default) branches worktrees from <code>origin/&lt;default&gt;</code>; <code>head</code> branches from local <code>HEAD</code> — applies to <code>--worktree</code>, <code>EnterWorktree</code>, and agent-isolation</td></tr>
@@ -412,7 +414,7 @@
                     <tr class="search-item"><td><code>/claude-api</code></td><td class="desc">Load API + SDK reference into context</td></tr>
                     <tr class="search-item"><td><code>/less-permission-prompts</code></td><td class="desc">Scan transcripts for read-only Bash/MCP calls; propose settings.json allowlist</td></tr>
                     <tr class="search-item"><td><code>/ultrareview [PR#]</code></td><td class="desc">Cloud code review via parallel agents; no args for current branch, PR# for specific PR</td></tr>
-                    <tr class="search-item"><td><code class="new">/dataviz</code> <!-- added:v2.1.198 --></td><td class="desc">Chart and dashboard design guidance with a runnable color-palette validator</td></tr>
+                    <tr class="search-item"><td><code>/dataviz</code></td><td class="desc">Chart and dashboard design guidance with a runnable color-palette validator</td></tr>
                     <tr class="search-item"><td><code class="new">/skill-a /skill-b [prompt]</code> <!-- added:v2.1.199 --></td><td class="desc">Stacked slash-skill invocations — up to 5 leading skills all load simultaneously (e.g. <code>/skill-a /skill-b do XYZ</code>)</td></tr>
                     <tr class="search-item"><td><code>.claude/skills/&lt;name&gt;/</code></td><td class="desc">Project skill directory; auto-loaded without marketplace; nested <code>.claude/skills/</code> directories also load when working on files there — on a name clash, the nested skill appears as <code>&lt;dir&gt;:&lt;name&gt;</code></td></tr>
                     <tr class="search-item"><td><code>~/.claude/skills/&lt;name&gt;/</code></td><td class="desc">Global personal skill directory</td></tr>
@@ -443,7 +445,7 @@
             <div class="search-group">
                 <h3>Agent YAML Frontmatter</h3>
                 <table>
-                    <tr class="search-item"><td><code>permissionMode</code></td><td class="desc">default / acceptEdits / plan / bypass</td></tr>
+                    <tr class="search-item"><td><code>permissionMode</code></td><td class="desc">manual / acceptEdits / plan / bypass; <code>manual</code> replaces <code>default</code> — both accepted</td></tr>
                     <tr class="search-item"><td><code>isolation: worktree</code></td><td class="desc">Run agent in isolated git worktree</td></tr>
                     <tr class="search-item"><td><code>memory: user|project</code></td><td class="desc">Persistent memory storage scope</td></tr>
                     <tr class="search-item"><td><code>background: true</code></td><td class="desc">Run entirely as background task</td></tr>
@@ -502,7 +504,7 @@
                     <tr class="search-item"><td><code>terminalSequence</code> (hook output)</td><td class="desc">Hook JSON output field — emit desktop notifications, window titles, and bells without a controlling terminal</td></tr>
                     <tr class="search-item"><td><code>MessageDisplay</code></td><td class="desc">Fires as assistant message text is displayed; hooks can transform or hide the output</td></tr>
                     <tr class="search-item"><td><code>EnterWorktree</code></td><td class="desc">Fires when entering a worktree; can now switch between Claude-managed worktrees mid-session</td></tr>
-                    <tr class="search-item"><td><code class="new">Notification</code> <!-- added:v2.1.198 --></td><td class="desc">Fires when a background agent session needs input or finishes; events: <code>agent_needs_input</code> / <code>agent_completed</code></td></tr>
+                    <tr class="search-item"><td><code>Notification</code></td><td class="desc">Fires when a background agent session needs input or finishes; events: <code>agent_needs_input</code> / <code>agent_completed</code></td></tr>
                 </table>
             </div>
 
@@ -694,12 +696,12 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.199",
-        "date": "2026-07-02",
+        "version": "v2.1.201",
+        "date": "2026-07-03",
         "changes": [
-            {"tag": "ADD", "text": "<code>/skill-a /skill-b [prompt]</code> — stacked slash-skill invocations load up to 5 leading skills simultaneously"},
-            {"tag": "CHG", "text": "<code>CLAUDE_CODE_RETRY_WATCHDOG</code> — raises default retry count for non-capacity transient errors to 300 and lifts the cap of 15 on <code>CLAUDE_CODE_MAX_RETRIES</code>"},
-            {"tag": "CHG", "text": "<code>CLAUDE_CODE_MAX_RETRIES</code> — cap of 15 is lifted when <code>CLAUDE_CODE_RETRY_WATCHDOG</code> is set"}
+            {"tag": "ADD", "text": "<code>--permission-mode manual</code> — new accepted value for the default permission mode; renamed from <code>default</code> — both values honored"},
+            {"tag": "ADD", "text": "<code>defaultMode</code> JSON setting — set default permission mode; <code>\"manual\"</code> (formerly <code>\"default\"</code>) — both values accepted"},
+            {"tag": "CHG", "text": "<code>permissionMode</code> (agent frontmatter) — <code>manual</code> replaces <code>default</code>; both accepted"}
         ]
     }
     </script>
