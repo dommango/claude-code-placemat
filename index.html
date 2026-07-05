@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Claude Code Placemat</title>
+    <meta name="description" content="Single-page reference for Claude Code — commands, shortcuts, flags, configuration, hooks, MCP, skills, and agents. Auto-updated from the official changelog.">
+    <meta property="og:title" content="Claude Code Placemat">
+    <meta property="og:description" content="Single-page reference for Claude Code — commands, shortcuts, flags, configuration, hooks, MCP, skills, and agents.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dommango.github.io/claude-code-placemat/">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iI2Q5Nzc1NyIvPjx0ZXh0IHg9IjE2IiB5PSIyMyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzFlMWUxZSI+Jmd0O188L3RleHQ+PC9zdmc+Cg==">
     <link rel="stylesheet" href="placemat.css">
     <script>
         (function() {
@@ -42,10 +48,10 @@
         <div class="global-controls">
             <span class="release-tag">As of release: v2.1.201</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
-            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">&#9728;&#65039;</button>
+            <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
-                <input type="text" id="dashboardSearch" placeholder="Search the placemat…">
-                <span class="kbd">⌘K</span>
+                <input type="text" id="dashboardSearch" placeholder="Search the placemat…" aria-label="Search the placemat">
+                <span class="kbd" id="searchKbd">⌘K</span>
             </div>
         </div>
     </header>
@@ -53,8 +59,8 @@
     <div class="dashboard-grid">
 
         <!-- Legend + Command Builder -->
-        <div class="card full-width search-exclude" style="padding: 8px 16px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <div class="card full-width search-exclude legend-strip">
+            <div class="legend-strip-row">
                 <div class="legend">
                     <div class="legend-item"><span class="legend-swatch swatch-default"></span> Verified</div>
                     <div class="legend-item"><span class="legend-swatch swatch-new"></span> New (recent release)</div>
@@ -84,6 +90,7 @@
             <div class="search-group">
                 <h3>General Controls</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>Ctrl C</code> / <code>D</code></td><td class="desc">Cancel input / Exit session</td></tr>
                     <tr class="search-item"><td><code>Ctrl L</code></td><td class="desc">Clear screen + full redraw</td></tr>
                     <tr class="search-item"><td><code>Ctrl O</code></td><td class="desc">Toggle between normal and verbose transcript; in a collapsed thinking group, shows the full thinking; focus view toggled with /focus</td></tr>
@@ -103,6 +110,7 @@
             <div class="search-group">
                 <h3>Mode & Input</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>Tab</code></td><td class="desc">Cycle permission modes</td></tr>
                     <tr class="search-item"><td><code>\ P</code></td><td class="desc">Switch model</td></tr>
                     <tr class="search-item"><td><code>\ T</code></td><td class="desc">Toggle thinking on/off</td></tr>
@@ -115,6 +123,7 @@
             <div class="search-group">
                 <h3>Session Picker Nav</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>P</code> / <code>R</code></td><td class="desc">Preview / Rename session</td></tr>
                     <tr class="search-item"><td><code>/</code></td><td class="desc">Search sessions</td></tr>
                     <tr class="search-item"><td><code>A</code> / <code>B</code></td><td class="desc">Filter All projects / Current branch</td></tr>
@@ -125,6 +134,7 @@
             <div class="search-group">
                 <h3>Transcript View</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>[</code></td><td class="desc">Dump transcript to scrollback</td></tr>
                     <tr class="search-item"><td><code>v</code></td><td class="desc">Open transcript in editor</td></tr>
                     <tr class="search-item"><td><code>?</code></td><td class="desc">Show keyboard shortcuts in transcript nav view</td></tr>
@@ -136,6 +146,7 @@
             <div class="search-group">
                 <h3>Vim Mode</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>v</code> / <code>V</code></td><td class="desc">Visual / visual-line selection mode (NORMAL mode)</td></tr>
                     <tr class="search-item"><td><code>/ (NORMAL mode)</code></td><td class="desc">Open reverse history search (like Ctrl+R), matching bash/zsh vi-mode</td></tr>
                 </table>
@@ -148,6 +159,7 @@
             <div class="search-group">
                 <h3>Session Management</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>/clear</code></td><td class="desc">Clear conversation context</td></tr>
                     <tr class="search-item"><td><code>/compact [focus]</code></td><td class="desc">Compact context to free space</td></tr>
                     <tr class="search-item"><td><code>/resume</code></td><td class="desc">Display session picker menu; background sessions (from <code>--bg</code> or agent view) now appear alongside interactive sessions, marked with <code>bg</code>; offers to summarize stale large sessions before re-reading</td></tr>
@@ -169,6 +181,7 @@
             <div class="search-group">
                 <h3>Configuration</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>/config</code></td><td class="desc">Open settings interface; search matches option values; Enter and Space change the selected setting; Esc saves and closes</td></tr>
                     <tr class="search-item"><td><code>/config key=value</code></td><td class="desc">Set any setting from the prompt (e.g. <code>/config thinking=false</code>) — works in interactive, <code>-p</code>, and Remote Control</td></tr>
                     <tr class="search-item"><td><code>/config --help</code></td><td class="desc">List all available shorthand keys for <code>/config key=value</code></td></tr>
@@ -194,6 +207,7 @@
             <div class="search-group">
                 <h3>Development Tools</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>/init</code></td><td class="desc">Create CLAUDE.md memory</td></tr>
                     <tr class="search-item"><td><code>/memory</code></td><td class="desc">Edit CLAUDE.md files directly</td></tr>
                     <tr class="search-item"><td><code>/mcp</code></td><td class="desc">Manage MCP servers; shows tool count for each connected server and flags servers with 0 tools</td></tr>
@@ -211,6 +225,7 @@
             <div class="search-group">
                 <h3>Special & Utility</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>/btw &lt;query&gt;</code></td><td class="desc">Side question (does not alter context); press <code>c</code> to copy raw markdown answer to clipboard; ←/→ to step through earlier answers</td></tr>
                     <tr class="search-item"><td><code>/plan [desc]</code></td><td class="desc">Switch to Plan Mode directly</td></tr>
                     <tr class="search-item"><td><code>/loop [interval]</code></td><td class="desc">Schedule recurring background task</td></tr>
@@ -237,6 +252,7 @@
             <div class="search-group">
                 <h3>Core Execution</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>claude</code></td><td class="desc">Start interactive REPL</td></tr>
                     <tr class="search-item"><td><code>claude -p "q"</code></td><td class="desc">Headless execution (scripting)</td></tr>
                     <tr class="search-item"><td><code>claude -c</code> / <code>-r "n"</code></td><td class="desc">Continue last / Resume specific</td></tr>
@@ -252,6 +268,7 @@
             <div class="search-group">
                 <h3>Headless & CI Flags</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>--bare</code></td><td class="desc">Minimal headless (no hooks/LSP)</td></tr>
                     <tr class="search-item"><td><code>--channels</code></td><td class="desc">Permission relay / MCP push msg; now works with console (API key) auth — console orgs with managed settings must set <code>channelsEnabled: true</code></td></tr>
                     <tr class="search-item"><td><code>--output-format json</code></td><td class="desc">Structured JSON output</td></tr>
@@ -264,6 +281,7 @@
             <div class="search-group">
                 <h3>State & Behavior</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>-w</code> / <code>--worktree</code></td><td class="desc">Start in isolated git worktree</td></tr>
                     <tr class="search-item"><td><code>--effort</code></td><td class="desc">Set effort level (low/med/high/xhigh); xhigh is Opus 4.8 only</td></tr>
                     <tr class="search-item"><td><code>--model</code></td><td class="desc">Override specific model at launch</td></tr>
@@ -288,6 +306,7 @@
             <div class="search-group">
                 <h3>Files & Priority</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>~/.claude/settings.json</code></td><td class="desc">User global defaults</td></tr>
                     <tr class="search-item"><td><code>.claude/settings.json</code></td><td class="desc">Project shared (committed)</td></tr>
                     <tr class="search-item"><td><code>.claude/settings.local.json</code></td><td class="desc">Project local only (gitignored)</td></tr>
@@ -300,6 +319,7 @@
             <div class="search-group">
                 <h3>Key JSON Settings</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>modelOverrides</code></td><td class="desc">Map model picker to custom IDs</td></tr>
                     <tr class="search-item"><td><code class="new">defaultMode</code> <!-- added:v2.1.200 --></td><td class="desc">Set default permission mode; <code>"manual"</code> (formerly <code>"default"</code>) — both values accepted; paired with <code>--permission-mode</code> CLI flag</td></tr>
                     <tr class="search-item"><td><code>autoMemoryDirectory</code></td><td class="desc">Custom auto-loaded memory dir</td></tr>
@@ -348,6 +368,7 @@
             <div class="search-group">
                 <h3>Environment Variables</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>ANTHROPIC_API_KEY</code></td><td class="desc">Auth override</td></tr>
                     <tr class="search-item"><td><code>ANTHROPIC_MODEL</code></td><td class="desc">Default model override</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_EFFORT_LEVEL</code></td><td class="desc">Default effort (low/med/high)</td></tr>
@@ -408,6 +429,7 @@
             <div class="search-group">
                 <h3>Built-in Skills & Locations</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>/code-review [effort]</code></td><td class="desc">Code review; pass <code>--fix</code> to apply findings to working tree (surfacing reuse/simplification/efficiency suggestions); pass <code>--comment</code> to post findings as inline PR comments; optional effort level (e.g. <code>/code-review high</code>)</td></tr>
                     <tr class="search-item"><td><code>/simplify</code></td><td class="desc">Cleanup-only review (reuse, simplification, efficiency, altitude) applied to working tree; does not run the full <code>/code-review --fix</code> bug hunt</td></tr>
                     <tr class="search-item"><td><code>/batch</code></td><td class="desc">Large parallel changes (5-30 worktrees)</td></tr>
@@ -425,6 +447,7 @@
             <div class="search-group">
                 <h3>Skill YAML Frontmatter</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>description</code></td><td class="desc">Auto-invocation trigger string</td></tr>
                     <tr class="search-item"><td><code>effort</code></td><td class="desc">Override effort level specifically for skill</td></tr>
                     <tr class="search-item"><td><code>allowed-tools</code></td><td class="desc">Skip permission prompts for skill</td></tr>
@@ -445,6 +468,7 @@
             <div class="search-group">
                 <h3>Agent YAML Frontmatter</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>permissionMode</code></td><td class="desc">manual / acceptEdits / plan / bypass; <code>manual</code> replaces <code>default</code> — both accepted</td></tr>
                     <tr class="search-item"><td><code>isolation: worktree</code></td><td class="desc">Run agent in isolated git worktree</td></tr>
                     <tr class="search-item"><td><code>memory: user|project</code></td><td class="desc">Persistent memory storage scope</td></tr>
@@ -459,6 +483,7 @@
             <div class="search-group">
                 <h3>Plugin CLI Commands</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>claude plugin init &lt;name&gt;</code></td><td class="desc">Scaffold a new plugin in <code>.claude/skills</code></td></tr>
                     <tr class="search-item"><td><code>claude plugin tag</code></td><td class="desc">Create release git tags for plugins with version validation</td></tr>
                     <tr class="search-item"><td><code>claude plugin prune</code></td><td class="desc">Remove orphaned auto-installed plugin dependencies; <code>plugin uninstall --prune</code> cascades</td></tr>
@@ -473,6 +498,7 @@
             <div class="search-group">
                 <h3>Rules & Auto-Memory</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>.claude/rules/*.md</code></td><td class="desc">Project specific structural rules</td></tr>
                     <tr class="search-item"><td><code>~/.claude/rules/*.md</code></td><td class="desc">User specific global rules</td></tr>
                     <tr class="search-item"><td><code>paths:</code> (frontmatter)</td><td class="desc">Path-specific rule triggers</td></tr>
@@ -484,6 +510,7 @@
             <div class="search-group">
                 <h3>Event Hooks</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>PreToolUse</code> / <code>PostToolUse</code></td><td class="desc">Intercept before/after tool execution; <code>PostToolUse</code> hook input includes <code>duration_ms</code>; can replace tool output via <code>hookSpecificOutput.updatedToolOutput</code> for all tools</td></tr>
                     <tr class="search-item"><td><code>PostToolUseFailure</code></td><td class="desc">Fires when a tool call fails; hook input includes <code>duration_ms</code></td></tr>
                     <tr class="search-item"><td><code>SessionStart</code></td><td class="desc">Fires on session start/resume; return <code>reloadSkills: true</code> to re-scan skill directories; set <code>hookSpecificOutput.sessionTitle</code> to name the session</td></tr>
@@ -511,6 +538,7 @@
             <div class="search-group">
                 <h3>MCP Servers</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>claude mcp list/add/remove</code></td><td class="desc">Standard MCP server management; <code>claude mcp list</code>/<code>get</code> show unapproved <code>.mcp.json</code> servers as <code>⏸ Pending approval</code> instead of auto-connecting</td></tr>
                     <tr class="search-item"><td><code>claude mcp login/logout &lt;name&gt;</code></td><td class="desc">Authenticate or de-authenticate an MCP server from the CLI without opening <code>/mcp</code>; <code>--no-browser</code> redirects auth code to stdin for SSH completion</td></tr>
                     <tr class="search-item"><td><code>claude mcp serve</code></td><td class="desc">Run Claude Code as an MCP server</td></tr>
@@ -524,11 +552,14 @@
             <div class="search-group">
                 <h3>Auth Commands</h3>
                 <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>claude auth login/logout</code></td><td class="desc">Session authentication control; <code>auth login</code> accepts OAuth code pasted in terminal when browser callback can't reach localhost (WSL2, SSH, containers)</td></tr>
                     <tr class="search-item"><td><code>claude auth status</code></td><td class="desc">Check current authentication validity</td></tr>
                 </table>
             </div>
         </div>
+
+        <div class="no-results search-exclude" id="noResults" style="display: none;">No matches — clear search to see everything.</div>
 
         <footer class="global-footer">
             Template v1.1 | March 2026<br>
@@ -537,26 +568,50 @@
 
     </div>
 
+    <script type="application/json" id="whatsNewData">
+    {
+        "version": "v2.1.201",
+        "date": "2026-07-03",
+        "changes": [
+            {"tag": "ADD", "text": "<code>--permission-mode manual</code> — new accepted value for the default permission mode; renamed from <code>default</code> — both values honored"},
+            {"tag": "ADD", "text": "<code>defaultMode</code> JSON setting — set default permission mode; <code>\"manual\"</code> (formerly <code>\"default\"</code>) — both values accepted"},
+            {"tag": "CHG", "text": "<code>permissionMode</code> (agent frontmatter) — <code>manual</code> replaces <code>default</code>; both accepted"}
+        ]
+    }
+    </script>
+
     <script>
         // --- THEME TOGGLE LOGIC ---
+        function setThemeIcon(theme) {
+            const btn = document.getElementById('themeBtn');
+            if (btn) btn.innerHTML = theme === 'dark' ? '&#9728;&#65039;' : '&#127769;';
+        }
         function toggleTheme() {
             const root = document.documentElement;
-            const btn = document.getElementById('themeBtn');
             const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
             root.dataset.theme = next;
             localStorage.setItem('placemat-theme', next);
-            btn.innerHTML = next === 'dark' ? '&#9728;&#65039;' : '&#127769;';
+            setThemeIcon(next);
         }
-        (function() {
-            const btn = document.getElementById('themeBtn');
-            if (btn) btn.innerHTML = document.documentElement.dataset.theme === 'dark' ? '&#9728;&#65039;' : '&#127769;';
-        })();
+        setThemeIcon(document.documentElement.dataset.theme);
 
-        // --- CLICK TO COPY LOGIC ---
+        // --- CLICK TO COPY LOGIC (mouse + keyboard) ---
+        function makeCopyable(el, getText) {
+            el.title = "Click to copy";
+            el.tabIndex = 0;
+            el.setAttribute('role', 'button');
+            el.addEventListener('click', () => copyText(el, getText()));
+            el.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    copyText(el, getText());
+                }
+            });
+        }
+
         document.querySelectorAll('code').forEach(el => {
             if(el.id === 'generatedCmd') return;
-            el.title = "Click to copy";
-            el.addEventListener('click', () => copyText(el, el.innerText));
+            makeCopyable(el, () => el.innerText);
         });
 
         async function copyText(element, text) {
@@ -571,6 +626,11 @@
         const searchInput = document.getElementById('dashboardSearch');
         searchInput.addEventListener('input', (e) => performSearch(e.target.value));
 
+        const searchKbd = document.getElementById('searchKbd');
+        if (searchKbd && !/mac/i.test(navigator.platform || navigator.userAgentData?.platform || '')) {
+            searchKbd.textContent = 'Ctrl K';
+        }
+
         window.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
                 e.preventDefault(); searchInput.focus();
@@ -580,6 +640,8 @@
         function performSearch(term) {
             term = term.toLowerCase().trim();
             const cards = document.querySelectorAll('.dashboard-grid .card:not(.search-exclude)');
+            const noResults = document.getElementById('noResults');
+            let anyCardVisible = false;
 
             cards.forEach(card => {
                 let cardHasMatch = false;
@@ -588,6 +650,7 @@
                     card.style.display = 'block';
                     card.querySelectorAll('.search-group').forEach(sg => sg.style.display = 'block');
                     card.querySelectorAll('.search-item').forEach(item => item.style.display = 'table-row');
+                    anyCardVisible = true;
                     return;
                 }
 
@@ -596,6 +659,7 @@
                     card.style.display = 'block';
                     card.querySelectorAll('.search-group').forEach(sg => sg.style.display = 'block');
                     card.querySelectorAll('.search-item').forEach(item => item.style.display = 'table-row');
+                    anyCardVisible = true;
                     return;
                 }
 
@@ -624,7 +688,10 @@
                 });
 
                 card.style.display = cardHasMatch ? 'block' : 'none';
+                if (cardHasMatch) anyCardVisible = true;
             });
+
+            if (noResults) noResults.style.display = anyCardVisible ? 'none' : 'block';
         }
 
         // --- COMPACT COMMAND BUILDER LOGIC ---
@@ -634,13 +701,17 @@
         const labBare = document.getElementById('labBare');
         const genOut = document.getElementById('generatedCmd');
 
+        // Single-quote the prompt and escape embedded single quotes the POSIX-safe way
+        // ('\'') — unlike double-quote escaping, this is immune to $VAR and `cmd` expansion.
+        const shellSingleQuote = (str) => `'${str.replace(/'/g, `'\\''`)}'`;
+
         const updateCmd = () => {
-            const prompt = labPrompt.value.replace(/"/g, '\\"');
+            const prompt = shellSingleQuote(labPrompt.value);
             const effort = labEffort.value;
             const format = labFormat.value;
             const bare = labBare.checked ? '--bare' : '';
 
-            let cmd = `claude -p "${prompt}"`;
+            let cmd = `claude -p ${prompt}`;
             if (effort) cmd += ` ${effort}`;
             if (format) cmd += ` ${format}`;
             if (bare) cmd += ` ${bare}`;
@@ -650,14 +721,23 @@
 
         [labPrompt, labEffort, labFormat].forEach(el => el.addEventListener('input', updateCmd));
         labBare.addEventListener('change', updateCmd);
+        updateCmd();
 
-        genOut.addEventListener('click', () => copyText(genOut, genOut.innerText));
+        makeCopyable(genOut, () => genOut.innerText);
 
         // --- WHAT'S NEW POPUP LOGIC ---
         (function initWhatsNew() {
             const dataEl = document.getElementById('whatsNewData');
             if (!dataEl) return;
-            const data = JSON.parse(dataEl.textContent);
+
+            let data;
+            try {
+                data = JSON.parse(dataEl.textContent);
+            } catch (err) {
+                console.error("Failed to parse What's New data:", err);
+                return;
+            }
+
             const seen = localStorage.getItem('placemat-seen-version');
             if (seen === data.version) return;
             if (!data.changes || !data.changes.length) return;
@@ -670,40 +750,36 @@
             const overlay = document.createElement('div');
             overlay.className = 'whats-new-overlay';
             overlay.innerHTML = `
-                <div class="whats-new-modal">
+                <div class="whats-new-modal" role="dialog" aria-modal="true" aria-labelledby="whatsNewTitle">
                     <div class="whats-new-header">
-                        <h2>What's New <span class="version-date">${data.version} &mdash; ${data.date}</span></h2>
-                        <button class="whats-new-close" title="Dismiss">&times;</button>
+                        <h2 id="whatsNewTitle">What's New <span class="version-date">${data.version} &mdash; ${data.date}</span></h2>
+                        <button type="button" class="whats-new-close" title="Dismiss" aria-label="Dismiss What's New">&times;</button>
                     </div>
                     <ul class="whats-new-list">${items}</ul>
                 </div>`;
 
             document.body.appendChild(overlay);
 
+            const previouslyFocused = document.activeElement;
+            const closeBtn = overlay.querySelector('.whats-new-close');
+            closeBtn.focus();
+
+            function escHandler(e) {
+                if (e.key === 'Escape') dismiss();
+            }
+
             function dismiss() {
                 localStorage.setItem('placemat-seen-version', data.version);
                 overlay.remove();
+                window.removeEventListener('keydown', escHandler);
+                if (previouslyFocused && previouslyFocused.focus) previouslyFocused.focus();
             }
 
-            overlay.querySelector('.whats-new-close').addEventListener('click', dismiss);
+            closeBtn.addEventListener('click', dismiss);
             overlay.addEventListener('click', (e) => { if (e.target === overlay) dismiss(); });
-            window.addEventListener('keydown', function escHandler(e) {
-                if (e.key === 'Escape') { dismiss(); window.removeEventListener('keydown', escHandler); }
-            });
+            window.addEventListener('keydown', escHandler);
         })();
 
-    </script>
-
-    <script type="application/json" id="whatsNewData">
-    {
-        "version": "v2.1.201",
-        "date": "2026-07-03",
-        "changes": [
-            {"tag": "ADD", "text": "<code>--permission-mode manual</code> — new accepted value for the default permission mode; renamed from <code>default</code> — both values honored"},
-            {"tag": "ADD", "text": "<code>defaultMode</code> JSON setting — set default permission mode; <code>\"manual\"</code> (formerly <code>\"default\"</code>) — both values accepted"},
-            {"tag": "CHG", "text": "<code>permissionMode</code> (agent frontmatter) — <code>manual</code> replaces <code>default</code>; both accepted"}
-        ]
-    }
     </script>
 </body>
 </html>

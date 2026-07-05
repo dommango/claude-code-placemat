@@ -28,3 +28,4 @@ jobs:
           root: .
           blacklist: versions
           format: text
+          css: true

@@ -10,10 +10,15 @@ Single-page HTML reference for Claude Code commands, shortcuts, flags, config, a
 
 ```
 index.html          — Current placemat (edit this)
-placemat.css        — Shared styles for index + versioned snapshots
+placemat.css        — Shared styles, linked by index.html and changelog.html
 changelog.html      — Detailed changelog across versions
 versions/           — Archived snapshots (read-only, never edit)
 ```
+
+`versions/*.html` snapshots are intentionally self-contained (their own inline
+`<style>`, no link to `placemat.css`) since they're immutable archives — never
+refactor them onto the shared stylesheet, that would change how a past version
+renders.
 
 ## Local Preview
 
@@ -23,16 +28,26 @@ python3 -m http.server 8000   # then open http://localhost:8000
 
 ## Versioning
 
-- `index.html` is always the latest version
-- When releasing a new version, copy `index.html` into `versions/vN.N.html` before making changes
-- Update the `<title>` and header version tag to match the Claude Code version it covers
-- Add a new version block to `changelog.html` documenting what changed
+Two independent version numbers are tracked here:
+
+- **Template version** (e.g. v1.1) — the placemat's own structure/design. Bumped
+  only on structural or visual redesigns. When bumping, copy the current
+  `index.html` into `versions/vN.N.html` *before* making changes, so the prior
+  layout stays reachable.
+- **CC release version** (e.g. v2.1.150) — the Claude Code release the content
+  reflects. Updated on every sync (daily pipeline or manual); does **not** get
+  a `versions/` snapshot — it's tracked via the header's "As of release" tag
+  and `changelog.html` entries only.
+
+For either kind of update:
+- Update the `<title>` and header version tag to match
+- Add a new version block (or CC-release entry) to `changelog.html` documenting what changed
 
 ## Style Guide
 
 - OS-preference theme detection with localStorage persistence; Anthropic brand colors (`--coral: #d97757`, `--teal: #879d86`)
 - All content is searchable via the global search (Ctrl+K)
-- Tables use `0.8rem` font, `4px 6px` cell padding, fixed first-column width at 42%
+- Tables use `12px` font, `4px 6px 3px` cell padding, fixed first-column width at 44%
 - Every `<code>` element is click-to-copy
 - Item status is shown via shaded code backgrounds, not badges:
   - Default (dark bg): verified
