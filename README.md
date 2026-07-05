@@ -37,6 +37,14 @@ python3 -m http.server 8000
 # open http://localhost:8000
 ```
 
+## Tests
+
+Zero-dependency structural/regression checks — no npm install, just Node:
+
+```bash
+node tests/placemat.test.js
+```
+
 ## Contributing
 
 Humans and bots both welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the split:

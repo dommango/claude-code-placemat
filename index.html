@@ -559,7 +559,7 @@
             </div>
         </div>
 
-        <div class="no-results search-exclude" id="noResults" style="display: none;">No matches — clear search to see everything.</div>
+        <div class="no-results search-exclude" id="noResults">No matches — clear search to see everything.</div>
 
         <footer class="global-footer">
             Template v1.1 | March 2026<br>
@@ -691,7 +691,7 @@
                 if (cardHasMatch) anyCardVisible = true;
             });
 
-            if (noResults) noResults.style.display = anyCardVisible ? 'none' : 'block';
+            if (noResults) noResults.classList.toggle('is-visible', !anyCardVisible);
         }
 
         // --- COMPACT COMMAND BUILDER LOGIC ---

@@ -489,6 +489,7 @@ code.unverified {
     border: 0;
 }
 .no-results {
+    display: none;
     grid-column: 1 / -1;
     text-align: center;
     padding: 40px 12px;
@@ -496,6 +497,7 @@ code.unverified {
     font-family: var(--font-mono);
     font-size: 12.5px;
 }
+.no-results.is-visible { display: block; }
 
 /* ---------- FOOTER ---------- */
 .global-footer {
