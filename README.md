@@ -1,7 +1,7 @@
 # Claude Code Placemat
 
 <p align="center">
-  <img src="claude_code_placemat_typographic_8bit.png" alt="Claude Code Placemat" width="600">
+  <img src=".github/assets/claude_code_placemat_typographic_8bit.png" alt="Claude Code Placemat" width="600">
 </p>
 
 <p align="center">
@@ -35,6 +35,14 @@ No build step — it's static HTML + CSS.
 ```bash
 python3 -m http.server 8000
 # open http://localhost:8000
+```
+
+## Tests
+
+Zero-dependency structural/regression checks — no npm install, just Node:
+
+```bash
+node tests/placemat.test.js
 ```
 
 ## Contributing

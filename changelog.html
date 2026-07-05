@@ -4,93 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Claude Code Placemat — Changelog</title>
+    <meta name="description" content="Detailed changelog for the Claude Code Placemat — template and content changes across versions.">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iI2Q5Nzc1NyIvPjx0ZXh0IHg9IjE2IiB5PSIyMyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzFlMWUxZSI+Jmd0O188L3RleHQ+PC9zdmc+Cg==">
+    <link rel="stylesheet" href="placemat.css">
+    <script>
+        (function() {
+            var stored = localStorage.getItem('placemat-theme');
+            var theme = (stored === 'light' || stored === 'dark')
+                ? stored
+                : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.dataset.theme = theme;
+        })();
+    </script>
     <style>
-        :root {
-            --bg-page: #0a0a0a;
-            --bg-card: #141414;
-            --border-color: #2a2a2a;
-            --text-main: #ededed;
-            --text-muted: #888888;
-            --code-bg: #1e1e1e;
-            --code-color: #f1f1f1;
-            --anthropic-coral: #d97757;
-            --anthropic-teal: #879d86;
-            --header-bg: rgba(10, 10, 10, 0.95);
-            --row-hover: rgba(255, 255, 255, 0.03);
-        }
-
-        :root[data-theme="light"] {
-            --bg-page: #f4f4f5;
-            --bg-card: #ffffff;
-            --border-color: #e4e4e7;
-            --text-main: #18181b;
-            --text-muted: #52525b;
-            --code-bg: #f4f4f5;
-            --code-color: #18181b;
-            --anthropic-coral: #c2410c;
-            --anthropic-teal: #0f766e;
-            --header-bg: rgba(244, 244, 245, 0.95);
-            --row-hover: rgba(0, 0, 0, 0.02);
-        }
-
-        body {
-            margin: 0;
-            padding: 15px;
-            font-family: 'Geist', 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-page);
-            color: var(--text-main);
-            line-height: 1.4;
-            padding-top: 65px;
-            font-size: 0.85rem;
-        }
-
-        .global-header {
-            position: fixed; top: 0; left: 0; width: 100%;
-            background-color: var(--header-bg); backdrop-filter: blur(8px);
-            border-bottom: 1px solid var(--border-color); z-index: 1000;
-            padding: 8px 20px; display: flex; align-items: center;
-            justify-content: space-between; box-sizing: border-box;
-        }
-
+        /* Page-specific rules only — shared tokens, body, header chrome, footer,
+           and code chip styling come from placemat.css. */
         .header-title h1 {
-            color: var(--anthropic-coral); margin: 0; font-size: 1.1rem;
-            font-weight: 700; letter-spacing: -0.02em;
+            color: var(--coral);
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
         }
 
         .header-nav { display: flex; gap: 12px; align-items: center; }
-
-        .header-link {
-            color: var(--text-muted); text-decoration: none; font-size: 0.8rem;
-            padding: 4px 10px; border: 1px solid var(--border-color); border-radius: 4px;
-        }
-        .header-link:hover { color: var(--text-main); border-color: var(--anthropic-teal); }
-
-        .theme-toggle {
-            background: none; border: 1px solid var(--border-color); color: var(--text-main);
-            padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;
-        }
 
         .container { max-width: 900px; margin: 0 auto; }
 
         .version-block {
             background-color: var(--bg-card); border-radius: 6px;
-            padding: 16px 20px; border: 1px solid var(--border-color);
+            padding: 16px 20px; border: 1px solid var(--border);
             margin-bottom: 15px;
         }
 
         .version-block h2 {
             margin: 0 0 12px 0; padding-bottom: 8px;
-            border-bottom: 1px solid var(--border-color);
-            color: var(--anthropic-coral); font-size: 1rem; font-weight: 700;
+            border-bottom: 1px solid var(--border);
+            color: var(--coral); font-size: 1rem; font-weight: 700;
             display: flex; align-items: center; gap: 10px;
         }
 
         .version-date {
-            font-size: 0.75rem; color: var(--text-muted); font-weight: 400;
+            font-size: 0.75rem; color: var(--fg-muted); font-weight: 400;
         }
 
         .change-section h3 {
-            color: var(--anthropic-teal); font-size: 0.75rem;
+            color: var(--teal); font-size: 0.75rem;
             margin: 12px 0 6px 0; text-transform: uppercase;
             letter-spacing: 0.05em; font-weight: 700;
         }
@@ -100,9 +57,10 @@
         }
 
         .change-list li {
-            padding: 4px 0; border-bottom: 1px solid var(--border-color);
-            font-size: 0.8rem; display: flex; gap: 8px;
+            padding: 4px 0; border-bottom: 1px solid var(--border);
+            font-size: 0.8rem; display: flex; flex-wrap: wrap; gap: 4px 8px;
         }
+        .change-list li > .tag { flex: 0 0 auto; }
         .change-list li:last-child { border-bottom: none; }
         .change-list li:hover { background-color: var(--row-hover); }
 
@@ -111,16 +69,12 @@
             font-size: 0.65em; font-weight: 700; flex-shrink: 0;
             min-width: 45px; text-align: center; margin-top: 2px;
         }
-        .tag-add { background: rgba(135, 157, 134, 0.15); color: var(--anthropic-teal); border: 1px solid var(--anthropic-teal); }
-        .tag-fix { background: rgba(217, 119, 87, 0.15); color: var(--anthropic-coral); border: 1px solid var(--anthropic-coral); }
+        .tag-add { background: rgba(135, 157, 134, 0.15); color: var(--teal); border: 1px solid var(--teal); }
+        .tag-fix { background: rgba(217, 119, 87, 0.15); color: var(--coral); border: 1px solid var(--coral); }
         .tag-change { background: rgba(245, 158, 11, 0.1); color: #fbbf24; border: 1px solid #f59e0b; }
         .tag-remove { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid #ef4444; }
 
-        code {
-            font-family: ui-monospace, monospace; background-color: var(--code-bg);
-            color: var(--code-color); padding: 1px 4px; border-radius: 3px;
-            font-size: 0.85em;
-        }
+        .change-list code { font-size: 0.85em; }
 
         .month-group {
             margin-bottom: 10px;
@@ -129,10 +83,10 @@
             cursor: pointer;
             font-size: 0.8rem;
             font-weight: 700;
-            color: var(--anthropic-teal);
+            color: var(--teal);
             padding: 7px 12px;
             border-radius: 4px;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border);
             background: rgba(135, 157, 134, 0.04);
             list-style: none;
             user-select: none;
@@ -142,7 +96,7 @@
         }
         .month-group summary:hover {
             background: rgba(135, 157, 134, 0.1);
-            border-color: var(--anthropic-teal);
+            border-color: var(--teal);
         }
         .month-group summary::-webkit-details-marker { display: none; }
         .month-group summary::before {
@@ -156,7 +110,7 @@
         }
         .month-count {
             font-size: 0.7rem;
-            color: var(--text-muted);
+            color: var(--fg-muted);
             font-weight: 400;
             margin-left: auto;
         }
@@ -164,21 +118,12 @@
             padding-top: 4px;
         }
 
-        .global-footer {
-            text-align: center; padding: 15px; margin-top: 10px;
-            color: var(--text-muted); font-size: 0.75rem;
-            border-top: 1px solid var(--border-color);
-        }
-        .global-footer a { color: var(--anthropic-teal); text-decoration: none; font-weight: 600; }
-        .global-footer a:hover { text-decoration: underline; }
-
         @media (max-width: 768px) {
-            .global-header { flex-direction: column; align-items: flex-start; padding-top: 10px; }
-            body { padding-top: 90px; }
+            .global-header { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
-<body data-theme="dark">
+<body>
 
     <header class="global-header">
         <div class="header-title">
@@ -186,7 +131,7 @@
         </div>
         <div class="header-nav">
             <a href="index.html" class="header-link">Placemat</a>
-            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">&#9728;&#65039;</button>
+            <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
         </div>
     </header>
 
@@ -948,17 +893,41 @@
     </div>
 
     <script>
+        // --- THEME TOGGLE LOGIC (persisted, matches index.html) ---
+        function setThemeIcon(theme) {
+            const btn = document.getElementById('themeBtn');
+            if (btn) btn.innerHTML = theme === 'dark' ? '&#9728;&#65039;' : '&#127769;';
+        }
         function toggleTheme() {
             const root = document.documentElement;
-            const btn = document.getElementById('themeBtn');
-            if (root.dataset.theme === 'dark') {
-                root.dataset.theme = 'light';
-                btn.innerHTML = '&#127769;';
-            } else {
-                root.dataset.theme = 'dark';
-                btn.innerHTML = '&#9728;&#65039;';
-            }
+            const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+            root.dataset.theme = next;
+            localStorage.setItem('placemat-theme', next);
+            setThemeIcon(next);
         }
+        setThemeIcon(document.documentElement.dataset.theme);
+
+        // --- CLICK TO COPY LOGIC (mouse + keyboard), matches index.html ---
+        async function copyText(element, text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                element.classList.add('copied');
+                setTimeout(() => element.classList.remove('copied'), 300);
+            } catch (err) { console.error('Failed to copy: ', err); }
+        }
+
+        document.querySelectorAll('code').forEach(el => {
+            el.title = "Click to copy";
+            el.tabIndex = 0;
+            el.setAttribute('role', 'button');
+            el.addEventListener('click', () => copyText(el, el.innerText));
+            el.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    copyText(el, el.innerText);
+                }
+            });
+        });
     </script>
 </body>
 </html>

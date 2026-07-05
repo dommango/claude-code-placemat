@@ -5,12 +5,14 @@ on:
     paths:
       - "**.html"
       - "**.css"
+      - "tests/**"
       - ".github/workflows/html-validate.yml"
   push:
     branches: [main]
     paths:
       - "**.html"
       - "**.css"
+      - "tests/**"
 
 permissions:
   contents: read
@@ -28,3 +30,15 @@ jobs:
           root: .
           blacklist: versions
           format: text
+          css: true
+
+  test:
+    name: placemat tests (no build step, zero deps)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Run structural/regression tests
+        run: node tests/placemat.test.js
