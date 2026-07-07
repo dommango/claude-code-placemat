@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.201</span>
+            <span class="release-tag">As of release: v2.1.202</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -362,6 +362,7 @@
                     <tr class="search-item"><td><code>teammateMode: "iterm2"</code></td><td class="desc">Use iTerm2 as the teammate backend; shows a warning when auto mode cannot find the <code>it2</code> CLI</td></tr>
                     <tr class="search-item"><td><code>awsAuthRefresh</code></td><td class="desc">Configures the "Claude Platform on AWS — refresh credentials" option in <code>/login</code></td></tr>
                     <tr class="search-item"><td><code>respondToBashCommands</code></td><td class="desc">Set to <code>false</code> to keep <code>!</code> bash command output as context-only; default behavior is for Claude to respond automatically</td></tr>
+                    <tr class="search-item"><td><code class="unverified">dynamicWorkflowSize</code></td><td class="desc">Controls how large Claude makes dynamic workflows (small/medium/large agent counts) — advisory guideline, not a hard cap; configured via <code>/config</code></td></tr>
                 </table>
             </div>
 
@@ -437,7 +438,7 @@
                     <tr class="search-item"><td><code>/less-permission-prompts</code></td><td class="desc">Scan transcripts for read-only Bash/MCP calls; propose settings.json allowlist</td></tr>
                     <tr class="search-item"><td><code>/ultrareview [PR#]</code></td><td class="desc">Cloud code review via parallel agents; no args for current branch, PR# for specific PR</td></tr>
                     <tr class="search-item"><td><code>/dataviz</code></td><td class="desc">Chart and dashboard design guidance with a runnable color-palette validator</td></tr>
-                    <tr class="search-item"><td><code class="new">/skill-a /skill-b [prompt]</code> <!-- added:v2.1.199 --></td><td class="desc">Stacked slash-skill invocations — up to 5 leading skills all load simultaneously (e.g. <code>/skill-a /skill-b do XYZ</code>)</td></tr>
+                    <tr class="search-item"><td><code>/skill-a /skill-b [prompt]</code></td><td class="desc">Stacked slash-skill invocations — up to 5 leading skills all load simultaneously (e.g. <code>/skill-a /skill-b do XYZ</code>)</td></tr>
                     <tr class="search-item"><td><code>.claude/skills/&lt;name&gt;/</code></td><td class="desc">Project skill directory; auto-loaded without marketplace; nested <code>.claude/skills/</code> directories also load when working on files there — on a name clash, the nested skill appears as <code>&lt;dir&gt;:&lt;name&gt;</code></td></tr>
                     <tr class="search-item"><td><code>~/.claude/skills/&lt;name&gt;/</code></td><td class="desc">Global personal skill directory</td></tr>
                     <tr class="search-item"><td><code>plugin: bin/</code></td><td class="desc">Plugin executables in bin/ invocable as bare commands from Bash tool</td></tr>
@@ -570,12 +571,10 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.201",
-        "date": "2026-07-03",
+        "version": "v2.1.202",
+        "date": "2026-07-06",
         "changes": [
-            {"tag": "ADD", "text": "<code>--permission-mode manual</code> — new accepted value for the default permission mode; renamed from <code>default</code> — both values honored"},
-            {"tag": "ADD", "text": "<code>defaultMode</code> JSON setting — set default permission mode; <code>\"manual\"</code> (formerly <code>\"default\"</code>) — both values accepted"},
-            {"tag": "CHG", "text": "<code>permissionMode</code> (agent frontmatter) — <code>manual</code> replaces <code>default</code>; both accepted"}
+            {"tag": "ADD", "text": "<code>dynamicWorkflowSize</code> JSON setting — controls how large Claude makes dynamic workflows (small/medium/large agent counts); advisory guideline, not a hard cap"}
         ]
     }
     </script>
