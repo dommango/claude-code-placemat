@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.203</span>
+            <span class="release-tag">As of release: v2.1.205</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -235,7 +235,7 @@
                     <tr class="search-item"><td><code>/workflows</code></td><td class="desc">View and manage dynamic workflow runs; workflows orchestrate work across tens to hundreds of background agents for large, complex tasks; press <code>f</code> in the agent detail view to filter by status</td></tr>
                     <tr class="search-item"><td><code>ultracode</code></td><td class="desc">Prompt trigger keyword — type in the prompt to start a dynamic workflow; highlighted in violet in the prompt input</td></tr>
                     <tr class="search-item"><td><code>/voice</code></td><td class="desc">Push-to-talk voice prompting</td></tr>
-                    <tr class="search-item"><td><code>/doctor</code></td><td class="desc">Diagnose installation/env issues; press f to auto-fix; openable while Claude is responding; shows result of last update attempt; lists npm auto-update fix hints</td></tr>
+                    <tr class="search-item"><td><code class="new">/doctor</code> <!-- added:v2.1.205 --></td><td class="desc">Full setup checkup — diagnoses and fixes CC installation/env issues; press f to auto-fix; openable while Claude is responding; shows result of last update attempt; lists npm auto-update fix hints; <code>/checkup</code> is an alias</td></tr>
                     <tr class="search-item"><td><code class="new">/status</code> <!-- added:v2.1.203 --></td><td class="desc">Show CC environment status and warnings (e.g. "claude command missing or broken"); moved from startup output in v2.1.203</td></tr>
                     <tr class="search-item"><td><code>/pr-comments [PR]</code></td><td class="desc">Fetch GitHub PR comments</td></tr>
                     <tr class="search-item"><td><code>/security-review</code></td><td class="desc">Security analysis of uncommitted code</td></tr>
@@ -364,7 +364,7 @@
                     <tr class="search-item"><td><code>teammateMode: "iterm2"</code></td><td class="desc">Use iTerm2 as the teammate backend; shows a warning when auto mode cannot find the <code>it2</code> CLI</td></tr>
                     <tr class="search-item"><td><code>awsAuthRefresh</code></td><td class="desc">Configures the "Claude Platform on AWS — refresh credentials" option in <code>/login</code></td></tr>
                     <tr class="search-item"><td><code>respondToBashCommands</code></td><td class="desc">Set to <code>false</code> to keep <code>!</code> bash command output as context-only; default behavior is for Claude to respond automatically</td></tr>
-                    <tr class="search-item"><td><code class="new">dynamicWorkflowSize</code> <!-- added:v2.1.202 --></td><td class="desc">Controls how large Claude makes dynamic workflows (small/medium/large agent counts) — advisory guideline, not a hard cap; configured via <code>/config</code></td></tr>
+                    <tr class="search-item"><td><code>dynamicWorkflowSize</code></td><td class="desc">Controls how large Claude makes dynamic workflows (small/medium/large agent counts) — advisory guideline, not a hard cap; configured via <code>/config</code></td></tr>
                 </table>
             </div>
 
@@ -574,12 +574,10 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.203",
-        "date": "2026-07-07",
+        "version": "v2.1.205",
+        "date": "2026-07-08",
         "changes": [
-            {"tag": "ADD", "text": "<code>roots/list</code> — additional working directories from <code>/add-dir</code> are now included in MCP <code>roots/list</code>; <code>notifications/roots/list_changed</code> sent when the set changes"},
-            {"tag": "ADD", "text": "<code>/status</code> slash command — show CC environment warnings (moved from startup output)"},
-            {"tag": "CHG", "text": "<code>Esc</code> now closes background-tasks, diff, and workflow detail views (left arrow no longer closes these)"}
+            {"tag": "CHG", "text": "<code>/doctor</code> upgraded to a full setup checkup that can diagnose and fix issues; <code>/checkup</code> added as alias"}
         ]
     }
     </script>
