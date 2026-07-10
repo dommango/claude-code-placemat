@@ -143,8 +143,19 @@
 
             <!-- July 2026 -->
             <details class="month-group" open>
-                <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.205</span> <span class="month-count">8 releases</span></summary>
+                <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.206</span> <span class="month-count">9 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.206 <span class="version-date">2026-07-09</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>/commit-push-pr</code> slash command — commit, push, and open a PR in one step; auto-allows <code>git push</code> to the repo's configured push remote (<code>remote.pushDefault</code>, or the sole remote) in addition to <code>origin</code></li>
+                            <li><span class="tag tag-add">ADD</span><code>Ctrl X</code> (Keys &amp; Shortcuts) — in <code>claude agents</code>: permanently removes a completed session; deleted background jobs stay deleted</li>
+                            <li><span class="tag tag-change">CHG</span><code>/cd</code> — now supports directory path suggestions, matching <code>/add-dir</code> behavior</li>
+                            <li><span class="tag tag-change">CHG</span><code>/doctor</code> — now proposes trimming checked-in <code>CLAUDE.md</code> files by cutting content Claude could derive from the codebase</li>
+                            <li><span class="tag tag-change">CHG</span><code>EnterWorktree</code> hook — now asks for confirmation before entering a git worktree outside the project's <code>.claude/worktrees/</code> directory</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.205 <span class="version-date">2026-07-08</span></h3>
