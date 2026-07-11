@@ -143,8 +143,18 @@
 
             <!-- July 2026 -->
             <details class="month-group" open>
-                <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.206</span> <span class="month-count">9 releases</span></summary>
+                <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.207</span> <span class="month-count">10 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.207 <span class="version-date">2026-07-11</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>disableAutoMode</code> JSON setting — set to <code>true</code> to disable auto mode on Bedrock, Vertex AI, and Foundry (auto mode now available there by default without opt-in)</li>
+                            <li><span class="tag tag-add">ADD</span><code>$CLAUDE_PLUGIN_OPTION_&lt;KEY&gt;</code> (hook env var) — access plugin config option values in exec-form hook commands; replaces rejected shell-form <code>${user_config.*}</code></li>
+                            <li><span class="tag tag-change">CHG</span><code>CLAUDE_CODE_ENABLE_AUTO_MODE</code> — no longer needed; auto mode now available by default on Bedrock, Vertex AI, and Foundry</li>
+                            <li><span class="tag tag-change">CHG</span><code>autoMode</code> settings — no longer read from <code>.claude/settings.local.json</code>; configure in <code>~/.claude/settings.json</code> instead</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.206 <span class="version-date">2026-07-09</span></h3>
