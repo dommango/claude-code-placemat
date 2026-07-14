@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.207</span>
+            <span class="release-tag">As of release: v2.1.209</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -103,7 +103,7 @@
                     <tr class="search-item"><td><code>Ctrl U</code></td><td class="desc">Clear entire input buffer (Ctrl+Y to restore)</td></tr>
                     <tr class="search-item"><td><code>Ctrl Y</code></td><td class="desc">Restore input buffer cleared by Ctrl+U</td></tr>
                     <tr class="search-item"><td><code>Ctrl X K</code></td><td class="desc">Kill background agents (chord, x2)</td></tr>
-                    <tr class="search-item"><td><code class="new">Ctrl X</code> <!-- added:v2.1.206 --></td><td class="desc">In <code>claude agents</code>: permanently removes a completed session; deleted background jobs stay deleted</td></tr>
+                    <tr class="search-item"><td><code>Ctrl X</code></td><td class="desc">In <code>claude agents</code>: permanently removes a completed session; deleted background jobs stay deleted</td></tr>
                     <tr class="search-item"><td><code>Esc Esc</code></td><td class="desc">Rewind / undo state</td></tr>
                     <tr class="search-item"><td><code>Esc</code></td><td class="desc">Close background-tasks, diff, and workflow detail views (left arrow no longer closes these)</td></tr>
                 </table>
@@ -215,7 +215,7 @@
                     <tr class="search-item"><td><code>/mcp</code></td><td class="desc">Manage MCP servers; shows tool count for each connected server and flags servers with 0 tools</td></tr>
                     <tr class="search-item"><td><code>/hooks</code></td><td class="desc">Manage event lifecycle hooks</td></tr>
                     <tr class="search-item"><td><code>/install-github-app</code></td><td class="desc">Install the GitHub App; GitHub Actions workflow and repo secret setup is optional — install just the GitHub App and skip the workflow/secret steps</td></tr>
-                    <tr class="search-item"><td><code class="new">/commit-push-pr</code> <!-- added:v2.1.206 --></td><td class="desc">Commit, push, and open a PR in one step; auto-allows <code>git push</code> to the repo's configured push remote (<code>remote.pushDefault</code>, or the sole remote when only one is configured) in addition to <code>origin</code></td></tr>
+                    <tr class="search-item"><td><code>/commit-push-pr</code></td><td class="desc">Commit, push, and open a PR in one step; auto-allows <code>git push</code> to the repo's configured push remote (<code>remote.pushDefault</code>, or the sole remote when only one is configured) in addition to <code>origin</code></td></tr>
                     <tr class="search-item"><td><code>/skills</code></td><td class="desc">List available active skills; includes type-to-filter search box for long lists</td></tr>
                     <tr class="search-item"><td><code>/chrome</code></td><td class="desc">Chrome browser integration; pick which connected browser to use via <code>/chrome</code> → "Select browser…", or in-chat when a browser action runs with multiple connected</td></tr>
                     <tr class="search-item"><td><code>/add-dir &lt;path&gt;</code></td><td class="desc">Add working directory to context</td></tr>
@@ -237,7 +237,7 @@
                     <tr class="search-item"><td><code>/workflows</code></td><td class="desc">View and manage dynamic workflow runs; workflows orchestrate work across tens to hundreds of background agents for large, complex tasks; press <code>f</code> in the agent detail view to filter by status</td></tr>
                     <tr class="search-item"><td><code>ultracode</code></td><td class="desc">Prompt trigger keyword — type in the prompt to start a dynamic workflow; highlighted in violet in the prompt input</td></tr>
                     <tr class="search-item"><td><code>/voice</code></td><td class="desc">Push-to-talk voice prompting</td></tr>
-                    <tr class="search-item"><td><code class="new">/doctor</code> <!-- added:v2.1.205 --></td><td class="desc">Full setup checkup — diagnoses and fixes CC installation/env issues; press f to auto-fix; openable while Claude is responding; shows result of last update attempt; lists npm auto-update fix hints; proposes trimming checked-in <code>CLAUDE.md</code> files by cutting content Claude could derive from the codebase; <code>/checkup</code> is an alias</td></tr>
+                    <tr class="search-item"><td><code>/doctor</code></td><td class="desc">Full setup checkup — diagnoses and fixes CC installation/env issues; press f to auto-fix; openable while Claude is responding; shows result of last update attempt; lists npm auto-update fix hints; proposes trimming checked-in <code>CLAUDE.md</code> files by cutting content Claude could derive from the codebase; <code>/checkup</code> is an alias</td></tr>
                     <tr class="search-item"><td><code>/status</code></td><td class="desc">Show CC environment status and warnings (e.g. "claude command missing or broken"); moved from startup output in v2.1.203</td></tr>
                     <tr class="search-item"><td><code>/pr-comments [PR]</code></td><td class="desc">Fetch GitHub PR comments</td></tr>
                     <tr class="search-item"><td><code>/security-review</code></td><td class="desc">Security analysis of uncommitted code</td></tr>
@@ -300,6 +300,7 @@
                     <tr class="search-item"><td><code>--plugin-dir &lt;path&gt;</code></td><td class="desc">Load plugins from a directory or <code>.zip</code> archive at launch</td></tr>
                     <tr class="search-item"><td><code>--plugin-url &lt;url&gt;</code></td><td class="desc">Fetch a plugin <code>.zip</code> archive from a URL for the current session</td></tr>
                     <tr class="search-item"><td><code>--safe-mode</code></td><td class="desc">Start with all customizations (CLAUDE.md, plugins, skills, hooks, MCP servers) disabled for troubleshooting; paired with <code>CLAUDE_CODE_SAFE_MODE</code> env var</td></tr>
+                    <tr class="search-item"><td><code class="new">--ax-screen-reader</code> <!-- added:v2.1.208 --></td><td class="desc">Enable screen reader mode — opt-in plain-text rendering for screen reader users; also set via <code>CLAUDE_AX_SCREEN_READER=1</code> env var or <code>axScreenReader: true</code> in settings</td></tr>
                 </table>
             </div>
         </div>
@@ -343,6 +344,8 @@
                     <tr class="search-item"><td><code>autoScrollEnabled</code></td><td class="desc">Disable conversation auto-scroll in fullscreen mode</td></tr>
                     <tr class="search-item"><td><code>wheelScrollAccelerationEnabled</code></td><td class="desc">Set to <code>false</code> to disable mouse-wheel scroll acceleration in fullscreen mode</td></tr>
                     <tr class="search-item"><td><code>tui</code></td><td class="desc">Default TUI mode; set to "fullscreen" for flicker-free alt-screen rendering</td></tr>
+                    <tr class="search-item"><td><code class="new">axScreenReader</code> <!-- added:v2.1.208 --></td><td class="desc">Set to <code>true</code> for opt-in plain-text rendering for screen reader users; paired with <code>--ax-screen-reader</code> flag and <code>CLAUDE_AX_SCREEN_READER=1</code> env var</td></tr>
+                    <tr class="search-item"><td><code class="new">vimInsertModeRemaps</code> <!-- added:v2.1.208 --></td><td class="desc">Map two-key insert-mode sequences to keys in vim mode; e.g. map <code>jj</code> to Escape</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr>
                     <tr class="search-item"><td><code>sandbox.bwrapPath</code> / <code>sandbox.socatPath</code></td><td class="desc">Custom bubblewrap and socat binary paths (Linux/WSL managed settings)</td></tr>
                     <tr class="search-item"><td><code>sandbox.allowAppleEvents</code></td><td class="desc">Opt-in macOS setting to allow sandboxed commands to send Apple Events</td></tr>
@@ -425,6 +428,8 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT</code></td><td class="desc">Override the default 5-minute idle timeout for remote MCP tool calls; stalled calls abort with an error instead of blocking indefinitely</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP=1</code></td><td class="desc">Disable automatic memory-pressure reaping of idle background shell commands</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_MOUSE_CLICKS</code></td><td class="desc">Disable mouse click/drag/hover in fullscreen mode while keeping wheel scroll active</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_AX_SCREEN_READER=1</code> <!-- added:v2.1.208 --></td><td class="desc">Enable screen reader mode — opt-in plain-text rendering; paired with <code>--ax-screen-reader</code> flag and <code>axScreenReader</code> JSON setting</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_PROCESS_WRAPPER</code> <!-- added:v2.1.208 --></td><td class="desc">Corporate launcher wrapper — agent view and background service run every Claude Code self-spawn through the specified executable</td></tr>
                 </table>
             </div>
         </div>
@@ -578,13 +583,14 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.207",
-        "date": "2026-07-11",
+        "version": "v2.1.209",
+        "date": "2026-07-14",
         "changes": [
-            {"tag": "ADD", "text": "<code>disableAutoMode</code> setting — disable auto mode on Bedrock, Vertex AI, and Foundry (now on by default there without opt-in)"},
-            {"tag": "ADD", "text": "<code>$CLAUDE_PLUGIN_OPTION_&lt;KEY&gt;</code> — hook env var for accessing plugin config values in exec-form commands (replaces rejected <code>${user_config.*}</code> in shell-form hooks)"},
-            {"tag": "CHG", "text": "<code>CLAUDE_CODE_ENABLE_AUTO_MODE</code> — no longer needed; auto mode now available by default on Bedrock, Vertex AI, and Foundry"},
-            {"tag": "CHG", "text": "<code>autoMode</code> settings no longer read from <code>.claude/settings.local.json</code>; configure in <code>~/.claude/settings.json</code> instead"}
+            {"tag": "ADD", "text": "<code>--ax-screen-reader</code> CLI flag — opt-in plain-text rendering for screen reader users; also set via <code>CLAUDE_AX_SCREEN_READER=1</code> or <code>axScreenReader: true</code>"},
+            {"tag": "ADD", "text": "<code>CLAUDE_AX_SCREEN_READER=1</code> env var — enable screen reader mode; paired with <code>--ax-screen-reader</code> flag and <code>axScreenReader</code> JSON setting"},
+            {"tag": "ADD", "text": "<code>axScreenReader</code> JSON setting — set to <code>true</code> for opt-in plain-text rendering for screen reader users"},
+            {"tag": "ADD", "text": "<code>vimInsertModeRemaps</code> JSON setting — map two-key insert-mode sequences in vim mode (e.g. <code>jj</code> → Escape)"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_PROCESS_WRAPPER</code> env var — run every Claude Code self-spawn through a required corporate launcher executable"}
         ]
     }
     </script>
