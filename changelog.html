@@ -143,8 +143,19 @@
 
             <!-- July 2026 -->
             <details class="month-group" open>
-                <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.207</span> <span class="month-count">10 releases</span></summary>
+                <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.209</span> <span class="month-count">12 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.208 <span class="version-date">2026-07-14</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>--ax-screen-reader</code> CLI flag — opt-in plain-text rendering for screen reader users; also set via <code>CLAUDE_AX_SCREEN_READER=1</code> env var or <code>axScreenReader: true</code> in settings</li>
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_AX_SCREEN_READER=1</code> env var — enable screen reader mode; paired with <code>--ax-screen-reader</code> flag and <code>axScreenReader</code> JSON setting</li>
+                            <li><span class="tag tag-add">ADD</span><code>axScreenReader</code> JSON setting — set to <code>true</code> for opt-in plain-text rendering for screen reader users</li>
+                            <li><span class="tag tag-add">ADD</span><code>vimInsertModeRemaps</code> JSON setting — map two-key insert-mode sequences to keys in vim mode (e.g. <code>jj</code> → Escape)</li>
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_PROCESS_WRAPPER</code> env var — run every Claude Code self-spawn through a required corporate launcher executable</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.207 <span class="version-date">2026-07-11</span></h3>
