@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.209</span>
+            <span class="release-tag">As of release: v2.1.210</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -355,9 +355,10 @@
                     <tr class="search-item"><td><code>"$defaults"</code> (autoMode)</td><td class="desc">Include in <code>autoMode.allow</code>, <code>autoMode.soft_deny</code>, or <code>autoMode.environment</code> to add custom rules alongside the built-in list; <code>autoMode</code> settings are read only from <code>~/.claude/settings.json</code>, not from <code>.claude/settings.local.json</code></td></tr>
                     <tr class="search-item"><td><code>autoMode.hard_deny</code></td><td class="desc">Auto mode classifier rules that block unconditionally regardless of user intent — unlike <code>autoMode.soft_deny</code>, cannot be overridden by allow exceptions</td></tr>
                     <tr class="search-item"><td><code>autoMode.classifyAllShell</code></td><td class="desc">Route all Bash/PowerShell commands through the auto-mode classifier instead of only arbitrary-code-execution patterns</td></tr>
-                    <tr class="search-item"><td><code class="new">disableAutoMode</code> <!-- added:v2.1.207 --></td><td class="desc">Set to <code>true</code> to disable auto mode on Bedrock, Vertex AI, and Foundry — auto mode is now available there by default without opt-in</td></tr>
+                    <tr class="search-item"><td><code>disableAutoMode</code></td><td class="desc">Set to <code>true</code> to disable auto mode on Bedrock, Vertex AI, and Foundry — auto mode is now available there by default without opt-in</td></tr>
                     <tr class="search-item"><td><code>"*"</code> (deny rule glob)</td><td class="desc">Glob patterns supported in deny rule tool-name position; <code>"*"</code> denies all tools; allow rules reject non-MCP globs; unknown tool names in deny rules warn at startup</td></tr>
                     <tr class="search-item"><td><code>Tool(param:value)</code></td><td class="desc">Permission rule syntax to match a tool's input parameters (supports <code>*</code> wildcard); e.g. <code>Agent(model:opus)</code> to block Opus subagents</td></tr>
+                    <tr class="search-item"><td><code class="new">Write(path)</code> / <code class="new">NotebookEdit(path)</code> / <code class="new">Glob(path)</code> <!-- added:v2.1.210 --></td><td class="desc">Deprecated permission-rule tool names — startup warns to use <code>Edit(path)</code> or <code>Read(path)</code> instead</td></tr>
                     <tr class="search-item"><td><code>attribution.sessionUrl</code></td><td class="desc">Set to <code>false</code> to omit the claude.ai session link from commits and PRs in web and Remote Control sessions</td></tr>
                     <tr class="search-item"><td><code>prUrlTemplate</code></td><td class="desc">Point footer PR badge at a custom code-review URL instead of github.com</td></tr>
                     <tr class="search-item"><td><code>footerLinksRegexes</code></td><td class="desc">Array of regex patterns for regex-matched link badges in the footer row; configurable via user or managed settings</td></tr>
@@ -538,7 +539,7 @@
                     <tr class="search-item"><td><code>PreCompact</code></td><td class="desc">Fires before compaction; block by exiting with code 2 or returning {"decision":"block"}</td></tr>
                     <tr class="search-item"><td><code>type: "mcp_tool"</code> (hook)</td><td class="desc">Hook directly invokes an MCP tool</td></tr>
                     <tr class="search-item"><td><code>args: string[]</code> (hook field)</td><td class="desc">Exec form — spawns command directly without a shell; path placeholders never need quoting</td></tr>
-                    <tr class="search-item"><td><code class="new">$CLAUDE_PLUGIN_OPTION_&lt;KEY&gt;</code> <!-- added:v2.1.207 --></td><td class="desc">Hook env var for accessing plugin config option values in exec-form hook commands; use instead of <code>${user_config.*}</code> in shell-form commands (shell-form <code>${user_config.*}</code> is now rejected as a security fix)</td></tr>
+                    <tr class="search-item"><td><code>$CLAUDE_PLUGIN_OPTION_&lt;KEY&gt;</code></td><td class="desc">Hook env var for accessing plugin config option values in exec-form hook commands; use instead of <code>${user_config.*}</code> in shell-form commands (shell-form <code>${user_config.*}</code> is now rejected as a security fix)</td></tr>
                     <tr class="search-item"><td><code>continueOnBlock</code> (PostToolUse)</td><td class="desc">Set to <code>true</code> to feed the hook's rejection reason back to Claude and continue the turn</td></tr>
                     <tr class="search-item"><td><code>terminalSequence</code> (hook output)</td><td class="desc">Hook JSON output field — emit desktop notifications, window titles, and bells without a controlling terminal</td></tr>
                     <tr class="search-item"><td><code>MessageDisplay</code></td><td class="desc">Fires as assistant message text is displayed; hooks can transform or hide the output</td></tr>
@@ -583,14 +584,10 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.209",
+        "version": "v2.1.210",
         "date": "2026-07-14",
         "changes": [
-            {"tag": "ADD", "text": "<code>--ax-screen-reader</code> CLI flag — opt-in plain-text rendering for screen reader users; also set via <code>CLAUDE_AX_SCREEN_READER=1</code> or <code>axScreenReader: true</code>"},
-            {"tag": "ADD", "text": "<code>CLAUDE_AX_SCREEN_READER=1</code> env var — enable screen reader mode; paired with <code>--ax-screen-reader</code> flag and <code>axScreenReader</code> JSON setting"},
-            {"tag": "ADD", "text": "<code>axScreenReader</code> JSON setting — set to <code>true</code> for opt-in plain-text rendering for screen reader users"},
-            {"tag": "ADD", "text": "<code>vimInsertModeRemaps</code> JSON setting — map two-key insert-mode sequences in vim mode (e.g. <code>jj</code> → Escape)"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_PROCESS_WRAPPER</code> env var — run every Claude Code self-spawn through a required corporate launcher executable"}
+            {"tag": "ADD", "text": "<code>Write(path)</code>, <code>NotebookEdit(path)</code>, <code>Glob(path)</code> — deprecated permission-rule tool names; startup now warns to use <code>Edit(path)</code> or <code>Read(path)</code> instead"}
         ]
     }
     </script>
