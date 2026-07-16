@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.210</span>
+            <span class="release-tag">As of release: v2.1.211</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -151,6 +151,7 @@
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>v</code> / <code>V</code></td><td class="desc">Visual / visual-line selection mode (NORMAL mode)</td></tr>
                     <tr class="search-item"><td><code>/ (NORMAL mode)</code></td><td class="desc">Open reverse history search (like Ctrl+R), matching bash/zsh vi-mode</td></tr>
+                    <tr class="search-item"><td><code class="new">s</code> / <code class="new">S</code> <!-- added:v2.1.211 --></td><td class="desc">Substitute char / substitute line in NORMAL mode, matching vim behavior</td></tr>
                 </table>
             </div>
         </div>
@@ -168,7 +169,7 @@
                     <tr class="search-item"><td><code>/rename [name]</code></td><td class="desc">Name current session</td></tr>
                     <tr class="search-item"><td><code>/branch [name]</code></td><td class="desc">Branch convo (formerly /fork)</td></tr>
                     <tr class="search-item"><td><code>/usage</code></td><td class="desc">Unified usage view (cost + stats tabs); per-category limits breakdown (skills, subagents, plugins, per-MCP-server cost); <code>/cost</code> and <code>/stats</code> are shortcuts that open the relevant tab</td></tr>
-                    <tr class="search-item"><td><code>/usage-credits</code></td><td class="desc">Request extra usage allowance; old name <code>/extra-usage</code> still works; accessible from Remote Control clients</td></tr>
+                    <tr class="search-item"><td><code>/usage-credits</code></td><td class="desc">Request extra usage allowance; asks for confirmation before sending to organization admins; old name <code>/extra-usage</code> still works; accessible from Remote Control clients</td></tr>
                     <tr class="search-item"><td><code>/context</code></td><td class="desc">Visualize context window (grid)</td></tr>
                     <tr class="search-item"><td><code>/diff</code></td><td class="desc">Interactive diff viewer; detail view scrollable with arrows, <code>j</code>/<code>k</code>, <code>PgUp</code>/<code>PgDn</code>, <code>Space</code>, <code>Home</code>/<code>End</code></td></tr>
                     <tr class="search-item"><td><code>/copy</code></td><td class="desc">Copy last response</td></tr>
@@ -279,6 +280,7 @@
                     <tr class="search-item"><td><code>--json-schema</code></td><td class="desc">Strict JSON schema validation</td></tr>
                     <tr class="search-item"><td><code>--dangerously-skip-permissions</code></td><td class="desc">Skip all approval prompts; bypasses prompts for writes to <code>.claude/</code>, <code>.git/</code>, <code>.vscode/</code>, shell config files, and other protected paths (catastrophic removal commands still prompt)</td></tr>
                     <tr class="search-item"><td><code>--exclude-dynamic-system-prompt-sections</code></td><td class="desc">Exclude dynamic prompt sections in print mode for cross-user prompt caching</td></tr>
+                    <tr class="search-item"><td><code class="new">--forward-subagent-text</code> <!-- added:v2.1.211 --></td><td class="desc">Include subagent text and thinking in <code>--output-format stream-json</code> output; paired with <code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code> env var</td></tr>
                 </table>
             </div>
 
@@ -300,7 +302,7 @@
                     <tr class="search-item"><td><code>--plugin-dir &lt;path&gt;</code></td><td class="desc">Load plugins from a directory or <code>.zip</code> archive at launch</td></tr>
                     <tr class="search-item"><td><code>--plugin-url &lt;url&gt;</code></td><td class="desc">Fetch a plugin <code>.zip</code> archive from a URL for the current session</td></tr>
                     <tr class="search-item"><td><code>--safe-mode</code></td><td class="desc">Start with all customizations (CLAUDE.md, plugins, skills, hooks, MCP servers) disabled for troubleshooting; paired with <code>CLAUDE_CODE_SAFE_MODE</code> env var</td></tr>
-                    <tr class="search-item"><td><code class="new">--ax-screen-reader</code> <!-- added:v2.1.208 --></td><td class="desc">Enable screen reader mode — opt-in plain-text rendering for screen reader users; also set via <code>CLAUDE_AX_SCREEN_READER=1</code> env var or <code>axScreenReader: true</code> in settings</td></tr>
+                    <tr class="search-item"><td><code>--ax-screen-reader</code></td><td class="desc">Enable screen reader mode — opt-in plain-text rendering for screen reader users; also set via <code>CLAUDE_AX_SCREEN_READER=1</code> env var or <code>axScreenReader: true</code> in settings</td></tr>
                 </table>
             </div>
         </div>
@@ -344,8 +346,8 @@
                     <tr class="search-item"><td><code>autoScrollEnabled</code></td><td class="desc">Disable conversation auto-scroll in fullscreen mode</td></tr>
                     <tr class="search-item"><td><code>wheelScrollAccelerationEnabled</code></td><td class="desc">Set to <code>false</code> to disable mouse-wheel scroll acceleration in fullscreen mode</td></tr>
                     <tr class="search-item"><td><code>tui</code></td><td class="desc">Default TUI mode; set to "fullscreen" for flicker-free alt-screen rendering</td></tr>
-                    <tr class="search-item"><td><code class="new">axScreenReader</code> <!-- added:v2.1.208 --></td><td class="desc">Set to <code>true</code> for opt-in plain-text rendering for screen reader users; paired with <code>--ax-screen-reader</code> flag and <code>CLAUDE_AX_SCREEN_READER=1</code> env var</td></tr>
-                    <tr class="search-item"><td><code class="new">vimInsertModeRemaps</code> <!-- added:v2.1.208 --></td><td class="desc">Map two-key insert-mode sequences to keys in vim mode; e.g. map <code>jj</code> to Escape</td></tr>
+                    <tr class="search-item"><td><code>axScreenReader</code></td><td class="desc">Set to <code>true</code> for opt-in plain-text rendering for screen reader users; paired with <code>--ax-screen-reader</code> flag and <code>CLAUDE_AX_SCREEN_READER=1</code> env var</td></tr>
+                    <tr class="search-item"><td><code>vimInsertModeRemaps</code></td><td class="desc">Map two-key insert-mode sequences to keys in vim mode; e.g. map <code>jj</code> to Escape</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr>
                     <tr class="search-item"><td><code>sandbox.bwrapPath</code> / <code>sandbox.socatPath</code></td><td class="desc">Custom bubblewrap and socat binary paths (Linux/WSL managed settings)</td></tr>
                     <tr class="search-item"><td><code>sandbox.allowAppleEvents</code></td><td class="desc">Opt-in macOS setting to allow sandboxed commands to send Apple Events</td></tr>
@@ -429,8 +431,9 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT</code></td><td class="desc">Override the default 5-minute idle timeout for remote MCP tool calls; stalled calls abort with an error instead of blocking indefinitely</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP=1</code></td><td class="desc">Disable automatic memory-pressure reaping of idle background shell commands</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_MOUSE_CLICKS</code></td><td class="desc">Disable mouse click/drag/hover in fullscreen mode while keeping wheel scroll active</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_AX_SCREEN_READER=1</code> <!-- added:v2.1.208 --></td><td class="desc">Enable screen reader mode — opt-in plain-text rendering; paired with <code>--ax-screen-reader</code> flag and <code>axScreenReader</code> JSON setting</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_PROCESS_WRAPPER</code> <!-- added:v2.1.208 --></td><td class="desc">Corporate launcher wrapper — agent view and background service run every Claude Code self-spawn through the specified executable</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_AX_SCREEN_READER=1</code></td><td class="desc">Enable screen reader mode — opt-in plain-text rendering; paired with <code>--ax-screen-reader</code> flag and <code>axScreenReader</code> JSON setting</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_PROCESS_WRAPPER</code></td><td class="desc">Corporate launcher wrapper — agent view and background service run every Claude Code self-spawn through the specified executable</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code> <!-- added:v2.1.211 --></td><td class="desc">Include subagent text and thinking in stream-json output; paired with <code>--forward-subagent-text</code> flag</td></tr>
                 </table>
             </div>
         </div>
@@ -584,10 +587,13 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.210",
-        "date": "2026-07-14",
+        "version": "v2.1.211",
+        "date": "2026-07-15",
         "changes": [
-            {"tag": "ADD", "text": "<code>Write(path)</code>, <code>NotebookEdit(path)</code>, <code>Glob(path)</code> — deprecated permission-rule tool names; startup now warns to use <code>Edit(path)</code> or <code>Read(path)</code> instead"}
+            {"tag": "ADD", "text": "<code>--forward-subagent-text</code> CLI flag — include subagent text and thinking in stream-json output; paired with <code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code> env var"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code> env var — include subagent text and thinking in stream-json output; paired with <code>--forward-subagent-text</code> flag"},
+            {"tag": "ADD", "text": "Vim mode <code>s</code> / <code>S</code> — substitute char / substitute line in NORMAL mode, matching vim behavior"},
+            {"tag": "CHG", "text": "<code>/usage-credits</code> — now asks for confirmation before sending request to organization admins"}
         ]
     }
     </script>
