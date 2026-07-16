@@ -143,8 +143,18 @@
 
             <!-- July 2026 -->
             <details class="month-group" open>
-                <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.210</span> <span class="month-count">13 releases</span></summary>
+                <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.211</span> <span class="month-count">14 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.211 <span class="version-date">2026-07-15</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>--forward-subagent-text</code> CLI flag — include subagent text and thinking in <code>--output-format stream-json</code> output; paired with <code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code> env var</li>
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code> env var — include subagent text and thinking in stream-json output; paired with <code>--forward-subagent-text</code> flag</li>
+                            <li><span class="tag tag-add">ADD</span>Vim mode <code>s</code> / <code>S</code> — substitute char / substitute line in NORMAL mode, matching vim behavior</li>
+                            <li><span class="tag tag-change">CHG</span><code>/usage-credits</code> — now asks for confirmation before sending request to organization admins</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.210 <span class="version-date">2026-07-14</span></h3>
