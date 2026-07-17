@@ -143,8 +143,21 @@
 
             <!-- July 2026 -->
             <details class="month-group" open>
-                <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.211</span> <span class="month-count">14 releases</span></summary>
+                <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.212</span> <span class="month-count">15 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.212 <span class="version-date">2026-07-17</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-change">CHG</span><code>/fork</code> — now copies conversation into a new background session (its own row in <code>claude agents</code>); old in-session subagent behavior moved to new <code>/subtask</code></li>
+                            <li><span class="tag tag-add">ADD</span><code>/subtask</code> slash command — launch an in-session subagent for the current task (formerly what <code>/fork</code> did)</li>
+                            <li><span class="tag tag-add">ADD</span><code>claude auto-mode reset</code> — restore default auto-mode configuration; prompts for confirmation (<code>--yes</code> to skip)</li>
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION</code> env var — session-wide limit on WebSearch tool calls (default 200)</li>
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION</code> env var — per-session cap on subagent spawns (default 200); <code>/clear</code> resets the budget</li>
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS</code> env var — threshold (ms) after which long-running MCP tool calls move to background automatically (default 120000); set to <code>0</code> to disable</li>
+                            <li><span class="tag tag-change">CHG</span><code>/resume</code> — in the agent view, now opens a picker of past sessions including deleted ones and resumes the chosen session as a background session</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.211 <span class="version-date">2026-07-15</span></h3>
