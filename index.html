@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.212</span>
+            <span class="release-tag">As of release: v2.1.214</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -363,7 +363,7 @@
                     <tr class="search-item"><td><code>disableAutoMode</code></td><td class="desc">Set to <code>true</code> to disable auto mode on Bedrock, Vertex AI, and Foundry — auto mode is now available there by default without opt-in</td></tr>
                     <tr class="search-item"><td><code>"*"</code> (deny rule glob)</td><td class="desc">Glob patterns supported in deny rule tool-name position; <code>"*"</code> denies all tools; allow rules reject non-MCP globs; unknown tool names in deny rules warn at startup</td></tr>
                     <tr class="search-item"><td><code>Tool(param:value)</code></td><td class="desc">Permission rule syntax to match a tool's input parameters (supports <code>*</code> wildcard); e.g. <code>Agent(model:opus)</code> to block Opus subagents</td></tr>
-                    <tr class="search-item"><td><code class="new">Write(path)</code> / <code class="new">NotebookEdit(path)</code> / <code class="new">Glob(path)</code> <!-- added:v2.1.210 --></td><td class="desc">Deprecated permission-rule tool names — startup warns to use <code>Edit(path)</code> or <code>Read(path)</code> instead</td></tr>
+                    <tr class="search-item"><td><code>Write(path)</code> / <code>NotebookEdit(path)</code> / <code>Glob(path)</code></td><td class="desc">Deprecated permission-rule tool names — startup warns to use <code>Edit(path)</code> or <code>Read(path)</code> instead</td></tr>
                     <tr class="search-item"><td><code>attribution.sessionUrl</code></td><td class="desc">Set to <code>false</code> to omit the claude.ai session link from commits and PRs in web and Remote Control sessions</td></tr>
                     <tr class="search-item"><td><code>prUrlTemplate</code></td><td class="desc">Point footer PR badge at a custom code-review URL instead of github.com</td></tr>
                     <tr class="search-item"><td><code>footerLinksRegexes</code></td><td class="desc">Array of regex patterns for regex-matched link badges in the footer row; configurable via user or managed settings</td></tr>
@@ -407,6 +407,7 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_AWAY_SUMMARY</code></td><td class="desc">Force-enable recap/away summary (useful when telemetry disabled)</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_USE_POWERSHELL_TOOL</code></td><td class="desc">Enable PowerShell tool; on Windows opt in/out, on Linux/macOS requires pwsh on PATH</td></tr>
                     <tr class="search-item"><td><code>OTEL_LOG_RAW_API_BODIES</code></td><td class="desc">Emit full API request/response bodies as OTEL log events for debugging</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH</code> <!-- added:v2.1.214 --></td><td class="desc">Configure the 60 KB truncation limit on OpenTelemetry content attributes</td></tr>
                     <tr class="search-item"><td><code>TRACEPARENT</code> / <code>TRACESTATE</code></td><td class="desc">Distributed trace context injected from environment for SDK/headless sessions</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_FORK_SUBAGENT=1</code></td><td class="desc">Enable forked subagents on external (non-Anthropic) builds; also works in non-interactive sessions</td></tr>
                     <tr class="search-item"><td><code>DISABLE_UPDATES</code></td><td class="desc">Block all update paths including manual <code>claude update</code>; stricter than <code>DISABLE_AUTOUPDATER</code></td></tr>
@@ -534,12 +535,12 @@
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>PreToolUse</code> / <code>PostToolUse</code></td><td class="desc">Intercept before/after tool execution; <code>PostToolUse</code> hook input includes <code>duration_ms</code>; can replace tool output via <code>hookSpecificOutput.updatedToolOutput</code> for all tools</td></tr>
                     <tr class="search-item"><td><code>PostToolUseFailure</code></td><td class="desc">Fires when a tool call fails; hook input includes <code>duration_ms</code></td></tr>
-                    <tr class="search-item"><td><code>SessionStart</code></td><td class="desc">Fires on session start/resume; return <code>reloadSkills: true</code> to re-scan skill directories; set <code>hookSpecificOutput.sessionTitle</code> to name the session</td></tr>
+                    <tr class="search-item"><td><code>SessionStart</code></td><td class="desc">Fires on session start/resume; return <code>reloadSkills: true</code> to re-scan skill directories; set <code>hookSpecificOutput.sessionTitle</code> to name the session; reports source <code>"fork"</code> when a session begins as a fork instead of <code>"resume"</code></td></tr>
                     <tr class="search-item"><td><code>SubagentStart</code> / <code>Stop</code> / <code>SubagentStop</code></td><td class="desc">Lifecycle triggers for agent spawning; sub-agents can spawn their own sub-agents (up to 5 levels deep); Stop and SubagentStop hook input includes <code>background_tasks</code> and <code>session_crons</code> fields; Stop and SubagentStop can return <code>hookSpecificOutput.additionalContext</code> to give Claude feedback and continue the turn</td></tr>
                     <tr class="search-item"><td><code>SessionEnd</code></td><td class="desc">Run cleanup script when session closes</td></tr>
                     <tr class="search-item"><td><code>CwdChanged</code> / <code>FileChanged</code></td><td class="desc">React to directory or file changes</td></tr>
                     <tr class="search-item"><td><code>TaskCreated</code></td><td class="desc">Fires when task created via TaskCreate</td></tr>
-                    <tr class="search-item"><td><code>if:</code> (hook field)</td><td class="desc">Conditional execution (permission rule syntax)</td></tr>
+                    <tr class="search-item"><td><code>if:</code> (hook field)</td><td class="desc">Conditional execution (permission rule syntax); single-segment <code>dir/**</code> <code>if:</code> conditions match only <code>&lt;cwd&gt;/dir</code> — write <code>**/dir/**</code> for any-depth matching (<code>deny</code>/<code>ask</code> permission rules keep any-depth match)</td></tr>
                     <tr class="search-item"><td><code>"Bash,PowerShell"</code> (hook matcher)</td><td class="desc">Comma-separated tool type names in a hook's matcher field — fires the hook on any of the listed types; e.g. <code>"Bash,PowerShell"</code> fires on both Bash and PowerShell commands</td></tr>
                     <tr class="search-item"><td><code>mcp__name__.*</code> (hook matcher pattern)</td><td class="desc">Hyphenated hook matcher identifiers exact-match — use <code>mcp__name__.*</code> glob to match all tools from a hyphenated MCP server (e.g. <code>mcp__brave-search__.*</code>)</td></tr>
                     <tr class="search-item"><td><code>PermissionDenied</code></td><td class="desc">Fires after auto mode classifier denials; return {retry:true} to allow retry</td></tr>
@@ -593,16 +594,12 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.212",
-        "date": "2026-07-17",
+        "version": "v2.1.214",
+        "date": "2026-07-18",
         "changes": [
-            {"tag": "CHG", "text": "<code>/fork</code> — now copies conversation into a new background session in <code>claude agents</code>; old in-session subagent behavior moved to new <code>/subtask</code>"},
-            {"tag": "ADD", "text": "<code>/subtask</code> — launch an in-session subagent (formerly what <code>/fork</code> did)"},
-            {"tag": "ADD", "text": "<code>claude auto-mode reset</code> — restore default auto-mode configuration; pass <code>--yes</code> to skip confirmation"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION</code> — session-wide limit on WebSearch tool calls (default 200)"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION</code> — per-session cap on subagent spawns (default 200); <code>/clear</code> resets the budget"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS</code> — threshold (ms) after which long-running MCP tool calls move to background automatically (default 120000); set to <code>0</code> to disable"},
-            {"tag": "CHG", "text": "<code>/resume</code> — in the agent view, opens a picker of past sessions including deleted ones and resumes as a background session"}
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH</code> — configure the 60 KB truncation limit on OpenTelemetry content attributes"},
+            {"tag": "CHG", "text": "<code>SessionStart</code> hook — now reports source <code>\"fork\"</code> when a session begins as a fork instead of <code>\"resume\"</code>"},
+            {"tag": "CHG", "text": "<code>if:</code> hook field — single-segment <code>dir/**</code> conditions now match only <code>&lt;cwd&gt;/dir</code>; write <code>**/dir/**</code> for any-depth matching"}
         ]
     }
     </script>
