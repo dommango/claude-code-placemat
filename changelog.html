@@ -143,8 +143,17 @@
 
             <!-- July 2026 -->
             <details class="month-group" open>
-                <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.212</span> <span class="month-count">15 releases</span></summary>
+                <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.214</span> <span class="month-count">16 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.214 <span class="version-date">2026-07-18</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH</code> env var — configure the 60 KB truncation limit on OpenTelemetry content attributes</li>
+                            <li><span class="tag tag-change">CHG</span><code>SessionStart</code> hook — now reports source <code>"fork"</code> when a session begins as a fork instead of <code>"resume"</code></li>
+                            <li><span class="tag tag-change">CHG</span><code>if:</code> hook field — single-segment <code>dir/**</code> conditions now match only <code>&lt;cwd&gt;/dir</code>; write <code>**/dir/**</code> for any-depth matching (<code>deny</code>/<code>ask</code> permission rules keep any-depth match)</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.212 <span class="version-date">2026-07-17</span></h3>
