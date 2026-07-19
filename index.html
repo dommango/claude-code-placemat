@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.214</span>
+            <span class="release-tag">As of release: v2.1.215</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -151,7 +151,7 @@
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>v</code> / <code>V</code></td><td class="desc">Visual / visual-line selection mode (NORMAL mode)</td></tr>
                     <tr class="search-item"><td><code>/ (NORMAL mode)</code></td><td class="desc">Open reverse history search (like Ctrl+R), matching bash/zsh vi-mode</td></tr>
-                    <tr class="search-item"><td><code class="new">s</code> / <code class="new">S</code> <!-- added:v2.1.211 --></td><td class="desc">Substitute char / substitute line in NORMAL mode, matching vim behavior</td></tr>
+                    <tr class="search-item"><td><code>s</code> / <code>S</code></td><td class="desc">Substitute char / substitute line in NORMAL mode, matching vim behavior</td></tr>
                 </table>
             </div>
         </div>
@@ -283,7 +283,7 @@
                     <tr class="search-item"><td><code>--json-schema</code></td><td class="desc">Strict JSON schema validation</td></tr>
                     <tr class="search-item"><td><code>--dangerously-skip-permissions</code></td><td class="desc">Skip all approval prompts; bypasses prompts for writes to <code>.claude/</code>, <code>.git/</code>, <code>.vscode/</code>, shell config files, and other protected paths (catastrophic removal commands still prompt)</td></tr>
                     <tr class="search-item"><td><code>--exclude-dynamic-system-prompt-sections</code></td><td class="desc">Exclude dynamic prompt sections in print mode for cross-user prompt caching</td></tr>
-                    <tr class="search-item"><td><code class="new">--forward-subagent-text</code> <!-- added:v2.1.211 --></td><td class="desc">Include subagent text and thinking in <code>--output-format stream-json</code> output; paired with <code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code> env var</td></tr>
+                    <tr class="search-item"><td><code>--forward-subagent-text</code></td><td class="desc">Include subagent text and thinking in <code>--output-format stream-json</code> output; paired with <code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code> env var</td></tr>
                 </table>
             </div>
 
@@ -437,7 +437,7 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_MOUSE_CLICKS</code></td><td class="desc">Disable mouse click/drag/hover in fullscreen mode while keeping wheel scroll active</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_AX_SCREEN_READER=1</code></td><td class="desc">Enable screen reader mode — opt-in plain-text rendering; paired with <code>--ax-screen-reader</code> flag and <code>axScreenReader</code> JSON setting</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_PROCESS_WRAPPER</code></td><td class="desc">Corporate launcher wrapper — agent view and background service run every Claude Code self-spawn through the specified executable</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code> <!-- added:v2.1.211 --></td><td class="desc">Include subagent text and thinking in stream-json output; paired with <code>--forward-subagent-text</code> flag</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code></td><td class="desc">Include subagent text and thinking in stream-json output; paired with <code>--forward-subagent-text</code> flag</td></tr>
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION</code> <!-- added:v2.1.212 --></td><td class="desc">Session-wide limit on WebSearch tool calls (default 200); prevents runaway search loops</td></tr>
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION</code> <!-- added:v2.1.212 --></td><td class="desc">Per-session cap on subagent spawns (default 200); <code>/clear</code> resets the budget; prevents runaway delegation loops</td></tr>
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS</code> <!-- added:v2.1.212 --></td><td class="desc">Threshold in ms after which long-running MCP tool calls move to background automatically (default 120000 / 2 min); set to <code>0</code> to disable</td></tr>
@@ -452,7 +452,8 @@
                 <h3>Built-in Skills & Locations</h3>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
-                    <tr class="search-item"><td><code>/code-review [effort]</code></td><td class="desc">Code review; pass <code>--fix</code> to apply findings to working tree (surfacing reuse/simplification/efficiency suggestions); pass <code>--comment</code> to post findings as inline PR comments; optional effort level (e.g. <code>/code-review high</code>)</td></tr>
+                    <tr class="search-item"><td><code>/code-review [effort]</code></td><td class="desc">Code review; must be explicitly invoked — Claude no longer auto-runs it; pass <code>--fix</code> to apply findings to working tree (surfacing reuse/simplification/efficiency suggestions); pass <code>--comment</code> to post findings as inline PR comments; optional effort level (e.g. <code>/code-review high</code>)</td></tr>
+                    <tr class="search-item"><td><code class="new">/verify</code> <!-- added:v2.1.215 --></td><td class="desc">Verify a code change works end-to-end; must be explicitly invoked — Claude no longer auto-runs it</td></tr>
                     <tr class="search-item"><td><code>/simplify</code></td><td class="desc">Cleanup-only review (reuse, simplification, efficiency, altitude) applied to working tree; does not run the full <code>/code-review --fix</code> bug hunt</td></tr>
                     <tr class="search-item"><td><code>/batch</code></td><td class="desc">Large parallel changes (5-30 worktrees)</td></tr>
                     <tr class="search-item"><td><code>/claude-api</code></td><td class="desc">Load API + SDK reference into context</td></tr>
@@ -594,12 +595,11 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.214",
-        "date": "2026-07-18",
+        "version": "v2.1.215",
+        "date": "2026-07-19",
         "changes": [
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH</code> — configure the 60 KB truncation limit on OpenTelemetry content attributes"},
-            {"tag": "CHG", "text": "<code>SessionStart</code> hook — now reports source <code>\"fork\"</code> when a session begins as a fork instead of <code>\"resume\"</code>"},
-            {"tag": "CHG", "text": "<code>if:</code> hook field — single-segment <code>dir/**</code> conditions now match only <code>&lt;cwd&gt;/dir</code>; write <code>**/dir/**</code> for any-depth matching"}
+            {"tag": "ADD", "text": "<code>/verify</code> — built-in skill for end-to-end code change verification; must be explicitly invoked"},
+            {"tag": "CHG", "text": "<code>/code-review</code> — Claude no longer auto-runs it; must be explicitly invoked with <code>/code-review</code>"}
         ]
     }
     </script>
