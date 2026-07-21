@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.215</span>
+            <span class="release-tag">As of release: v2.1.216</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -168,8 +168,8 @@
                     <tr class="search-item"><td><code>/resume</code></td><td class="desc">Display session picker menu; background sessions (from <code>--bg</code> or agent view) now appear alongside interactive sessions, marked with <code>bg</code>; offers to summarize stale large sessions before re-reading; in the agent view, opens a picker of past sessions including deleted ones and resumes the chosen session as a background session</td></tr>
                     <tr class="search-item"><td><code>/rename [name]</code></td><td class="desc">Name current session</td></tr>
                     <tr class="search-item"><td><code>/branch [name]</code></td><td class="desc">Branch conversation</td></tr>
-                    <tr class="search-item"><td><code class="new">/fork</code> <!-- added:v2.1.212 --></td><td class="desc">Copy conversation into a new background session (its own row in <code>claude agents</code>) while you keep working in the current session; old in-session subagent behavior moved to <code>/subtask</code></td></tr>
-                    <tr class="search-item"><td><code class="new">/subtask</code> <!-- added:v2.1.212 --></td><td class="desc">Launch an in-session subagent for the current task; formerly what <code>/fork</code> did before v2.1.212</td></tr>
+                    <tr class="search-item"><td><code>/fork</code></td><td class="desc">Copy conversation into a new background session (its own row in <code>claude agents</code>) while you keep working in the current session; old in-session subagent behavior moved to <code>/subtask</code></td></tr>
+                    <tr class="search-item"><td><code>/subtask</code></td><td class="desc">Launch an in-session subagent for the current task; formerly what <code>/fork</code> did before v2.1.212</td></tr>
                     <tr class="search-item"><td><code>/usage</code></td><td class="desc">Unified usage view (cost + stats tabs); per-category limits breakdown (skills, subagents, plugins, per-MCP-server cost); <code>/cost</code> and <code>/stats</code> are shortcuts that open the relevant tab</td></tr>
                     <tr class="search-item"><td><code>/usage-credits</code></td><td class="desc">Request extra usage allowance; asks for confirmation before sending to organization admins; old name <code>/extra-usage</code> still works; accessible from Remote Control clients</td></tr>
                     <tr class="search-item"><td><code>/context</code></td><td class="desc">Visualize context window (grid)</td></tr>
@@ -267,7 +267,7 @@
                     <tr class="search-item"><td><code>claude --fork-session</code></td><td class="desc">Fork existing session on resume</td></tr>
                     <tr class="search-item"><td><code>claude ultrareview [target]</code></td><td class="desc">Run <code>/ultrareview</code> non-interactively from CI or scripts; prints findings to stdout; use <code>--json</code> for raw output</td></tr>
                     <tr class="search-item"><td><code>claude project purge [path]</code></td><td class="desc">Delete all Claude Code state for a project (transcripts, tasks, file history, config entry); supports <code>--dry-run</code>, <code>-y/--yes</code>, <code>-i/--interactive</code>, and <code>--all</code></td></tr>
-                    <tr class="search-item"><td><code class="new">claude auto-mode reset</code> <!-- added:v2.1.212 --></td><td class="desc">Restore default auto-mode configuration; prompts for confirmation (pass <code>--yes</code> to skip)</td></tr>
+                    <tr class="search-item"><td><code>claude auto-mode reset</code></td><td class="desc">Restore default auto-mode configuration; prompts for confirmation (pass <code>--yes</code> to skip)</td></tr>
                     <tr class="search-item"><td><code>claude agents</code></td><td class="desc">Agent view (Research Preview) — single list of every CC session; running, blocked on you, or done; type <code>! &lt;cmd&gt;</code> to launch a shell command as a background session you can attach/detach; <code>--cwd &lt;path&gt;</code> scopes list to a directory; <code>--json</code> lists live sessions as JSON (includes <code>waitingFor</code>, <code>id</code>, and <code>state</code> fields); <code>--all</code> flag includes completed sessions; dispatch flags for background sessions: <code>--add-dir</code>, <code>--settings</code>, <code>--mcp-config</code>, <code>--plugin-dir</code>, <code>--permission-mode</code>, <code>--model</code>, <code>--effort</code>, <code>--agent</code>, <code>--dangerously-skip-permissions</code></td></tr>
                     <tr class="search-item"><td><code>claude --bg --exec '&lt;cmd&gt;'</code></td><td class="desc">Run a shell command as a background session you can attach to and detach from; equivalent to typing <code>! &lt;cmd&gt;</code> inside <code>claude agents</code></td></tr>
                 </table>
@@ -355,6 +355,7 @@
                     <tr class="search-item"><td><code>sandbox.bwrapPath</code> / <code>sandbox.socatPath</code></td><td class="desc">Custom bubblewrap and socat binary paths (Linux/WSL managed settings)</td></tr>
                     <tr class="search-item"><td><code>sandbox.allowAppleEvents</code></td><td class="desc">Opt-in macOS setting to allow sandboxed commands to send Apple Events</td></tr>
                     <tr class="search-item"><td><code>sandbox.credentials</code></td><td class="desc">Block sandboxed commands from reading credential files and secret environment variables</td></tr>
+                    <tr class="search-item"><td><code class="new">sandbox.filesystem.disabled</code> <!-- added:v2.1.216 --></td><td class="desc">Skip filesystem isolation while keeping network egress control</td></tr>
                     <tr class="search-item"><td><code>wslInheritsWindowsSettings</code></td><td class="desc">WSL sessions inherit Windows-side managed settings (policy key)</td></tr>
                     <tr class="search-item"><td><code>parentSettingsBehavior</code></td><td class="desc">Admin-tier key: <code>first-wins</code> (default) or <code>merge</code> — opts SDK <code>managedSettings</code> parent tier into policy merge</td></tr>
                     <tr class="search-item"><td><code>"$defaults"</code> (autoMode)</td><td class="desc">Include in <code>autoMode.allow</code>, <code>autoMode.soft_deny</code>, or <code>autoMode.environment</code> to add custom rules alongside the built-in list; <code>autoMode</code> settings are read only from <code>~/.claude/settings.json</code>, not from <code>.claude/settings.local.json</code></td></tr>
@@ -438,9 +439,9 @@
                     <tr class="search-item"><td><code>CLAUDE_AX_SCREEN_READER=1</code></td><td class="desc">Enable screen reader mode — opt-in plain-text rendering; paired with <code>--ax-screen-reader</code> flag and <code>axScreenReader</code> JSON setting</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_PROCESS_WRAPPER</code></td><td class="desc">Corporate launcher wrapper — agent view and background service run every Claude Code self-spawn through the specified executable</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code></td><td class="desc">Include subagent text and thinking in stream-json output; paired with <code>--forward-subagent-text</code> flag</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION</code> <!-- added:v2.1.212 --></td><td class="desc">Session-wide limit on WebSearch tool calls (default 200); prevents runaway search loops</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION</code> <!-- added:v2.1.212 --></td><td class="desc">Per-session cap on subagent spawns (default 200); <code>/clear</code> resets the budget; prevents runaway delegation loops</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS</code> <!-- added:v2.1.212 --></td><td class="desc">Threshold in ms after which long-running MCP tool calls move to background automatically (default 120000 / 2 min); set to <code>0</code> to disable</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION</code></td><td class="desc">Session-wide limit on WebSearch tool calls (default 200); prevents runaway search loops</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION</code></td><td class="desc">Per-session cap on subagent spawns (default 200); <code>/clear</code> resets the budget; prevents runaway delegation loops</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS</code></td><td class="desc">Threshold in ms after which long-running MCP tool calls move to background automatically (default 120000 / 2 min); set to <code>0</code> to disable</td></tr>
                 </table>
             </div>
         </div>
@@ -595,11 +596,10 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.215",
-        "date": "2026-07-19",
+        "version": "v2.1.216",
+        "date": "2026-07-20",
         "changes": [
-            {"tag": "ADD", "text": "<code>/verify</code> — built-in skill for end-to-end code change verification; must be explicitly invoked"},
-            {"tag": "CHG", "text": "<code>/code-review</code> — Claude no longer auto-runs it; must be explicitly invoked with <code>/code-review</code>"}
+            {"tag": "ADD", "text": "<code>sandbox.filesystem.disabled</code> — skip filesystem isolation while keeping network egress control"}
         ]
     }
     </script>
