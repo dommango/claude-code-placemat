@@ -143,8 +143,18 @@
 
             <!-- July 2026 -->
             <details class="month-group" open>
-                <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.216</span> <span class="month-count">18 releases</span></summary>
+                <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.217</span> <span class="month-count">19 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.217 <span class="version-date">2026-07-21</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>emojiCompletionEnabled</code> JSON setting — disable emoji shortcode autocomplete in the prompt input (e.g. <code>:heart:</code> → ❤️)</li>
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS</code> env var — cap on concurrently-running subagents (default 20); prevents unbounded fan-out from a single message</li>
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</code> env var — allow nested subagent spawning; subagents no longer spawn nested subagents by default</li>
+                            <li><span class="tag tag-add">ADD</span><code>FORCE_HYPERLINK=0</code> env var — opt out of clickable hyperlinks in footer PR badge links (on by default even without terminal detection)</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.216 <span class="version-date">2026-07-20</span></h3>

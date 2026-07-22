@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.216</span>
+            <span class="release-tag">As of release: v2.1.217</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -378,6 +378,7 @@
                     <tr class="search-item"><td><code>awsAuthRefresh</code></td><td class="desc">Configures the "Claude Platform on AWS — refresh credentials" option in <code>/login</code></td></tr>
                     <tr class="search-item"><td><code>respondToBashCommands</code></td><td class="desc">Set to <code>false</code> to keep <code>!</code> bash command output as context-only; default behavior is for Claude to respond automatically</td></tr>
                     <tr class="search-item"><td><code>dynamicWorkflowSize</code></td><td class="desc">Controls how large Claude makes dynamic workflows (small/medium/large agent counts) — advisory guideline, not a hard cap; configured via <code>/config</code></td></tr>
+                    <tr class="search-item"><td><code class="new">emojiCompletionEnabled</code> <!-- added:v2.1.217 --></td><td class="desc">Set to <code>false</code> to disable emoji shortcode autocomplete in the prompt input (e.g. <code>:heart:</code> → ❤️)</td></tr>
                 </table>
             </div>
 
@@ -408,7 +409,7 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_AWAY_SUMMARY</code></td><td class="desc">Force-enable recap/away summary (useful when telemetry disabled)</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_USE_POWERSHELL_TOOL</code></td><td class="desc">Enable PowerShell tool; on Windows opt in/out, on Linux/macOS requires pwsh on PATH</td></tr>
                     <tr class="search-item"><td><code>OTEL_LOG_RAW_API_BODIES</code></td><td class="desc">Emit full API request/response bodies as OTEL log events for debugging</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH</code> <!-- added:v2.1.214 --></td><td class="desc">Configure the 60 KB truncation limit on OpenTelemetry content attributes</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH</code></td><td class="desc">Configure the 60 KB truncation limit on OpenTelemetry content attributes</td></tr>
                     <tr class="search-item"><td><code>TRACEPARENT</code> / <code>TRACESTATE</code></td><td class="desc">Distributed trace context injected from environment for SDK/headless sessions</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_FORK_SUBAGENT=1</code></td><td class="desc">Enable forked subagents on external (non-Anthropic) builds; also works in non-interactive sessions</td></tr>
                     <tr class="search-item"><td><code>DISABLE_UPDATES</code></td><td class="desc">Block all update paths including manual <code>claude update</code>; stricter than <code>DISABLE_AUTOUPDATER</code></td></tr>
@@ -441,7 +442,10 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code></td><td class="desc">Include subagent text and thinking in stream-json output; paired with <code>--forward-subagent-text</code> flag</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION</code></td><td class="desc">Session-wide limit on WebSearch tool calls (default 200); prevents runaway search loops</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION</code></td><td class="desc">Per-session cap on subagent spawns (default 200); <code>/clear</code> resets the budget; prevents runaway delegation loops</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS</code> <!-- added:v2.1.217 --></td><td class="desc">Cap on concurrently-running subagents (default 20); prevents a single message from fanning out unbounded background agents</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</code> <!-- added:v2.1.217 --></td><td class="desc">Allow nested subagent spawning; subagents no longer spawn nested subagents by default — set to allow deeper nesting</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS</code></td><td class="desc">Threshold in ms after which long-running MCP tool calls move to background automatically (default 120000 / 2 min); set to <code>0</code> to disable</td></tr>
+                    <tr class="search-item"><td><code class="new">FORCE_HYPERLINK=0</code> <!-- added:v2.1.217 --></td><td class="desc">Opt out of clickable hyperlinks in footer PR badge links (hyperlinks are on by default even when terminal support can't be detected, e.g. over ssh/tmux)</td></tr>
                 </table>
             </div>
         </div>
@@ -596,10 +600,13 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.216",
-        "date": "2026-07-20",
+        "version": "v2.1.217",
+        "date": "2026-07-21",
         "changes": [
-            {"tag": "ADD", "text": "<code>sandbox.filesystem.disabled</code> — skip filesystem isolation while keeping network egress control"}
+            {"tag": "ADD", "text": "<code>emojiCompletionEnabled</code> JSON setting — disable emoji shortcode autocomplete (<code>:heart:</code> → ❤️)"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS</code> env var — cap on concurrently-running subagents (default 20)"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</code> env var — allow nested subagent spawning (disabled by default)"},
+            {"tag": "ADD", "text": "<code>FORCE_HYPERLINK=0</code> env var — opt out of clickable hyperlinks in footer PR badge links"}
         ]
     }
     </script>
