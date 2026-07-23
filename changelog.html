@@ -143,8 +143,19 @@
 
             <!-- July 2026 -->
             <details class="month-group" open>
-                <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.217</span> <span class="month-count">19 releases</span></summary>
+                <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.218</span> <span class="month-count">20 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.218 <span class="version-date">2026-07-22</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>/deep-research</code> slash command — structured deep-research session; must be explicitly invoked (Claude no longer auto-starts it)</li>
+                            <li><span class="tag tag-change">CHG</span><code>/code-review</code> — now runs as a background subagent; review work no longer fills your conversation; keeps stacked slash commands as review target</li>
+                            <li><span class="tag tag-change">CHG</span><code>/mcp</code> — shows HTTP status and error text when a server fails to connect; warns for MCP config values with hidden leading or trailing whitespace</li>
+                            <li><span class="tag tag-change">CHG</span><code>context: fork</code> (skill frontmatter) — skills now run in the background by default; opt out per skill with <code>background: false</code></li>
+                            <li><span class="tag tag-add">ADD</span>Frontmatter booleans — <code>yes</code>/<code>no</code>/<code>on</code>/<code>off</code>/<code>1</code>/<code>0</code> now accepted alongside <code>true</code>/<code>false</code> in skill and plugin frontmatter</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.217 <span class="version-date">2026-07-21</span></h3>

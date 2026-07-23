@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.217</span>
+            <span class="release-tag">As of release: v2.1.218</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -215,7 +215,7 @@
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>/init</code></td><td class="desc">Create CLAUDE.md memory</td></tr>
                     <tr class="search-item"><td><code>/memory</code></td><td class="desc">Edit CLAUDE.md files directly</td></tr>
-                    <tr class="search-item"><td><code>/mcp</code></td><td class="desc">Manage MCP servers; shows tool count for each connected server and flags servers with 0 tools</td></tr>
+                    <tr class="search-item"><td><code>/mcp</code></td><td class="desc">Manage MCP servers; shows tool count for each connected server and flags servers with 0 tools; shows HTTP status and error text when a server fails to connect; warns for MCP config values with hidden leading or trailing whitespace</td></tr>
                     <tr class="search-item"><td><code>/hooks</code></td><td class="desc">Manage event lifecycle hooks</td></tr>
                     <tr class="search-item"><td><code>/install-github-app</code></td><td class="desc">Install the GitHub App; GitHub Actions workflow and repo secret setup is optional — install just the GitHub App and skip the workflow/secret steps</td></tr>
                     <tr class="search-item"><td><code>/commit-push-pr</code></td><td class="desc">Commit, push, and open a PR in one step; auto-allows <code>git push</code> to the repo's configured push remote (<code>remote.pushDefault</code>, or the sole remote when only one is configured) in addition to <code>origin</code></td></tr>
@@ -237,6 +237,7 @@
                     <tr class="search-item"><td><code>/loop [interval]</code></td><td class="desc">Schedule recurring background task</td></tr>
                     <tr class="search-item"><td><code>/proactive</code></td><td class="desc">Alias for /loop — schedule recurring background task</td></tr>
                     <tr class="search-item"><td><code>/schedule</code></td><td class="desc">Cloud scheduled tasks</td></tr>
+                    <tr class="search-item"><td><code class="new">/deep-research</code> <!-- added:v2.1.218 --></td><td class="desc">Structured deep-research session; must be explicitly invoked — Claude no longer auto-starts it</td></tr>
                     <tr class="search-item"><td><code>/workflows</code></td><td class="desc">View and manage dynamic workflow runs; workflows orchestrate work across tens to hundreds of background agents for large, complex tasks; press <code>f</code> in the agent detail view to filter by status</td></tr>
                     <tr class="search-item"><td><code>ultracode</code></td><td class="desc">Prompt trigger keyword — type in the prompt to start a dynamic workflow; highlighted in violet in the prompt input</td></tr>
                     <tr class="search-item"><td><code>/voice</code></td><td class="desc">Push-to-talk voice prompting</td></tr>
@@ -457,8 +458,8 @@
                 <h3>Built-in Skills & Locations</h3>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
-                    <tr class="search-item"><td><code>/code-review [effort]</code></td><td class="desc">Code review; must be explicitly invoked — Claude no longer auto-runs it; pass <code>--fix</code> to apply findings to working tree (surfacing reuse/simplification/efficiency suggestions); pass <code>--comment</code> to post findings as inline PR comments; optional effort level (e.g. <code>/code-review high</code>)</td></tr>
-                    <tr class="search-item"><td><code class="new">/verify</code> <!-- added:v2.1.215 --></td><td class="desc">Verify a code change works end-to-end; must be explicitly invoked — Claude no longer auto-runs it</td></tr>
+                    <tr class="search-item"><td><code>/code-review [effort]</code></td><td class="desc">Code review; must be explicitly invoked — Claude no longer auto-runs it; runs as a background subagent — review work no longer fills your conversation; keeps stacked slash commands as review target; pass <code>--fix</code> to apply findings to working tree (surfacing reuse/simplification/efficiency suggestions); pass <code>--comment</code> to post findings as inline PR comments; optional effort level (e.g. <code>/code-review high</code>)</td></tr>
+                    <tr class="search-item"><td><code>/verify</code></td><td class="desc">Verify a code change works end-to-end; must be explicitly invoked — Claude no longer auto-runs it</td></tr>
                     <tr class="search-item"><td><code>/simplify</code></td><td class="desc">Cleanup-only review (reuse, simplification, efficiency, altitude) applied to working tree; does not run the full <code>/code-review --fix</code> bug hunt</td></tr>
                     <tr class="search-item"><td><code>/batch</code></td><td class="desc">Large parallel changes (5-30 worktrees)</td></tr>
                     <tr class="search-item"><td><code>/claude-api</code></td><td class="desc">Load API + SDK reference into context</td></tr>
@@ -480,7 +481,7 @@
                     <tr class="search-item"><td><code>effort</code></td><td class="desc">Override effort level specifically for skill</td></tr>
                     <tr class="search-item"><td><code>allowed-tools</code></td><td class="desc">Skip permission prompts for skill</td></tr>
                     <tr class="search-item"><td><code>disallowed-tools</code></td><td class="desc">Remove tools from the model while the skill or slash command is active</td></tr>
-                    <tr class="search-item"><td><code>context: fork</code></td><td class="desc">Run skill logic in an isolated subagent</td></tr>
+                    <tr class="search-item"><td><code>context: fork</code></td><td class="desc">Run skill in an isolated subagent; runs in the background by default — opt out per skill with <code>background: false</code></td></tr>
                     <tr class="search-item"><td><code>$ARGUMENTS</code></td><td class="desc">User input placeholder replacement</td></tr>
                     <tr class="search-item"><td><code>\$</code></td><td class="desc">Escape to include a literal <code>$</code> before a digit in skill command bodies</td></tr>
                     <tr class="search-item"><td><code class="unverified">$FILE_PATH</code></td><td class="desc">File path resolution (hook strings only)</td></tr>
@@ -490,6 +491,7 @@
                     <tr class="search-item"><td><code>keep-coding-instructions</code></td><td class="desc">Control plugin output style for coding tasks</td></tr>
                     <tr class="search-item"><td><code>monitors</code> (plugin manifest)</td><td class="desc">Background monitor support for plugins; auto-arms at session start or on skill invoke</td></tr>
                     <tr class="search-item"><td><code>defaultEnabled: false</code> (plugin manifest)</td><td class="desc">Plugin starts disabled by default; enable with <code>/plugin</code> or <code>claude plugin enable</code>; dependency plugins of enabled plugins are still enabled automatically</td></tr>
+                    <tr class="search-item"><td><code class="new">true/false/yes/no/on/off/1/0</code> <!-- added:v2.1.218 --></td><td class="desc">Accepted values for boolean frontmatter fields in skills and plugins (case-insensitive); all resolve to <code>true</code> or <code>false</code></td></tr>
                 </table>
             </div>
 
@@ -600,13 +602,14 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.217",
-        "date": "2026-07-21",
+        "version": "v2.1.218",
+        "date": "2026-07-22",
         "changes": [
-            {"tag": "ADD", "text": "<code>emojiCompletionEnabled</code> JSON setting — disable emoji shortcode autocomplete (<code>:heart:</code> → ❤️)"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS</code> env var — cap on concurrently-running subagents (default 20)"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</code> env var — allow nested subagent spawning (disabled by default)"},
-            {"tag": "ADD", "text": "<code>FORCE_HYPERLINK=0</code> env var — opt out of clickable hyperlinks in footer PR badge links"}
+            {"tag": "ADD", "text": "<code>/deep-research</code> slash command — structured deep-research session; must be explicitly invoked (Claude no longer auto-starts it)"},
+            {"tag": "CHG", "text": "<code>/code-review</code> — now runs as a background subagent; review work no longer fills your conversation; keeps stacked slash commands as review target"},
+            {"tag": "CHG", "text": "<code>/mcp</code> — shows HTTP status and error text when a server fails to connect; warns for config values with hidden whitespace"},
+            {"tag": "CHG", "text": "<code>context: fork</code> frontmatter — skills now run in the background by default; opt out with <code>background: false</code>"},
+            {"tag": "ADD", "text": "Frontmatter booleans — <code>yes</code>/<code>no</code>/<code>on</code>/<code>off</code>/<code>1</code>/<code>0</code> now accepted alongside <code>true</code>/<code>false</code> in skill and plugin frontmatter"}
         ]
     }
     </script>
