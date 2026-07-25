@@ -143,8 +143,18 @@
 
             <!-- July 2026 -->
             <details class="month-group" open>
-                <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.218</span> <span class="month-count">20 releases</span></summary>
+                <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.220</span> <span class="month-count">22 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.219 <span class="version-date">2026-07-24</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>DirectoryAdded</code> hook — fires after <code>/add-dir</code> or SDK <code>register_repo_root</code> registers a new working directory mid-session</li>
+                            <li><span class="tag tag-add">ADD</span><code>sandbox.network.strictAllowlist</code> JSON setting — deny non-allowlisted hosts for sandboxed commands without prompting</li>
+                            <li><span class="tag tag-add">ADD</span><code>workflowSizeGuideline</code> JSON setting — set the advisory Dynamic workflow size guideline from any settings file; <code>/config</code> row hidden while one is set</li>
+                            <li><span class="tag tag-change">CHG</span><code>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</code> — default nesting depth changed to 3 (was 1); set to <code>1</code> to disable nesting</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.218 <span class="version-date">2026-07-22</span></h3>
