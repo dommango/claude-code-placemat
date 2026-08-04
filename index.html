@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.220</span>
+            <span class="release-tag">As of release: v2.1.221</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -168,7 +168,7 @@
                     <tr class="search-item"><td><code>/resume</code></td><td class="desc">Display session picker menu; background sessions (from <code>--bg</code> or agent view) now appear alongside interactive sessions, marked with <code>bg</code>; offers to summarize stale large sessions before re-reading; in the agent view, opens a picker of past sessions including deleted ones and resumes the chosen session as a background session</td></tr>
                     <tr class="search-item"><td><code>/rename [name]</code></td><td class="desc">Name current session</td></tr>
                     <tr class="search-item"><td><code>/branch [name]</code></td><td class="desc">Branch conversation</td></tr>
-                    <tr class="search-item"><td><code>/fork</code></td><td class="desc">Copy conversation into a new background session (its own row in <code>claude agents</code>) while you keep working in the current session; old in-session subagent behavior moved to <code>/subtask</code></td></tr>
+                    <tr class="search-item"><td><code>/fork</code></td><td class="desc">Copy conversation into a new background session (its own row in <code>claude agents</code>) with its own git worktree, while you keep working in the current session; old in-session subagent behavior moved to <code>/subtask</code></td></tr>
                     <tr class="search-item"><td><code>/subtask</code></td><td class="desc">Launch an in-session subagent for the current task; formerly what <code>/fork</code> did before v2.1.212</td></tr>
                     <tr class="search-item"><td><code>/usage</code></td><td class="desc">Unified usage view (cost + stats tabs); per-category limits breakdown (skills, subagents, plugins, per-MCP-server cost); <code>/cost</code> and <code>/stats</code> are shortcuts that open the relevant tab</td></tr>
                     <tr class="search-item"><td><code>/usage-credits</code></td><td class="desc">Request extra usage allowance; asks for confirmation before sending to organization admins; old name <code>/extra-usage</code> still works; accessible from Remote Control clients</td></tr>
@@ -225,6 +225,7 @@
                     <tr class="search-item"><td><code>/reload-plugins</code></td><td class="desc">Hot-reload local plugins; auto-installs missing dependencies from added marketplaces</td></tr>
                     <tr class="search-item"><td><code>/reload-skills</code></td><td class="desc">Re-scan skill directories without restarting the session</td></tr>
                     <tr class="search-item"><td><code>/plugin list</code></td><td class="desc">List installed plugins; <code>--enabled</code>/<code>--disabled</code> filters; search bar available when browsing marketplace plugins; surfaces recently-unused plugins for cleanup</td></tr>
+                    <tr class="search-item"><td><code class="new">/plugin install &lt;name&gt;</code> <!-- added:v2.1.221 --></td><td class="desc">Install a plugin from the marketplace; refreshes a stale catalog and retries before reporting not found; activates immediately when safe without requiring <code>/reload-plugins</code></td></tr>
                 </table>
             </div>
 
@@ -237,12 +238,12 @@
                     <tr class="search-item"><td><code>/loop [interval]</code></td><td class="desc">Schedule recurring background task</td></tr>
                     <tr class="search-item"><td><code>/proactive</code></td><td class="desc">Alias for /loop — schedule recurring background task</td></tr>
                     <tr class="search-item"><td><code>/schedule</code></td><td class="desc">Cloud scheduled tasks</td></tr>
-                    <tr class="search-item"><td><code class="new">/deep-research</code> <!-- added:v2.1.218 --></td><td class="desc">Structured deep-research session; must be explicitly invoked — Claude no longer auto-starts it</td></tr>
+                    <tr class="search-item"><td><code>/deep-research</code></td><td class="desc">Structured deep-research session; must be explicitly invoked — Claude no longer auto-starts it</td></tr>
                     <tr class="search-item"><td><code>/workflows</code></td><td class="desc">View and manage dynamic workflow runs; workflows orchestrate work across tens to hundreds of background agents for large, complex tasks; press <code>f</code> in the agent detail view to filter by status</td></tr>
                     <tr class="search-item"><td><code>ultracode</code></td><td class="desc">Prompt trigger keyword — type in the prompt to start a dynamic workflow; highlighted in violet in the prompt input</td></tr>
                     <tr class="search-item"><td><code>/voice</code></td><td class="desc">Push-to-talk voice prompting</td></tr>
                     <tr class="search-item"><td><code>/doctor</code></td><td class="desc">Full setup checkup — diagnoses and fixes CC installation/env issues; press f to auto-fix; openable while Claude is responding; shows result of last update attempt; lists npm auto-update fix hints; proposes trimming checked-in <code>CLAUDE.md</code> files by cutting content Claude could derive from the codebase; <code>/checkup</code> is an alias</td></tr>
-                    <tr class="search-item"><td><code>/status</code></td><td class="desc">Show CC environment status and warnings (e.g. "claude command missing or broken"); moved from startup output in v2.1.203</td></tr>
+                    <tr class="search-item"><td><code>/status</code></td><td class="desc">Show CC environment status and warnings (e.g. "claude command missing or broken"); shows session kind: <code>interactive</code>, or a background job that is <code>attached</code> or <code>unattended</code>; moved from startup output in v2.1.203</td></tr>
                     <tr class="search-item"><td><code>/pr-comments [PR]</code></td><td class="desc">Fetch GitHub PR comments</td></tr>
                     <tr class="search-item"><td><code>/security-review</code></td><td class="desc">Security analysis of uncommitted code</td></tr>
                     <tr class="search-item"><td><code>/powerup</code></td><td class="desc">Interactive lessons teaching CC features with animated demos</td></tr>
@@ -356,7 +357,7 @@
                     <tr class="search-item"><td><code class="new">sandbox.network.strictAllowlist</code> <!-- added:v2.1.219 --></td><td class="desc">Deny non-allowlisted hosts for sandboxed commands without prompting</td></tr>
                     <tr class="search-item"><td><code>sandbox.bwrapPath</code> / <code>sandbox.socatPath</code></td><td class="desc">Custom bubblewrap and socat binary paths (Linux/WSL managed settings)</td></tr>
                     <tr class="search-item"><td><code>sandbox.allowAppleEvents</code></td><td class="desc">Opt-in macOS setting to allow sandboxed commands to send Apple Events</td></tr>
-                    <tr class="search-item"><td><code>sandbox.credentials</code></td><td class="desc">Block sandboxed commands from reading credential files and secret environment variables</td></tr>
+                    <tr class="search-item"><td><code>sandbox.credentials</code></td><td class="desc">Block sandboxed commands from reading credential files and secret environment variables; set <code>mode: "mask"</code> (Linux/WSL) to expose a sentinel copy while the sandbox proxy substitutes the real value on egress; macOS falls back to <code>deny</code></td></tr>
                     <tr class="search-item"><td><code>sandbox.filesystem.disabled</code></td><td class="desc">Skip filesystem isolation while keeping network egress control</td></tr>
                     <tr class="search-item"><td><code>wslInheritsWindowsSettings</code></td><td class="desc">WSL sessions inherit Windows-side managed settings (policy key)</td></tr>
                     <tr class="search-item"><td><code>parentSettingsBehavior</code></td><td class="desc">Admin-tier key: <code>first-wins</code> (default) or <code>merge</code> — opts SDK <code>managedSettings</code> parent tier into policy merge</td></tr>
@@ -493,7 +494,7 @@
                     <tr class="search-item"><td><code>keep-coding-instructions</code></td><td class="desc">Control plugin output style for coding tasks</td></tr>
                     <tr class="search-item"><td><code>monitors</code> (plugin manifest)</td><td class="desc">Background monitor support for plugins; auto-arms at session start or on skill invoke</td></tr>
                     <tr class="search-item"><td><code>defaultEnabled: false</code> (plugin manifest)</td><td class="desc">Plugin starts disabled by default; enable with <code>/plugin</code> or <code>claude plugin enable</code>; dependency plugins of enabled plugins are still enabled automatically</td></tr>
-                    <tr class="search-item"><td><code class="new">true/false/yes/no/on/off/1/0</code> <!-- added:v2.1.218 --></td><td class="desc">Accepted values for boolean frontmatter fields in skills and plugins (case-insensitive); all resolve to <code>true</code> or <code>false</code></td></tr>
+                    <tr class="search-item"><td><code>true/false/yes/no/on/off/1/0</code></td><td class="desc">Accepted values for boolean frontmatter fields in skills and plugins (case-insensitive); all resolve to <code>true</code> or <code>false</code></td></tr>
                 </table>
             </div>
 
@@ -520,6 +521,7 @@
                     <tr class="search-item"><td><code>claude plugin tag</code></td><td class="desc">Create release git tags for plugins with version validation</td></tr>
                     <tr class="search-item"><td><code>claude plugin prune</code></td><td class="desc">Remove orphaned auto-installed plugin dependencies; <code>plugin uninstall --prune</code> cascades</td></tr>
                     <tr class="search-item"><td><code>claude plugin details &lt;name&gt;</code></td><td class="desc">Show a plugin's component inventory and projected per-session token cost</td></tr>
+                    <tr class="search-item"><td><code class="new">claude plugin validate</code> <!-- added:v2.1.221 --></td><td class="desc">Validate plugin manifest; warns when a marketplace or plugin name would be rejected by Claude Desktop's managed marketplace sync</td></tr>
                 </table>
             </div>
         </div>
@@ -605,13 +607,14 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.220",
-        "date": "2026-07-25",
+        "version": "v2.1.221",
+        "date": "2026-08-04",
         "changes": [
-            {"tag": "ADD", "text": "<code>DirectoryAdded</code> hook — fires after <code>/add-dir</code> or SDK <code>register_repo_root</code> registers a new working directory mid-session"},
-            {"tag": "ADD", "text": "<code>sandbox.network.strictAllowlist</code> JSON setting — deny non-allowlisted hosts for sandboxed commands without prompting"},
-            {"tag": "ADD", "text": "<code>workflowSizeGuideline</code> JSON setting — set the advisory Dynamic workflow size guideline from any settings file"},
-            {"tag": "CHG", "text": "<code>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</code> — default nesting depth changed to 3 (was 1); set to <code>1</code> to disable nesting"}
+            {"tag": "CHG", "text": "<code>/fork</code> — forked sessions now create their own git worktree instead of working in the original session's checkout"},
+            {"tag": "CHG", "text": "<code>/status</code> — now shows session kind: <code>interactive</code>, or a background job that is <code>attached</code> or <code>unattended</code>"},
+            {"tag": "ADD", "text": "<code>/plugin install &lt;name&gt;</code> — install from marketplace; refreshes stale catalog before failing; activates immediately when safe without requiring <code>/reload-plugins</code>"},
+            {"tag": "ADD", "text": "<code>claude plugin validate</code> — warns when a plugin or marketplace name would be rejected by managed marketplace sync"},
+            {"tag": "CHG", "text": "<code>sandbox.credentials</code> — new <code>mode: &quot;mask&quot;</code> (Linux/WSL): sandboxed commands read a sentinel copy; sandbox proxy substitutes the real value on egress"}
         ]
     }
     </script>
