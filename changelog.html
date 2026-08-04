@@ -141,6 +141,25 @@
         <div class="version-block">
             <h2>Template v1.1 <span class="version-date">2026-03-27 — As of CC v2.1.85</span></h2>
 
+            <!-- August 2026 -->
+            <details class="month-group" open>
+                <summary>August 2026 <span class="version-date">v2.1.221</span> <span class="month-count">1 release</span></summary>
+                <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.221 <span class="version-date">2026-08-04</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-change">CHG</span><code>/fork</code> — forked sessions now create their own git worktree instead of working in the original session's checkout</li>
+                            <li><span class="tag tag-change">CHG</span><code>/status</code> — now shows session kind: <code>interactive</code>, or a background job that is <code>attached</code> or <code>unattended</code></li>
+                            <li><span class="tag tag-add">ADD</span><code>/plugin install &lt;name&gt;</code> slash command — install from marketplace; refreshes stale catalog before failing; activates immediately when safe without requiring <code>/reload-plugins</code></li>
+                            <li><span class="tag tag-add">ADD</span><code>claude plugin validate</code> CLI command — validates plugin manifest; warns when a plugin or marketplace name would be rejected by Claude Desktop's managed marketplace sync</li>
+                            <li><span class="tag tag-change">CHG</span><code>sandbox.credentials</code> — new <code>mode: "mask"</code> option (Linux/WSL): sandboxed commands read a sentinel copy; sandbox proxy substitutes the real value on egress; macOS falls back to <code>deny</code></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </details>
+
             <!-- July 2026 -->
             <details class="month-group" open>
                 <summary>July 2026 <span class="version-date">v2.1.198 – v2.1.220</span> <span class="month-count">22 releases</span></summary>
