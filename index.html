@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.221</span>
+            <span class="release-tag">As of release: v2.1.222</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -354,7 +354,7 @@
                     <tr class="search-item"><td><code>axScreenReader</code></td><td class="desc">Set to <code>true</code> for opt-in plain-text rendering for screen reader users; paired with <code>--ax-screen-reader</code> flag and <code>CLAUDE_AX_SCREEN_READER=1</code> env var</td></tr>
                     <tr class="search-item"><td><code>vimInsertModeRemaps</code></td><td class="desc">Map two-key insert-mode sequences to keys in vim mode; e.g. map <code>jj</code> to Escape</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr>
-                    <tr class="search-item"><td><code class="new">sandbox.network.strictAllowlist</code> <!-- added:v2.1.219 --></td><td class="desc">Deny non-allowlisted hosts for sandboxed commands without prompting</td></tr>
+                    <tr class="search-item"><td><code>sandbox.network.strictAllowlist</code></td><td class="desc">Deny non-allowlisted hosts for sandboxed commands without prompting</td></tr>
                     <tr class="search-item"><td><code>sandbox.bwrapPath</code> / <code>sandbox.socatPath</code></td><td class="desc">Custom bubblewrap and socat binary paths (Linux/WSL managed settings)</td></tr>
                     <tr class="search-item"><td><code>sandbox.allowAppleEvents</code></td><td class="desc">Opt-in macOS setting to allow sandboxed commands to send Apple Events</td></tr>
                     <tr class="search-item"><td><code>sandbox.credentials</code></td><td class="desc">Block sandboxed commands from reading credential files and secret environment variables; set <code>mode: "mask"</code> (Linux/WSL) to expose a sentinel copy while the sandbox proxy substitutes the real value on egress; macOS falls back to <code>deny</code></td></tr>
@@ -381,7 +381,7 @@
                     <tr class="search-item"><td><code>awsAuthRefresh</code></td><td class="desc">Configures the "Claude Platform on AWS — refresh credentials" option in <code>/login</code></td></tr>
                     <tr class="search-item"><td><code>respondToBashCommands</code></td><td class="desc">Set to <code>false</code> to keep <code>!</code> bash command output as context-only; default behavior is for Claude to respond automatically</td></tr>
                     <tr class="search-item"><td><code>dynamicWorkflowSize</code></td><td class="desc">Controls how large Claude makes dynamic workflows (small/medium/large agent counts) — advisory guideline, not a hard cap; configured via <code>/config</code></td></tr>
-                    <tr class="search-item"><td><code class="new">workflowSizeGuideline</code> <!-- added:v2.1.219 --></td><td class="desc">Set the advisory Dynamic workflow size guideline from any settings file; the <code>/config</code> row is hidden while one is set</td></tr>
+                    <tr class="search-item"><td><code>workflowSizeGuideline</code></td><td class="desc">Set the advisory Dynamic workflow size guideline from any settings file; the <code>/config</code> row is hidden while one is set</td></tr>
                     <tr class="search-item"><td><code>emojiCompletionEnabled</code></td><td class="desc">Set to <code>false</code> to disable emoji shortcode autocomplete in the prompt input (e.g. <code>:heart:</code> → ❤️)</td></tr>
                 </table>
             </div>
@@ -484,6 +484,7 @@
                     <tr class="search-item"><td><code>effort</code></td><td class="desc">Override effort level specifically for skill</td></tr>
                     <tr class="search-item"><td><code>allowed-tools</code></td><td class="desc">Skip permission prompts for skill</td></tr>
                     <tr class="search-item"><td><code>disallowed-tools</code></td><td class="desc">Remove tools from the model while the skill or slash command is active</td></tr>
+                    <tr class="search-item"><td><code>disable-model-invocation</code></td><td class="desc">Prevent Claude from auto-invoking the skill; Claude is told to ask you to run it manually instead</td></tr>
                     <tr class="search-item"><td><code>context: fork</code></td><td class="desc">Run skill in an isolated subagent; runs in the background by default — opt out per skill with <code>background: false</code></td></tr>
                     <tr class="search-item"><td><code>$ARGUMENTS</code></td><td class="desc">User input placeholder replacement</td></tr>
                     <tr class="search-item"><td><code>\$</code></td><td class="desc">Escape to include a literal <code>$</code> before a digit in skill command bodies</td></tr>
@@ -552,7 +553,7 @@
                     <tr class="search-item"><td><code>SessionEnd</code></td><td class="desc">Run cleanup script when session closes</td></tr>
                     <tr class="search-item"><td><code>CwdChanged</code> / <code>FileChanged</code></td><td class="desc">React to directory or file changes</td></tr>
                     <tr class="search-item"><td><code>TaskCreated</code></td><td class="desc">Fires when task created via TaskCreate</td></tr>
-                    <tr class="search-item"><td><code class="new">DirectoryAdded</code> <!-- added:v2.1.219 --></td><td class="desc">Fires after <code>/add-dir</code> or the SDK <code>register_repo_root</code> registers a new working directory mid-session</td></tr>
+                    <tr class="search-item"><td><code>DirectoryAdded</code></td><td class="desc">Fires after <code>/add-dir</code> or the SDK <code>register_repo_root</code> registers a new working directory mid-session</td></tr>
                     <tr class="search-item"><td><code>if:</code> (hook field)</td><td class="desc">Conditional execution (permission rule syntax); single-segment <code>dir/**</code> <code>if:</code> conditions match only <code>&lt;cwd&gt;/dir</code> — write <code>**/dir/**</code> for any-depth matching (<code>deny</code>/<code>ask</code> permission rules keep any-depth match)</td></tr>
                     <tr class="search-item"><td><code>"Bash,PowerShell"</code> (hook matcher)</td><td class="desc">Comma-separated tool type names in a hook's matcher field — fires the hook on any of the listed types; e.g. <code>"Bash,PowerShell"</code> fires on both Bash and PowerShell commands</td></tr>
                     <tr class="search-item"><td><code>mcp__name__.*</code> (hook matcher pattern)</td><td class="desc">Hyphenated hook matcher identifiers exact-match — use <code>mcp__name__.*</code> glob to match all tools from a hyphenated MCP server (e.g. <code>mcp__brave-search__.*</code>)</td></tr>
@@ -607,14 +608,10 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.221",
+        "version": "v2.1.222",
         "date": "2026-08-04",
         "changes": [
-            {"tag": "CHG", "text": "<code>/fork</code> — forked sessions now create their own git worktree instead of working in the original session's checkout"},
-            {"tag": "CHG", "text": "<code>/status</code> — now shows session kind: <code>interactive</code>, or a background job that is <code>attached</code> or <code>unattended</code>"},
-            {"tag": "ADD", "text": "<code>/plugin install &lt;name&gt;</code> — install from marketplace; refreshes stale catalog before failing; activates immediately when safe without requiring <code>/reload-plugins</code>"},
-            {"tag": "ADD", "text": "<code>claude plugin validate</code> — warns when a plugin or marketplace name would be rejected by managed marketplace sync"},
-            {"tag": "CHG", "text": "<code>sandbox.credentials</code> — new <code>mode: &quot;mask&quot;</code> (Linux/WSL): sandboxed commands read a sentinel copy; sandbox proxy substitutes the real value on egress"}
+            {"tag": "ADD", "text": "<code>disable-model-invocation</code> (skill frontmatter) — prevent Claude from auto-invoking the skill; Claude is told to ask you to run it manually instead"}
         ]
     }
     </script>
