@@ -143,8 +143,19 @@
 
             <!-- August 2026 -->
             <details class="month-group" open>
-                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.222</span> <span class="month-count">2 releases</span></summary>
+                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.223</span> <span class="month-count">3 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.223 <span class="version-date">2026-08-06</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>claude --teleport &lt;session-id&gt;</code> — continue a cloud session locally; session ID shown in the <code>/teleport</code> hint that appears in cloud sessions</li>
+                            <li><span class="tag tag-change">CHG</span><code>/code-review [level] [pr#]</code> — <code>/review</code> is now an alias; supports PR number as target; <code>ultra</code> level triggers a deep cloud review; effort level persists across invocations (no arg reuses last level)</li>
+                            <li><span class="tag tag-add">ADD</span><code>strictKnownMarketplaces</code> / <code>blockedMarketplaces</code> (managed settings) — allowlist/blocklist marketplace repos as plugin sources; support <code>"owner/*"</code> wildcard for GitHub org-wide control</li>
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_DISABLE_1M_CONTEXT</code> env var — hold every model with a native 1M context window to 200K via auto-compaction; startup warning appears when auto-compaction isn't holding the session to 200K</li>
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT=1</code> env var — opt out of auto-compact enforcement for sessions on unrecognized model IDs</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.222 <span class="version-date">2026-08-04</span></h3>
