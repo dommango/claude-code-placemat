@@ -143,8 +143,21 @@
 
             <!-- August 2026 -->
             <details class="month-group" open>
-                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.223</span> <span class="month-count">3 releases</span></summary>
+                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.224</span> <span class="month-count">4 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.224 <span class="version-date">2026-08-07</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>claude self-hosted-runner</code> CLI command — turn your own machine or container into a session host for Claude Code web, mobile, and desktop sessions (Team and Enterprise plans)</li>
+                            <li><span class="tag tag-add">ADD</span><code>ANTHROPIC_BEDROCK_REGION_PREFIX</code> env var — prefer a specific Bedrock cross-region inference profile over the <code>AWS_REGION</code>-derived one</li>
+                            <li><span class="tag tag-add">ADD</span><code>crossSessionInbound</code> / <code>dialogExpiry</code> (JSON settings) — <code>crossSessionInbound</code> holds inbound cross-session messages for approval when the receiving session has bypassed permissions; <code>dialogExpiry</code> controls the approval dialog timeout</li>
+                            <li><span class="tag tag-change">CHG</span><code>sandbox.credentials</code> — new masking options: <code>extract</code>/<code>onExtractNoMatch</code> for structured env values, <code>decode: "jwt"</code> with <code>maskClaims</code> for JWT-aware masking, <code>awsPairs</code>/<code>sigv4</code> for AWS SigV4 re-signing; requires <code>network.tlsTerminate</code></li>
+                            <li><span class="tag tag-change">CHG</span><code>CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION</code> — built-in 200-spawn limit removed; long-running sessions no longer refuse new agents by default; concurrency and depth limits still apply</li>
+                            <li><span class="tag tag-change">CHG</span><code>SendMessage</code> — supports cross-session messaging across machines; use <code>ListAgents</code> to discover sessions (macOS and Linux)</li>
+                            <li><span class="tag tag-change">CHG</span><code>/plugin install</code> — now supports <code>archive</code> source: install plugins from a zip over HTTPS without git or npm; optional SHA-256 pinning</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.223 <span class="version-date">2026-08-06</span></h3>
