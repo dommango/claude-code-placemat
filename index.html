@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.224</span>
+            <span class="release-tag">As of release: v2.1.226</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -267,7 +267,7 @@
                     <tr class="search-item"><td><code>claude -c</code> / <code>-r "n"</code></td><td class="desc">Continue last / Resume specific</td></tr>
                     <tr class="search-item"><td><code>claude --from-pr</code></td><td class="desc">Resume session linked to a PR; accepts GitHub, GitLab MR, Bitbucket PR, and GitHub Enterprise URLs</td></tr>
                     <tr class="search-item"><td><code>claude --fork-session</code></td><td class="desc">Fork existing session on resume</td></tr>
-                    <tr class="search-item"><td><code class="new">claude --teleport &lt;session-id&gt;</code> <!-- added:v2.1.223 --></td><td class="desc">Continue a cloud session locally; session ID shown in the <code>/teleport</code> hint that appears in cloud sessions</td></tr>
+                    <tr class="search-item"><td><code>claude --teleport &lt;session-id&gt;</code></td><td class="desc">Continue a cloud session locally; session ID shown in the <code>/teleport</code> hint that appears in cloud sessions</td></tr>
                     <tr class="search-item"><td><code>claude ultrareview [target]</code></td><td class="desc">Run <code>/ultrareview</code> non-interactively from CI or scripts; prints findings to stdout; use <code>--json</code> for raw output</td></tr>
                     <tr class="search-item"><td><code>claude project purge [path]</code></td><td class="desc">Delete all Claude Code state for a project (transcripts, tasks, file history, config entry); supports <code>--dry-run</code>, <code>-y/--yes</code>, <code>-i/--interactive</code>, and <code>--all</code></td></tr>
                     <tr class="search-item"><td><code>claude auto-mode reset</code></td><td class="desc">Restore default auto-mode configuration; prompts for confirmation (pass <code>--yes</code> to skip)</td></tr>
@@ -376,8 +376,8 @@
                     <tr class="search-item"><td><code>channelsEnabled</code></td><td class="desc">Set to <code>true</code> in managed settings to allow <code>--channels</code> with console (API key) auth</td></tr>
                     <tr class="search-item"><td><code>allowAllClaudeAiMcps</code></td><td class="desc">Enterprise managed setting — load claude.ai cloud MCP connectors alongside <code>managed-mcp.json</code></td></tr>
                     <tr class="search-item"><td><code>pluginSuggestionMarketplaces</code></td><td class="desc">Managed setting — allowlist org marketplaces whose plugins may be suggested via context-aware tips</td></tr>
-                    <tr class="search-item"><td><code class="new">strictKnownMarketplaces</code> <!-- added:v2.1.223 --></td><td class="desc">Managed setting — allowlist of marketplace repos allowed as plugin sources; supports <code>"owner/*"</code> wildcard to allow all repos under a GitHub org</td></tr>
-                    <tr class="search-item"><td><code class="new">blockedMarketplaces</code> <!-- added:v2.1.223 --></td><td class="desc">Managed setting — blocklist of marketplace repos denied as plugin sources; supports <code>"owner/*"</code> wildcard to block all repos under a GitHub org</td></tr>
+                    <tr class="search-item"><td><code>strictKnownMarketplaces</code></td><td class="desc">Managed setting — allowlist of marketplace repos allowed as plugin sources; supports <code>"owner/*"</code> wildcard to allow all repos under a GitHub org</td></tr>
+                    <tr class="search-item"><td><code>blockedMarketplaces</code></td><td class="desc">Managed setting — blocklist of marketplace repos denied as plugin sources; supports <code>"owner/*"</code> wildcard to block all repos under a GitHub org</td></tr>
                     <tr class="search-item"><td><code>requiredMinimumVersion</code> / <code>requiredMaximumVersion</code></td><td class="desc">Managed settings — CC refuses to start if its version is outside the allowed range; directs user to an approved version</td></tr>
                     <tr class="search-item"><td><code>disableBundledSkills</code></td><td class="desc">Hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code> env var</td></tr>
                     <tr class="search-item"><td><code>enforceAvailableModels</code></td><td class="desc">Managed setting — when enabled, the <code>availableModels</code> allowlist also constrains the Default model (a Default that resolves to a disallowed model falls back to the first allowed model); user or project settings cannot widen a managed <code>availableModels</code> list</td></tr>
@@ -429,8 +429,8 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_FORCE_SYNC_OUTPUT=1</code></td><td class="desc">Force-enable synchronized output on terminals that auto-detection misses (e.g. Emacs <code>eat</code>)</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE</code></td><td class="desc">On Homebrew or WinGet installs, runs the upgrade command in the background and prompts to restart when set</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1</code></td><td class="desc">Opt in to listing gateway <code>/v1/models</code> in the <code>/model</code> picker when using a custom <code>ANTHROPIC_BASE_URL</code> gateway (was automatic in v2.1.126–v2.1.128)</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_DISABLE_1M_CONTEXT</code> <!-- added:v2.1.223 --></td><td class="desc">Hold every Claude model with a native 1M context window to 200K via auto-compaction; a startup warning appears when auto-compaction isn't holding the session to 200K</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT=1</code> <!-- added:v2.1.223 --></td><td class="desc">Restore previous behavior where sessions on unrecognized model IDs may grow past the assumed context window; by default, auto-compact now holds unrecognized models within the assumed window</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_1M_CONTEXT</code></td><td class="desc">Hold every Claude model with a native 1M context window to 200K via auto-compaction; a startup warning appears when auto-compaction isn't holding the session to 200K</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT=1</code></td><td class="desc">Restore previous behavior where sessions on unrecognized model IDs may grow past the assumed context window; by default, auto-compact now holds unrecognized models within the assumed window</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_SESSION_ID</code></td><td class="desc">Session ID injected into Bash tool subprocess environment and stdio MCP server subprocess environments, matching the <code>session_id</code> passed to hooks</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1</code></td><td class="desc">Opt out of the fullscreen alternate-screen renderer; keeps conversation in the terminal's native scrollback</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL</code></td><td class="desc">Re-enable the session quality survey for enterprises capturing responses through OpenTelemetry</td></tr>
@@ -470,7 +470,7 @@
                 <h3>Built-in Skills & Locations</h3>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
-                    <tr class="search-item"><td><code class="new">/code-review [level] [pr#]</code> <!-- added:v2.1.223 --></td><td class="desc">Code review; <code>/review</code> is an alias; must be explicitly invoked — Claude no longer auto-runs it; runs as a background subagent — review work no longer fills your conversation; pass a PR number to review a specific PR; use <code>/code-review ultra</code> for a deep cloud review; effort level persists — no arg reuses the last level typed; pass <code>--fix</code> to apply findings to working tree; pass <code>--comment</code> to post findings as inline PR comments</td></tr>
+                    <tr class="search-item"><td><code>/code-review [level] [pr#]</code></td><td class="desc">Code review; <code>/review</code> is an alias; must be explicitly invoked — Claude no longer auto-runs it; runs as a background subagent — review work no longer fills your conversation; pass a PR number to review a specific PR; use <code>/code-review ultra</code> for a deep cloud review; effort level persists — no arg reuses the last level typed; pass <code>--fix</code> to apply findings to working tree; pass <code>--comment</code> to post findings as inline PR comments</td></tr>
                     <tr class="search-item"><td><code>/verify</code></td><td class="desc">Verify a code change works end-to-end; must be explicitly invoked — Claude no longer auto-runs it</td></tr>
                     <tr class="search-item"><td><code>/simplify</code></td><td class="desc">Cleanup-only review (reuse, simplification, efficiency, altitude) applied to working tree; does not run the full <code>/code-review --fix</code> bug hunt</td></tr>
                     <tr class="search-item"><td><code>/batch</code></td><td class="desc">Large parallel changes (5-30 worktrees)</td></tr>
@@ -517,7 +517,7 @@
                     <tr class="search-item"><td><code>memory: user|project</code></td><td class="desc">Persistent memory storage scope</td></tr>
                     <tr class="search-item"><td><code>background: true</code></td><td class="desc">Run entirely as background task</td></tr>
                     <tr class="search-item"><td><code>initialPrompt</code></td><td class="desc">Auto-submit first turn on spawn</td></tr>
-                    <tr class="search-item"><td><code>SendMessage</code></td><td class="desc">Auto-resumes stopped agents; supports cross-session messaging — CC sessions can message each other across machines using <code>ListAgents</code> to discover them (macOS and Linux)</td></tr>
+                    <tr class="search-item"><td><code>SendMessage</code></td><td class="desc">Auto-resumes stopped agents; supports cross-session messaging — CC sessions can message each other across machines using <code>ListAgents</code> to discover them; can initiate a conversation with a Remote Control session on another machine by name (macOS and Linux)</td></tr>
                     <tr class="search-item"><td><code>hooks:</code></td><td class="desc">Agent lifecycle hooks; fire when running as main-thread agent via <code>--agent</code></td></tr>
                     <tr class="search-item"><td><code>mcpServers</code></td><td class="desc">MCP servers for the agent; now loaded for main-thread agent sessions via <code>--agent</code></td></tr>
                 </table>
@@ -617,16 +617,10 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.224",
-        "date": "2026-08-07",
+        "version": "v2.1.226",
+        "date": "2026-08-08",
         "changes": [
-            {"tag": "ADD", "text": "<code>claude self-hosted-runner</code> — turn your own machine or container into a session host for web, mobile, and desktop sessions (Team and Enterprise plans)"},
-            {"tag": "ADD", "text": "<code>ANTHROPIC_BEDROCK_REGION_PREFIX</code> env var — prefer a specific Bedrock cross-region inference profile over the <code>AWS_REGION</code>-derived one"},
-            {"tag": "ADD", "text": "<code>crossSessionInbound</code> / <code>dialogExpiry</code> (JSON settings) — control inbound cross-session message approval for sessions with bypassed permissions"},
-            {"tag": "CHG", "text": "<code>sandbox.credentials</code> — new masking options: <code>extract</code>/<code>onExtractNoMatch</code> for structured values, <code>decode: \"jwt\"</code>/<code>maskClaims</code> for JWT-aware masking, <code>awsPairs</code>/<code>sigv4</code> for AWS SigV4 re-signing"},
-            {"tag": "CHG", "text": "<code>CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION</code> — built-in 200-spawn limit removed; long-running sessions no longer refuse new agents by default"},
-            {"tag": "CHG", "text": "<code>SendMessage</code> — now supports cross-session messaging across machines using <code>ListAgents</code> to discover sessions (macOS and Linux)"},
-            {"tag": "CHG", "text": "<code>/plugin install</code> — now supports <code>archive</code> source for installing plugins from a zip over HTTPS without git or npm (optional SHA-256 pinning)"}
+            {"tag": "CHG", "text": "<code>SendMessage</code> — can now initiate a conversation with a Remote Control session on another machine by name, without needing <code>ListAgents</code>"}
         ]
     }
     </script>
