@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.226</span>
+            <span class="release-tag">As of release: v2.1.227</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -273,7 +273,7 @@
                     <tr class="search-item"><td><code>claude auto-mode reset</code></td><td class="desc">Restore default auto-mode configuration; prompts for confirmation (pass <code>--yes</code> to skip)</td></tr>
                     <tr class="search-item"><td><code>claude agents</code></td><td class="desc">Agent view (Research Preview) — single list of every CC session; running, blocked on you, or done; type <code>! &lt;cmd&gt;</code> to launch a shell command as a background session you can attach/detach; <code>--cwd &lt;path&gt;</code> scopes list to a directory; <code>--json</code> lists live sessions as JSON (includes <code>waitingFor</code>, <code>id</code>, and <code>state</code> fields); <code>--all</code> flag includes completed sessions; dispatch flags for background sessions: <code>--add-dir</code>, <code>--settings</code>, <code>--mcp-config</code>, <code>--plugin-dir</code>, <code>--permission-mode</code>, <code>--model</code>, <code>--effort</code>, <code>--agent</code>, <code>--dangerously-skip-permissions</code></td></tr>
                     <tr class="search-item"><td><code>claude --bg --exec '&lt;cmd&gt;'</code></td><td class="desc">Run a shell command as a background session you can attach to and detach from; equivalent to typing <code>! &lt;cmd&gt;</code> inside <code>claude agents</code></td></tr>
-                    <tr class="search-item"><td><code class="new">claude self-hosted-runner</code> <!-- added:v2.1.224 --></td><td class="desc">Turn your own machine or container into a session host for Claude Code web, mobile, and desktop sessions (Team and Enterprise plans)</td></tr>
+                    <tr class="search-item"><td><code>claude self-hosted-runner</code></td><td class="desc">Turn your own machine or container into a session host for Claude Code web, mobile, and desktop sessions (Team and Enterprise plans)</td></tr>
                 </table>
             </div>
 
@@ -387,8 +387,8 @@
                     <tr class="search-item"><td><code>dynamicWorkflowSize</code></td><td class="desc">Controls how large Claude makes dynamic workflows (small/medium/large agent counts) — advisory guideline, not a hard cap; configured via <code>/config</code></td></tr>
                     <tr class="search-item"><td><code>workflowSizeGuideline</code></td><td class="desc">Set the advisory Dynamic workflow size guideline from any settings file; the <code>/config</code> row is hidden while one is set</td></tr>
                     <tr class="search-item"><td><code>emojiCompletionEnabled</code></td><td class="desc">Set to <code>false</code> to disable emoji shortcode autocomplete in the prompt input (e.g. <code>:heart:</code> → ❤️)</td></tr>
-                    <tr class="search-item"><td><code class="new">crossSessionInbound</code> <!-- added:v2.1.224 --></td><td class="desc">Cross-session messages sent to a session running with bypassed permissions are held for your approval before delivery</td></tr>
-                    <tr class="search-item"><td><code class="new">dialogExpiry</code> <!-- added:v2.1.224 --></td><td class="desc">Timeout for inbound cross-session message approval dialogs; messages to sessions without bypassed permissions auto-deliver</td></tr>
+                    <tr class="search-item"><td><code>crossSessionInbound</code></td><td class="desc">Cross-session messages sent to a session running with bypassed permissions are held for your approval before delivery</td></tr>
+                    <tr class="search-item"><td><code>dialogExpiry</code></td><td class="desc">Timeout for inbound cross-session message approval dialogs; messages to sessions without bypassed permissions auto-deliver</td></tr>
                 </table>
             </div>
 
@@ -425,7 +425,7 @@
                     <tr class="search-item"><td><code>DISABLE_UPDATES</code></td><td class="desc">Block all update paths including manual <code>claude update</code>; stricter than <code>DISABLE_AUTOUPDATER</code></td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_HIDE_CWD</code></td><td class="desc">Hide working directory in the startup logo</td></tr>
                     <tr class="search-item"><td><code>ANTHROPIC_BEDROCK_SERVICE_TIER</code></td><td class="desc">Select a Bedrock service tier (<code>default</code>, <code>flex</code>, or <code>priority</code>); sent as the <code>X-Amzn-Bedrock-Service-Tier</code> header</td></tr>
-                    <tr class="search-item"><td><code class="new">ANTHROPIC_BEDROCK_REGION_PREFIX</code> <!-- added:v2.1.224 --></td><td class="desc">Prefer a specific Bedrock cross-region inference profile over the <code>AWS_REGION</code>-derived one</td></tr>
+                    <tr class="search-item"><td><code>ANTHROPIC_BEDROCK_REGION_PREFIX</code></td><td class="desc">Prefer a specific Bedrock cross-region inference profile over the <code>AWS_REGION</code>-derived one</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_FORCE_SYNC_OUTPUT=1</code></td><td class="desc">Force-enable synchronized output on terminals that auto-detection misses (e.g. Emacs <code>eat</code>)</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE</code></td><td class="desc">On Homebrew or WinGet installs, runs the upgrade command in the background and prompts to restart when set</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1</code></td><td class="desc">Opt in to listing gateway <code>/v1/models</code> in the <code>/model</code> picker when using a custom <code>ANTHROPIC_BASE_URL</code> gateway (was automatic in v2.1.126–v2.1.128)</td></tr>
@@ -617,11 +617,9 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.226",
-        "date": "2026-08-08",
-        "changes": [
-            {"tag": "CHG", "text": "<code>SendMessage</code> — can now initiate a conversation with a Remote Control session on another machine by name, without needing <code>ListAgents</code>"}
-        ]
+        "version": "v2.1.227",
+        "date": "2026-08-10",
+        "changes": []
     }
     </script>
 
