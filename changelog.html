@@ -143,8 +143,18 @@
 
             <!-- August 2026 -->
             <details class="month-group" open>
-                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.226</span> <span class="month-count">6 releases</span></summary>
+                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.231</span> <span class="month-count">10 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.229 <span class="version-date">2026-08-12</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>claude remote-control --continue</code> — resume the most recent Remote Control session</li>
+                            <li><span class="tag tag-change">CHG</span><code>/commit-push-pr</code> — git/gh commands with dangerous flags (<code>--force</code>, <code>--amend</code>, <code>--no-verify</code>, etc.) are no longer auto-approved</li>
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS=0</code> env var — set to <code>0</code> to disable automatic staggering of same-prefix sibling workflow agents</li>
+                            <li><span class="tag tag-add">ADD</span><code>command</code> (plugin marketplace source) — specify a plugin directory via a local command's output; re-resolved each session without restart; <code>mode: "link"</code> uses it in place</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.225 <span class="version-date">2026-08-08</span></h3>

@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.228</span>
+            <span class="release-tag">As of release: v2.1.231</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -218,7 +218,7 @@
                     <tr class="search-item"><td><code>/mcp</code></td><td class="desc">Manage MCP servers; shows tool count for each connected server and flags servers with 0 tools; shows HTTP status and error text when a server fails to connect; warns for MCP config values with hidden leading or trailing whitespace</td></tr>
                     <tr class="search-item"><td><code>/hooks</code></td><td class="desc">Manage event lifecycle hooks</td></tr>
                     <tr class="search-item"><td><code>/install-github-app</code></td><td class="desc">Install the GitHub App; GitHub Actions workflow and repo secret setup is optional — install just the GitHub App and skip the workflow/secret steps</td></tr>
-                    <tr class="search-item"><td><code>/commit-push-pr</code></td><td class="desc">Commit, push, and open a PR in one step; auto-allows <code>git push</code> to the repo's configured push remote (<code>remote.pushDefault</code>, or the sole remote when only one is configured) in addition to <code>origin</code></td></tr>
+                    <tr class="search-item"><td><code>/commit-push-pr</code></td><td class="desc">Commit, push, and open a PR in one step; auto-allows <code>git push</code> to the repo's configured push remote (<code>remote.pushDefault</code>, or the sole remote when only one is configured) in addition to <code>origin</code>; git/gh commands with dangerous flags (<code>--force</code>, <code>--amend</code>, <code>--no-verify</code>, etc.) are no longer auto-approved</td></tr>
                     <tr class="search-item"><td><code>/skills</code></td><td class="desc">List available active skills; includes type-to-filter search box for long lists</td></tr>
                     <tr class="search-item"><td><code>/chrome</code></td><td class="desc">Chrome browser integration; pick which connected browser to use via <code>/chrome</code> → "Select browser…", or in-chat when a browser action runs with multiple connected</td></tr>
                     <tr class="search-item"><td><code>/add-dir &lt;path&gt;</code></td><td class="desc">Add working directory to context</td></tr>
@@ -274,6 +274,7 @@
                     <tr class="search-item"><td><code>claude agents</code></td><td class="desc">Agent view (Research Preview) — single list of every CC session; running, blocked on you, or done; type <code>! &lt;cmd&gt;</code> to launch a shell command as a background session you can attach/detach; <code>--cwd &lt;path&gt;</code> scopes list to a directory; <code>--json</code> lists live sessions as JSON (includes <code>waitingFor</code>, <code>id</code>, and <code>state</code> fields); <code>--all</code> flag includes completed sessions; dispatch flags for background sessions: <code>--add-dir</code>, <code>--settings</code>, <code>--mcp-config</code>, <code>--plugin-dir</code>, <code>--permission-mode</code>, <code>--model</code>, <code>--effort</code>, <code>--agent</code>, <code>--dangerously-skip-permissions</code></td></tr>
                     <tr class="search-item"><td><code>claude --bg --exec '&lt;cmd&gt;'</code></td><td class="desc">Run a shell command as a background session you can attach to and detach from; equivalent to typing <code>! &lt;cmd&gt;</code> inside <code>claude agents</code></td></tr>
                     <tr class="search-item"><td><code>claude self-hosted-runner</code></td><td class="desc">Turn your own machine or container into a session host for Claude Code web, mobile, and desktop sessions (Team and Enterprise plans)</td></tr>
+                    <tr class="search-item"><td><code class="new">claude remote-control --continue</code> <!-- added:v2.1.229 --></td><td class="desc">Resume the most recent Remote Control session</td></tr>
                 </table>
             </div>
 
@@ -459,6 +460,7 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</code></td><td class="desc">Max nesting depth for subagent spawning (default 3); set to <code>1</code> to disable nesting</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS</code></td><td class="desc">Threshold in ms after which long-running MCP tool calls move to background automatically (default 120000 / 2 min); set to <code>0</code> to disable</td></tr>
                     <tr class="search-item"><td><code>FORCE_HYPERLINK=0</code></td><td class="desc">Opt out of clickable hyperlinks in footer PR badge links (hyperlinks are on by default even when terminal support can't be detected, e.g. over ssh/tmux)</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS=0</code> <!-- added:v2.1.229 --></td><td class="desc">Set to <code>0</code> to disable automatic staggering of same-prefix sibling workflow agents; staggering is on by default so later agents reuse the cached prompt prefix</td></tr>
                 </table>
             </div>
         </div>
@@ -482,6 +484,7 @@
                     <tr class="search-item"><td><code>.claude/skills/&lt;name&gt;/</code></td><td class="desc">Project skill directory; auto-loaded without marketplace; nested <code>.claude/skills/</code> directories also load when working on files there — on a name clash, the nested skill appears as <code>&lt;dir&gt;:&lt;name&gt;</code></td></tr>
                     <tr class="search-item"><td><code>~/.claude/skills/&lt;name&gt;/</code></td><td class="desc">Global personal skill directory</td></tr>
                     <tr class="search-item"><td><code>plugin: bin/</code></td><td class="desc">Plugin executables in bin/ invocable as bare commands from Bash tool</td></tr>
+                    <tr class="search-item"><td><code class="new">command</code> (plugin marketplace source) <!-- added:v2.1.229 --></td><td class="desc">Specify a plugin directory via a local command's output (e.g. from an IDE); re-resolved each session without restart; <code>mode: "link"</code> uses it in place</td></tr>
                 </table>
             </div>
 
@@ -617,9 +620,14 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.228",
-        "date": "2026-08-11",
-        "changes": []
+        "version": "v2.1.231",
+        "date": "2026-08-13",
+        "changes": [
+            {"tag": "ADD", "text": "<code>claude remote-control --continue</code> — resume the most recent Remote Control session"},
+            {"tag": "CHG", "text": "<code>/commit-push-pr</code> — git/gh commands with dangerous flags (<code>--force</code>, <code>--amend</code>, <code>--no-verify</code>, etc.) are no longer auto-approved"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS=0</code> — disable staggering of same-prefix sibling workflow agents"},
+            {"tag": "ADD", "text": "<code>command</code> (plugin marketplace source) — specify a plugin directory via a local command's output; re-resolved each session without restart"}
+        ]
     }
     </script>
 
