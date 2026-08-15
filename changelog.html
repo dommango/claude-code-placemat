@@ -143,8 +143,18 @@
 
             <!-- August 2026 -->
             <details class="month-group" open>
-                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.232</span> <span class="month-count">11 releases</span></summary>
+                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.233</span> <span class="month-count">12 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.233 <span class="version-date">2026-08-14</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_TOOL_MEMORY_LIMIT</code> env var — opt-in memory cgroup limit for Bash tool commands on Linux; prevents a runaway build from stalling the session</li>
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS</code> env var — configure the WebFetch session URL cache TTL in milliseconds (default: 15 minutes)</li>
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_ENABLE_TODO_TOOLS=1</code> env var — re-enable task/todo tools (<code>TaskCreate</code>/<code>Get</code>/<code>Update</code>/<code>List</code>, <code>TodoWrite</code>) on Opus 4.8, Sonnet 5, Fable 5, Mythos 5, and newer models where they are no longer available by default</li>
+                            <li><span class="tag tag-change">CHG</span><code>claude plugin validate</code> — now also checks a bare <code>.claude/skills</code> directory, reporting SKILL.md files whose frontmatter fails to parse</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.232 <span class="version-date">2026-08-13</span></h3>
