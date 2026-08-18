@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.233</span>
+            <span class="release-tag">As of release: v2.1.234</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -106,6 +106,7 @@
                     <tr class="search-item"><td><code>Ctrl X</code></td><td class="desc">In <code>claude agents</code>: permanently removes a completed session; deleted background jobs stay deleted</td></tr>
                     <tr class="search-item"><td><code>Esc Esc</code></td><td class="desc">Rewind / undo state</td></tr>
                     <tr class="search-item"><td><code>Esc</code></td><td class="desc">Close background-tasks, diff, and workflow detail views (left arrow no longer closes these)</td></tr>
+                    <tr class="search-item"><td><code class="new">selection:clear</code> <!-- added:v2.1.234 --></td><td class="desc">Keybinding action — bind to a key in <code>/keybindings</code> to clear an in-app text selection; works in agents view</td></tr>
                 </table>
             </div>
 
@@ -178,7 +179,7 @@
                     <tr class="search-item"><td><code>/export</code></td><td class="desc">Export conversation</td></tr>
                     <tr class="search-item"><td><code>/recap</code></td><td class="desc">Summarize away context; auto-triggered on return or invoke manually</td></tr>
                     <tr class="search-item"><td><code>/rewind</code> / <code>/undo</code></td><td class="desc">Rewind conversation to previous state; /undo is alias; supports resuming a conversation from before <code>/clear</code> was run</td></tr>
-                    <tr class="search-item"><td><code>/goal [condition]</code></td><td class="desc">Set a completion condition; Claude keeps working across turns until met; works in interactive, <code>-p</code>, and Remote Control; shows live elapsed/turns/tokens overlay</td></tr>
+                    <tr class="search-item"><td><code>/goal [condition]</code></td><td class="desc">Set a completion condition; Claude keeps working across turns until met; works in interactive, <code>-p</code>, and Remote Control; shows live elapsed/turns/tokens overlay; clears itself on unrecoverable errors (revoked auth, exhausted credits, context overflow); checks in on background tasks waiting 30+ min (set <code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES=0</code> to opt out)</td></tr>
                     <tr class="search-item"><td><code>/cd</code></td><td class="desc">Move session to a new working directory without breaking the prompt cache mid-session; supports directory path suggestions (matching <code>/add-dir</code>)</td></tr>
                 </table>
             </div>
@@ -193,7 +194,7 @@
                     <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model; selection saved as default for new sessions; <code>claude-sonnet-5</code> is now the default (native 1M-token context); press <code>s</code> in picker to switch for current session only; warns before switching mid-conversation; startup header shows model pin source; lists models from gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway; org-restricted models show "restricted by your organization's settings"</td></tr>
                     <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/xhigh/auto); no args opens interactive slider (Faster/Smarter labels); xhigh is Opus 4.8 only; confirms when chosen level will persist as the default for new sessions</td></tr>
                     <tr class="search-item"><td><code>/fast [on/off]</code></td><td class="desc">Toggle Fast mode</td></tr>
-                    <tr class="search-item"><td><code>/permissions</code></td><td class="desc">View/update tool permissions</td></tr>
+                    <tr class="search-item"><td><code>/permissions</code></td><td class="desc">View/update tool permissions; can be opened while Claude is working — rule changes apply to the rest of the current turn</td></tr>
                     <tr class="search-item"><td><code>/color [color]</code></td><td class="desc">Set prompt-bar color; bare <code>/color</code> with no args picks a random session color</td></tr>
                     <tr class="search-item"><td><code>/keybindings</code></td><td class="desc">Customize keyboard shortcuts</td></tr>
                     <tr class="search-item"><td><code>/terminal-setup</code></td><td class="desc">Configure terminal integration; configures scroll sensitivity and disables GPU acceleration in VS Code, Cursor, and Devin Desktop to prevent garbled-text rendering; enables iTerm2 clipboard access for <code>/copy</code></td></tr>
@@ -221,7 +222,7 @@
                     <tr class="search-item"><td><code>/commit-push-pr</code></td><td class="desc">Commit, push, and open a PR in one step; auto-allows <code>git push</code> to the repo's configured push remote (<code>remote.pushDefault</code>, or the sole remote when only one is configured) in addition to <code>origin</code>; git/gh commands with dangerous flags (<code>--force</code>, <code>--amend</code>, <code>--no-verify</code>, etc.) are no longer auto-approved</td></tr>
                     <tr class="search-item"><td><code>/skills</code></td><td class="desc">List available active skills; includes type-to-filter search box for long lists</td></tr>
                     <tr class="search-item"><td><code>/chrome</code></td><td class="desc">Chrome browser integration; pick which connected browser to use via <code>/chrome</code> → "Select browser…", or in-chat when a browser action runs with multiple connected</td></tr>
-                    <tr class="search-item"><td><code>/add-dir &lt;path&gt;</code></td><td class="desc">Add working directory to context</td></tr>
+                    <tr class="search-item"><td><code>/add-dir &lt;path&gt;</code></td><td class="desc">Add working directory to context; usable while Claude is working</td></tr>
                     <tr class="search-item"><td><code>/reload-plugins</code></td><td class="desc">Hot-reload local plugins; auto-installs missing dependencies from added marketplaces</td></tr>
                     <tr class="search-item"><td><code>/reload-skills</code></td><td class="desc">Re-scan skill directories without restarting the session</td></tr>
                     <tr class="search-item"><td><code>/plugin list</code></td><td class="desc">List installed plugins; <code>--enabled</code>/<code>--disabled</code> filters; search bar available when browsing marketplace plugins; surfaces recently-unused plugins for cleanup</td></tr>
@@ -466,6 +467,8 @@
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_TOOL_MEMORY_LIMIT</code> <!-- added:v2.1.233 --></td><td class="desc">Opt-in memory cgroup limit for Bash tool commands on Linux; prevents a runaway build from stalling the session</td></tr>
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS</code> <!-- added:v2.1.233 --></td><td class="desc">Configure the WebFetch session URL cache TTL in milliseconds (default: 15 minutes)</td></tr>
                     <tr class="search-item"><td><code class="new">CLAUDE_CODE_ENABLE_TODO_TOOLS=1</code> <!-- added:v2.1.233 --></td><td class="desc">Re-enable task/todo tools (<code>TaskCreate</code>/<code>Get</code>/<code>Update</code>/<code>List</code>, <code>TodoWrite</code>) on Opus 4.8, Sonnet 5, Fable 5, Mythos 5, and newer models where they are no longer available by default</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_PROJECT_DIR_NAME</code> <!-- added:v2.1.234 --></td><td class="desc">Custom short name for the per-project transcript directory; for hosts that give each session its own config directory</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_GOAL_CHECKIN_MINUTES</code> <!-- added:v2.1.234 --></td><td class="desc">Set to <code>0</code> to disable automatic check-ins when a <code>/goal</code> is waiting on background tasks for 30+ min</td></tr>
                 </table>
             </div>
         </div>
@@ -625,13 +628,15 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.233",
-        "date": "2026-08-14",
+        "version": "v2.1.234",
+        "date": "2026-08-17",
         "changes": [
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_TOOL_MEMORY_LIMIT</code> env var — opt-in memory cgroup limit for Bash tool commands on Linux"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS</code> env var — configure the WebFetch session URL cache TTL (default: 15 min)"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_ENABLE_TODO_TOOLS=1</code> env var — re-enable task/todo tools on Sonnet 5, Fable 5, and newer models"},
-            {"tag": "CHG", "text": "<code>claude plugin validate</code> — now also checks bare <code>.claude/skills</code> directory for SKILL.md frontmatter parse errors"}
+            {"tag": "ADD", "text": "<code>selection:clear</code> keybinding action — bind to a key to clear an in-app text selection"},
+            {"tag": "CHG", "text": "<code>/goal</code> — clears on unrecoverable errors; checks in on background tasks after 30+ min (opt out: <code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES=0</code>)"},
+            {"tag": "CHG", "text": "<code>/permissions</code> — can now be opened while Claude is working; rule changes apply immediately"},
+            {"tag": "CHG", "text": "<code>/add-dir</code> — now usable while Claude is working"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_PROJECT_DIR_NAME</code> env var — custom short name for the per-project transcript directory"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES</code> env var — set to <code>0</code> to disable <code>/goal</code> check-ins after 30 min"}
         ]
     }
     </script>
