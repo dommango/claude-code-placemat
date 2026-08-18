@@ -143,8 +143,20 @@
 
             <!-- August 2026 -->
             <details class="month-group" open>
-                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.233</span> <span class="month-count">12 releases</span></summary>
+                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.234</span> <span class="month-count">13 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.234 <span class="version-date">2026-08-17</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>selection:clear</code> keybinding action — bind to a key via <code>/keybindings</code> to clear an in-app text selection; works in agents view</li>
+                            <li><span class="tag tag-change">CHG</span><code>/goal</code> — clears itself on unrecoverable errors (revoked auth, exhausted credits, context overflow); checks in on background tasks waiting 30+ min (set <code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES=0</code> to opt out)</li>
+                            <li><span class="tag tag-change">CHG</span><code>/permissions</code> — can now be opened while Claude is working; rule changes apply to the rest of the current turn</li>
+                            <li><span class="tag tag-change">CHG</span><code>/add-dir &lt;path&gt;</code> — now usable while Claude is working</li>
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_PROJECT_DIR_NAME</code> env var — custom short name for the per-project transcript directory</li>
+                            <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES</code> env var — set to <code>0</code> to disable automatic check-ins when <code>/goal</code> is waiting on background tasks for 30+ min</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.233 <span class="version-date">2026-08-14</span></h3>
