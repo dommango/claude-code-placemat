@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.234</span>
+            <span class="release-tag">As of release: v2.1.235</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -252,7 +252,7 @@
                     <tr class="search-item"><td><code>/desktop</code></td><td class="desc">Continue session in Desktop app</td></tr>
                     <tr class="search-item"><td><code>/remote-control</code></td><td class="desc">Bridge session to claude.ai/code</td></tr>
                     <tr class="search-item"><td><code>/team-onboarding</code></td><td class="desc">Generate teammate ramp-up guide from local CC usage</td></tr>
-                    <tr class="search-item"><td><code class="new">/advisor</code> <!-- added:v2.1.232 --></td><td class="desc">AI advisor mode; Fable 5 available for organizations with Fable access — enable via <code>/model fable</code></td></tr>
+                    <tr class="search-item"><td><code>/advisor</code></td><td class="desc">AI advisor mode; Fable 5 available for organizations with Fable access — enable via <code>/model fable</code></td></tr>
                 </table>
             </div>
         </div>
@@ -357,6 +357,7 @@
                     <tr class="search-item"><td><code>wheelScrollAccelerationEnabled</code></td><td class="desc">Set to <code>false</code> to disable mouse-wheel scroll acceleration in fullscreen mode</td></tr>
                     <tr class="search-item"><td><code>tui</code></td><td class="desc">Default TUI mode; set to "fullscreen" for flicker-free alt-screen rendering</td></tr>
                     <tr class="search-item"><td><code>axScreenReader</code></td><td class="desc">Set to <code>true</code> for opt-in plain-text rendering for screen reader users; paired with <code>--ax-screen-reader</code> flag and <code>CLAUDE_AX_SCREEN_READER=1</code> env var</td></tr>
+                    <tr class="search-item"><td><code class="new">spellcheck</code> <!-- added:v2.1.235 --></td><td class="desc">Underline misspelled words in the prompt input as you type; requires <code>aspell</code>, <code>hunspell</code>, or <code>ispell</code> to be installed</td></tr>
                     <tr class="search-item"><td><code>vimInsertModeRemaps</code></td><td class="desc">Map two-key insert-mode sequences to keys in vim mode; e.g. map <code>jj</code> to Escape</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.strictAllowlist</code></td><td class="desc">Deny non-allowlisted hosts for sandboxed commands without prompting</td></tr>
@@ -379,7 +380,7 @@
                     <tr class="search-item"><td><code>channelsEnabled</code></td><td class="desc">Set to <code>true</code> in managed settings to allow <code>--channels</code> with console (API key) auth</td></tr>
                     <tr class="search-item"><td><code>allowAllClaudeAiMcps</code></td><td class="desc">Enterprise managed setting — load claude.ai cloud MCP connectors alongside <code>managed-mcp.json</code></td></tr>
                     <tr class="search-item"><td><code>pluginSuggestionMarketplaces</code></td><td class="desc">Managed setting — allowlist org marketplaces whose plugins may be suggested via context-aware tips</td></tr>
-                    <tr class="search-item"><td><code class="new">additionalMarketplaces</code> <!-- added:v2.1.232 --></td><td class="desc">Add plugin marketplace repos beyond the built-in list; friendlier alias for <code>extraKnownMarketplaces</code></td></tr>
+                    <tr class="search-item"><td><code>additionalMarketplaces</code></td><td class="desc">Add plugin marketplace repos beyond the built-in list; friendlier alias for <code>extraKnownMarketplaces</code></td></tr>
                     <tr class="search-item"><td><code>strictKnownMarketplaces</code></td><td class="desc">Managed setting — allowlist of marketplace repos allowed as plugin sources; supports <code>"owner/*"</code> wildcard to allow all repos under a GitHub org; also accepted as <code>allowedMarketplaces</code></td></tr>
                     <tr class="search-item"><td><code>blockedMarketplaces</code></td><td class="desc">Managed setting — blocklist of marketplace repos denied as plugin sources; supports <code>"owner/*"</code> wildcard to block all repos under a GitHub org</td></tr>
                     <tr class="search-item"><td><code>requiredMinimumVersion</code> / <code>requiredMaximumVersion</code></td><td class="desc">Managed settings — CC refuses to start if its version is outside the allowed range; directs user to an approved version</td></tr>
@@ -628,15 +629,10 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.234",
-        "date": "2026-08-17",
+        "version": "v2.1.235",
+        "date": "2026-08-18",
         "changes": [
-            {"tag": "ADD", "text": "<code>selection:clear</code> keybinding action — bind to a key to clear an in-app text selection"},
-            {"tag": "CHG", "text": "<code>/goal</code> — clears on unrecoverable errors; checks in on background tasks after 30+ min (opt out: <code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES=0</code>)"},
-            {"tag": "CHG", "text": "<code>/permissions</code> — can now be opened while Claude is working; rule changes apply immediately"},
-            {"tag": "CHG", "text": "<code>/add-dir</code> — now usable while Claude is working"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_PROJECT_DIR_NAME</code> env var — custom short name for the per-project transcript directory"},
-            {"tag": "ADD", "text": "<code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES</code> env var — set to <code>0</code> to disable <code>/goal</code> check-ins after 30 min"}
+            {"tag": "ADD", "text": "<code>spellcheck</code> JSON setting — underline misspelled words in the prompt input as you type (requires <code>aspell</code>, <code>hunspell</code>, or <code>ispell</code>)"}
         ]
     }
     </script>
