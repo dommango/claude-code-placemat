@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.235</span>
+            <span class="release-tag">As of release: v2.1.237</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -106,7 +106,7 @@
                     <tr class="search-item"><td><code>Ctrl X</code></td><td class="desc">In <code>claude agents</code>: permanently removes a completed session; deleted background jobs stay deleted</td></tr>
                     <tr class="search-item"><td><code>Esc Esc</code></td><td class="desc">Rewind / undo state</td></tr>
                     <tr class="search-item"><td><code>Esc</code></td><td class="desc">Close background-tasks, diff, and workflow detail views (left arrow no longer closes these)</td></tr>
-                    <tr class="search-item"><td><code class="new">selection:clear</code> <!-- added:v2.1.234 --></td><td class="desc">Keybinding action — bind to a key in <code>/keybindings</code> to clear an in-app text selection; works in agents view</td></tr>
+                    <tr class="search-item"><td><code>selection:clear</code></td><td class="desc">Keybinding action — bind to a key in <code>/keybindings</code> to clear an in-app text selection; works in agents view</td></tr>
                 </table>
             </div>
 
@@ -358,6 +358,7 @@
                     <tr class="search-item"><td><code>tui</code></td><td class="desc">Default TUI mode; set to "fullscreen" for flicker-free alt-screen rendering</td></tr>
                     <tr class="search-item"><td><code>axScreenReader</code></td><td class="desc">Set to <code>true</code> for opt-in plain-text rendering for screen reader users; paired with <code>--ax-screen-reader</code> flag and <code>CLAUDE_AX_SCREEN_READER=1</code> env var</td></tr>
                     <tr class="search-item"><td><code class="new">spellcheck</code> <!-- added:v2.1.235 --></td><td class="desc">Underline misspelled words in the prompt input as you type; requires <code>aspell</code>, <code>hunspell</code>, or <code>ispell</code> to be installed</td></tr>
+                    <tr class="search-item"><td><code class="new unverified">outputStyle</code> <!-- added:v2.1.237 --></td><td class="desc">Built-in output style; <code>"concise"</code> makes Claude lead with results and skip preamble and narration while working just as thoroughly; configure via <code>/config</code> → Output style</td></tr>
                     <tr class="search-item"><td><code>vimInsertModeRemaps</code></td><td class="desc">Map two-key insert-mode sequences to keys in vim mode; e.g. map <code>jj</code> to Escape</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.strictAllowlist</code></td><td class="desc">Deny non-allowlisted hosts for sandboxed commands without prompting</td></tr>
@@ -465,11 +466,12 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS</code></td><td class="desc">Threshold in ms after which long-running MCP tool calls move to background automatically (default 120000 / 2 min); set to <code>0</code> to disable</td></tr>
                     <tr class="search-item"><td><code>FORCE_HYPERLINK=0</code></td><td class="desc">Opt out of clickable hyperlinks in footer PR badge links (hyperlinks are on by default even when terminal support can't be detected, e.g. over ssh/tmux)</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS=0</code></td><td class="desc">Set to <code>0</code> to disable automatic staggering of same-prefix sibling workflow agents; staggering is on by default so later agents reuse the cached prompt prefix</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_TOOL_MEMORY_LIMIT</code> <!-- added:v2.1.233 --></td><td class="desc">Opt-in memory cgroup limit for Bash tool commands on Linux; prevents a runaway build from stalling the session</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS</code> <!-- added:v2.1.233 --></td><td class="desc">Configure the WebFetch session URL cache TTL in milliseconds (default: 15 minutes)</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_ENABLE_TODO_TOOLS=1</code> <!-- added:v2.1.233 --></td><td class="desc">Re-enable task/todo tools (<code>TaskCreate</code>/<code>Get</code>/<code>Update</code>/<code>List</code>, <code>TodoWrite</code>) on Opus 4.8, Sonnet 5, Fable 5, Mythos 5, and newer models where they are no longer available by default</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_PROJECT_DIR_NAME</code> <!-- added:v2.1.234 --></td><td class="desc">Custom short name for the per-project transcript directory; for hosts that give each session its own config directory</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_GOAL_CHECKIN_MINUTES</code> <!-- added:v2.1.234 --></td><td class="desc">Set to <code>0</code> to disable automatic check-ins when a <code>/goal</code> is waiting on background tasks for 30+ min</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_TOOL_MEMORY_LIMIT</code></td><td class="desc">Opt-in memory cgroup limit for Bash tool commands on Linux; prevents a runaway build from stalling the session</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS</code></td><td class="desc">Configure the WebFetch session URL cache TTL in milliseconds (default: 15 minutes)</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_TODO_TOOLS=1</code></td><td class="desc">Re-enable task/todo tools (<code>TaskCreate</code>/<code>Get</code>/<code>Update</code>/<code>List</code>, <code>TodoWrite</code>) on Opus 4.8, Sonnet 5, Fable 5, Mythos 5, and newer models where they are no longer available by default</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_PROJECT_DIR_NAME</code></td><td class="desc">Custom short name for the per-project transcript directory; for hosts that give each session its own config directory</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES</code></td><td class="desc">Set to <code>0</code> to disable automatic check-ins when a <code>/goal</code> is waiting on background tasks for 30+ min</td></tr>
+                    <tr class="search-item"><td><code class="new">ANTHROPIC_DEFAULT_MODEL</code> <!-- added:v2.1.236 --></td><td class="desc">Sets the model new sessions start on; a <code>/model</code> pick still overrides it and persists across restarts — unlike <code>ANTHROPIC_MODEL</code></td></tr>
                 </table>
             </div>
         </div>
@@ -529,7 +531,7 @@
                     <tr class="search-item"><td><code>memory: user|project</code></td><td class="desc">Persistent memory storage scope</td></tr>
                     <tr class="search-item"><td><code>background: true</code></td><td class="desc">Run entirely as background task</td></tr>
                     <tr class="search-item"><td><code>initialPrompt</code></td><td class="desc">Auto-submit first turn on spawn</td></tr>
-                    <tr class="search-item"><td><code>SendMessage</code></td><td class="desc">Auto-resumes stopped agents; supports cross-session messaging — CC sessions can message each other across machines using <code>ListAgents</code> to discover them; can initiate a conversation with a Remote Control session on another machine by name (macOS and Linux)</td></tr>
+                    <tr class="search-item"><td><code>SendMessage</code></td><td class="desc">Auto-resumes stopped agents; supports cross-session messaging — CC sessions can message each other across machines using <code>ListAgents</code> to discover them; can initiate a conversation with a Remote Control session on another machine by name (macOS and Linux); <code>notify_when_idle</code> — ask another session to send one notice when it next goes idle, opt-in, one-shot, no polling (macOS and Linux)</td></tr>
                     <tr class="search-item"><td><code>hooks:</code></td><td class="desc">Agent lifecycle hooks; fire when running as main-thread agent via <code>--agent</code></td></tr>
                     <tr class="search-item"><td><code>mcpServers</code></td><td class="desc">MCP servers for the agent; now loaded for main-thread agent sessions via <code>--agent</code></td></tr>
                 </table>
@@ -629,10 +631,12 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.235",
-        "date": "2026-08-18",
+        "version": "v2.1.237",
+        "date": "2026-08-20",
         "changes": [
-            {"tag": "ADD", "text": "<code>spellcheck</code> JSON setting — underline misspelled words in the prompt input as you type (requires <code>aspell</code>, <code>hunspell</code>, or <code>ispell</code>)"}
+            {"tag": "ADD", "text": "<code>outputStyle</code> JSON setting — <code>\"concise\"</code> makes Claude lead with results and skip preamble/narration; select via <code>/config</code> → Output style"},
+            {"tag": "ADD", "text": "<code>ANTHROPIC_DEFAULT_MODEL</code> env var — sets the model new sessions start on; a <code>/model</code> pick still overrides it and persists across restarts"},
+            {"tag": "CHG", "text": "<code>SendMessage</code> — added <code>notify_when_idle</code> option: ask a session to send one notice when it next goes idle, one-shot, no polling (macOS/Linux)"}
         ]
     }
     </script>
