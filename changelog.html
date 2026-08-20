@@ -143,8 +143,23 @@
 
             <!-- August 2026 -->
             <details class="month-group" open>
-                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.235</span> <span class="month-count">14 releases</span></summary>
+                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.237</span> <span class="month-count">16 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.237 <span class="version-date">2026-08-20</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>outputStyle</code> JSON setting — <code>"concise"</code> makes Claude lead with results and skip preamble/narration; configure via <code>/config</code> → Output style</li>
+                        </ul>
+                    </div>
+
+                    <div class="change-section">
+                        <h3>CC v2.1.236 <span class="version-date">2026-08-19</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>ANTHROPIC_DEFAULT_MODEL</code> env var — sets the model new sessions start on; a <code>/model</code> pick still overrides it and persists across restarts, unlike <code>ANTHROPIC_MODEL</code></li>
+                            <li><span class="tag tag-change">CHG</span><code>SendMessage</code> — added <code>notify_when_idle</code> option: ask another session to send one notice when it next goes idle, opt-in, one-shot, no polling (macOS and Linux)</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.235 <span class="version-date">2026-08-18</span></h3>
