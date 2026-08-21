@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.237</span>
+            <span class="release-tag">As of release: v2.1.238</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -92,7 +92,7 @@
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>Ctrl C</code> / <code>D</code></td><td class="desc">Cancel input / Exit session</td></tr>
-                    <tr class="search-item"><td><code>Ctrl L</code></td><td class="desc">Clear screen + full redraw</td></tr>
+                    <tr class="search-item"><td><code>Ctrl L</code></td><td class="desc">Clear screen + full redraw; in fullscreen mode, always just repaints — the double-press <code>/clear</code> shortcut was removed</td></tr>
                     <tr class="search-item"><td><code>Ctrl O</code></td><td class="desc">Toggle between normal and verbose transcript; in a collapsed thinking group, shows the full thinking; focus view toggled with /focus</td></tr>
                     <tr class="search-item"><td><code>Ctrl R</code></td><td class="desc">History picker — searches all projects by default; press <code>Ctrl S</code> to narrow to current project or session</td></tr>
                     <tr class="search-item"><td><code>Ctrl G</code></td><td class="desc">Open prompt in external editor</td></tr>
@@ -276,6 +276,8 @@
                     <tr class="search-item"><td><code>claude agents</code></td><td class="desc">Agent view (Research Preview) — single list of every CC session; running, blocked on you, or done; type <code>! &lt;cmd&gt;</code> to launch a shell command as a background session you can attach/detach; <code>--cwd &lt;path&gt;</code> scopes list to a directory; <code>--json</code> lists live sessions as JSON (includes <code>waitingFor</code>, <code>id</code>, and <code>state</code> fields); <code>--all</code> flag includes completed sessions; dispatch flags for background sessions: <code>--add-dir</code>, <code>--settings</code>, <code>--mcp-config</code>, <code>--plugin-dir</code>, <code>--permission-mode</code>, <code>--model</code>, <code>--effort</code>, <code>--agent</code>, <code>--dangerously-skip-permissions</code></td></tr>
                     <tr class="search-item"><td><code>claude --bg --exec '&lt;cmd&gt;'</code></td><td class="desc">Run a shell command as a background session you can attach to and detach from; equivalent to typing <code>! &lt;cmd&gt;</code> inside <code>claude agents</code></td></tr>
                     <tr class="search-item"><td><code>claude self-hosted-runner</code></td><td class="desc">Turn your own machine or container into a session host for Claude Code web, mobile, and desktop sessions (Team and Enterprise plans)</td></tr>
+                    <tr class="search-item"><td><code class="new">claude self-hosted-runner --defer-shutdown-max-min &lt;minutes&gt;</code> <!-- added:v2.1.238 --></td><td class="desc">On SIGTERM, keep serving attached sessions for up to the given number of minutes before parking remaining sessions and exiting</td></tr>
+                    <tr class="search-item"><td><code class="new">claude self-hosted-runner --proxy-authorization-command</code> / <code class="new">--proxy-authorization-file</code> <!-- added:v2.1.238 --></td><td class="desc">Supply a freshly issued <code>Proxy-Authorization</code> header on every connection for egress proxies that require per-request credentials</td></tr>
                     <tr class="search-item"><td><code>claude remote-control --continue</code></td><td class="desc">Resume the most recent Remote Control session</td></tr>
                 </table>
             </div>
@@ -357,8 +359,9 @@
                     <tr class="search-item"><td><code>wheelScrollAccelerationEnabled</code></td><td class="desc">Set to <code>false</code> to disable mouse-wheel scroll acceleration in fullscreen mode</td></tr>
                     <tr class="search-item"><td><code>tui</code></td><td class="desc">Default TUI mode; set to "fullscreen" for flicker-free alt-screen rendering</td></tr>
                     <tr class="search-item"><td><code>axScreenReader</code></td><td class="desc">Set to <code>true</code> for opt-in plain-text rendering for screen reader users; paired with <code>--ax-screen-reader</code> flag and <code>CLAUDE_AX_SCREEN_READER=1</code> env var</td></tr>
-                    <tr class="search-item"><td><code class="new">spellcheck</code> <!-- added:v2.1.235 --></td><td class="desc">Underline misspelled words in the prompt input as you type; requires <code>aspell</code>, <code>hunspell</code>, or <code>ispell</code> to be installed</td></tr>
-                    <tr class="search-item"><td><code class="new unverified">outputStyle</code> <!-- added:v2.1.237 --></td><td class="desc">Built-in output style; <code>"concise"</code> makes Claude lead with results and skip preamble and narration while working just as thoroughly; configure via <code>/config</code> → Output style</td></tr>
+                    <tr class="search-item"><td><code>spellcheck</code></td><td class="desc">Underline misspelled words in the prompt input as you type; requires <code>aspell</code>, <code>hunspell</code>, or <code>ispell</code> to be installed</td></tr>
+                    <tr class="search-item"><td><code class="new">keybindingFlavor</code> <!-- added:v2.1.238 --></td><td class="desc">Set to <code>"readline"</code> to make Ctrl+W delete back to the previous whitespace (Bash-style); default <code>"classic"</code> is unchanged</td></tr>
+                    <tr class="search-item"><td><code class="new">outputStyle</code> <!-- added:v2.1.237 --></td><td class="desc">Built-in output style; <code>"concise"</code> makes Claude lead with results and skip preamble and narration while working just as thoroughly; configure via <code>/config</code> → Output style</td></tr>
                     <tr class="search-item"><td><code>vimInsertModeRemaps</code></td><td class="desc">Map two-key insert-mode sequences to keys in vim mode; e.g. map <code>jj</code> to Escape</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.strictAllowlist</code></td><td class="desc">Deny non-allowlisted hosts for sandboxed commands without prompting</td></tr>
@@ -496,6 +499,7 @@
                     <tr class="search-item"><td><code>~/.claude/skills/&lt;name&gt;/</code></td><td class="desc">Global personal skill directory</td></tr>
                     <tr class="search-item"><td><code>plugin: bin/</code></td><td class="desc">Plugin executables in bin/ invocable as bare commands from Bash tool</td></tr>
                     <tr class="search-item"><td><code>command</code> (plugin marketplace source)</td><td class="desc">Specify a plugin directory via a local command's output (e.g. from an IDE); re-resolved each session without restart; <code>mode: "link"</code> uses it in place</td></tr>
+                    <tr class="search-item"><td><code class="new">headersHelper</code> (plugin marketplace / catalog entry) <!-- added:v2.1.238 --></td><td class="desc">Command that mints HTTP headers (e.g. a short-lived token) for catalog and same-origin archive fetches on a <code>url</code> marketplace; for a catalog entry, runs only on <code>claude plugin install/update</code> after displaying the command; prompts <code>[y/N]</code> or pass <code>-y</code></td></tr>
                 </table>
             </div>
 
@@ -599,7 +603,7 @@
                 <h3>MCP Servers</h3>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
-                    <tr class="search-item"><td><code>claude mcp list/add/remove</code></td><td class="desc">Standard MCP server management; <code>claude mcp list</code>/<code>get</code> show unapproved <code>.mcp.json</code> servers as <code>⏸ Pending approval</code> instead of auto-connecting</td></tr>
+                    <tr class="search-item"><td><code>claude mcp list/add/remove</code></td><td class="desc">Standard MCP server management; <code>claude mcp list</code>/<code>get</code> show unapproved <code>.mcp.json</code> servers as <code>⏸ Pending approval</code> instead of auto-connecting; disabled servers now show as <code>⊘ Disabled</code> without connecting for a health check</td></tr>
                     <tr class="search-item"><td><code>claude mcp login/logout &lt;name&gt;</code></td><td class="desc">Authenticate or de-authenticate an MCP server from the CLI without opening <code>/mcp</code>; <code>--no-browser</code> redirects auth code to stdin for SSH completion</td></tr>
                     <tr class="search-item"><td><code>claude mcp serve</code></td><td class="desc">Run Claude Code as an MCP server</td></tr>
                     <tr class="search-item"><td><code>--transport http/stdio/sse</code></td><td class="desc">Protocol connection methods</td></tr>
@@ -631,12 +635,15 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.237",
+        "version": "v2.1.238",
         "date": "2026-08-20",
         "changes": [
-            {"tag": "ADD", "text": "<code>outputStyle</code> JSON setting — <code>\"concise\"</code> makes Claude lead with results and skip preamble/narration; select via <code>/config</code> → Output style"},
-            {"tag": "ADD", "text": "<code>ANTHROPIC_DEFAULT_MODEL</code> env var — sets the model new sessions start on; a <code>/model</code> pick still overrides it and persists across restarts"},
-            {"tag": "CHG", "text": "<code>SendMessage</code> — added <code>notify_when_idle</code> option: ask a session to send one notice when it next goes idle, one-shot, no polling (macOS/Linux)"}
+            {"tag": "ADD", "text": "<code>keybindingFlavor</code> JSON setting — set to <code>\"readline\"</code> to make Ctrl+W delete back to previous whitespace (Bash-style); default <code>\"classic\"</code> unchanged"},
+            {"tag": "ADD", "text": "<code>headersHelper</code> (plugin marketplace / catalog entry) — command that mints HTTP headers for catalog and archive fetches; prompts on install/update"},
+            {"tag": "ADD", "text": "<code>claude self-hosted-runner --defer-shutdown-max-min</code> — keep serving attached sessions on SIGTERM for up to N minutes before parking and exiting"},
+            {"tag": "ADD", "text": "<code>claude self-hosted-runner --proxy-authorization-command</code> / <code>--proxy-authorization-file</code> — supply per-connection egress proxy credentials"},
+            {"tag": "CHG", "text": "<code>Ctrl L</code> in fullscreen — now always repaints; double-press <code>/clear</code> shortcut removed"},
+            {"tag": "CHG", "text": "<code>claude mcp list/get</code> — disabled servers now show as <code>⊘ Disabled</code> without connecting for a health check"}
         ]
     }
     </script>

@@ -143,8 +143,20 @@
 
             <!-- August 2026 -->
             <details class="month-group" open>
-                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.237</span> <span class="month-count">16 releases</span></summary>
+                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.238</span> <span class="month-count">17 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.238 <span class="version-date">2026-08-20</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>keybindingFlavor</code> JSON setting — set to <code>"readline"</code> to make Ctrl+W delete back to previous whitespace (Bash-style); default <code>"classic"</code> unchanged</li>
+                            <li><span class="tag tag-add">ADD</span><code>headersHelper</code> (plugin marketplace / catalog entry) — command that mints HTTP headers (e.g. a short-lived token) for catalog and same-origin archive fetches; for catalog entries, runs only on <code>claude plugin install/update</code> after displaying the command (<code>-y</code> to skip prompt)</li>
+                            <li><span class="tag tag-add">ADD</span><code>claude self-hosted-runner --defer-shutdown-max-min &lt;minutes&gt;</code> — on SIGTERM, keep serving attached sessions for up to N minutes before parking remaining sessions and exiting</li>
+                            <li><span class="tag tag-add">ADD</span><code>claude self-hosted-runner --proxy-authorization-command</code> / <code>--proxy-authorization-file</code> — supply a freshly issued <code>Proxy-Authorization</code> header on every connection for egress proxies requiring per-request credentials</li>
+                            <li><span class="tag tag-change">CHG</span><code>Ctrl L</code> / <code>Cmd+K</code> in fullscreen — now always just repaints; the double-press <code>/clear</code> shortcut was removed</li>
+                            <li><span class="tag tag-change">CHG</span><code>claude mcp list</code> / <code>claude mcp get</code> — disabled servers now show as <code>⊘ Disabled</code> instead of connecting for a health check</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.237 <span class="version-date">2026-08-20</span></h3>
