@@ -143,8 +143,20 @@
 
             <!-- August 2026 -->
             <details class="month-group" open>
-                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.238</span> <span class="month-count">17 releases</span></summary>
+                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.239</span> <span class="month-count">18 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.239 <span class="version-date">2026-08-21</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>claude plugin enable/disable &lt;name&gt;@synced</code> — cloud-synced plugins from claude.ai appear as <code>name@synced</code>; managed with <code>enable/disable &lt;name&gt;@synced</code>; never override a locally installed same-named plugin</li>
+                            <li><span class="tag tag-add">ADD</span><code>/claude-api upgrade</code> — new subcommand; migrates Python projects from <code>anthropic</code> 0.x to 1.x (timeouts use <code>anthropic.Timeout</code>, not <code>httpx.Timeout</code>)</li>
+                            <li><span class="tag tag-change">CHG</span><code>/goal</code> — check-ins back off (30 min → 1 h → 2 h) instead of repeating every 30 min; resuming via <code>claude --resume</code> now restores the active goal</li>
+                            <li><span class="tag tag-change">CHG</span><code>keybindingFlavor: "readline"</code> — extended with word-motion keys: Alt+F and Ctrl/Option+→ stop at end of word, Alt+D deletes to it (Ctrl+Y pastes back), punctuation separates words</li>
+                            <li><span class="tag tag-change">CHG</span><code>ListAgents</code> / <code>SendMessage</code> — <code>ListAgents</code> now reports the session's own name (the identifier peers use to message it) and includes live teammates in its listing</li>
+                            <li><span class="tag tag-change">CHG</span><code>CLAUDE_CODE_RETRY_WATCHDOG</code> — now fails immediately on organization spend-limit and out-of-credits errors instead of waiting indefinitely</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.238 <span class="version-date">2026-08-20</span></h3>
