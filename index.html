@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.238</span>
+            <span class="release-tag">As of release: v2.1.239</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -179,7 +179,7 @@
                     <tr class="search-item"><td><code>/export</code></td><td class="desc">Export conversation</td></tr>
                     <tr class="search-item"><td><code>/recap</code></td><td class="desc">Summarize away context; auto-triggered on return or invoke manually</td></tr>
                     <tr class="search-item"><td><code>/rewind</code> / <code>/undo</code></td><td class="desc">Rewind conversation to previous state; /undo is alias; supports resuming a conversation from before <code>/clear</code> was run</td></tr>
-                    <tr class="search-item"><td><code>/goal [condition]</code></td><td class="desc">Set a completion condition; Claude keeps working across turns until met; works in interactive, <code>-p</code>, and Remote Control; shows live elapsed/turns/tokens overlay; clears itself on unrecoverable errors (revoked auth, exhausted credits, context overflow); checks in on background tasks waiting 30+ min (set <code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES=0</code> to opt out)</td></tr>
+                    <tr class="search-item"><td><code>/goal [condition]</code></td><td class="desc">Set a completion condition; Claude keeps working across turns until met; works in interactive, <code>-p</code>, and Remote Control; shows live elapsed/turns/tokens overlay; clears itself on unrecoverable errors (revoked auth, exhausted credits, context overflow); checks in on background tasks waiting 30+ min (set <code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES=0</code> to opt out); check-ins back off (30 min → 1 h → 2 h) instead of repeating every 30 min; resuming via <code>claude --resume</code> restores the active goal</td></tr>
                     <tr class="search-item"><td><code>/cd</code></td><td class="desc">Move session to a new working directory without breaking the prompt cache mid-session; supports directory path suggestions (matching <code>/add-dir</code>)</td></tr>
                 </table>
             </div>
@@ -360,7 +360,7 @@
                     <tr class="search-item"><td><code>tui</code></td><td class="desc">Default TUI mode; set to "fullscreen" for flicker-free alt-screen rendering</td></tr>
                     <tr class="search-item"><td><code>axScreenReader</code></td><td class="desc">Set to <code>true</code> for opt-in plain-text rendering for screen reader users; paired with <code>--ax-screen-reader</code> flag and <code>CLAUDE_AX_SCREEN_READER=1</code> env var</td></tr>
                     <tr class="search-item"><td><code>spellcheck</code></td><td class="desc">Underline misspelled words in the prompt input as you type; requires <code>aspell</code>, <code>hunspell</code>, or <code>ispell</code> to be installed</td></tr>
-                    <tr class="search-item"><td><code class="new">keybindingFlavor</code> <!-- added:v2.1.238 --></td><td class="desc">Set to <code>"readline"</code> to make Ctrl+W delete back to the previous whitespace (Bash-style); default <code>"classic"</code> is unchanged</td></tr>
+                    <tr class="search-item"><td><code class="new">keybindingFlavor</code> <!-- added:v2.1.238 --></td><td class="desc">Set to <code>"readline"</code> to make Ctrl+W delete back to the previous whitespace (Bash-style); default <code>"classic"</code> is unchanged; in <code>"readline"</code> mode, Alt+F and Ctrl/Option+→ stop at end of word, Alt+D deletes to it (Ctrl+Y pastes back), and punctuation separates words</td></tr>
                     <tr class="search-item"><td><code class="new">outputStyle</code> <!-- added:v2.1.237 --></td><td class="desc">Built-in output style; <code>"concise"</code> makes Claude lead with results and skip preamble and narration while working just as thoroughly; configure via <code>/config</code> → Output style</td></tr>
                     <tr class="search-item"><td><code>vimInsertModeRemaps</code></td><td class="desc">Map two-key insert-mode sequences to keys in vim mode; e.g. map <code>jj</code> to Escape</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr>
@@ -455,7 +455,7 @@
                     <tr class="search-item"><td><code>API_FORCE_IDLE_TIMEOUT=0</code></td><td class="desc">Opt out of the default 5-minute idle timeout on Vertex/Foundry; stalled streams will hang indefinitely instead of aborting</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CLIENT_PRESENCE_FILE</code></td><td class="desc">Path to a marker file — while the file exists, mobile push notifications are suppressed (signals you're at the machine)</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MAX_RETRIES</code></td><td class="desc">Retry attempt limit; cap of 15 is lifted when <code>CLAUDE_CODE_RETRY_WATCHDOG</code> is set — for unattended sessions use the watchdog instead</td></tr>
-                    <tr class="search-item"><td><code>CLAUDE_CODE_RETRY_WATCHDOG</code></td><td class="desc">Retry watchdog for unattended sessions; raises default retry count for non-capacity transient errors to 300 and lifts the cap of 15 on <code>CLAUDE_CODE_MAX_RETRIES</code></td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_RETRY_WATCHDOG</code></td><td class="desc">Retry watchdog for unattended sessions; raises default retry count for non-capacity transient errors to 300 and lifts the cap of 15 on <code>CLAUDE_CODE_MAX_RETRIES</code>; fails immediately on organization spend-limit and out-of-credits errors instead of waiting indefinitely</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT</code></td><td class="desc">Override the default 5-minute idle timeout for remote MCP tool calls; stalled calls abort with an error instead of blocking indefinitely</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP=1</code></td><td class="desc">Disable automatic memory-pressure reaping of idle background shell commands</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_DISABLE_MOUSE_CLICKS</code></td><td class="desc">Disable mouse click/drag/hover in fullscreen mode while keeping wheel scroll active</td></tr>
@@ -474,7 +474,7 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_ENABLE_TODO_TOOLS=1</code></td><td class="desc">Re-enable task/todo tools (<code>TaskCreate</code>/<code>Get</code>/<code>Update</code>/<code>List</code>, <code>TodoWrite</code>) on Opus 4.8, Sonnet 5, Fable 5, Mythos 5, and newer models where they are no longer available by default</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_PROJECT_DIR_NAME</code></td><td class="desc">Custom short name for the per-project transcript directory; for hosts that give each session its own config directory</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES</code></td><td class="desc">Set to <code>0</code> to disable automatic check-ins when a <code>/goal</code> is waiting on background tasks for 30+ min</td></tr>
-                    <tr class="search-item"><td><code class="new">ANTHROPIC_DEFAULT_MODEL</code> <!-- added:v2.1.236 --></td><td class="desc">Sets the model new sessions start on; a <code>/model</code> pick still overrides it and persists across restarts — unlike <code>ANTHROPIC_MODEL</code></td></tr>
+                    <tr class="search-item"><td><code>ANTHROPIC_DEFAULT_MODEL</code></td><td class="desc">Sets the model new sessions start on; a <code>/model</code> pick still overrides it and persists across restarts — unlike <code>ANTHROPIC_MODEL</code></td></tr>
                 </table>
             </div>
         </div>
@@ -490,7 +490,7 @@
                     <tr class="search-item"><td><code>/verify</code></td><td class="desc">Verify a code change works end-to-end; must be explicitly invoked — Claude no longer auto-runs it</td></tr>
                     <tr class="search-item"><td><code>/simplify</code></td><td class="desc">Cleanup-only review (reuse, simplification, efficiency, altitude) applied to working tree; does not run the full <code>/code-review --fix</code> bug hunt</td></tr>
                     <tr class="search-item"><td><code>/batch</code></td><td class="desc">Large parallel changes (5-30 worktrees)</td></tr>
-                    <tr class="search-item"><td><code>/claude-api</code></td><td class="desc">Load API + SDK reference into context</td></tr>
+                    <tr class="search-item"><td><code>/claude-api</code></td><td class="desc">Load API + SDK reference into context; <code class="new">upgrade</code> <!-- added:v2.1.239 --> subcommand migrates Python projects from <code>anthropic</code> 0.x to 1.x (timeouts now use <code>anthropic.Timeout</code>, not <code>httpx.Timeout</code>)</td></tr>
                     <tr class="search-item"><td><code>/less-permission-prompts</code></td><td class="desc">Scan transcripts for read-only Bash/MCP calls; propose settings.json allowlist</td></tr>
                     <tr class="search-item"><td><code>/ultrareview [PR#]</code></td><td class="desc">Cloud code review via parallel agents; no args for current branch, PR# for specific PR</td></tr>
                     <tr class="search-item"><td><code>/dataviz</code></td><td class="desc">Chart and dashboard design guidance with a runnable color-palette validator</td></tr>
@@ -535,7 +535,7 @@
                     <tr class="search-item"><td><code>memory: user|project</code></td><td class="desc">Persistent memory storage scope</td></tr>
                     <tr class="search-item"><td><code>background: true</code></td><td class="desc">Run entirely as background task</td></tr>
                     <tr class="search-item"><td><code>initialPrompt</code></td><td class="desc">Auto-submit first turn on spawn</td></tr>
-                    <tr class="search-item"><td><code>SendMessage</code></td><td class="desc">Auto-resumes stopped agents; supports cross-session messaging — CC sessions can message each other across machines using <code>ListAgents</code> to discover them; can initiate a conversation with a Remote Control session on another machine by name (macOS and Linux); <code>notify_when_idle</code> — ask another session to send one notice when it next goes idle, opt-in, one-shot, no polling (macOS and Linux)</td></tr>
+                    <tr class="search-item"><td><code>SendMessage</code></td><td class="desc">Auto-resumes stopped agents; supports cross-session messaging — CC sessions can message each other across machines using <code>ListAgents</code> to discover them; can initiate a conversation with a Remote Control session on another machine by name (macOS and Linux); <code>notify_when_idle</code> — ask another session to send one notice when it next goes idle, opt-in, one-shot, no polling (macOS and Linux); <code>ListAgents</code> now reports a session's own name (the identifier peers use to message it) and lists live teammates alongside subagents and other sessions</td></tr>
                     <tr class="search-item"><td><code>hooks:</code></td><td class="desc">Agent lifecycle hooks; fire when running as main-thread agent via <code>--agent</code></td></tr>
                     <tr class="search-item"><td><code>mcpServers</code></td><td class="desc">MCP servers for the agent; now loaded for main-thread agent sessions via <code>--agent</code></td></tr>
                 </table>
@@ -545,6 +545,7 @@
                 <h3>Plugin CLI Commands</h3>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item"><td><code class="new">claude plugin enable/disable &lt;name&gt;</code> <!-- added:v2.1.239 --></td><td class="desc">Enable or disable an installed plugin; cloud-synced plugins (from claude.ai) appear as <code>&lt;name&gt;@synced</code> and are managed with <code>claude plugin enable/disable &lt;name&gt;@synced</code>; synced plugins never override a locally installed same-named plugin</td></tr>
                     <tr class="search-item"><td><code>claude plugin init &lt;name&gt;</code></td><td class="desc">Scaffold a new plugin in <code>.claude/skills</code></td></tr>
                     <tr class="search-item"><td><code>claude plugin tag</code></td><td class="desc">Create release git tags for plugins with version validation</td></tr>
                     <tr class="search-item"><td><code>claude plugin prune</code></td><td class="desc">Remove orphaned auto-installed plugin dependencies; <code>plugin uninstall --prune</code> cascades</td></tr>
@@ -635,15 +636,15 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.238",
-        "date": "2026-08-20",
+        "version": "v2.1.239",
+        "date": "2026-08-21",
         "changes": [
-            {"tag": "ADD", "text": "<code>keybindingFlavor</code> JSON setting — set to <code>\"readline\"</code> to make Ctrl+W delete back to previous whitespace (Bash-style); default <code>\"classic\"</code> unchanged"},
-            {"tag": "ADD", "text": "<code>headersHelper</code> (plugin marketplace / catalog entry) — command that mints HTTP headers for catalog and archive fetches; prompts on install/update"},
-            {"tag": "ADD", "text": "<code>claude self-hosted-runner --defer-shutdown-max-min</code> — keep serving attached sessions on SIGTERM for up to N minutes before parking and exiting"},
-            {"tag": "ADD", "text": "<code>claude self-hosted-runner --proxy-authorization-command</code> / <code>--proxy-authorization-file</code> — supply per-connection egress proxy credentials"},
-            {"tag": "CHG", "text": "<code>Ctrl L</code> in fullscreen — now always repaints; double-press <code>/clear</code> shortcut removed"},
-            {"tag": "CHG", "text": "<code>claude mcp list/get</code> — disabled servers now show as <code>⊘ Disabled</code> without connecting for a health check"}
+            {"tag": "ADD", "text": "<code>claude plugin enable/disable &lt;name&gt;@synced</code> — cloud-synced plugins from claude.ai appear as <code>name@synced</code> and are managed with this syntax; synced plugins never override a locally installed same-named plugin"},
+            {"tag": "ADD", "text": "<code>/claude-api upgrade</code> — migrates Python projects from <code>anthropic</code> 0.x to 1.x (timeouts now use <code>anthropic.Timeout</code>, not <code>httpx.Timeout</code>)"},
+            {"tag": "CHG", "text": "<code>/goal</code> — check-ins back off (30 min → 1 h → 2 h) instead of repeating every 30 min; resuming via <code>claude --resume</code> now restores the active goal"},
+            {"tag": "CHG", "text": "<code>keybindingFlavor: \"readline\"</code> — now also maps word-motion keys: Alt+F / Ctrl+→ stop at end of word, Alt+D deletes to it, punctuation separates words"},
+            {"tag": "CHG", "text": "<code>ListAgents</code> — now reports the session's own name (the identifier peers use to message it) and includes live teammates in its listing"},
+            {"tag": "CHG", "text": "<code>CLAUDE_CODE_RETRY_WATCHDOG</code> — now fails immediately on organization spend-limit and out-of-credits errors instead of waiting indefinitely"}
         ]
     }
     </script>
