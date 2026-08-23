@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.239</span>
+            <span class="release-tag">As of release: v2.1.241</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -276,8 +276,8 @@
                     <tr class="search-item"><td><code>claude agents</code></td><td class="desc">Agent view (Research Preview) — single list of every CC session; running, blocked on you, or done; type <code>! &lt;cmd&gt;</code> to launch a shell command as a background session you can attach/detach; <code>--cwd &lt;path&gt;</code> scopes list to a directory; <code>--json</code> lists live sessions as JSON (includes <code>waitingFor</code>, <code>id</code>, and <code>state</code> fields); <code>--all</code> flag includes completed sessions; dispatch flags for background sessions: <code>--add-dir</code>, <code>--settings</code>, <code>--mcp-config</code>, <code>--plugin-dir</code>, <code>--permission-mode</code>, <code>--model</code>, <code>--effort</code>, <code>--agent</code>, <code>--dangerously-skip-permissions</code></td></tr>
                     <tr class="search-item"><td><code>claude --bg --exec '&lt;cmd&gt;'</code></td><td class="desc">Run a shell command as a background session you can attach to and detach from; equivalent to typing <code>! &lt;cmd&gt;</code> inside <code>claude agents</code></td></tr>
                     <tr class="search-item"><td><code>claude self-hosted-runner</code></td><td class="desc">Turn your own machine or container into a session host for Claude Code web, mobile, and desktop sessions (Team and Enterprise plans)</td></tr>
-                    <tr class="search-item"><td><code class="new">claude self-hosted-runner --defer-shutdown-max-min &lt;minutes&gt;</code> <!-- added:v2.1.238 --></td><td class="desc">On SIGTERM, keep serving attached sessions for up to the given number of minutes before parking remaining sessions and exiting</td></tr>
-                    <tr class="search-item"><td><code class="new">claude self-hosted-runner --proxy-authorization-command</code> / <code class="new">--proxy-authorization-file</code> <!-- added:v2.1.238 --></td><td class="desc">Supply a freshly issued <code>Proxy-Authorization</code> header on every connection for egress proxies that require per-request credentials</td></tr>
+                    <tr class="search-item"><td><code>claude self-hosted-runner --defer-shutdown-max-min &lt;minutes&gt;</code></td><td class="desc">On SIGTERM, keep serving attached sessions for up to the given number of minutes before parking remaining sessions and exiting</td></tr>
+                    <tr class="search-item"><td><code>claude self-hosted-runner --proxy-authorization-command</code> / <code>--proxy-authorization-file</code></td><td class="desc">Supply a freshly issued <code>Proxy-Authorization</code> header on every connection for egress proxies that require per-request credentials</td></tr>
                     <tr class="search-item"><td><code>claude remote-control --continue</code></td><td class="desc">Resume the most recent Remote Control session</td></tr>
                 </table>
             </div>
@@ -360,8 +360,8 @@
                     <tr class="search-item"><td><code>tui</code></td><td class="desc">Default TUI mode; set to "fullscreen" for flicker-free alt-screen rendering</td></tr>
                     <tr class="search-item"><td><code>axScreenReader</code></td><td class="desc">Set to <code>true</code> for opt-in plain-text rendering for screen reader users; paired with <code>--ax-screen-reader</code> flag and <code>CLAUDE_AX_SCREEN_READER=1</code> env var</td></tr>
                     <tr class="search-item"><td><code>spellcheck</code></td><td class="desc">Underline misspelled words in the prompt input as you type; requires <code>aspell</code>, <code>hunspell</code>, or <code>ispell</code> to be installed</td></tr>
-                    <tr class="search-item"><td><code class="new">keybindingFlavor</code> <!-- added:v2.1.238 --></td><td class="desc">Set to <code>"readline"</code> to make Ctrl+W delete back to the previous whitespace (Bash-style); default <code>"classic"</code> is unchanged; in <code>"readline"</code> mode, Alt+F and Ctrl/Option+→ stop at end of word, Alt+D deletes to it (Ctrl+Y pastes back), and punctuation separates words</td></tr>
-                    <tr class="search-item"><td><code class="new">outputStyle</code> <!-- added:v2.1.237 --></td><td class="desc">Built-in output style; <code>"concise"</code> makes Claude lead with results and skip preamble and narration while working just as thoroughly; configure via <code>/config</code> → Output style</td></tr>
+                    <tr class="search-item"><td><code>keybindingFlavor</code></td><td class="desc">Set to <code>"readline"</code> to make Ctrl+W delete back to the previous whitespace (Bash-style); default <code>"classic"</code> is unchanged; in <code>"readline"</code> mode, Alt+F and Ctrl/Option+→ stop at end of word, Alt+D deletes to it (Ctrl+Y pastes back), and punctuation separates words</td></tr>
+                    <tr class="search-item"><td><code>outputStyle</code></td><td class="desc">Built-in output style; <code>"concise"</code> makes Claude lead with results and skip preamble and narration while working just as thoroughly; configure via <code>/config</code> → Output style</td></tr>
                     <tr class="search-item"><td><code>vimInsertModeRemaps</code></td><td class="desc">Map two-key insert-mode sequences to keys in vim mode; e.g. map <code>jj</code> to Escape</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.strictAllowlist</code></td><td class="desc">Deny non-allowlisted hosts for sandboxed commands without prompting</td></tr>
@@ -499,7 +499,7 @@
                     <tr class="search-item"><td><code>~/.claude/skills/&lt;name&gt;/</code></td><td class="desc">Global personal skill directory</td></tr>
                     <tr class="search-item"><td><code>plugin: bin/</code></td><td class="desc">Plugin executables in bin/ invocable as bare commands from Bash tool</td></tr>
                     <tr class="search-item"><td><code>command</code> (plugin marketplace source)</td><td class="desc">Specify a plugin directory via a local command's output (e.g. from an IDE); re-resolved each session without restart; <code>mode: "link"</code> uses it in place</td></tr>
-                    <tr class="search-item"><td><code class="new">headersHelper</code> (plugin marketplace / catalog entry) <!-- added:v2.1.238 --></td><td class="desc">Command that mints HTTP headers (e.g. a short-lived token) for catalog and same-origin archive fetches on a <code>url</code> marketplace; for a catalog entry, runs only on <code>claude plugin install/update</code> after displaying the command; prompts <code>[y/N]</code> or pass <code>-y</code></td></tr>
+                    <tr class="search-item"><td><code>headersHelper</code> (plugin marketplace / catalog entry)</td><td class="desc">Command that mints HTTP headers (e.g. a short-lived token) for catalog and same-origin archive fetches on a <code>url</code> marketplace; for a catalog entry, runs only on <code>claude plugin install/update</code> after displaying the command; prompts <code>[y/N]</code> or pass <code>-y</code></td></tr>
                 </table>
             </div>
 
@@ -636,16 +636,9 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.239",
-        "date": "2026-08-21",
-        "changes": [
-            {"tag": "ADD", "text": "<code>claude plugin enable/disable &lt;name&gt;@synced</code> — cloud-synced plugins from claude.ai appear as <code>name@synced</code> and are managed with this syntax; synced plugins never override a locally installed same-named plugin"},
-            {"tag": "ADD", "text": "<code>/claude-api upgrade</code> — migrates Python projects from <code>anthropic</code> 0.x to 1.x (timeouts now use <code>anthropic.Timeout</code>, not <code>httpx.Timeout</code>)"},
-            {"tag": "CHG", "text": "<code>/goal</code> — check-ins back off (30 min → 1 h → 2 h) instead of repeating every 30 min; resuming via <code>claude --resume</code> now restores the active goal"},
-            {"tag": "CHG", "text": "<code>keybindingFlavor: \"readline\"</code> — now also maps word-motion keys: Alt+F / Ctrl+→ stop at end of word, Alt+D deletes to it, punctuation separates words"},
-            {"tag": "CHG", "text": "<code>ListAgents</code> — now reports the session's own name (the identifier peers use to message it) and includes live teammates in its listing"},
-            {"tag": "CHG", "text": "<code>CLAUDE_CODE_RETRY_WATCHDOG</code> — now fails immediately on organization spend-limit and out-of-credits errors instead of waiting indefinitely"}
-        ]
+        "version": "v2.1.241",
+        "date": "2026-08-23",
+        "changes": []
     }
     </script>
 
