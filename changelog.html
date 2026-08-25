@@ -143,8 +143,20 @@
 
             <!-- August 2026 -->
             <details class="month-group" open>
-                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.239</span> <span class="month-count">18 releases</span></summary>
+                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.245</span> <span class="month-count">22 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.243 <span class="version-date">2026-08-25</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>modelPicker</code> JSON setting — curate the <code>/model</code> picker with an ordered, labeled list of models (any id spelling, including Vertex/Bedrock ids); entries are appended to or replace the built-in lineup</li>
+                            <li><span class="tag tag-add">ADD</span><code>modelPricing</code> managed setting — set an organization's contracted per-model rates and discount multiplier for <code>/cost</code>, status line, and telemetry cost figures instead of list price</li>
+                            <li><span class="tag tag-add">ADD</span><code>promptCacheTtl</code> / <code>subagentPromptCacheTtl</code> JSON settings — set a 1-hour prompt cache TTL for the main conversation while subagents stay at 5 minutes; for API-key and cloud-provider users</li>
+                            <li><span class="tag tag-change">CHG</span><code>/usage</code> — new Loops breakdown: per-loop run count, total tokens, tokens per run, and last run</li>
+                            <li><span class="tag tag-change">CHG</span><code>/status</code> — new <code>Skipped sources</code> line listing managed settings sources present but not applied; shows GitHub connection status for Claude Code on the web (Pro/Max)</li>
+                            <li><span class="tag tag-change">CHG</span><code>/mcp</code> — shows a <code>managed</code> marker on claude.ai connectors whose authentication is managed by your organization</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.239 <span class="version-date">2026-08-21</span></h3>

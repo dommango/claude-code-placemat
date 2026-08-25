@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.241</span>
+            <span class="release-tag">As of release: v2.1.245</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -171,7 +171,7 @@
                     <tr class="search-item"><td><code>/branch [name]</code></td><td class="desc">Branch conversation</td></tr>
                     <tr class="search-item"><td><code>/fork</code></td><td class="desc">Copy conversation into a new background session (its own row in <code>claude agents</code>) with its own git worktree, while you keep working in the current session; old in-session subagent behavior moved to <code>/subtask</code></td></tr>
                     <tr class="search-item"><td><code>/subtask</code></td><td class="desc">Launch an in-session subagent for the current task; formerly what <code>/fork</code> did before v2.1.212</td></tr>
-                    <tr class="search-item"><td><code>/usage</code></td><td class="desc">Unified usage view (cost + stats tabs); per-category limits breakdown (skills, subagents, plugins, per-MCP-server cost); <code>/cost</code> and <code>/stats</code> are shortcuts that open the relevant tab</td></tr>
+                    <tr class="search-item"><td><code>/usage</code></td><td class="desc">Unified usage view (cost + stats tabs); per-category limits breakdown (skills, subagents, plugins, per-MCP-server cost); Loops tab shows per-loop run count, total tokens, tokens per run, and last run — easy to spot runaway or chatty <code>/loop</code> tasks; <code>/cost</code> and <code>/stats</code> are shortcuts that open the relevant tab</td></tr>
                     <tr class="search-item"><td><code>/usage-credits</code></td><td class="desc">Request extra usage allowance; asks for confirmation before sending to organization admins; old name <code>/extra-usage</code> still works; accessible from Remote Control clients</td></tr>
                     <tr class="search-item"><td><code>/context</code></td><td class="desc">Visualize context window (grid)</td></tr>
                     <tr class="search-item"><td><code>/diff</code></td><td class="desc">Interactive diff viewer; detail view scrollable with arrows, <code>j</code>/<code>k</code>, <code>PgUp</code>/<code>PgDn</code>, <code>Space</code>, <code>Home</code>/<code>End</code></td></tr>
@@ -216,7 +216,7 @@
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>/init</code></td><td class="desc">Create CLAUDE.md memory</td></tr>
                     <tr class="search-item"><td><code>/memory</code></td><td class="desc">Edit CLAUDE.md files directly</td></tr>
-                    <tr class="search-item"><td><code>/mcp</code></td><td class="desc">Manage MCP servers; shows tool count for each connected server and flags servers with 0 tools; shows HTTP status and error text when a server fails to connect; warns for MCP config values with hidden leading or trailing whitespace</td></tr>
+                    <tr class="search-item"><td><code>/mcp</code></td><td class="desc">Manage MCP servers; shows tool count for each connected server and flags servers with 0 tools; shows HTTP status and error text when a server fails to connect; warns for MCP config values with hidden leading or trailing whitespace; shows a <code>managed</code> marker on claude.ai connectors whose authentication is managed by your organization</td></tr>
                     <tr class="search-item"><td><code>/hooks</code></td><td class="desc">Manage event lifecycle hooks</td></tr>
                     <tr class="search-item"><td><code>/install-github-app</code></td><td class="desc">Install the GitHub App; GitHub Actions workflow and repo secret setup is optional — install just the GitHub App and skip the workflow/secret steps</td></tr>
                     <tr class="search-item"><td><code>/commit-push-pr</code></td><td class="desc">Commit, push, and open a PR in one step; auto-allows <code>git push</code> to the repo's configured push remote (<code>remote.pushDefault</code>, or the sole remote when only one is configured) in addition to <code>origin</code>; git/gh commands with dangerous flags (<code>--force</code>, <code>--amend</code>, <code>--no-verify</code>, etc.) are no longer auto-approved</td></tr>
@@ -244,7 +244,7 @@
                     <tr class="search-item"><td><code>ultracode</code></td><td class="desc">Prompt trigger keyword — type in the prompt to start a dynamic workflow; highlighted in violet in the prompt input</td></tr>
                     <tr class="search-item"><td><code>/voice</code></td><td class="desc">Push-to-talk voice prompting</td></tr>
                     <tr class="search-item"><td><code>/doctor</code></td><td class="desc">Full setup checkup — diagnoses and fixes CC installation/env issues; press f to auto-fix; openable while Claude is responding; shows result of last update attempt; lists npm auto-update fix hints; proposes trimming checked-in <code>CLAUDE.md</code> files by cutting content Claude could derive from the codebase; <code>/checkup</code> is an alias</td></tr>
-                    <tr class="search-item"><td><code>/status</code></td><td class="desc">Show CC environment status and warnings (e.g. "claude command missing or broken"); shows session kind: <code>interactive</code>, or a background job that is <code>attached</code> or <code>unattended</code>; moved from startup output in v2.1.203</td></tr>
+                    <tr class="search-item"><td><code>/status</code></td><td class="desc">Show CC environment status and warnings (e.g. "claude command missing or broken"); shows session kind: <code>interactive</code>, or a background job that is <code>attached</code> or <code>unattended</code>; shows <code>Skipped sources</code> line listing managed settings sources present but not applied; shows GitHub connection status for Claude Code on the web (Pro/Max); moved from startup output in v2.1.203</td></tr>
                     <tr class="search-item"><td><code>/pr-comments [PR]</code></td><td class="desc">Fetch GitHub PR comments</td></tr>
                     <tr class="search-item"><td><code>/security-review</code></td><td class="desc">Security analysis of uncommitted code</td></tr>
                     <tr class="search-item"><td><code>/powerup</code></td><td class="desc">Interactive lessons teaching CC features with animated demos</td></tr>
@@ -340,6 +340,9 @@
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>modelOverrides</code></td><td class="desc">Map model picker to custom IDs</td></tr>
+                    <tr class="search-item"><td><code class="new">modelPicker</code> <!-- added:v2.1.243 --></td><td class="desc">Curate the <code>/model</code> picker with an ordered, labeled list of models (any id spelling, including Vertex/Bedrock ids); entries are appended to or replace the built-in lineup</td></tr>
+                    <tr class="search-item"><td><code class="new">modelPricing</code> <!-- added:v2.1.243 --></td><td class="desc">Managed setting — set an organization's contracted per-model rates and discount multiplier; used for <code>/cost</code>, the status line, and telemetry cost figures instead of list price</td></tr>
+                    <tr class="search-item"><td><code class="new">promptCacheTtl</code> / <code class="new">subagentPromptCacheTtl</code> <!-- added:v2.1.243 --></td><td class="desc">Set a 1-hour prompt cache TTL for the main conversation (<code>promptCacheTtl</code>) while subagents stay at 5 minutes (<code>subagentPromptCacheTtl</code>); for API-key and cloud-provider users</td></tr>
                     <tr class="search-item"><td><code>defaultMode</code></td><td class="desc">Set default permission mode; <code>"manual"</code> (formerly <code>"default"</code>) — both values accepted; paired with <code>--permission-mode</code> CLI flag</td></tr>
                     <tr class="search-item"><td><code>autoMemoryDirectory</code></td><td class="desc">Custom auto-loaded memory dir</td></tr>
                     <tr class="search-item"><td><code>worktree.sparsePaths</code></td><td class="desc">Sparse checkout dirs for agents</td></tr>
@@ -490,7 +493,7 @@
                     <tr class="search-item"><td><code>/verify</code></td><td class="desc">Verify a code change works end-to-end; must be explicitly invoked — Claude no longer auto-runs it</td></tr>
                     <tr class="search-item"><td><code>/simplify</code></td><td class="desc">Cleanup-only review (reuse, simplification, efficiency, altitude) applied to working tree; does not run the full <code>/code-review --fix</code> bug hunt</td></tr>
                     <tr class="search-item"><td><code>/batch</code></td><td class="desc">Large parallel changes (5-30 worktrees)</td></tr>
-                    <tr class="search-item"><td><code>/claude-api</code></td><td class="desc">Load API + SDK reference into context; <code class="new">upgrade</code> <!-- added:v2.1.239 --> subcommand migrates Python projects from <code>anthropic</code> 0.x to 1.x (timeouts now use <code>anthropic.Timeout</code>, not <code>httpx.Timeout</code>)</td></tr>
+                    <tr class="search-item"><td><code>/claude-api</code></td><td class="desc">Load API + SDK reference into context; <code>upgrade</code> subcommand migrates Python projects from <code>anthropic</code> 0.x to 1.x (timeouts now use <code>anthropic.Timeout</code>, not <code>httpx.Timeout</code>)</td></tr>
                     <tr class="search-item"><td><code>/less-permission-prompts</code></td><td class="desc">Scan transcripts for read-only Bash/MCP calls; propose settings.json allowlist</td></tr>
                     <tr class="search-item"><td><code>/ultrareview [PR#]</code></td><td class="desc">Cloud code review via parallel agents; no args for current branch, PR# for specific PR</td></tr>
                     <tr class="search-item"><td><code>/dataviz</code></td><td class="desc">Chart and dashboard design guidance with a runnable color-palette validator</td></tr>
@@ -545,7 +548,7 @@
                 <h3>Plugin CLI Commands</h3>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
-                    <tr class="search-item"><td><code class="new">claude plugin enable/disable &lt;name&gt;</code> <!-- added:v2.1.239 --></td><td class="desc">Enable or disable an installed plugin; cloud-synced plugins (from claude.ai) appear as <code>&lt;name&gt;@synced</code> and are managed with <code>claude plugin enable/disable &lt;name&gt;@synced</code>; synced plugins never override a locally installed same-named plugin</td></tr>
+                    <tr class="search-item"><td><code>claude plugin enable/disable &lt;name&gt;</code></td><td class="desc">Enable or disable an installed plugin; cloud-synced plugins (from claude.ai) appear as <code>&lt;name&gt;@synced</code> and are managed with <code>claude plugin enable/disable &lt;name&gt;@synced</code>; synced plugins never override a locally installed same-named plugin</td></tr>
                     <tr class="search-item"><td><code>claude plugin init &lt;name&gt;</code></td><td class="desc">Scaffold a new plugin in <code>.claude/skills</code></td></tr>
                     <tr class="search-item"><td><code>claude plugin tag</code></td><td class="desc">Create release git tags for plugins with version validation</td></tr>
                     <tr class="search-item"><td><code>claude plugin prune</code></td><td class="desc">Remove orphaned auto-installed plugin dependencies; <code>plugin uninstall --prune</code> cascades</td></tr>
@@ -636,9 +639,16 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.241",
-        "date": "2026-08-23",
-        "changes": []
+        "version": "v2.1.245",
+        "date": "2026-08-25",
+        "changes": [
+            {"tag": "ADD", "text": "<code>modelPicker</code> JSON setting — curate the <code>/model</code> picker with an ordered, labeled list of models"},
+            {"tag": "ADD", "text": "<code>promptCacheTtl</code> / <code>subagentPromptCacheTtl</code> JSON settings — configure prompt cache TTL per conversation and per subagent"},
+            {"tag": "ADD", "text": "<code>modelPricing</code> managed setting — set org contracted per-model rates for <code>/cost</code> and telemetry"},
+            {"tag": "CHG", "text": "<code>/usage</code> — Loops tab shows per-loop run count, total tokens, tokens per run, and last run"},
+            {"tag": "CHG", "text": "<code>/status</code> — new <code>Skipped sources</code> line and GitHub connection status (Pro/Max)"},
+            {"tag": "CHG", "text": "<code>/mcp</code> — shows <code>managed</code> marker on organization-managed claude.ai connectors"}
+        ]
     }
     </script>
 
