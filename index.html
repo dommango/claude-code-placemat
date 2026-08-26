@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.245</span>
+            <span class="release-tag">As of release: v2.1.246</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -179,8 +179,8 @@
                     <tr class="search-item"><td><code>/export</code></td><td class="desc">Export conversation</td></tr>
                     <tr class="search-item"><td><code>/recap</code></td><td class="desc">Summarize away context; auto-triggered on return or invoke manually</td></tr>
                     <tr class="search-item"><td><code>/rewind</code> / <code>/undo</code></td><td class="desc">Rewind conversation to previous state; /undo is alias; supports resuming a conversation from before <code>/clear</code> was run</td></tr>
-                    <tr class="search-item"><td><code>/goal [condition]</code></td><td class="desc">Set a completion condition; Claude keeps working across turns until met; works in interactive, <code>-p</code>, and Remote Control; shows live elapsed/turns/tokens overlay; clears itself on unrecoverable errors (revoked auth, exhausted credits, context overflow); checks in on background tasks waiting 30+ min (set <code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES=0</code> to opt out); check-ins back off (30 min → 1 h → 2 h) instead of repeating every 30 min; resuming via <code>claude --resume</code> restores the active goal</td></tr>
-                    <tr class="search-item"><td><code>/cd</code></td><td class="desc">Move session to a new working directory without breaking the prompt cache mid-session; supports directory path suggestions (matching <code>/add-dir</code>)</td></tr>
+                    <tr class="search-item"><td><code>/goal [condition]</code></td><td class="desc">Set a completion condition; Claude keeps working across turns until met; works in interactive, <code>-p</code>, and Remote Control; shows live elapsed/turns/tokens overlay; clears itself on unrecoverable errors (revoked auth, exhausted credits, context overflow); checks in on background tasks waiting 30+ min (set <code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES=0</code> to opt out); idle sessions start at most three check-ins per goal — your next message allows three more; check-ins back off (30 min → 1 h → 2 h) instead of repeating every 30 min; resuming via <code>claude --resume</code> restores the active goal</td></tr>
+                    <tr class="search-item"><td><code>/cd</code></td><td class="desc">Move session to a new working directory without breaking the prompt cache mid-session; project settings, hooks, <code>.mcp.json</code> servers (behind the usual approval prompt), skills, and agents take effect immediately after the move instead of on <code>--resume</code>; supports directory path suggestions (matching <code>/add-dir</code>)</td></tr>
                 </table>
             </div>
 
@@ -194,7 +194,7 @@
                     <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model; selection saved as default for new sessions; <code>claude-sonnet-5</code> is now the default (native 1M-token context); press <code>s</code> in picker to switch for current session only; warns before switching mid-conversation; startup header shows model pin source; lists models from gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway; org-restricted models show "restricted by your organization's settings"</td></tr>
                     <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/xhigh/auto); no args opens interactive slider (Faster/Smarter labels); xhigh is Opus 4.8 only; confirms when chosen level will persist as the default for new sessions</td></tr>
                     <tr class="search-item"><td><code>/fast [on/off]</code></td><td class="desc">Toggle Fast mode</td></tr>
-                    <tr class="search-item"><td><code>/permissions</code></td><td class="desc">View/update tool permissions; can be opened while Claude is working — rule changes apply to the rest of the current turn</td></tr>
+                    <tr class="search-item"><td><code>/permissions</code></td><td class="desc">View/update tool permissions; can be opened while Claude is working — rule changes apply to the rest of the current turn; Auto mode tab shows and edits auto mode classifier rules</td></tr>
                     <tr class="search-item"><td><code>/color [color]</code></td><td class="desc">Set prompt-bar color; bare <code>/color</code> with no args picks a random session color</td></tr>
                     <tr class="search-item"><td><code>/keybindings</code></td><td class="desc">Customize keyboard shortcuts</td></tr>
                     <tr class="search-item"><td><code>/terminal-setup</code></td><td class="desc">Configure terminal integration; configures scroll sensitivity and disables GPU acceleration in VS Code, Cursor, and Devin Desktop to prevent garbled-text rendering; enables iTerm2 clipboard access for <code>/copy</code></td></tr>
@@ -489,7 +489,7 @@
                 <h3>Built-in Skills & Locations</h3>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
-                    <tr class="search-item"><td><code>/code-review [level] [pr#]</code></td><td class="desc">Code review; <code>/review</code> is an alias; must be explicitly invoked — Claude no longer auto-runs it; runs as a background subagent — review work no longer fills your conversation; pass a PR number to review a specific PR; use <code>/code-review ultra</code> for a deep cloud review; effort level persists — no arg reuses the last level typed; pass <code>--fix</code> to apply findings to working tree; pass <code>--comment</code> to post findings as inline PR comments</td></tr>
+                    <tr class="search-item"><td><code>/code-review [level] [pr#]</code></td><td class="desc">Code review; <code>/review</code> is an alias; must be explicitly invoked — Claude no longer auto-runs it; runs as a background subagent — review work no longer fills your conversation; pass a PR number to review a specific PR; use <code>/code-review ultra</code> for a deep cloud review; effort level persists — no arg reuses the last level typed; pass <code>--fix</code> to apply findings to working tree; pass <code>--comment</code> to post findings as inline PR comments; Claude can also start it on its own on Bedrock, Vertex AI, Foundry, through the Claude apps gateway, and when telemetry or non-essential traffic is disabled</td></tr>
                     <tr class="search-item"><td><code>/verify</code></td><td class="desc">Verify a code change works end-to-end; must be explicitly invoked — Claude no longer auto-runs it</td></tr>
                     <tr class="search-item"><td><code>/simplify</code></td><td class="desc">Cleanup-only review (reuse, simplification, efficiency, altitude) applied to working tree; does not run the full <code>/code-review --fix</code> bug hunt</td></tr>
                     <tr class="search-item"><td><code>/batch</code></td><td class="desc">Large parallel changes (5-30 worktrees)</td></tr>
@@ -639,15 +639,13 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.245",
+        "version": "v2.1.246",
         "date": "2026-08-25",
         "changes": [
-            {"tag": "ADD", "text": "<code>modelPicker</code> JSON setting — curate the <code>/model</code> picker with an ordered, labeled list of models"},
-            {"tag": "ADD", "text": "<code>promptCacheTtl</code> / <code>subagentPromptCacheTtl</code> JSON settings — configure prompt cache TTL per conversation and per subagent"},
-            {"tag": "ADD", "text": "<code>modelPricing</code> managed setting — set org contracted per-model rates for <code>/cost</code> and telemetry"},
-            {"tag": "CHG", "text": "<code>/usage</code> — Loops tab shows per-loop run count, total tokens, tokens per run, and last run"},
-            {"tag": "CHG", "text": "<code>/status</code> — new <code>Skipped sources</code> line and GitHub connection status (Pro/Max)"},
-            {"tag": "CHG", "text": "<code>/mcp</code> — shows <code>managed</code> marker on organization-managed claude.ai connectors"}
+            {"tag": "CHG", "text": "<code>/permissions</code> — new Auto mode tab for viewing and editing auto mode classifier rules"},
+            {"tag": "CHG", "text": "<code>/cd</code> — project settings, hooks, <code>.mcp.json</code> servers, skills, and agents now take effect immediately after the move instead of on <code>--resume</code>"},
+            {"tag": "CHG", "text": "<code>/code-review</code> — Claude can now start it on its own on Bedrock, Vertex AI, Foundry, through the Claude apps gateway, and when telemetry is disabled"},
+            {"tag": "CHG", "text": "<code>/goal</code> — idle sessions start at most three check-ins per goal; your next message allows three more"}
         ]
     }
     </script>
