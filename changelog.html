@@ -143,8 +143,19 @@
 
             <!-- August 2026 -->
             <details class="month-group" open>
-                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.246</span> <span class="month-count">23 releases</span></summary>
+                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.247</span> <span class="month-count">24 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.247 <span class="version-date">2026-08-26</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>/feedback</code> slash command — Claude drafts a session feedback report for your review before sending; disable with <code>feedbackDrafts: false</code></li>
+                            <li><span class="tag tag-add">ADD</span><code>feedbackDrafts</code> JSON setting — set to <code>false</code> to disable auto-drafted feedback reports in <code>/feedback</code></li>
+                            <li><span class="tag tag-add">ADD</span><code>spinnerTipsOverride</code> JSON setting — customize spinner tips; entries support <code>{id, text, cooldownSessions, priority}</code> fields, <code>tipsFile</code> for a file source, and <code>label</code> for naming the tip set; org tips rotate alongside built-in ones</li>
+                            <li><span class="tag tag-change">CHG</span><code>/claude-api</code> — new <code>cost-optimize</code> subcommand profiles API spend and works through cost levers (caching, token hygiene, batch, effort, model choice); now includes Admin API coverage (organization members, invites, workspaces, API keys, rate limit reports)</li>
+                            <li><span class="tag tag-change">CHG</span><code>Ctrl O</code> — also expands collapsed cross-session peer message previews</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.246 <span class="version-date">2026-08-25</span></h3>

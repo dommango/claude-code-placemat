@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.246</span>
+            <span class="release-tag">As of release: v2.1.247</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -93,7 +93,7 @@
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>Ctrl C</code> / <code>D</code></td><td class="desc">Cancel input / Exit session</td></tr>
                     <tr class="search-item"><td><code>Ctrl L</code></td><td class="desc">Clear screen + full redraw; in fullscreen mode, always just repaints — the double-press <code>/clear</code> shortcut was removed</td></tr>
-                    <tr class="search-item"><td><code>Ctrl O</code></td><td class="desc">Toggle between normal and verbose transcript; in a collapsed thinking group, shows the full thinking; focus view toggled with /focus</td></tr>
+                    <tr class="search-item"><td><code>Ctrl O</code></td><td class="desc">Toggle between normal and verbose transcript; in a collapsed thinking group, shows the full thinking; expands collapsed cross-session peer message previews; focus view toggled with /focus</td></tr>
                     <tr class="search-item"><td><code>Ctrl R</code></td><td class="desc">History picker — searches all projects by default; press <code>Ctrl S</code> to narrow to current project or session</td></tr>
                     <tr class="search-item"><td><code>Ctrl G</code></td><td class="desc">Open prompt in external editor</td></tr>
                     <tr class="search-item"><td><code>Ctrl B</code></td><td class="desc">Background running task</td></tr>
@@ -253,6 +253,7 @@
                     <tr class="search-item"><td><code>/remote-control</code></td><td class="desc">Bridge session to claude.ai/code</td></tr>
                     <tr class="search-item"><td><code>/team-onboarding</code></td><td class="desc">Generate teammate ramp-up guide from local CC usage</td></tr>
                     <tr class="search-item"><td><code>/advisor</code></td><td class="desc">AI advisor mode; Fable 5 available for organizations with Fable access — enable via <code>/model fable</code></td></tr>
+                    <tr class="search-item"><td><code class="new">/feedback</code> <!-- added:v2.1.247 --></td><td class="desc">Submit session feedback; Claude drafts a report for your review before sending; turn off with the <code>feedbackDrafts</code> setting</td></tr>
                 </table>
             </div>
         </div>
@@ -340,9 +341,9 @@
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>modelOverrides</code></td><td class="desc">Map model picker to custom IDs</td></tr>
-                    <tr class="search-item"><td><code class="new">modelPicker</code> <!-- added:v2.1.243 --></td><td class="desc">Curate the <code>/model</code> picker with an ordered, labeled list of models (any id spelling, including Vertex/Bedrock ids); entries are appended to or replace the built-in lineup</td></tr>
-                    <tr class="search-item"><td><code class="new">modelPricing</code> <!-- added:v2.1.243 --></td><td class="desc">Managed setting — set an organization's contracted per-model rates and discount multiplier; used for <code>/cost</code>, the status line, and telemetry cost figures instead of list price</td></tr>
-                    <tr class="search-item"><td><code class="new">promptCacheTtl</code> / <code class="new">subagentPromptCacheTtl</code> <!-- added:v2.1.243 --></td><td class="desc">Set a 1-hour prompt cache TTL for the main conversation (<code>promptCacheTtl</code>) while subagents stay at 5 minutes (<code>subagentPromptCacheTtl</code>); for API-key and cloud-provider users</td></tr>
+                    <tr class="search-item"><td><code>modelPicker</code></td><td class="desc">Curate the <code>/model</code> picker with an ordered, labeled list of models (any id spelling, including Vertex/Bedrock ids); entries are appended to or replace the built-in lineup</td></tr>
+                    <tr class="search-item"><td><code>modelPricing</code></td><td class="desc">Managed setting — set an organization's contracted per-model rates and discount multiplier; used for <code>/cost</code>, the status line, and telemetry cost figures instead of list price</td></tr>
+                    <tr class="search-item"><td><code>promptCacheTtl</code> / <code>subagentPromptCacheTtl</code></td><td class="desc">Set a 1-hour prompt cache TTL for the main conversation (<code>promptCacheTtl</code>) while subagents stay at 5 minutes (<code>subagentPromptCacheTtl</code>); for API-key and cloud-provider users</td></tr>
                     <tr class="search-item"><td><code>defaultMode</code></td><td class="desc">Set default permission mode; <code>"manual"</code> (formerly <code>"default"</code>) — both values accepted; paired with <code>--permission-mode</code> CLI flag</td></tr>
                     <tr class="search-item"><td><code>autoMemoryDirectory</code></td><td class="desc">Custom auto-loaded memory dir</td></tr>
                     <tr class="search-item"><td><code>worktree.sparsePaths</code></td><td class="desc">Sparse checkout dirs for agents</td></tr>
@@ -399,6 +400,8 @@
                     <tr class="search-item"><td><code>dynamicWorkflowSize</code></td><td class="desc">Controls how large Claude makes dynamic workflows (small/medium/large agent counts) — advisory guideline, not a hard cap; configured via <code>/config</code></td></tr>
                     <tr class="search-item"><td><code>workflowSizeGuideline</code></td><td class="desc">Set the advisory Dynamic workflow size guideline from any settings file; the <code>/config</code> row is hidden while one is set</td></tr>
                     <tr class="search-item"><td><code>emojiCompletionEnabled</code></td><td class="desc">Set to <code>false</code> to disable emoji shortcode autocomplete in the prompt input (e.g. <code>:heart:</code> → ❤️)</td></tr>
+                    <tr class="search-item"><td><code class="new">feedbackDrafts</code> <!-- added:v2.1.247 --></td><td class="desc">Set to <code>false</code> to disable Claude's auto-drafted feedback reports in <code>/feedback</code></td></tr>
+                    <tr class="search-item"><td><code class="new">spinnerTipsOverride</code> <!-- added:v2.1.247 --></td><td class="desc">Customize spinner tips; entries support <code>{id, text, cooldownSessions, priority}</code> fields; <code>tipsFile</code> loads tips from a file; <code>label</code> names the tip set; org tips rotate alongside built-in ones</td></tr>
                     <tr class="search-item"><td><code>crossSessionInbound</code></td><td class="desc">Cross-session messages sent to a session running with bypassed permissions are held for your approval before delivery</td></tr>
                     <tr class="search-item"><td><code>dialogExpiry</code></td><td class="desc">Timeout for inbound cross-session message approval dialogs; messages to sessions without bypassed permissions auto-deliver</td></tr>
                 </table>
@@ -493,7 +496,7 @@
                     <tr class="search-item"><td><code>/verify</code></td><td class="desc">Verify a code change works end-to-end; must be explicitly invoked — Claude no longer auto-runs it</td></tr>
                     <tr class="search-item"><td><code>/simplify</code></td><td class="desc">Cleanup-only review (reuse, simplification, efficiency, altitude) applied to working tree; does not run the full <code>/code-review --fix</code> bug hunt</td></tr>
                     <tr class="search-item"><td><code>/batch</code></td><td class="desc">Large parallel changes (5-30 worktrees)</td></tr>
-                    <tr class="search-item"><td><code>/claude-api</code></td><td class="desc">Load API + SDK reference into context; <code>upgrade</code> subcommand migrates Python projects from <code>anthropic</code> 0.x to 1.x (timeouts now use <code>anthropic.Timeout</code>, not <code>httpx.Timeout</code>)</td></tr>
+                    <tr class="search-item"><td><code>/claude-api</code></td><td class="desc">Load API + SDK reference into context; <code>upgrade</code> subcommand migrates Python projects from <code>anthropic</code> 0.x to 1.x (timeouts now use <code>anthropic.Timeout</code>, not <code>httpx.Timeout</code>); <code>cost-optimize</code> profiles an existing project's Claude API spend and works through cost levers (caching, token hygiene, batch, effort, model choice) one measured change at a time; includes Admin API coverage (organization members, invites, workspaces, API keys, rate limit reports)</td></tr>
                     <tr class="search-item"><td><code>/less-permission-prompts</code></td><td class="desc">Scan transcripts for read-only Bash/MCP calls; propose settings.json allowlist</td></tr>
                     <tr class="search-item"><td><code>/ultrareview [PR#]</code></td><td class="desc">Cloud code review via parallel agents; no args for current branch, PR# for specific PR</td></tr>
                     <tr class="search-item"><td><code>/dataviz</code></td><td class="desc">Chart and dashboard design guidance with a runnable color-palette validator</td></tr>
@@ -639,13 +642,14 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.246",
-        "date": "2026-08-25",
+        "version": "v2.1.247",
+        "date": "2026-08-26",
         "changes": [
-            {"tag": "CHG", "text": "<code>/permissions</code> — new Auto mode tab for viewing and editing auto mode classifier rules"},
-            {"tag": "CHG", "text": "<code>/cd</code> — project settings, hooks, <code>.mcp.json</code> servers, skills, and agents now take effect immediately after the move instead of on <code>--resume</code>"},
-            {"tag": "CHG", "text": "<code>/code-review</code> — Claude can now start it on its own on Bedrock, Vertex AI, Foundry, through the Claude apps gateway, and when telemetry is disabled"},
-            {"tag": "CHG", "text": "<code>/goal</code> — idle sessions start at most three check-ins per goal; your next message allows three more"}
+            {"tag": "ADD", "text": "<code>/feedback</code> — Claude drafts a session feedback report for your review before sending; disable with <code>feedbackDrafts: false</code>"},
+            {"tag": "ADD", "text": "<code>feedbackDrafts</code> setting — set to <code>false</code> to disable auto-drafted feedback reports in <code>/feedback</code>"},
+            {"tag": "ADD", "text": "<code>spinnerTipsOverride</code> setting — customize spinner tips with per-entry <code>id</code>, <code>cooldownSessions</code>, <code>priority</code>, <code>tipsFile</code>, and <code>label</code>"},
+            {"tag": "CHG", "text": "<code>/claude-api</code> — added <code>cost-optimize</code> subcommand and Admin API coverage"},
+            {"tag": "CHG", "text": "<code>Ctrl O</code> — also expands collapsed cross-session peer message previews"}
         ]
     }
     </script>
