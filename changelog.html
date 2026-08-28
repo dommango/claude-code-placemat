@@ -143,8 +143,28 @@
 
             <!-- August 2026 -->
             <details class="month-group" open>
-                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.246</span> <span class="month-count">23 releases</span></summary>
+                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.250</span> <span class="month-count">27 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.248 <span class="version-date">2026-08-27</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>--restricted</code> CLI flag / <code>CLAUDE_CODE_RESTRICTED=1</code> env var — removes built-in tools that run commands or code and <code>WebFetch</code> (unless named in <code>--tools</code>); keeps file tools inside the working directory; refuses <code>bypassPermissions</code>; ignores user, project and local settings files</li>
+                            <li><span class="tag tag-add">ADD</span><code>experimental.cacheTtl</code> (agent frontmatter) — per-agent prompt cache TTL (<code>"5m"</code> or <code>"1h"</code>); used when no subagent TTL setting is configured in the session</li>
+                            <li><span class="tag tag-add">ADD</span><code>claude self-hosted-runner --client-label &lt;label&gt;</code> / <code>SELF_HOSTED_RUNNER_CLIENT_LABEL</code> — override the label the runner registers with (default: hostname)</li>
+                            <li><span class="tag tag-change">CHG</span><code>SendMessage</code> / <code>ListAgents</code> — cross-session messaging between sessions on the same machine now available on Bedrock, Vertex, Foundry, and when telemetry is disabled</li>
+                            <li><span class="tag tag-change">CHG</span><code>/status</code> — shows a line explaining a managed-settings load failure or why settings weren't fetched (e.g. Bedrock/Vertex/third-party provider, custom <code>ANTHROPIC_BASE_URL</code>)</li>
+                        </ul>
+                    </div>
+
+                    <div class="change-section">
+                        <h3>CC v2.1.247 <span class="version-date">2026-08-26</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>feedbackDrafts</code> JSON setting — set to <code>false</code> to prevent Claude from auto-drafting a feedback report when something goes wrong; draft appears in <code>/feedback</code></li>
+                            <li><span class="tag tag-change">CHG</span><code>/claude-api</code> — added <code>cost-optimize</code> subcommand (profiles Claude API spend and works through cost levers); updated with Admin API coverage (organization members, invites, workspaces, API keys, rate limit reports, workload identity federation, CMEK)</li>
+                            <li><span class="tag tag-change">CHG</span><code>/loop</code> — self-paced dynamic mode and no-prompt autonomous default now always available, including on Bedrock, Vertex, and Foundry</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.246 <span class="version-date">2026-08-25</span></h3>
