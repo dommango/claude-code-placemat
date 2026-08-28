@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.246</span>
+            <span class="release-tag">As of release: v2.1.250</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -172,7 +172,7 @@
                     <tr class="search-item"><td><code>/fork</code></td><td class="desc">Copy conversation into a new background session (its own row in <code>claude agents</code>) with its own git worktree, while you keep working in the current session; old in-session subagent behavior moved to <code>/subtask</code></td></tr>
                     <tr class="search-item"><td><code>/subtask</code></td><td class="desc">Launch an in-session subagent for the current task; formerly what <code>/fork</code> did before v2.1.212</td></tr>
                     <tr class="search-item"><td><code>/usage</code></td><td class="desc">Unified usage view (cost + stats tabs); per-category limits breakdown (skills, subagents, plugins, per-MCP-server cost); Loops tab shows per-loop run count, total tokens, tokens per run, and last run — easy to spot runaway or chatty <code>/loop</code> tasks; <code>/cost</code> and <code>/stats</code> are shortcuts that open the relevant tab</td></tr>
-                    <tr class="search-item"><td><code>/usage-credits</code></td><td class="desc">Request extra usage allowance; asks for confirmation before sending to organization admins; old name <code>/extra-usage</code> still works; accessible from Remote Control clients</td></tr>
+                    <tr class="search-item"><td><code>/usage-credits</code></td><td class="desc">Request extra usage allowance; available for Enterprise organizations billed through AWS Marketplace, self-serve Enterprise, and Enterprise trials; asks for confirmation before sending to organization admins; old name <code>/extra-usage</code> still works; accessible from Remote Control clients</td></tr>
                     <tr class="search-item"><td><code>/context</code></td><td class="desc">Visualize context window (grid)</td></tr>
                     <tr class="search-item"><td><code>/diff</code></td><td class="desc">Interactive diff viewer; detail view scrollable with arrows, <code>j</code>/<code>k</code>, <code>PgUp</code>/<code>PgDn</code>, <code>Space</code>, <code>Home</code>/<code>End</code></td></tr>
                     <tr class="search-item"><td><code>/copy</code></td><td class="desc">Copy last response</td></tr>
@@ -236,7 +236,7 @@
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>/btw &lt;query&gt;</code></td><td class="desc">Side question (does not alter context); press <code>c</code> to copy raw markdown answer to clipboard; ←/→ to step through earlier answers</td></tr>
                     <tr class="search-item"><td><code>/plan [desc]</code></td><td class="desc">Switch to Plan Mode directly</td></tr>
-                    <tr class="search-item"><td><code>/loop [interval]</code></td><td class="desc">Schedule recurring background task</td></tr>
+                    <tr class="search-item"><td><code>/loop [interval]</code></td><td class="desc">Schedule recurring background task; self-paced dynamic mode and no-prompt autonomous default are now always available, including on Bedrock, Vertex, and Foundry</td></tr>
                     <tr class="search-item"><td><code>/proactive</code></td><td class="desc">Alias for /loop — schedule recurring background task</td></tr>
                     <tr class="search-item"><td><code>/schedule</code></td><td class="desc">Cloud scheduled tasks</td></tr>
                     <tr class="search-item"><td><code>/deep-research</code></td><td class="desc">Structured deep-research session; must be explicitly invoked — Claude no longer auto-starts it</td></tr>
@@ -244,7 +244,7 @@
                     <tr class="search-item"><td><code>ultracode</code></td><td class="desc">Prompt trigger keyword — type in the prompt to start a dynamic workflow; highlighted in violet in the prompt input</td></tr>
                     <tr class="search-item"><td><code>/voice</code></td><td class="desc">Push-to-talk voice prompting</td></tr>
                     <tr class="search-item"><td><code>/doctor</code></td><td class="desc">Full setup checkup — diagnoses and fixes CC installation/env issues; press f to auto-fix; openable while Claude is responding; shows result of last update attempt; lists npm auto-update fix hints; proposes trimming checked-in <code>CLAUDE.md</code> files by cutting content Claude could derive from the codebase; <code>/checkup</code> is an alias</td></tr>
-                    <tr class="search-item"><td><code>/status</code></td><td class="desc">Show CC environment status and warnings (e.g. "claude command missing or broken"); shows session kind: <code>interactive</code>, or a background job that is <code>attached</code> or <code>unattended</code>; shows <code>Skipped sources</code> line listing managed settings sources present but not applied; shows GitHub connection status for Claude Code on the web (Pro/Max); moved from startup output in v2.1.203</td></tr>
+                    <tr class="search-item"><td><code>/status</code></td><td class="desc">Show CC environment status and warnings (e.g. "claude command missing or broken"); shows session kind: <code>interactive</code>, or a background job that is <code>attached</code> or <code>unattended</code>; shows <code>Skipped sources</code> line listing managed settings sources present but not applied; shows GitHub connection status for Claude Code on the web (Pro/Max); shows a line explaining a managed-settings load failure or why they weren't fetched (e.g. Bedrock/Vertex/third-party provider, custom <code>ANTHROPIC_BASE_URL</code>); moved from startup output in v2.1.203</td></tr>
                     <tr class="search-item"><td><code>/pr-comments [PR]</code></td><td class="desc">Fetch GitHub PR comments</td></tr>
                     <tr class="search-item"><td><code>/security-review</code></td><td class="desc">Security analysis of uncommitted code</td></tr>
                     <tr class="search-item"><td><code>/powerup</code></td><td class="desc">Interactive lessons teaching CC features with animated demos</td></tr>
@@ -279,6 +279,7 @@
                     <tr class="search-item"><td><code>claude self-hosted-runner --defer-shutdown-max-min &lt;minutes&gt;</code></td><td class="desc">On SIGTERM, keep serving attached sessions for up to the given number of minutes before parking remaining sessions and exiting</td></tr>
                     <tr class="search-item"><td><code>claude self-hosted-runner --proxy-authorization-command</code> / <code>--proxy-authorization-file</code></td><td class="desc">Supply a freshly issued <code>Proxy-Authorization</code> header on every connection for egress proxies that require per-request credentials</td></tr>
                     <tr class="search-item"><td><code>claude remote-control --continue</code></td><td class="desc">Resume the most recent Remote Control session</td></tr>
+                    <tr class="search-item"><td><code class="new">claude self-hosted-runner --client-label &lt;label&gt;</code> <!-- added:v2.1.248 --></td><td class="desc">Override the label the runner registers with (default: hostname); paired with <code>SELF_HOSTED_RUNNER_CLIENT_LABEL</code> env var</td></tr>
                 </table>
             </div>
 
@@ -286,6 +287,7 @@
                 <h3>Headless & CI Flags</h3>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item"><td><code class="new">--restricted</code> <!-- added:v2.1.248 --></td><td class="desc">Remove built-in tools that run commands or code and <code>WebFetch</code> (unless named in <code>--tools</code>); keep file tools inside the working directory; refuse <code>bypassPermissions</code>; ignore user, project and local settings files; paired with <code>CLAUDE_CODE_RESTRICTED=1</code> env var</td></tr>
                     <tr class="search-item"><td><code>--bare</code></td><td class="desc">Minimal headless (no hooks/LSP)</td></tr>
                     <tr class="search-item"><td><code>--channels</code></td><td class="desc">Permission relay / MCP push msg; now works with console (API key) auth — console orgs with managed settings must set <code>channelsEnabled: true</code></td></tr>
                     <tr class="search-item"><td><code>--output-format json</code></td><td class="desc">Structured JSON output</td></tr>
@@ -340,9 +342,9 @@
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>modelOverrides</code></td><td class="desc">Map model picker to custom IDs</td></tr>
-                    <tr class="search-item"><td><code class="new">modelPicker</code> <!-- added:v2.1.243 --></td><td class="desc">Curate the <code>/model</code> picker with an ordered, labeled list of models (any id spelling, including Vertex/Bedrock ids); entries are appended to or replace the built-in lineup</td></tr>
-                    <tr class="search-item"><td><code class="new">modelPricing</code> <!-- added:v2.1.243 --></td><td class="desc">Managed setting — set an organization's contracted per-model rates and discount multiplier; used for <code>/cost</code>, the status line, and telemetry cost figures instead of list price</td></tr>
-                    <tr class="search-item"><td><code class="new">promptCacheTtl</code> / <code class="new">subagentPromptCacheTtl</code> <!-- added:v2.1.243 --></td><td class="desc">Set a 1-hour prompt cache TTL for the main conversation (<code>promptCacheTtl</code>) while subagents stay at 5 minutes (<code>subagentPromptCacheTtl</code>); for API-key and cloud-provider users</td></tr>
+                    <tr class="search-item"><td><code>modelPicker</code></td><td class="desc">Curate the <code>/model</code> picker with an ordered, labeled list of models (any id spelling, including Vertex/Bedrock ids); entries are appended to or replace the built-in lineup</td></tr>
+                    <tr class="search-item"><td><code>modelPricing</code></td><td class="desc">Managed setting — set an organization's contracted per-model rates and discount multiplier; used for <code>/cost</code>, the status line, and telemetry cost figures instead of list price</td></tr>
+                    <tr class="search-item"><td><code>promptCacheTtl</code> / <code>subagentPromptCacheTtl</code></td><td class="desc">Set a 1-hour prompt cache TTL for the main conversation (<code>promptCacheTtl</code>) while subagents stay at 5 minutes (<code>subagentPromptCacheTtl</code>); for API-key and cloud-provider users</td></tr>
                     <tr class="search-item"><td><code>defaultMode</code></td><td class="desc">Set default permission mode; <code>"manual"</code> (formerly <code>"default"</code>) — both values accepted; paired with <code>--permission-mode</code> CLI flag</td></tr>
                     <tr class="search-item"><td><code>autoMemoryDirectory</code></td><td class="desc">Custom auto-loaded memory dir</td></tr>
                     <tr class="search-item"><td><code>worktree.sparsePaths</code></td><td class="desc">Sparse checkout dirs for agents</td></tr>
@@ -401,6 +403,7 @@
                     <tr class="search-item"><td><code>emojiCompletionEnabled</code></td><td class="desc">Set to <code>false</code> to disable emoji shortcode autocomplete in the prompt input (e.g. <code>:heart:</code> → ❤️)</td></tr>
                     <tr class="search-item"><td><code>crossSessionInbound</code></td><td class="desc">Cross-session messages sent to a session running with bypassed permissions are held for your approval before delivery</td></tr>
                     <tr class="search-item"><td><code>dialogExpiry</code></td><td class="desc">Timeout for inbound cross-session message approval dialogs; messages to sessions without bypassed permissions auto-deliver</td></tr>
+                    <tr class="search-item"><td><code class="new">feedbackDrafts</code> <!-- added:v2.1.247 --></td><td class="desc">Set to <code>false</code> to prevent Claude from auto-drafting a feedback report when something goes wrong; when enabled (default), Claude drafts a report for you to review and send via <code>/feedback</code></td></tr>
                 </table>
             </div>
 
@@ -478,6 +481,8 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_PROJECT_DIR_NAME</code></td><td class="desc">Custom short name for the per-project transcript directory; for hosts that give each session its own config directory</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES</code></td><td class="desc">Set to <code>0</code> to disable automatic check-ins when a <code>/goal</code> is waiting on background tasks for 30+ min</td></tr>
                     <tr class="search-item"><td><code>ANTHROPIC_DEFAULT_MODEL</code></td><td class="desc">Sets the model new sessions start on; a <code>/model</code> pick still overrides it and persists across restarts — unlike <code>ANTHROPIC_MODEL</code></td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_RESTRICTED=1</code> <!-- added:v2.1.248 --></td><td class="desc">Removes built-in tools that run commands or code and <code>WebFetch</code> (unless named in <code>--tools</code>), keeps file tools inside the working directory, refuses <code>bypassPermissions</code>, and ignores user, project and local settings files; paired with <code>--restricted</code> CLI flag</td></tr>
+                    <tr class="search-item"><td><code class="new">SELF_HOSTED_RUNNER_CLIENT_LABEL</code> <!-- added:v2.1.248 --></td><td class="desc">Override the label the self-hosted runner registers with (default: hostname); paired with <code>claude self-hosted-runner --client-label &lt;label&gt;</code> CLI flag</td></tr>
                 </table>
             </div>
         </div>
@@ -493,7 +498,7 @@
                     <tr class="search-item"><td><code>/verify</code></td><td class="desc">Verify a code change works end-to-end; must be explicitly invoked — Claude no longer auto-runs it</td></tr>
                     <tr class="search-item"><td><code>/simplify</code></td><td class="desc">Cleanup-only review (reuse, simplification, efficiency, altitude) applied to working tree; does not run the full <code>/code-review --fix</code> bug hunt</td></tr>
                     <tr class="search-item"><td><code>/batch</code></td><td class="desc">Large parallel changes (5-30 worktrees)</td></tr>
-                    <tr class="search-item"><td><code>/claude-api</code></td><td class="desc">Load API + SDK reference into context; <code>upgrade</code> subcommand migrates Python projects from <code>anthropic</code> 0.x to 1.x (timeouts now use <code>anthropic.Timeout</code>, not <code>httpx.Timeout</code>)</td></tr>
+                    <tr class="search-item"><td><code>/claude-api</code></td><td class="desc">Load API + SDK reference into context; <code>upgrade</code> subcommand migrates Python projects from <code>anthropic</code> 0.x to 1.x (timeouts now use <code>anthropic.Timeout</code>, not <code>httpx.Timeout</code>); <code>cost-optimize</code> subcommand profiles an existing project's Claude API spend and works through cost levers (caching, token hygiene, batch, effort, model choice); includes Admin API coverage (organization members, invites, workspaces, API keys, rate limit reports, workload identity federation, CMEK)</td></tr>
                     <tr class="search-item"><td><code>/less-permission-prompts</code></td><td class="desc">Scan transcripts for read-only Bash/MCP calls; propose settings.json allowlist</td></tr>
                     <tr class="search-item"><td><code>/ultrareview [PR#]</code></td><td class="desc">Cloud code review via parallel agents; no args for current branch, PR# for specific PR</td></tr>
                     <tr class="search-item"><td><code>/dataviz</code></td><td class="desc">Chart and dashboard design guidance with a runnable color-palette validator</td></tr>
@@ -533,12 +538,13 @@
                 <h3>Agent YAML Frontmatter</h3>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item"><td><code class="new">experimental.cacheTtl</code> <!-- added:v2.1.248 --></td><td class="desc">Per-agent prompt cache TTL; set to <code>"5m"</code> or <code>"1h"</code>; used when no subagent TTL setting is configured in the session</td></tr>
                     <tr class="search-item"><td><code>permissionMode</code></td><td class="desc">manual / acceptEdits / plan / bypass; <code>manual</code> replaces <code>default</code> — both accepted</td></tr>
                     <tr class="search-item"><td><code>isolation: worktree</code></td><td class="desc">Run agent in isolated git worktree</td></tr>
                     <tr class="search-item"><td><code>memory: user|project</code></td><td class="desc">Persistent memory storage scope</td></tr>
                     <tr class="search-item"><td><code>background: true</code></td><td class="desc">Run entirely as background task</td></tr>
                     <tr class="search-item"><td><code>initialPrompt</code></td><td class="desc">Auto-submit first turn on spawn</td></tr>
-                    <tr class="search-item"><td><code>SendMessage</code></td><td class="desc">Auto-resumes stopped agents; supports cross-session messaging — CC sessions can message each other across machines using <code>ListAgents</code> to discover them; can initiate a conversation with a Remote Control session on another machine by name (macOS and Linux); <code>notify_when_idle</code> — ask another session to send one notice when it next goes idle, opt-in, one-shot, no polling (macOS and Linux); <code>ListAgents</code> now reports a session's own name (the identifier peers use to message it) and lists live teammates alongside subagents and other sessions</td></tr>
+                    <tr class="search-item"><td><code>SendMessage</code></td><td class="desc">Auto-resumes stopped agents; supports cross-session messaging — CC sessions can message each other across machines using <code>ListAgents</code> to discover them; cross-session messaging between sessions on the same machine now also available on Bedrock, Vertex, and Foundry, and when telemetry is disabled; can initiate a conversation with a Remote Control session on another machine by name (macOS and Linux); <code>notify_when_idle</code> — ask another session to send one notice when it next goes idle, opt-in, one-shot, no polling (macOS and Linux); <code>ListAgents</code> now reports a session's own name (the identifier peers use to message it) and lists live teammates alongside subagents and other sessions</td></tr>
                     <tr class="search-item"><td><code>hooks:</code></td><td class="desc">Agent lifecycle hooks; fire when running as main-thread agent via <code>--agent</code></td></tr>
                     <tr class="search-item"><td><code>mcpServers</code></td><td class="desc">MCP servers for the agent; now loaded for main-thread agent sessions via <code>--agent</code></td></tr>
                 </table>
@@ -639,13 +645,17 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.246",
-        "date": "2026-08-25",
+        "version": "v2.1.250",
+        "date": "2026-08-28",
         "changes": [
-            {"tag": "CHG", "text": "<code>/permissions</code> — new Auto mode tab for viewing and editing auto mode classifier rules"},
-            {"tag": "CHG", "text": "<code>/cd</code> — project settings, hooks, <code>.mcp.json</code> servers, skills, and agents now take effect immediately after the move instead of on <code>--resume</code>"},
-            {"tag": "CHG", "text": "<code>/code-review</code> — Claude can now start it on its own on Bedrock, Vertex AI, Foundry, through the Claude apps gateway, and when telemetry is disabled"},
-            {"tag": "CHG", "text": "<code>/goal</code> — idle sessions start at most three check-ins per goal; your next message allows three more"}
+            {"tag": "ADD", "text": "<code>--restricted</code> / <code>CLAUDE_CODE_RESTRICTED=1</code> — removes tools that run commands or code and <code>WebFetch</code>; keeps file tools inside the working directory; refuses <code>bypassPermissions</code>; ignores user, project and local settings files"},
+            {"tag": "ADD", "text": "<code>experimental.cacheTtl</code> (agent frontmatter) — per-agent prompt cache TTL (<code>\"5m\"</code> or <code>\"1h\"</code>)"},
+            {"tag": "ADD", "text": "<code>claude self-hosted-runner --client-label &lt;label&gt;</code> / <code>SELF_HOSTED_RUNNER_CLIENT_LABEL</code> — override the runner's registered label (default: hostname)"},
+            {"tag": "ADD", "text": "<code>feedbackDrafts</code> JSON setting — set to <code>false</code> to prevent Claude from auto-drafting feedback reports"},
+            {"tag": "CHG", "text": "<code>SendMessage</code> — cross-session messaging on the same machine now works on Bedrock, Vertex, Foundry, and when telemetry is disabled"},
+            {"tag": "CHG", "text": "<code>/loop</code> — self-paced dynamic mode and no-prompt autonomous default now always available on Bedrock, Vertex, and Foundry"},
+            {"tag": "CHG", "text": "<code>/claude-api</code> — added <code>cost-optimize</code> subcommand and Admin API coverage"},
+            {"tag": "CHG", "text": "<code>/status</code> — shows a line explaining a managed-settings load failure or why settings weren't fetched"}
         ]
     }
     </script>
