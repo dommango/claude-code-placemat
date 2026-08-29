@@ -143,8 +143,19 @@
 
             <!-- August 2026 -->
             <details class="month-group" open>
-                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.250</span> <span class="month-count">27 releases</span></summary>
+                <summary>August 2026 <span class="version-date">v2.1.221 – v2.1.251</span> <span class="month-count">28 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.251 <span class="version-date">2026-08-28</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>PreModelSwitch</code> / <code>PostModelSwitch</code> hook events — block, confirm, or annotate a model switch before or after it happens</li>
+                            <li><span class="tag tag-add">ADD</span><code>prompt_cache</code> status line script JSON input field — per-session prompt-cache stats (hit ratio, misses, tokens re-cached, warm/cold)</li>
+                            <li><span class="tag tag-change">CHG</span><code>/usage</code> — spend limit bar for gateway users with spend limits; <code>/cost</code> now shows a per-session prompt-cache line (hit ratio, misses, tokens re-cached, warm/cold)</li>
+                            <li><span class="tag tag-change">CHG</span><code>/effort</code> — saves the default effort level per model; each model keeps its own setting when you switch</li>
+                            <li><span class="tag tag-change">CHG</span><code>SessionStart</code> — resume hooks now receive session staleness and estimated re-cache cost</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.248 <span class="version-date">2026-08-27</span></h3>
