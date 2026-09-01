@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.251</span>
+            <span class="release-tag">As of release: v2.1.252</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -279,7 +279,7 @@
                     <tr class="search-item"><td><code>claude self-hosted-runner --defer-shutdown-max-min &lt;minutes&gt;</code></td><td class="desc">On SIGTERM, keep serving attached sessions for up to the given number of minutes before parking remaining sessions and exiting</td></tr>
                     <tr class="search-item"><td><code>claude self-hosted-runner --proxy-authorization-command</code> / <code>--proxy-authorization-file</code></td><td class="desc">Supply a freshly issued <code>Proxy-Authorization</code> header on every connection for egress proxies that require per-request credentials</td></tr>
                     <tr class="search-item"><td><code>claude remote-control --continue</code></td><td class="desc">Resume the most recent Remote Control session</td></tr>
-                    <tr class="search-item"><td><code class="new">claude self-hosted-runner --client-label &lt;label&gt;</code> <!-- added:v2.1.248 --></td><td class="desc">Override the label the runner registers with (default: hostname); paired with <code>SELF_HOSTED_RUNNER_CLIENT_LABEL</code> env var</td></tr>
+                    <tr class="search-item"><td><code>claude self-hosted-runner --client-label &lt;label&gt;</code></td><td class="desc">Override the label the runner registers with (default: hostname); paired with <code>SELF_HOSTED_RUNNER_CLIENT_LABEL</code> env var</td></tr>
                 </table>
             </div>
 
@@ -287,7 +287,7 @@
                 <h3>Headless & CI Flags</h3>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
-                    <tr class="search-item"><td><code class="new">--restricted</code> <!-- added:v2.1.248 --></td><td class="desc">Remove built-in tools that run commands or code and <code>WebFetch</code> (unless named in <code>--tools</code>); keep file tools inside the working directory; refuse <code>bypassPermissions</code>; ignore user, project and local settings files; paired with <code>CLAUDE_CODE_RESTRICTED=1</code> env var</td></tr>
+                    <tr class="search-item"><td><code>--restricted</code></td><td class="desc">Remove built-in tools that run commands or code and <code>WebFetch</code> (unless named in <code>--tools</code>); keep file tools inside the working directory; refuse <code>bypassPermissions</code>; ignore user, project and local settings files; paired with <code>CLAUDE_CODE_RESTRICTED=1</code> env var</td></tr>
                     <tr class="search-item"><td><code>--bare</code></td><td class="desc">Minimal headless (no hooks/LSP)</td></tr>
                     <tr class="search-item"><td><code>--channels</code></td><td class="desc">Permission relay / MCP push msg; now works with console (API key) auth — console orgs with managed settings must set <code>channelsEnabled: true</code></td></tr>
                     <tr class="search-item"><td><code>--output-format json</code></td><td class="desc">Structured JSON output</td></tr>
@@ -482,8 +482,8 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_PROJECT_DIR_NAME</code></td><td class="desc">Custom short name for the per-project transcript directory; for hosts that give each session its own config directory</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES</code></td><td class="desc">Set to <code>0</code> to disable automatic check-ins when a <code>/goal</code> is waiting on background tasks for 30+ min</td></tr>
                     <tr class="search-item"><td><code>ANTHROPIC_DEFAULT_MODEL</code></td><td class="desc">Sets the model new sessions start on; a <code>/model</code> pick still overrides it and persists across restarts — unlike <code>ANTHROPIC_MODEL</code></td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_RESTRICTED=1</code> <!-- added:v2.1.248 --></td><td class="desc">Removes built-in tools that run commands or code and <code>WebFetch</code> (unless named in <code>--tools</code>), keeps file tools inside the working directory, refuses <code>bypassPermissions</code>, and ignores user, project and local settings files; paired with <code>--restricted</code> CLI flag</td></tr>
-                    <tr class="search-item"><td><code class="new">SELF_HOSTED_RUNNER_CLIENT_LABEL</code> <!-- added:v2.1.248 --></td><td class="desc">Override the label the self-hosted runner registers with (default: hostname); paired with <code>claude self-hosted-runner --client-label &lt;label&gt;</code> CLI flag</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_RESTRICTED=1</code></td><td class="desc">Removes built-in tools that run commands or code and <code>WebFetch</code> (unless named in <code>--tools</code>), keeps file tools inside the working directory, refuses <code>bypassPermissions</code>, and ignores user, project and local settings files; paired with <code>--restricted</code> CLI flag</td></tr>
+                    <tr class="search-item"><td><code>SELF_HOSTED_RUNNER_CLIENT_LABEL</code></td><td class="desc">Override the label the self-hosted runner registers with (default: hostname); paired with <code>claude self-hosted-runner --client-label &lt;label&gt;</code> CLI flag</td></tr>
                 </table>
             </div>
         </div>
@@ -539,7 +539,7 @@
                 <h3>Agent YAML Frontmatter</h3>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
-                    <tr class="search-item"><td><code class="new">experimental.cacheTtl</code> <!-- added:v2.1.248 --></td><td class="desc">Per-agent prompt cache TTL; set to <code>"5m"</code> or <code>"1h"</code>; used when no subagent TTL setting is configured in the session</td></tr>
+                    <tr class="search-item"><td><code>experimental.cacheTtl</code></td><td class="desc">Per-agent prompt cache TTL; set to <code>"5m"</code> or <code>"1h"</code>; used when no subagent TTL setting is configured in the session</td></tr>
                     <tr class="search-item"><td><code>permissionMode</code></td><td class="desc">manual / acceptEdits / plan / bypass; <code>manual</code> replaces <code>default</code> — both accepted</td></tr>
                     <tr class="search-item"><td><code>isolation: worktree</code></td><td class="desc">Run agent in isolated git worktree</td></tr>
                     <tr class="search-item"><td><code>memory: user|project</code></td><td class="desc">Persistent memory storage scope</td></tr>
@@ -647,15 +647,9 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.251",
-        "date": "2026-08-28",
-        "changes": [
-            {"tag": "ADD", "text": "<code>PreModelSwitch</code> / <code>PostModelSwitch</code> hook events — block, confirm, or annotate a model switch before or after it happens"},
-            {"tag": "ADD", "text": "<code>prompt_cache</code> status line JSON field — per-session prompt-cache stats (hit ratio, misses, tokens re-cached, warm/cold)"},
-            {"tag": "CHG", "text": "<code>/usage</code> — spend limit bar for gateway users with spend limits; <code>/cost</code> shows a per-session prompt-cache line (hit ratio, misses, tokens re-cached, warm/cold)"},
-            {"tag": "CHG", "text": "<code>/effort</code> — saves the default effort level per model; each model keeps its own setting when you switch"},
-            {"tag": "CHG", "text": "<code>SessionStart</code> — resume hooks now receive session staleness and estimated re-cache cost"}
-        ]
+        "version": "v2.1.252",
+        "date": "2026-08-31",
+        "changes": []
     }
     </script>
 
