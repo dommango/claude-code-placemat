@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.252</span>
+            <span class="release-tag">As of release: v2.1.258</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -192,7 +192,7 @@
                     <tr class="search-item"><td><code>/config key=value</code></td><td class="desc">Set any setting from the prompt (e.g. <code>/config thinking=false</code>) — works in interactive, <code>-p</code>, and Remote Control</td></tr>
                     <tr class="search-item"><td><code>/config --help</code></td><td class="desc">List all available shorthand keys for <code>/config key=value</code></td></tr>
                     <tr class="search-item"><td><code>/model [model]</code></td><td class="desc">Switch model; selection saved as default for new sessions; <code>claude-sonnet-5</code> is now the default (native 1M-token context); press <code>s</code> in picker to switch for current session only; warns before switching mid-conversation; startup header shows model pin source; lists models from gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway; org-restricted models show "restricted by your organization's settings"</td></tr>
-                    <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/xhigh/auto); no args opens interactive slider (Faster/Smarter labels); xhigh is Opus 4.8 only; saves the default effort level per model — each model keeps its own setting when you switch</td></tr>
+                    <tr class="search-item"><td><code>/effort [level]</code></td><td class="desc">Set effort (low/med/high/xhigh/auto); no args opens interactive slider (Faster/Smarter labels); press <code>s</code> in interactive picker to switch for current session only, matching <code>/model</code>; xhigh is Opus 4.8 only; saves the default effort level per model — each model keeps its own setting when you switch</td></tr>
                     <tr class="search-item"><td><code>/fast [on/off]</code></td><td class="desc">Toggle Fast mode</td></tr>
                     <tr class="search-item"><td><code>/permissions</code></td><td class="desc">View/update tool permissions; can be opened while Claude is working — rule changes apply to the rest of the current turn; Auto mode tab shows and edits auto mode classifier rules</td></tr>
                     <tr class="search-item"><td><code>/color [color]</code></td><td class="desc">Set prompt-bar color; bare <code>/color</code> with no args picks a random session color</td></tr>
@@ -234,7 +234,7 @@
                 <h3>Special & Utility</h3>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
-                    <tr class="search-item"><td><code>/btw &lt;query&gt;</code></td><td class="desc">Side question (does not alter context); press <code>c</code> to copy raw markdown answer to clipboard; ←/→ to step through earlier answers</td></tr>
+                    <tr class="search-item"><td><code>/btw &lt;query&gt;</code></td><td class="desc">Side question (does not alter context); press <code>c</code> to copy raw markdown answer to clipboard; <code>Shift+←</code>/<code>Shift+→</code> (or <code>[</code>/<code>]</code>) to step through earlier answers</td></tr>
                     <tr class="search-item"><td><code>/plan [desc]</code></td><td class="desc">Switch to Plan Mode directly</td></tr>
                     <tr class="search-item"><td><code>/loop [interval]</code></td><td class="desc">Schedule recurring background task; self-paced dynamic mode and no-prompt autonomous default are now always available, including on Bedrock, Vertex, and Foundry</td></tr>
                     <tr class="search-item"><td><code>/proactive</code></td><td class="desc">Alias for /loop — schedule recurring background task</td></tr>
@@ -345,7 +345,7 @@
                     <tr class="search-item"><td><code>modelPicker</code></td><td class="desc">Curate the <code>/model</code> picker with an ordered, labeled list of models (any id spelling, including Vertex/Bedrock ids); entries are appended to or replace the built-in lineup</td></tr>
                     <tr class="search-item"><td><code>modelPricing</code></td><td class="desc">Managed setting — set an organization's contracted per-model rates and discount multiplier; used for <code>/cost</code>, the status line, and telemetry cost figures instead of list price</td></tr>
                     <tr class="search-item"><td><code>promptCacheTtl</code> / <code>subagentPromptCacheTtl</code></td><td class="desc">Set a 1-hour prompt cache TTL for the main conversation (<code>promptCacheTtl</code>) while subagents stay at 5 minutes (<code>subagentPromptCacheTtl</code>); for API-key and cloud-provider users</td></tr>
-                    <tr class="search-item"><td><code>defaultMode</code></td><td class="desc">Set default permission mode; <code>"manual"</code> (formerly <code>"default"</code>) — both values accepted; paired with <code>--permission-mode</code> CLI flag</td></tr>
+                    <tr class="search-item"><td><code>defaultMode</code></td><td class="desc">Set default permission mode; <code>"manual"</code> (formerly <code>"default"</code>) — both values accepted; <code>"bypassPermissions"</code> is ignored in project/local settings (same as <code>"auto"</code>) — set it in user or managed settings, or pass <code>--permission-mode bypassPermissions</code>; paired with <code>--permission-mode</code> CLI flag</td></tr>
                     <tr class="search-item"><td><code>autoMemoryDirectory</code></td><td class="desc">Custom auto-loaded memory dir</td></tr>
                     <tr class="search-item"><td><code>worktree.sparsePaths</code></td><td class="desc">Sparse checkout dirs for agents</td></tr>
                     <tr class="search-item"><td><code>worktree.baseRef</code></td><td class="desc"><code>fresh</code> (default) branches worktrees from <code>origin/&lt;default&gt;</code>; <code>head</code> branches from local <code>HEAD</code> — applies to <code>--worktree</code>, <code>EnterWorktree</code>, and agent-isolation</td></tr>
@@ -360,7 +360,7 @@
                     <tr class="search-item"><td><code>statusLine.refreshInterval</code></td><td class="desc">Re-run status line command every N seconds</td></tr>
                     <tr class="search-item"><td><code>workspace.git_worktree</code></td><td class="desc">Status line JSON input field — set when current directory is inside a linked git worktree</td></tr>
                     <tr class="search-item"><td><code>effort.level</code> / <code>thinking.enabled</code></td><td class="desc">Hooks and status line stdin JSON input fields — current effort level and thinking state</td></tr>
-                    <tr class="search-item"><td><code class="new">prompt_cache</code> <!-- added:v2.1.251 --></td><td class="desc">Status line script JSON input field — per-session prompt-cache stats (hit ratio, misses, tokens re-cached, warm/cold)</td></tr>
+                    <tr class="search-item"><td><code>prompt_cache</code></td><td class="desc">Status line script JSON input field — per-session prompt-cache stats (hit ratio, misses, tokens re-cached, warm/cold)</td></tr>
                     <tr class="search-item"><td><code>autoScrollEnabled</code></td><td class="desc">Disable conversation auto-scroll in fullscreen mode</td></tr>
                     <tr class="search-item"><td><code>wheelScrollAccelerationEnabled</code></td><td class="desc">Set to <code>false</code> to disable mouse-wheel scroll acceleration in fullscreen mode</td></tr>
                     <tr class="search-item"><td><code>tui</code></td><td class="desc">Default TUI mode; set to "fullscreen" for flicker-free alt-screen rendering</td></tr>
@@ -368,7 +368,10 @@
                     <tr class="search-item"><td><code>spellcheck</code></td><td class="desc">Underline misspelled words in the prompt input as you type; requires <code>aspell</code>, <code>hunspell</code>, or <code>ispell</code> to be installed</td></tr>
                     <tr class="search-item"><td><code>keybindingFlavor</code></td><td class="desc">Set to <code>"readline"</code> to make Ctrl+W delete back to the previous whitespace (Bash-style); default <code>"classic"</code> is unchanged; in <code>"readline"</code> mode, Alt+F and Ctrl/Option+→ stop at end of word, Alt+D deletes to it (Ctrl+Y pastes back), and punctuation separates words</td></tr>
                     <tr class="search-item"><td><code>outputStyle</code></td><td class="desc">Built-in output style; <code>"concise"</code> makes Claude lead with results and skip preamble and narration while working just as thoroughly; configure via <code>/config</code> → Output style</td></tr>
+                    <tr class="search-item"><td><code class="new">timeFormat</code> <!-- added:v2.1.257 --></td><td class="desc">Turn-end clock and transcript timestamp format: <code>"12h"</code>, <code>"24h"</code>, <code>"24h-utc"</code>, or a strftime pattern; paired with <code>timeZone</code></td></tr>
+                    <tr class="search-item"><td><code class="new">timeZone</code> <!-- added:v2.1.257 --></td><td class="desc">Time zone for the turn-end clock and transcript timestamps; paired with <code>timeFormat</code></td></tr>
                     <tr class="search-item"><td><code>vimInsertModeRemaps</code></td><td class="desc">Map two-key insert-mode sequences to keys in vim mode; e.g. map <code>jj</code> to Escape</td></tr>
+                    <tr class="search-item"><td><code class="new">permissions.blockReadsOutsideWorkingDirectories</code> <!-- added:v2.1.257 --></td><td class="desc">Block file reads outside configured working directories; in auto mode, a one-time prompt appears before the first such read</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.strictAllowlist</code></td><td class="desc">Deny non-allowlisted hosts for sandboxed commands without prompting</td></tr>
                     <tr class="search-item"><td><code>sandbox.bwrapPath</code> / <code>sandbox.socatPath</code></td><td class="desc">Custom bubblewrap and socat binary paths (Linux/WSL managed settings)</td></tr>
@@ -470,6 +473,7 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_PROCESS_WRAPPER</code></td><td class="desc">Corporate launcher wrapper — agent view and background service run every Claude Code self-spawn through the specified executable</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code></td><td class="desc">Include subagent text and thinking in stream-json output; paired with <code>--forward-subagent-text</code> flag</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION</code></td><td class="desc">Session-wide limit on WebSearch tool calls (default 200); prevents runaway search loops</td></tr>
+                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_SUBAGENT_MODEL_FORCE</code> <!-- added:v2.1.257 --></td><td class="desc">Apply <code>CLAUDE_CODE_SUBAGENT_MODEL</code> (or the main model when unset) to every subagent, ignoring per-spawn and agent-definition model overrides</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION</code></td><td class="desc">Set a per-session subagent spawn cap; the built-in 200-spawn limit was removed — long-running sessions no longer refuse new agents by default; <code>/clear</code> resets the budget; concurrency and depth limits still apply</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS</code></td><td class="desc">Cap on concurrently-running subagents (default 20); prevents a single message from fanning out unbounded background agents</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</code></td><td class="desc">Max nesting depth for subagent spawning (default 3); set to <code>1</code> to disable nesting</td></tr>
@@ -587,7 +591,7 @@
                     <tr class="search-item"><td><code>PreToolUse</code> / <code>PostToolUse</code></td><td class="desc">Intercept before/after tool execution; <code>PostToolUse</code> hook input includes <code>duration_ms</code>; can replace tool output via <code>hookSpecificOutput.updatedToolOutput</code> for all tools</td></tr>
                     <tr class="search-item"><td><code>PostToolUseFailure</code></td><td class="desc">Fires when a tool call fails; hook input includes <code>duration_ms</code></td></tr>
                     <tr class="search-item"><td><code>SessionStart</code></td><td class="desc">Fires on session start/resume; return <code>reloadSkills: true</code> to re-scan skill directories; set <code>hookSpecificOutput.sessionTitle</code> to name the session; reports source <code>"fork"</code> when a session begins as a fork instead of <code>"resume"</code>; resume hooks receive session staleness and estimated re-cache cost</td></tr>
-                    <tr class="search-item"><td><code class="new">PreModelSwitch</code> / <code class="new">PostModelSwitch</code> <!-- added:v2.1.251 --></td><td class="desc">Block, confirm, or annotate a model switch before or after it happens</td></tr>
+                    <tr class="search-item"><td><code>PreModelSwitch</code> / <code>PostModelSwitch</code></td><td class="desc">Block, confirm, or annotate a model switch before or after it happens</td></tr>
                     <tr class="search-item"><td><code>SubagentStart</code> / <code>Stop</code> / <code>SubagentStop</code></td><td class="desc">Lifecycle triggers for agent spawning; sub-agents can spawn their own sub-agents (up to 5 levels deep); Stop and SubagentStop hook input includes <code>background_tasks</code> and <code>session_crons</code> fields; Stop and SubagentStop can return <code>hookSpecificOutput.additionalContext</code> to give Claude feedback and continue the turn</td></tr>
                     <tr class="search-item"><td><code>SessionEnd</code></td><td class="desc">Run cleanup script when session closes</td></tr>
                     <tr class="search-item"><td><code>CwdChanged</code> / <code>FileChanged</code></td><td class="desc">React to directory or file changes</td></tr>
@@ -647,9 +651,16 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.252",
-        "date": "2026-08-31",
-        "changes": []
+        "version": "v2.1.258",
+        "date": "2026-09-01",
+        "changes": [
+            {"tag": "ADD", "text": "<code>timeFormat</code> / <code>timeZone</code> settings — control the turn-end clock and transcript timestamp format and time zone"},
+            {"tag": "ADD", "text": "<code>CLAUDE_CODE_SUBAGENT_MODEL_FORCE</code> env var — force every subagent onto <code>CLAUDE_CODE_SUBAGENT_MODEL</code> (or main model), ignoring per-spawn overrides"},
+            {"tag": "ADD", "text": "<code>permissions.blockReadsOutsideWorkingDirectories</code> — block file reads outside working directories; one-time auto-mode prompt before first such read"},
+            {"tag": "CHG", "text": "<code>/effort</code> — press <code>s</code> in the interactive picker to switch effort for the current session only"},
+            {"tag": "CHG", "text": "<code>/btw</code> — history navigation changed from <code>←</code>/<code>→</code> to <code>Shift+←</code>/<code>Shift+→</code> (or <code>[</code>/<code>]</code>)"},
+            {"tag": "CHG", "text": "<code>defaultMode: \"bypassPermissions\"</code> now ignored in project/local settings — use user/managed settings or <code>--permission-mode</code>"}
+        ]
     }
     </script>
 
