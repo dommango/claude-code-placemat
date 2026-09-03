@@ -143,8 +143,18 @@
 
             <!-- September 2026 -->
             <details class="month-group" open>
-                <summary>September 2026 <span class="version-date">v2.1.257 – v2.1.258</span> <span class="month-count">2 releases</span></summary>
+                <summary>September 2026 <span class="version-date">v2.1.257 – v2.1.259</span> <span class="month-count">3 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.259 <span class="version-date">2026-09-02</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>managedMcpServers</code> managed setting — provide HTTP/SSE MCP servers to every user in the organization (same entry shape as <code>.mcp.json</code>); entries naming a command to run are skipped</li>
+                            <li><span class="tag tag-add">ADD</span><code>deniedMcpServers</code> managed setting — blocklist of managed MCP servers to deny; as of v2.1.259, <code>allowedMcpServers</code> governs only user-added servers and no longer filters <code>managed-mcp.json</code> servers</li>
+                            <li><span class="tag tag-add">ADD</span><code>--permission-prompts none</code> CLI flag — deny any action that would prompt for unattended headless hosts; the active permission mode (including auto mode) still decides normally</li>
+                            <li><span class="tag tag-change">CHG</span><code>claude plugin validate</code> — added <code>--json</code> for a machine-readable validation report</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.257 <span class="version-date">2026-09-01</span></h3>
