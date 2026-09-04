@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.259</span>
+            <span class="release-tag">As of release: v2.1.260</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -92,7 +92,7 @@
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>Ctrl C</code> / <code>D</code></td><td class="desc">Cancel input / Exit session</td></tr>
-                    <tr class="search-item"><td><code>Ctrl L</code></td><td class="desc">Clear screen + full redraw; in fullscreen mode, always just repaints — the double-press <code>/clear</code> shortcut was removed</td></tr>
+                    <tr class="search-item"><td><code>Ctrl L</code></td><td class="desc">Clear screen + full redraw; in fullscreen mode, clears the transcript view like a terminal <code>clear</code> — scroll up to see earlier messages</td></tr>
                     <tr class="search-item"><td><code>Ctrl O</code></td><td class="desc">Toggle between normal and verbose transcript; in a collapsed thinking group, shows the full thinking; focus view toggled with /focus</td></tr>
                     <tr class="search-item"><td><code>Ctrl R</code></td><td class="desc">History picker — searches all projects by default; press <code>Ctrl S</code> to narrow to current project or session</td></tr>
                     <tr class="search-item"><td><code>Ctrl G</code></td><td class="desc">Open prompt in external editor</td></tr>
@@ -174,7 +174,7 @@
                     <tr class="search-item"><td><code>/usage</code></td><td class="desc">Unified usage view (cost + stats tabs); per-category limits breakdown (skills, subagents, plugins, per-MCP-server cost); Loops tab shows per-loop run count, total tokens, tokens per run, and last run — easy to spot runaway or chatty <code>/loop</code> tasks; spend limit bar for gateway users with spend limits; <code>/cost</code> shows a per-session prompt-cache line (hit ratio, misses, tokens re-cached, warm/cold); <code>/cost</code> and <code>/stats</code> are shortcuts that open the relevant tab</td></tr>
                     <tr class="search-item"><td><code>/usage-credits</code></td><td class="desc">Request extra usage allowance; available for Enterprise organizations billed through AWS Marketplace, self-serve Enterprise, and Enterprise trials; asks for confirmation before sending to organization admins; old name <code>/extra-usage</code> still works; accessible from Remote Control clients</td></tr>
                     <tr class="search-item"><td><code>/context</code></td><td class="desc">Visualize context window (grid)</td></tr>
-                    <tr class="search-item"><td><code>/diff</code></td><td class="desc">Interactive diff viewer; detail view scrollable with arrows, <code>j</code>/<code>k</code>, <code>PgUp</code>/<code>PgDn</code>, <code>Space</code>, <code>Home</code>/<code>End</code></td></tr>
+                    <tr class="search-item"><td><code>/diff</code></td><td class="desc">Interactive diff viewer; in fullscreen mode, opens as a panel beside the conversation showing uncommitted changes as Claude edits; detail view scrollable with arrows, <code>j</code>/<code>k</code>, <code>PgUp</code>/<code>PgDn</code>, <code>Space</code>, <code>Home</code>/<code>End</code></td></tr>
                     <tr class="search-item"><td><code>/copy</code></td><td class="desc">Copy last response</td></tr>
                     <tr class="search-item"><td><code>/export</code></td><td class="desc">Export conversation</td></tr>
                     <tr class="search-item"><td><code>/recap</code></td><td class="desc">Summarize away context; auto-triggered on return or invoke manually</td></tr>
@@ -223,7 +223,7 @@
                     <tr class="search-item"><td><code>/skills</code></td><td class="desc">List available active skills; includes type-to-filter search box for long lists</td></tr>
                     <tr class="search-item"><td><code>/chrome</code></td><td class="desc">Chrome browser integration; pick which connected browser to use via <code>/chrome</code> → "Select browser…", or in-chat when a browser action runs with multiple connected</td></tr>
                     <tr class="search-item"><td><code>/add-dir &lt;path&gt;</code></td><td class="desc">Add working directory to context; usable while Claude is working</td></tr>
-                    <tr class="search-item"><td><code>/reload-plugins</code></td><td class="desc">Hot-reload local plugins; auto-installs missing dependencies from added marketplaces</td></tr>
+                    <tr class="search-item"><td><code>/reload-plugins</code></td><td class="desc">Hot-reload local plugins; available in headless sessions (Claude Code Desktop and SDK); auto-installs missing dependencies from added marketplaces</td></tr>
                     <tr class="search-item"><td><code>/reload-skills</code></td><td class="desc">Re-scan skill directories without restarting the session</td></tr>
                     <tr class="search-item"><td><code>/plugin list</code></td><td class="desc">List installed plugins; <code>--enabled</code>/<code>--disabled</code> filters; search bar available when browsing marketplace plugins; surfaces recently-unused plugins for cleanup</td></tr>
                     <tr class="search-item"><td><code>/plugin install &lt;name&gt;</code></td><td class="desc">Install a plugin from the marketplace; supports <code>archive</code> source — install from a zip over HTTPS without git or npm, with optional SHA-256 pinning; refreshes a stale catalog and retries before reporting not found; activates immediately when safe without requiring <code>/reload-plugins</code></td></tr>
@@ -252,7 +252,7 @@
                     <tr class="search-item"><td><code>/desktop</code></td><td class="desc">Continue session in Desktop app</td></tr>
                     <tr class="search-item"><td><code>/remote-control</code></td><td class="desc">Bridge session to claude.ai/code</td></tr>
                     <tr class="search-item"><td><code>/team-onboarding</code></td><td class="desc">Generate teammate ramp-up guide from local CC usage</td></tr>
-                    <tr class="search-item"><td><code>/advisor</code></td><td class="desc">AI advisor mode; Fable 5 available for organizations with Fable access — enable via <code>/model fable</code></td></tr>
+                    <tr class="search-item"><td><code>/advisor</code></td><td class="desc">AI advisor mode; text form: <code>/advisor</code>, <code>/advisor &lt;model&gt;</code>, <code>/advisor off</code> — works in desktop, Remote Control, and headless (<code>-p</code>/Agent SDK) sessions; Fable 5 available for organizations with Fable access — enable via <code>/model fable</code></td></tr>
                 </table>
             </div>
         </div>
@@ -369,10 +369,10 @@
                     <tr class="search-item"><td><code>spellcheck</code></td><td class="desc">Underline misspelled words in the prompt input as you type; requires <code>aspell</code>, <code>hunspell</code>, or <code>ispell</code> to be installed</td></tr>
                     <tr class="search-item"><td><code>keybindingFlavor</code></td><td class="desc">Set to <code>"readline"</code> to make Ctrl+W delete back to the previous whitespace (Bash-style); default <code>"classic"</code> is unchanged; in <code>"readline"</code> mode, Alt+F and Ctrl/Option+→ stop at end of word, Alt+D deletes to it (Ctrl+Y pastes back), and punctuation separates words</td></tr>
                     <tr class="search-item"><td><code>outputStyle</code></td><td class="desc">Built-in output style; <code>"concise"</code> makes Claude lead with results and skip preamble and narration while working just as thoroughly; configure via <code>/config</code> → Output style</td></tr>
-                    <tr class="search-item"><td><code class="new">timeFormat</code> <!-- added:v2.1.257 --></td><td class="desc">Turn-end clock and transcript timestamp format: <code>"12h"</code>, <code>"24h"</code>, <code>"24h-utc"</code>, or a strftime pattern; paired with <code>timeZone</code></td></tr>
-                    <tr class="search-item"><td><code class="new">timeZone</code> <!-- added:v2.1.257 --></td><td class="desc">Time zone for the turn-end clock and transcript timestamps; paired with <code>timeFormat</code></td></tr>
+                    <tr class="search-item"><td><code>timeFormat</code></td><td class="desc">Turn-end clock and transcript timestamp format: <code>"12h"</code>, <code>"24h"</code>, <code>"24h-utc"</code>, or a strftime pattern; paired with <code>timeZone</code></td></tr>
+                    <tr class="search-item"><td><code>timeZone</code></td><td class="desc">Time zone for the turn-end clock and transcript timestamps; paired with <code>timeFormat</code></td></tr>
                     <tr class="search-item"><td><code>vimInsertModeRemaps</code></td><td class="desc">Map two-key insert-mode sequences to keys in vim mode; e.g. map <code>jj</code> to Escape</td></tr>
-                    <tr class="search-item"><td><code class="new">permissions.blockReadsOutsideWorkingDirectories</code> <!-- added:v2.1.257 --></td><td class="desc">Block file reads outside configured working directories; in auto mode, a one-time prompt appears before the first such read</td></tr>
+                    <tr class="search-item"><td><code>permissions.blockReadsOutsideWorkingDirectories</code></td><td class="desc">Block file reads outside configured working directories; in auto mode, a one-time prompt appears before the first such read</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.strictAllowlist</code></td><td class="desc">Deny non-allowlisted hosts for sandboxed commands without prompting</td></tr>
                     <tr class="search-item"><td><code>sandbox.bwrapPath</code> / <code>sandbox.socatPath</code></td><td class="desc">Custom bubblewrap and socat binary paths (Linux/WSL managed settings)</td></tr>
@@ -476,7 +476,7 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_PROCESS_WRAPPER</code></td><td class="desc">Corporate launcher wrapper — agent view and background service run every Claude Code self-spawn through the specified executable</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code></td><td class="desc">Include subagent text and thinking in stream-json output; paired with <code>--forward-subagent-text</code> flag</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION</code></td><td class="desc">Session-wide limit on WebSearch tool calls (default 200); prevents runaway search loops</td></tr>
-                    <tr class="search-item"><td><code class="new">CLAUDE_CODE_SUBAGENT_MODEL_FORCE</code> <!-- added:v2.1.257 --></td><td class="desc">Apply <code>CLAUDE_CODE_SUBAGENT_MODEL</code> (or the main model when unset) to every subagent, ignoring per-spawn and agent-definition model overrides</td></tr>
+                    <tr class="search-item"><td><code>CLAUDE_CODE_SUBAGENT_MODEL_FORCE</code></td><td class="desc">Apply <code>CLAUDE_CODE_SUBAGENT_MODEL</code> (or the main model when unset) to every subagent, ignoring per-spawn and agent-definition model overrides</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION</code></td><td class="desc">Set a per-session subagent spawn cap; the built-in 200-spawn limit was removed — long-running sessions no longer refuse new agents by default; <code>/clear</code> resets the budget; concurrency and depth limits still apply</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS</code></td><td class="desc">Cap on concurrently-running subagents (default 20); prevents a single message from fanning out unbounded background agents</td></tr>
                     <tr class="search-item"><td><code>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</code></td><td class="desc">Max nesting depth for subagent spawning (default 3); set to <code>1</code> to disable nesting</td></tr>
@@ -654,13 +654,13 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.259",
-        "date": "2026-09-02",
+        "version": "v2.1.260",
+        "date": "2026-09-03",
         "changes": [
-            {"tag": "ADD", "text": "<code>managedMcpServers</code> managed setting — provide HTTP/SSE MCP servers to every user in the organization"},
-            {"tag": "ADD", "text": "<code>deniedMcpServers</code> managed setting — blocklist of managed MCP servers to deny (as of v2.1.259, <code>allowedMcpServers</code> governs only user-added servers)"},
-            {"tag": "ADD", "text": "<code>--permission-prompts none</code> CLI flag — deny any action that would prompt for unattended headless hosts"},
-            {"tag": "CHG", "text": "<code>claude plugin validate</code> — added <code>--json</code> for a machine-readable validation report"}
+            {"tag": "CHG", "text": "<code>/diff</code> — in fullscreen mode, opens as a panel beside the conversation showing uncommitted changes as Claude edits"},
+            {"tag": "CHG", "text": "<code>Ctrl L</code> in fullscreen — clears the transcript view like a terminal <code>clear</code>; scroll up to see earlier messages"},
+            {"tag": "CHG", "text": "<code>/advisor</code> — text form (<code>/advisor</code>, <code>/advisor &lt;model&gt;</code>, <code>/advisor off</code>) now works in desktop, Remote Control, and headless sessions"},
+            {"tag": "CHG", "text": "<code>/reload-plugins</code> — now available in headless sessions (Claude Code Desktop and SDK)"}
         ]
     }
     </script>
