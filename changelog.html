@@ -143,8 +143,17 @@
 
             <!-- September 2026 -->
             <details class="month-group" open>
-                <summary>September 2026 <span class="version-date">v2.1.257 – v2.1.260</span> <span class="month-count">4 releases</span></summary>
+                <summary>September 2026 <span class="version-date">v2.1.257 – v2.1.261</span> <span class="month-count">5 releases</span></summary>
                 <div class="month-content">
+
+                    <div class="change-section">
+                        <h3>CC v2.1.261 <span class="version-date">2026-09-04</span></h3>
+                        <ul class="change-list">
+                            <li><span class="tag tag-add">ADD</span><code>/skill-doctor</code> — shows which loaded skills go unused and what they cost in context, so you can prune them</li>
+                            <li><span class="tag tag-add">ADD</span><code>--append-subagent-system-prompt-file</code> CLI flag — reads the subagent system prompt from a file, for prompts too large to pass on the command line</li>
+                            <li><span class="tag tag-add">ADD</span><code>bashOutputMaxChars</code> / <code>taskOutputMaxChars</code> JSON settings — raise how much Bash command or background-task output Claude receives inline before saving to a file (cap at 128K characters)</li>
+                        </ul>
+                    </div>
 
                     <div class="change-section">
                         <h3>CC v2.1.260 <span class="version-date">2026-09-03</span></h3>
