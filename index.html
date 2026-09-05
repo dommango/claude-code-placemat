@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.260</span>
+            <span class="release-tag">As of release: v2.1.261</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -244,6 +244,7 @@
                     <tr class="search-item"><td><code>ultracode</code></td><td class="desc">Prompt trigger keyword — type in the prompt to start a dynamic workflow; highlighted in violet in the prompt input</td></tr>
                     <tr class="search-item"><td><code>/voice</code></td><td class="desc">Push-to-talk voice prompting</td></tr>
                     <tr class="search-item"><td><code>/doctor</code></td><td class="desc">Full setup checkup — diagnoses and fixes CC installation/env issues; press f to auto-fix; openable while Claude is responding; shows result of last update attempt; lists npm auto-update fix hints; proposes trimming checked-in <code>CLAUDE.md</code> files by cutting content Claude could derive from the codebase; <code>/checkup</code> is an alias</td></tr>
+                    <tr class="search-item"><td><code class="new">/skill-doctor</code> <!-- added:v2.1.261 --></td><td class="desc">Show which loaded skills go unused and what they cost in context — helps prune skills that aren't contributing</td></tr>
                     <tr class="search-item"><td><code>/status</code></td><td class="desc">Show CC environment status and warnings (e.g. "claude command missing or broken"); shows session kind: <code>interactive</code>, or a background job that is <code>attached</code> or <code>unattended</code>; shows <code>Skipped sources</code> line listing managed settings sources present but not applied; shows GitHub connection status for Claude Code on the web (Pro/Max); shows a line explaining a managed-settings load failure or why they weren't fetched (e.g. Bedrock/Vertex/third-party provider, custom <code>ANTHROPIC_BASE_URL</code>); moved from startup output in v2.1.203</td></tr>
                     <tr class="search-item"><td><code>/pr-comments [PR]</code></td><td class="desc">Fetch GitHub PR comments</td></tr>
                     <tr class="search-item"><td><code>/security-review</code></td><td class="desc">Security analysis of uncommitted code</td></tr>
@@ -290,6 +291,7 @@
                     <tr class="search-item"><td><code>--restricted</code></td><td class="desc">Remove built-in tools that run commands or code and <code>WebFetch</code> (unless named in <code>--tools</code>); keep file tools inside the working directory; refuse <code>bypassPermissions</code>; ignore user, project and local settings files; paired with <code>CLAUDE_CODE_RESTRICTED=1</code> env var</td></tr>
                     <tr class="search-item"><td><code>--bare</code></td><td class="desc">Minimal headless (no hooks/LSP)</td></tr>
                     <tr class="search-item"><td><code class="new">--permission-prompts none</code> <!-- added:v2.1.259 --></td><td class="desc">Deny any action that would prompt for unattended headless hosts; the active permission mode (including auto mode) still decides normally</td></tr>
+                    <tr class="search-item"><td><code class="new">--append-subagent-system-prompt-file</code> <!-- added:v2.1.261 --></td><td class="desc">Read the subagent system prompt from a file; for prompts too large to pass on the command line</td></tr>
                     <tr class="search-item"><td><code>--channels</code></td><td class="desc">Permission relay / MCP push msg; now works with console (API key) auth — console orgs with managed settings must set <code>channelsEnabled: true</code></td></tr>
                     <tr class="search-item"><td><code>--output-format json</code></td><td class="desc">Structured JSON output</td></tr>
                     <tr class="search-item"><td><code>--json-schema</code></td><td class="desc">Strict JSON schema validation</td></tr>
@@ -411,6 +413,7 @@
                     <tr class="search-item"><td><code>crossSessionInbound</code></td><td class="desc">Cross-session messages sent to a session running with bypassed permissions are held for your approval before delivery</td></tr>
                     <tr class="search-item"><td><code>dialogExpiry</code></td><td class="desc">Timeout for inbound cross-session message approval dialogs; messages to sessions without bypassed permissions auto-deliver</td></tr>
                     <tr class="search-item"><td><code>feedbackDrafts</code></td><td class="desc">Set to <code>false</code> to prevent Claude from auto-drafting a feedback report when something goes wrong; when enabled (default), Claude drafts a report for you to review and send via <code>/feedback</code></td></tr>
+                    <tr class="search-item"><td><code class="new">bashOutputMaxChars</code> / <code class="new">taskOutputMaxChars</code> <!-- added:v2.1.261 --></td><td class="desc">Raise how much Bash command output (<code>bashOutputMaxChars</code>) or background-task output (<code>taskOutputMaxChars</code>) Claude receives inline before it is saved to a file; both cap at 128K characters</td></tr>
                 </table>
             </div>
 
@@ -654,13 +657,12 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.260",
-        "date": "2026-09-03",
+        "version": "v2.1.261",
+        "date": "2026-09-04",
         "changes": [
-            {"tag": "CHG", "text": "<code>/diff</code> — in fullscreen mode, opens as a panel beside the conversation showing uncommitted changes as Claude edits"},
-            {"tag": "CHG", "text": "<code>Ctrl L</code> in fullscreen — clears the transcript view like a terminal <code>clear</code>; scroll up to see earlier messages"},
-            {"tag": "CHG", "text": "<code>/advisor</code> — text form (<code>/advisor</code>, <code>/advisor &lt;model&gt;</code>, <code>/advisor off</code>) now works in desktop, Remote Control, and headless sessions"},
-            {"tag": "CHG", "text": "<code>/reload-plugins</code> — now available in headless sessions (Claude Code Desktop and SDK)"}
+            {"tag": "ADD", "text": "<code>/skill-doctor</code> — show which loaded skills go unused and what they cost in context, so you can prune them"},
+            {"tag": "ADD", "text": "<code>--append-subagent-system-prompt-file</code> — read the subagent system prompt from a file, for prompts too large to pass on the command line"},
+            {"tag": "ADD", "text": "<code>bashOutputMaxChars</code> / <code>taskOutputMaxChars</code> — raise how much Bash command or background-task output Claude receives inline before saving to a file (up to 128K characters)"}
         ]
     }
     </script>
