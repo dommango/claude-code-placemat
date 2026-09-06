@@ -46,7 +46,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.261</span>
+            <span class="release-tag">As of release: v2.1.263</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
@@ -290,7 +290,7 @@
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>--restricted</code></td><td class="desc">Remove built-in tools that run commands or code and <code>WebFetch</code> (unless named in <code>--tools</code>); keep file tools inside the working directory; refuse <code>bypassPermissions</code>; ignore user, project and local settings files; paired with <code>CLAUDE_CODE_RESTRICTED=1</code> env var</td></tr>
                     <tr class="search-item"><td><code>--bare</code></td><td class="desc">Minimal headless (no hooks/LSP)</td></tr>
-                    <tr class="search-item"><td><code class="new">--permission-prompts none</code> <!-- added:v2.1.259 --></td><td class="desc">Deny any action that would prompt for unattended headless hosts; the active permission mode (including auto mode) still decides normally</td></tr>
+                    <tr class="search-item"><td><code>--permission-prompts none</code></td><td class="desc">Deny any action that would prompt for unattended headless hosts; the active permission mode (including auto mode) still decides normally</td></tr>
                     <tr class="search-item"><td><code class="new">--append-subagent-system-prompt-file</code> <!-- added:v2.1.261 --></td><td class="desc">Read the subagent system prompt from a file; for prompts too large to pass on the command line</td></tr>
                     <tr class="search-item"><td><code>--channels</code></td><td class="desc">Permission relay / MCP push msg; now works with console (API key) auth — console orgs with managed settings must set <code>channelsEnabled: true</code></td></tr>
                     <tr class="search-item"><td><code>--output-format json</code></td><td class="desc">Structured JSON output</td></tr>
@@ -395,8 +395,8 @@
                     <tr class="search-item"><td><code>footerLinksRegexes</code></td><td class="desc">Array of regex patterns for regex-matched link badges in the footer row; configurable via user or managed settings</td></tr>
                     <tr class="search-item"><td><code>channelsEnabled</code></td><td class="desc">Set to <code>true</code> in managed settings to allow <code>--channels</code> with console (API key) auth</td></tr>
                     <tr class="search-item"><td><code>allowAllClaudeAiMcps</code></td><td class="desc">Enterprise managed setting — load claude.ai cloud MCP connectors alongside <code>managed-mcp.json</code></td></tr>
-                    <tr class="search-item"><td><code class="new">managedMcpServers</code> <!-- added:v2.1.259 --></td><td class="desc">Managed setting — provide HTTP/SSE MCP servers to every user in the organization (same entry shape as <code>.mcp.json</code>); entries naming a command to run are skipped</td></tr>
-                    <tr class="search-item"><td><code class="new">deniedMcpServers</code> <!-- added:v2.1.259 --></td><td class="desc">Managed setting — blocklist of managed MCP servers to deny; use to suppress servers from <code>managed-mcp.json</code> (as of v2.1.259, <code>allowedMcpServers</code> governs only user-added servers and no longer filters managed servers)</td></tr>
+                    <tr class="search-item"><td><code>managedMcpServers</code></td><td class="desc">Managed setting — provide HTTP/SSE MCP servers to every user in the organization (same entry shape as <code>.mcp.json</code>); entries naming a command to run are skipped</td></tr>
+                    <tr class="search-item"><td><code>deniedMcpServers</code></td><td class="desc">Managed setting — blocklist of managed MCP servers to deny; use to suppress servers from <code>managed-mcp.json</code> (as of v2.1.259, <code>allowedMcpServers</code> governs only user-added servers and no longer filters managed servers)</td></tr>
                     <tr class="search-item"><td><code>pluginSuggestionMarketplaces</code></td><td class="desc">Managed setting — allowlist org marketplaces whose plugins may be suggested via context-aware tips</td></tr>
                     <tr class="search-item"><td><code>additionalMarketplaces</code></td><td class="desc">Add plugin marketplace repos beyond the built-in list; friendlier alias for <code>extraKnownMarketplaces</code></td></tr>
                     <tr class="search-item"><td><code>strictKnownMarketplaces</code></td><td class="desc">Managed setting — allowlist of marketplace repos allowed as plugin sources; supports <code>"owner/*"</code> wildcard to allow all repos under a GitHub org; also accepted as <code>allowedMarketplaces</code></td></tr>
@@ -657,13 +657,9 @@
 
     <script type="application/json" id="whatsNewData">
     {
-        "version": "v2.1.261",
-        "date": "2026-09-04",
-        "changes": [
-            {"tag": "ADD", "text": "<code>/skill-doctor</code> — show which loaded skills go unused and what they cost in context, so you can prune them"},
-            {"tag": "ADD", "text": "<code>--append-subagent-system-prompt-file</code> — read the subagent system prompt from a file, for prompts too large to pass on the command line"},
-            {"tag": "ADD", "text": "<code>bashOutputMaxChars</code> / <code>taskOutputMaxChars</code> — raise how much Bash command or background-task output Claude receives inline before saving to a file (up to 128K characters)"}
-        ]
+        "version": "v2.1.263",
+        "date": "2026-09-06",
+        "changes": []
     }
     </script>
 
