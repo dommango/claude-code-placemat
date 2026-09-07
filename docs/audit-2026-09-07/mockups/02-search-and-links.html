@@ -911,7 +911,7 @@ code { cursor: pointer; }
 // ---- proposal: normalised matching + highlight + count + URL state ----
 (function () {
   const rows = [...document.querySelectorAll('.search-item')];
-  const norm = (s) => s.toLowerCase().replace(/[\s+_\-\/.:]/g, '');
+  const norm = (s) => s.toLowerCase().replace(/[\s+_\-\/.:~]/g, '');
   rows.forEach((r) => {
     const g = r.closest('.search-group'); const gh = g && g.querySelector('h3');
     r.dataset.norm = norm((gh ? gh.innerText + ' ' : '') + r.innerText);
@@ -926,7 +926,9 @@ code { cursor: pointer; }
     const walker = document.createTreeWalker(td, NodeFilter.SHOW_TEXT);
     const nodes = [];
     while (walker.nextNode()) nodes.push(walker.currentNode);
-    const re = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\</body>').split('').join('[\\s+_\\-\\/.:]*'), 'i');
+    const chars = term.split('').filter((ch) => !/[\s+_\-\/.:~]/.test(ch)).map((ch) => ch.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    if (!chars.length) return;
+    const re = new RegExp(chars.join('[\\s+_\\-\\/.:~]*'), 'i');
     nodes.forEach((n) => {
       if (n.parentElement.closest('a.row-link')) return;
       const m = n.data.match(re);
