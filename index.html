@@ -56,6 +56,26 @@
         </div>
     </header>
 
+    <nav class="section-nav" aria-label="Sections">
+        <div class="section-nav-inner">
+            <div class="section-chips">
+                <a href="#card-keys" data-target="card-keys">Keys &amp; Shortcuts<span class="chip-count"></span></a>
+                <a href="#card-slash-core" data-target="card-slash-core">Slash (Core)<span class="chip-count"></span></a>
+                <a href="#card-slash-tools" data-target="card-slash-tools">Slash (Tools)<span class="chip-count"></span></a>
+                <a href="#card-cli" data-target="card-cli">CLI Flags<span class="chip-count"></span></a>
+                <a href="#card-settings" data-target="card-settings">Settings<span class="chip-count"></span></a>
+                <a href="#card-env" data-target="card-env">Env Vars<span class="chip-count"></span></a>
+                <a href="#card-skills" data-target="card-skills">Skills &amp; Agents<span class="chip-count"></span></a>
+                <a href="#card-hooks" data-target="card-hooks">Memory, Hooks &amp; MCP<span class="chip-count"></span></a>
+            </div>
+            <div class="section-tools">
+                <button type="button" id="collapseAll">Collapse all</button>
+                <button type="button" id="expandAll">Expand all</button>
+                <button type="button" id="densityBtn" aria-pressed="false">Compact</button>
+            </div>
+        </div>
+    </nav>
+
     <div class="dashboard-grid">
 
         <!-- Legend + Command Builder -->
@@ -84,11 +104,11 @@
             </div>
         </div>
 
-        <div class="card">
-            <h2>Keys & Shortcuts</h2>
+        <div class="card" id="card-keys">
+            <h2>Keys & Shortcuts <span class="card-count"></span></h2>
 
-            <div class="search-group">
-                <h3>General Controls</h3>
+            <details class="search-group" open data-group="General Controls">
+                <summary><h3>General Controls</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>Ctrl C</code> / <code>D</code></td><td class="desc">Cancel input / Exit session</td></tr>
@@ -108,10 +128,10 @@
                     <tr class="search-item"><td><code>Esc</code></td><td class="desc">Close background-tasks, diff, and workflow detail views (left arrow no longer closes these)</td></tr>
                     <tr class="search-item"><td><code>selection:clear</code></td><td class="desc">Keybinding action — bind to a key in <code>/keybindings</code> to clear an in-app text selection; works in agents view</td></tr>
                 </table>
-            </div>
+            </details>
 
-            <div class="search-group">
-                <h3>Mode & Input</h3>
+            <details class="search-group" open data-group="Mode & Input">
+                <summary><h3>Mode & Input</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>Tab</code></td><td class="desc">Cycle permission modes</td></tr>
@@ -121,10 +141,10 @@
                     <tr class="search-item"><td><code>Ctrl J</code></td><td class="desc">Newline (control seq)</td></tr>
                     <tr class="search-item"><td><code>Ctrl A</code> / <code>Ctrl E</code></td><td class="desc">Move to start/end of current logical line (multiline input)</td></tr>
                 </table>
-            </div>
+            </details>
 
-            <div class="search-group">
-                <h3>Session Picker Nav</h3>
+            <details class="search-group" open data-group="Session Picker Nav">
+                <summary><h3>Session Picker Nav</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>P</code> / <code>R</code></td><td class="desc">Preview / Rename session</td></tr>
@@ -132,10 +152,10 @@
                     <tr class="search-item"><td><code>A</code> / <code>B</code></td><td class="desc">Filter All projects / Current branch</td></tr>
                     <tr class="search-item"><td><code>Ctrl A</code></td><td class="desc">Show all projects in /resume picker (picker defaults to current dir)</td></tr>
                 </table>
-            </div>
+            </details>
 
-            <div class="search-group">
-                <h3>Transcript View</h3>
+            <details class="search-group" open data-group="Transcript View">
+                <summary><h3>Transcript View</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>[</code></td><td class="desc">Dump transcript to scrollback</td></tr>
@@ -144,24 +164,24 @@
                     <tr class="search-item"><td><code>{</code> / <code>}</code></td><td class="desc">Jump between user prompts in transcript nav view</td></tr>
                     <tr class="search-item"><td><code>v</code> (nav view)</td><td class="desc">Toggle shortcut panel in transcript nav view</td></tr>
                 </table>
-            </div>
+            </details>
 
-            <div class="search-group">
-                <h3>Vim Mode</h3>
+            <details class="search-group" open data-group="Vim Mode">
+                <summary><h3>Vim Mode</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>v</code> / <code>V</code></td><td class="desc">Visual / visual-line selection mode (NORMAL mode)</td></tr>
                     <tr class="search-item"><td><code>/ (NORMAL mode)</code></td><td class="desc">Open reverse history search (like Ctrl+R), matching bash/zsh vi-mode</td></tr>
                     <tr class="search-item"><td><code>s</code> / <code>S</code></td><td class="desc">Substitute char / substitute line in NORMAL mode, matching vim behavior</td></tr>
                 </table>
-            </div>
+            </details>
         </div>
 
-        <div class="card">
-            <h2>Slash Commands (Core)</h2>
+        <div class="card" id="card-slash-core">
+            <h2>Slash Commands (Core) <span class="card-count"></span></h2>
 
-            <div class="search-group">
-                <h3>Session Management</h3>
+            <details class="search-group" open data-group="Session Management">
+                <summary><h3>Session Management</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>/clear</code></td><td class="desc">Clear conversation context; resets the per-session subagent spawn budget</td></tr>
@@ -182,10 +202,10 @@
                     <tr class="search-item"><td><code>/goal [condition]</code></td><td class="desc">Set a completion condition; Claude keeps working across turns until met; works in interactive, <code>-p</code>, and Remote Control; shows live elapsed/turns/tokens overlay; clears itself on unrecoverable errors (revoked auth, exhausted credits, context overflow); checks in on background tasks waiting 30+ min (set <code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES=0</code> to opt out); idle sessions start at most three check-ins per goal — your next message allows three more; check-ins back off (30 min → 1 h → 2 h) instead of repeating every 30 min; resuming via <code>claude --resume</code> restores the active goal</td></tr>
                     <tr class="search-item"><td><code>/cd</code></td><td class="desc">Move session to a new working directory without breaking the prompt cache mid-session; project settings, hooks, <code>.mcp.json</code> servers (behind the usual approval prompt), skills, and agents take effect immediately after the move instead of on <code>--resume</code>; supports directory path suggestions (matching <code>/add-dir</code>)</td></tr>
                 </table>
-            </div>
+            </details>
 
-            <div class="search-group">
-                <h3>Configuration</h3>
+            <details class="search-group" open data-group="Configuration">
+                <summary><h3>Configuration</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>/config</code></td><td class="desc">Open settings interface; search matches option values; Enter and Space change the selected setting; Esc saves and closes</td></tr>
@@ -204,14 +224,14 @@
                     <tr class="search-item"><td><code>/release-notes</code></td><td class="desc">Interactive version picker for release notes</td></tr>
                     <tr class="search-item"><td><code>/scroll-speed</code></td><td class="desc">Tune mouse wheel scroll speed with a live preview</td></tr>
                 </table>
-            </div>
+            </details>
         </div>
 
-        <div class="card">
-            <h2>Slash Commands (Tools)</h2>
+        <div class="card" id="card-slash-tools">
+            <h2>Slash Commands (Tools) <span class="card-count"></span></h2>
 
-            <div class="search-group">
-                <h3>Development Tools</h3>
+            <details class="search-group" open data-group="Development Tools">
+                <summary><h3>Development Tools</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>/init</code></td><td class="desc">Create CLAUDE.md memory</td></tr>
@@ -228,10 +248,10 @@
                     <tr class="search-item"><td><code>/plugin list</code></td><td class="desc">List installed plugins; <code>--enabled</code>/<code>--disabled</code> filters; search bar available when browsing marketplace plugins; surfaces recently-unused plugins for cleanup</td></tr>
                     <tr class="search-item"><td><code>/plugin install &lt;name&gt;</code></td><td class="desc">Install a plugin from the marketplace; supports <code>archive</code> source — install from a zip over HTTPS without git or npm, with optional SHA-256 pinning; refreshes a stale catalog and retries before reporting not found; activates immediately when safe without requiring <code>/reload-plugins</code></td></tr>
                 </table>
-            </div>
+            </details>
 
-            <div class="search-group">
-                <h3>Special & Utility</h3>
+            <details class="search-group" open data-group="Special & Utility">
+                <summary><h3>Special & Utility</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>/btw &lt;query&gt;</code></td><td class="desc">Side question (does not alter context); press <code>c</code> to copy raw markdown answer to clipboard; <code>Shift+←</code>/<code>Shift+→</code> (or <code>[</code>/<code>]</code>) to step through earlier answers</td></tr>
@@ -255,14 +275,14 @@
                     <tr class="search-item"><td><code>/team-onboarding</code></td><td class="desc">Generate teammate ramp-up guide from local CC usage</td></tr>
                     <tr class="search-item"><td><code>/advisor</code></td><td class="desc">AI advisor mode; text form: <code>/advisor</code>, <code>/advisor &lt;model&gt;</code>, <code>/advisor off</code> — works in desktop, Remote Control, and headless (<code>-p</code>/Agent SDK) sessions; Fable 5 available for organizations with Fable access — enable via <code>/model fable</code></td></tr>
                 </table>
-            </div>
+            </details>
         </div>
 
-        <div class="card">
-            <h2>CLI & Headless Flags</h2>
+        <div class="card" id="card-cli">
+            <h2>CLI & Headless Flags <span class="card-count"></span></h2>
 
-            <div class="search-group">
-                <h3>Core Execution</h3>
+            <details class="search-group" open data-group="Core Execution">
+                <summary><h3>Core Execution</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>claude</code></td><td class="desc">Start interactive REPL</td></tr>
@@ -282,10 +302,10 @@
                     <tr class="search-item"><td><code>claude remote-control --continue</code></td><td class="desc">Resume the most recent Remote Control session</td></tr>
                     <tr class="search-item"><td><code>claude self-hosted-runner --client-label &lt;label&gt;</code></td><td class="desc">Override the label the runner registers with (default: hostname); paired with <code>SELF_HOSTED_RUNNER_CLIENT_LABEL</code> env var</td></tr>
                 </table>
-            </div>
+            </details>
 
-            <div class="search-group">
-                <h3>Headless & CI Flags</h3>
+            <details class="search-group" open data-group="Headless & CI Flags">
+                <summary><h3>Headless & CI Flags</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>--restricted</code></td><td class="desc">Remove built-in tools that run commands or code and <code>WebFetch</code> (unless named in <code>--tools</code>); keep file tools inside the working directory; refuse <code>bypassPermissions</code>; ignore user, project and local settings files; paired with <code>CLAUDE_CODE_RESTRICTED=1</code> env var</td></tr>
@@ -299,10 +319,10 @@
                     <tr class="search-item"><td><code>--exclude-dynamic-system-prompt-sections</code></td><td class="desc">Exclude dynamic prompt sections in print mode for cross-user prompt caching</td></tr>
                     <tr class="search-item"><td><code>--forward-subagent-text</code></td><td class="desc">Include subagent text and thinking in <code>--output-format stream-json</code> output; paired with <code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code> env var</td></tr>
                 </table>
-            </div>
+            </details>
 
-            <div class="search-group">
-                <h3>State & Behavior</h3>
+            <details class="search-group" open data-group="State & Behavior">
+                <summary><h3>State & Behavior</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>-w</code> / <code>--worktree</code></td><td class="desc">Start in isolated git worktree</td></tr>
@@ -321,14 +341,14 @@
                     <tr class="search-item"><td><code>--safe-mode</code></td><td class="desc">Start with all customizations (CLAUDE.md, plugins, skills, hooks, MCP servers) disabled for troubleshooting; paired with <code>CLAUDE_CODE_SAFE_MODE</code> env var</td></tr>
                     <tr class="search-item"><td><code>--ax-screen-reader</code></td><td class="desc">Enable screen reader mode — opt-in plain-text rendering for screen reader users; also set via <code>CLAUDE_AX_SCREEN_READER=1</code> env var or <code>axScreenReader: true</code> in settings</td></tr>
                 </table>
-            </div>
+            </details>
         </div>
 
-        <div class="card">
-            <h2>Settings (JSON)</h2>
+        <div class="card" id="card-settings">
+            <h2>Settings (JSON) <span class="card-count"></span></h2>
 
-            <div class="search-group">
-                <h3>Files & Priority</h3>
+            <details class="search-group" open data-group="Files & Priority">
+                <summary><h3>Files & Priority</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>~/.claude/settings.json</code></td><td class="desc">User global defaults</td></tr>
@@ -338,10 +358,10 @@
                     <tr class="search-item"><td><code>.mcp.json</code></td><td class="desc">Project-specific MCP servers</td></tr>
                     <tr class="search-item"><td><code>managed-settings.d/</code></td><td class="desc">Drop-in policy fragments (alphabetical merge)</td></tr>
                 </table>
-            </div>
+            </details>
 
-            <div class="search-group">
-                <h3>Key JSON Settings</h3>
+            <details class="search-group" open data-group="Key JSON Settings">
+                <summary><h3>Key JSON Settings</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>modelOverrides</code></td><td class="desc">Map model picker to custom IDs</td></tr>
@@ -402,10 +422,10 @@
                     <tr class="search-item"><td><code>feedbackDrafts</code></td><td class="desc">Set to <code>false</code> to prevent Claude from auto-drafting a feedback report when something goes wrong; when enabled (default), Claude drafts a report for you to review and send via <code>/feedback</code></td></tr>
                     <tr class="search-item"><td><code class="new">bashOutputMaxChars</code> / <code class="new">taskOutputMaxChars</code> <!-- added:v2.1.261 --></td><td class="desc">Raise how much Bash command output (<code>bashOutputMaxChars</code>) or background-task output (<code>taskOutputMaxChars</code>) Claude receives inline before it is saved to a file; both cap at 128K characters</td></tr>
                 </table>
-            </div>
+            </details>
 
-            <div class="search-group">
-                <h3>Managed & Enterprise</h3>
+            <details class="search-group" open data-group="Managed & Enterprise">
+                <summary><h3>Managed & Enterprise</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>forceRemoteSettingsRefresh</code></td><td class="desc">Block startup until remote managed settings are freshly fetched; fail-closed on fetch failure</td></tr>
@@ -422,15 +442,15 @@
                     <tr class="search-item"><td><code>requiredMinimumVersion</code> / <code>requiredMaximumVersion</code></td><td class="desc">Managed settings — CC refuses to start if its version is outside the allowed range; directs user to an approved version</td></tr>
                     <tr class="search-item"><td><code>enforceAvailableModels</code></td><td class="desc">Managed setting — when enabled, the <code>availableModels</code> allowlist also constrains the Default model (a Default that resolves to a disallowed model falls back to the first allowed model); user or project settings cannot widen a managed <code>availableModels</code> list</td></tr>
                 </table>
-            </div>
+            </details>
 
         </div>
 
-        <div class="card">
-            <h2>Environment Variables</h2>
+        <div class="card" id="card-env">
+            <h2>Environment Variables <span class="card-count"></span></h2>
 
-            <div class="search-group">
-                <h3>All Variables</h3>
+            <details class="search-group" open data-group="All Variables">
+                <summary><h3>All Variables</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>ANTHROPIC_API_KEY</code></td><td class="desc">Auth override</td></tr>
@@ -507,14 +527,14 @@
                     <tr class="search-item"><td><code>CLAUDE_CODE_RESTRICTED=1</code></td><td class="desc">Removes built-in tools that run commands or code and <code>WebFetch</code> (unless named in <code>--tools</code>), keeps file tools inside the working directory, refuses <code>bypassPermissions</code>, and ignores user, project and local settings files; paired with <code>--restricted</code> CLI flag</td></tr>
                     <tr class="search-item"><td><code>SELF_HOSTED_RUNNER_CLIENT_LABEL</code></td><td class="desc">Override the label the self-hosted runner registers with (default: hostname); paired with <code>claude self-hosted-runner --client-label &lt;label&gt;</code> CLI flag</td></tr>
                 </table>
-            </div>
+            </details>
         </div>
 
-        <div class="card">
-            <h2>Skills & Agent Frontmatter</h2>
+        <div class="card" id="card-skills">
+            <h2>Skills & Agent Frontmatter <span class="card-count"></span></h2>
 
-            <div class="search-group">
-                <h3>Built-in Skills & Locations</h3>
+            <details class="search-group" open data-group="Built-in Skills & Locations">
+                <summary><h3>Built-in Skills & Locations</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>/code-review [level] [pr#]</code></td><td class="desc">Code review; <code>/review</code> is an alias; must be explicitly invoked — Claude no longer auto-runs it; runs as a background subagent — review work no longer fills your conversation; pass a PR number to review a specific PR; use <code>/code-review ultra</code> for a deep cloud review; effort level persists — no arg reuses the last level typed; pass <code>--fix</code> to apply findings to working tree; pass <code>--comment</code> to post findings as inline PR comments; Claude can also start it on its own on Bedrock, Vertex AI, Foundry, through the Claude apps gateway, and when telemetry or non-essential traffic is disabled</td></tr>
@@ -532,10 +552,10 @@
                     <tr class="search-item"><td><code>command</code> (plugin marketplace source)</td><td class="desc">Specify a plugin directory via a local command's output (e.g. from an IDE); re-resolved each session without restart; <code>mode: "link"</code> uses it in place</td></tr>
                     <tr class="search-item"><td><code>headersHelper</code> (plugin marketplace / catalog entry)</td><td class="desc">Command that mints HTTP headers (e.g. a short-lived token) for catalog and same-origin archive fetches on a <code>url</code> marketplace; for a catalog entry, runs only on <code>claude plugin install/update</code> after displaying the command; prompts <code>[y/N]</code> or pass <code>-y</code></td></tr>
                 </table>
-            </div>
+            </details>
 
-            <div class="search-group">
-                <h3>Skill YAML Frontmatter</h3>
+            <details class="search-group" open data-group="Skill YAML Frontmatter">
+                <summary><h3>Skill YAML Frontmatter</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>description</code></td><td class="desc">Auto-invocation trigger string</td></tr>
@@ -555,10 +575,10 @@
                     <tr class="search-item"><td><code>defaultEnabled: false</code> (plugin manifest)</td><td class="desc">Plugin starts disabled by default; enable with <code>/plugin</code> or <code>claude plugin enable</code>; dependency plugins of enabled plugins are still enabled automatically</td></tr>
                     <tr class="search-item"><td><code>true/false/yes/no/on/off/1/0</code></td><td class="desc">Accepted values for boolean frontmatter fields in skills and plugins (case-insensitive); all resolve to <code>true</code> or <code>false</code></td></tr>
                 </table>
-            </div>
+            </details>
 
-            <div class="search-group">
-                <h3>Agent YAML Frontmatter</h3>
+            <details class="search-group" open data-group="Agent YAML Frontmatter">
+                <summary><h3>Agent YAML Frontmatter</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>experimental.cacheTtl</code></td><td class="desc">Per-agent prompt cache TTL; set to <code>"5m"</code> or <code>"1h"</code>; used when no subagent TTL setting is configured in the session</td></tr>
@@ -571,10 +591,10 @@
                     <tr class="search-item"><td><code>hooks:</code></td><td class="desc">Agent lifecycle hooks; fire when running as main-thread agent via <code>--agent</code></td></tr>
                     <tr class="search-item"><td><code>mcpServers</code></td><td class="desc">MCP servers for the agent; now loaded for main-thread agent sessions via <code>--agent</code></td></tr>
                 </table>
-            </div>
+            </details>
 
-            <div class="search-group">
-                <h3>Plugin CLI Commands</h3>
+            <details class="search-group" open data-group="Plugin CLI Commands">
+                <summary><h3>Plugin CLI Commands</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>claude plugin enable/disable &lt;name&gt;</code></td><td class="desc">Enable or disable an installed plugin; cloud-synced plugins (from claude.ai) appear as <code>&lt;name&gt;@synced</code> and are managed with <code>claude plugin enable/disable &lt;name&gt;@synced</code>; synced plugins never override a locally installed same-named plugin</td></tr>
@@ -584,14 +604,14 @@
                     <tr class="search-item"><td><code>claude plugin details &lt;name&gt;</code></td><td class="desc">Show a plugin's component inventory and projected per-session token cost</td></tr>
                     <tr class="search-item"><td><code>claude plugin validate</code></td><td class="desc">Validate plugin manifest; warns when a marketplace or plugin name would be rejected by Claude Desktop's managed marketplace sync; also checks a bare <code>.claude/skills</code> directory, reporting SKILL.md files whose frontmatter fails to parse; use <code>--json</code> for a machine-readable validation report</td></tr>
                 </table>
-            </div>
+            </details>
         </div>
 
-        <div class="card">
-            <h2>Memory, Hooks & MCP</h2>
+        <div class="card" id="card-hooks">
+            <h2>Memory, Hooks & MCP <span class="card-count"></span></h2>
 
-            <div class="search-group">
-                <h3>Rules & Auto-Memory</h3>
+            <details class="search-group" open data-group="Rules & Auto-Memory">
+                <summary><h3>Rules & Auto-Memory</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>.claude/rules/*.md</code></td><td class="desc">Project specific structural rules</td></tr>
@@ -600,10 +620,10 @@
                     <tr class="search-item"><td><code>@path/to/file</code></td><td class="desc">Import file directly in CLAUDE.md</td></tr>
                     <tr class="search-item"><td><code>.../memory/MEMORY.md</code></td><td class="desc">Topic files, automatically loaded</td></tr>
                 </table>
-            </div>
+            </details>
 
-            <div class="search-group">
-                <h3>Event Hooks</h3>
+            <details class="search-group" open data-group="Event Hooks">
+                <summary><h3>Event Hooks</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>PreToolUse</code> / <code>PostToolUse</code></td><td class="desc">Intercept before/after tool execution; <code>PostToolUse</code> hook input includes <code>duration_ms</code>; can replace tool output via <code>hookSpecificOutput.updatedToolOutput</code> for all tools</td></tr>
@@ -631,10 +651,10 @@
                     <tr class="search-item"><td><code>EnterWorktree</code></td><td class="desc">Fires when entering a worktree; can now switch between Claude-managed worktrees mid-session; asks for confirmation before entering a git worktree outside the project's <code>.claude/worktrees/</code> directory</td></tr>
                     <tr class="search-item"><td><code>Notification</code></td><td class="desc">Fires when a background agent session needs input or finishes; events: <code>agent_needs_input</code> / <code>agent_completed</code></td></tr>
                 </table>
-            </div>
+            </details>
 
-            <div class="search-group">
-                <h3>MCP Servers</h3>
+            <details class="search-group" open data-group="MCP Servers">
+                <summary><h3>MCP Servers</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>claude mcp list/add/remove</code></td><td class="desc">Standard MCP server management; <code>claude mcp list</code>/<code>get</code> show unapproved <code>.mcp.json</code> servers as <code>⏸ Pending approval</code> instead of auto-connecting; disabled servers now show as <code>⊘ Disabled</code> without connecting for a health check</td></tr>
@@ -646,16 +666,16 @@
                     <tr class="search-item"><td><code>alwaysLoad</code> (MCP server config)</td><td class="desc">When <code>true</code>, all tools from that server skip tool-search deferral and are always available</td></tr>
                     <tr class="search-item"><td><code>roots/list</code></td><td class="desc">Session additional working directories (from <code>/add-dir</code>) are included in MCP <code>roots/list</code>; <code>notifications/roots/list_changed</code> sent to servers when the set changes</td></tr>
                 </table>
-            </div>
+            </details>
 
-            <div class="search-group">
-                <h3>Auth Commands</h3>
+            <details class="search-group" open data-group="Auth Commands">
+                <summary><h3>Auth Commands</h3><span class="group-count"></span></summary>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>claude auth login/logout</code></td><td class="desc">Session authentication control; <code>auth login</code> accepts OAuth code pasted in terminal when browser callback can't reach localhost (WSL2, SSH, containers)</td></tr>
                     <tr class="search-item"><td><code>claude auth status</code></td><td class="desc">Check current authentication validity</td></tr>
                 </table>
-            </div>
+            </details>
         </div>
 
         <div class="no-results search-exclude" id="noResults">No matches — clear search to see everything.</div>
@@ -719,7 +739,83 @@
 
         // --- HIERARCHICAL SEARCH LOGIC ---
         const searchInput = document.getElementById('dashboardSearch');
-        searchInput.addEventListener('input', (e) => performSearch(e.target.value));
+
+        // --- COLLAPSIBLE GROUPS (counts computed at load; folded state remembered) ---
+        const groupEls = Array.from(document.querySelectorAll('details.search-group'));
+        const COLLAPSED_KEY = 'placemat-collapsed';
+        let collapsedGroups = new Set();
+        try { collapsedGroups = new Set(JSON.parse(localStorage.getItem(COLLAPSED_KEY) || '[]')); } catch (err) {}
+
+        function saveCollapsed() {
+            try { localStorage.setItem(COLLAPSED_KEY, JSON.stringify(Array.from(collapsedGroups))); } catch (err) {}
+        }
+
+        groupEls.forEach((group) => {
+            group.querySelector('.group-count').textContent = group.querySelectorAll('.search-item').length;
+            group.open = !collapsedGroups.has(group.dataset.group);
+            group.addEventListener('toggle', () => {
+                if (searchInput.value.trim()) return; // search-driven opens are temporary
+                group.open ? collapsedGroups.delete(group.dataset.group) : collapsedGroups.add(group.dataset.group);
+                saveCollapsed();
+            });
+        });
+
+        function applyGroupState(term) {
+            groupEls.forEach((group) => { group.open = term ? true : !collapsedGroups.has(group.dataset.group); });
+        }
+
+        // --- SECTION NAV: counts, active chip, collapse/expand all ---
+        const navChips = Array.from(document.querySelectorAll('.section-chips a'));
+        navChips.forEach((chip) => {
+            const card = document.getElementById(chip.dataset.target);
+            if (!card) return;
+            const count = card.querySelectorAll('.search-item').length;
+            chip.querySelector('.chip-count').textContent = count;
+            card.querySelector('.card-count').textContent = count;
+        });
+        const cardObserver = new IntersectionObserver((entries) => {
+            const visible = entries
+                .filter((entry) => entry.isIntersecting)
+                .sort((a, b) => (a.boundingClientRect.top - b.boundingClientRect.top)
+                    || (a.boundingClientRect.left - b.boundingClientRect.left));
+            if (!visible.length) return;
+            navChips.forEach((chip) => chip.classList.toggle('is-active', chip.dataset.target === visible[0].target.id));
+        }, { rootMargin: '-100px 0px -60% 0px', threshold: 0 });
+        navChips.forEach((chip) => {
+            const card = document.getElementById(chip.dataset.target);
+            if (card) cardObserver.observe(card);
+        });
+
+        function setAllGroups(open) {
+            collapsedGroups = new Set(open ? [] : groupEls.map((group) => group.dataset.group));
+            saveCollapsed();
+            groupEls.forEach((group) => { group.open = open; });
+        }
+        document.getElementById('collapseAll').addEventListener('click', () => setAllGroups(false));
+        document.getElementById('expandAll').addEventListener('click', () => setAllGroups(true));
+
+        // --- DENSITY TOGGLE ---
+        (function initDensity() {
+            const DENSITY_KEY = 'placemat-density';
+            const btn = document.getElementById('densityBtn');
+            const apply = (compact) => {
+                document.body.classList.toggle('density-compact', compact);
+                btn.setAttribute('aria-pressed', String(compact));
+            };
+            let compact = false;
+            try { compact = localStorage.getItem(DENSITY_KEY) === 'compact'; } catch (err) {}
+            apply(compact);
+            btn.addEventListener('click', () => {
+                compact = !compact;
+                apply(compact);
+                try { localStorage.setItem(DENSITY_KEY, compact ? 'compact' : 'comfortable'); } catch (err) {}
+            });
+        })();
+
+        searchInput.addEventListener('input', (e) => {
+            performSearch(e.target.value);
+            applyGroupState(e.target.value.trim());
+        });
 
         const searchKbd = document.getElementById('searchKbd');
         if (searchKbd && !/mac/i.test(navigator.platform || navigator.userAgentData?.platform || '')) {

@@ -80,13 +80,33 @@ function extractScripts(html) {
   });
 
   test('index.html: Config card is split into Settings (JSON) and Environment Variables', () => {
-    assert.ok(!html.includes('<h2>Config & Environment</h2>'), 'old Config card still present');
-    const settings = html.indexOf('<h2>Settings (JSON)</h2>');
-    const env = html.indexOf('<h2>Environment Variables</h2>');
+    assert.ok(!html.includes('<h2>Config & Environment'), 'old Config card still present');
+    const settings = html.indexOf('<h2>Settings (JSON)');
+    const env = html.indexOf('<h2>Environment Variables');
     assert.ok(settings !== -1 && env !== -1, 'new cards missing');
     assert.ok(settings < env, 'Settings card must come before Environment Variables');
     const managed = html.indexOf('<h3>Managed & Enterprise</h3>');
     assert.ok(managed > settings && managed < env, 'Managed & Enterprise group must live in the Settings card');
+  });
+
+  test('index.html: every search-group is a <details> with a summary, h3 and count span', () => {
+    const groupCount = (html.match(/<details class="search-group" open data-group="[^"]+">/g) || []).length;
+    const h3Count = (html.match(/<h3>/g) || []).length;
+    const summaryCount = (html.match(/<summary><h3>[^<]+<\/h3><span class="group-count"><\/span><\/summary>/g) || []).length;
+    assert.ok(groupCount > 0, 'no details.search-group found');
+    assert.strictEqual(groupCount, h3Count, `${groupCount} details for ${h3Count} h3 headings`);
+    assert.strictEqual(summaryCount, h3Count, `${summaryCount} well-formed summaries for ${h3Count} h3 headings`);
+    assert.strictEqual((html.match(/<div class="search-group">/g) || []).length, 0, 'old div.search-group still present');
+  });
+
+  test('index.html: section nav has one chip per content card, in card order', () => {
+    const cardIds = Array.from(html.matchAll(/<div class="card" id="(card-[a-z-]+)">/g), (m) => m[1]);
+    assert.ok(cardIds.length >= 8, `expected 8+ card ids, found ${cardIds.length}`);
+    const nav = html.match(/<nav class="section-nav"[\s\S]*?<\/nav>/);
+    assert.ok(nav, 'section-nav not found');
+    const chipIds = Array.from(nav[0].matchAll(/href="#(card-[a-z-]+)"/g), (m) => m[1]);
+    assert.deepStrictEqual(chipIds, cardIds, 'nav chips must match card ids and order');
+    assert.ok(html.indexOf('<nav class="section-nav"') < html.indexOf('class="dashboard-grid"'), 'nav must precede the grid');
   });
 
   test('index.html: command builder single-quote escaping is shell-safe', () => {
