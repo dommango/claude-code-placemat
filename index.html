@@ -52,6 +52,7 @@
             <span class="release-tag">As of release: v2.1.263</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <a href="feed.xml" class="header-link" title="Subscribe to placemat changes (RSS)">RSS</a>
+            <button type="button" class="header-link print-btn" id="printBtn" title="Print or save as PDF (Ctrl P)">⎙ Print</button>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
                 <input type="text" id="dashboardSearch" placeholder="Search the placemat…" aria-label="Search the placemat">
@@ -82,6 +83,13 @@
     </nav>
 
     <main class="dashboard-grid">
+
+        <div class="print-head" aria-hidden="true">
+            <span class="print-head-title">Claude Code <b>PLACEMAT</b></span>
+            <span>As of release v2.1.263</span>
+            <span>■ = new &nbsp; □ = unverified</span>
+            <span>dommango.github.io/claude-code-placemat</span>
+        </div>
 
         <div class="card full-width search-exclude since-strip" id="sinceStrip" hidden>
             <div class="since-row">
@@ -812,6 +820,7 @@
             saveCollapsed();
             groupEls.forEach((group) => { group.open = open; });
         }
+        document.getElementById('printBtn').addEventListener('click', () => window.print());
         document.getElementById('collapseAll').addEventListener('click', () => setAllGroups(false));
         document.getElementById('expandAll').addEventListener('click', () => setAllGroups(true));
 

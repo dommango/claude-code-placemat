@@ -156,6 +156,13 @@ function extractScripts(html) {
     assert.ok(num('v2.1.263') < num('v2.2.0'));
   });
 
+  test('index.html: print header release matches the header release tag', () => {
+    const tag = html.match(/<span class="release-tag">As of release: (v[\d.]+)<\/span>/);
+    const head = html.match(/<div class="print-head"[^>]*>[\s\S]*?As of release (v[\d.]+)[\s\S]*?<\/div>/);
+    assert.ok(tag && head, 'release tag or print-head missing');
+    assert.strictEqual(head[1], tag[1], 'print-head release differs from the header release tag');
+  });
+
   test('index.html: command builder single-quote escaping is shell-safe', () => {
     // Extract shellSingleQuote's body and re-run it in isolation — this is the
     // exact logic that generates a copy-pasteable `claude -p '...'` command.
@@ -213,6 +220,15 @@ function extractScripts(html) {
 // --- placemat.css ---
 {
   const css = read('placemat.css');
+    test('placemat.css: has an A4 landscape @page rule and a print block that hides the chrome', () => {
+    assert.ok(/@page\s*\{\s*size: A4 landscape;/.test(css), '@page A4 landscape missing');
+    const print = css.match(/@media print \{([\s\S]*)\}\s*$/);
+    assert.ok(print, '@media print block missing (it must be the last block in the file)');
+    ['.global-header', '.legend-strip', '.print-head', 'column-count: 4', 'break-inside: avoid', 'print-color-adjust: exact'].forEach((needle) => {
+      assert.ok(print[1].includes(needle), `print block missing ${needle}`);
+    });
+  });
+
   ['.sr-only', '.no-results', '.legend-strip', '.legend-strip-row'].forEach((selector) => {
     test(`placemat.css: defines ${selector}`, () => {
       assert.ok(css.includes(selector), `${selector} not found in placemat.css`);
