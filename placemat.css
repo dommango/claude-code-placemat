@@ -106,7 +106,8 @@ html, body {
     transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
 }
 body {
-    padding: 96px 18px 24px;
+    /* --header-h / --nav-h are measured at runtime so the two fixed bars always clear each other */
+    padding: calc(var(--header-h, 52px) + var(--nav-h, 32px) + 12px) 18px 24px;
 }
 
 /* ---------- HEADER ---------- */
@@ -284,7 +285,7 @@ body {
 /* ---------- SECTION NAV ---------- */
 .section-nav {
     position: fixed;
-    top: 52px; left: 0; width: 100%;
+    top: var(--header-h, 52px); left: 0; width: 100%;
     z-index: 999;
     background: var(--header-bg);
     backdrop-filter: saturate(120%) blur(10px);
@@ -366,12 +367,14 @@ body.density-compact .dashboard-grid {
 /* ---------- DASHBOARD GRID ---------- */
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(360px, 100%), 1fr));
     gap: 14px;
     max-width: 1900px;
     margin: 0 auto;
     align-items: start;
 }
+/* grid items default to min-width:auto, which lets a wide row push the page sideways */
+.dashboard-grid > * { min-width: 0; }
 
 /* ---------- CARDS ---------- */
 .card {
@@ -383,7 +386,7 @@ body.density-compact .dashboard-grid {
     transition: border-color var(--dur) var(--ease);
 }
 .card:hover { border-color: var(--border-strong); }
-.card { scroll-margin-top: 100px; }
+.card { scroll-margin-top: calc(var(--header-h, 52px) + var(--nav-h, 32px) + 8px); }
 .card.full-width { grid-column: 1 / -1; }
 .card.legend-strip { padding: 8px 16px; }
 .legend-strip-row {
@@ -498,7 +501,7 @@ tr:hover { background-color: var(--row-hover); }
 }
 
 /* permalinks + roving focus */
-.search-item { scroll-margin-top: 100px; }
+.search-item { scroll-margin-top: calc(var(--header-h, 52px) + var(--nav-h, 32px) + 8px); }
 .search-item td:first-child { position: relative; }
 .row-link {
     position: absolute;
@@ -640,7 +643,8 @@ code.unverified {
 /* ---------- LEGEND + BUILDER (full-width strip) ---------- */
 .legend {
     display: flex;
-    gap: 18px;
+    flex-wrap: wrap;
+    gap: 8px 18px;
     align-items: center;
     font-size: 11px;
     color: var(--fg-muted);
@@ -662,6 +666,7 @@ code.unverified {
     display: flex; gap: 8px;
     align-items: center; flex-wrap: wrap;
     font-size: 12px;
+    min-width: 0;
 }
 .compact-builder .builder-label {
     font-family: var(--font-mono);
@@ -687,15 +692,15 @@ code.unverified {
     outline: none;
     border-color: var(--teal);
 }
-.compact-builder input[type="text"] { flex: 2; min-width: 200px; }
+.compact-builder input[type="text"] { flex: 2 1 180px; min-width: 0; }
 .compact-builder label {
     display: inline-flex; align-items: center; gap: 4px;
     color: var(--fg-muted);
     font-size: 11.5px;
 }
 #generatedCmd {
-    flex: 1;
-    min-width: 200px;
+    flex: 1 1 180px;
+    min-width: 0;
     padding: 5px 10px;
     background: var(--bg-code);
     color: var(--coral);
@@ -855,8 +860,7 @@ code.unverified {
     .release-tag { display: none; }
 }
 @media (max-width: 700px) {
-    body { padding: 140px 12px 24px; }
-    .section-nav { top: 96px; }
+    body { padding: calc(var(--header-h, 96px) + var(--nav-h, 32px) + 12px) 12px 24px; }
     .section-tools { display: none; }
     .global-header {
         height: auto;
@@ -886,6 +890,7 @@ code.unverified {
     box-shadow: 0 0 0 3px var(--new-bg);
     flex-shrink: 0;
 }
+.since-text { flex: 1 1 220px; min-width: 0; }
 .since-text b { color: var(--fg-main); }
 .since-text code { cursor: default; }
 .since-actions { margin-left: auto; display: flex; gap: 6px; }
@@ -911,7 +916,7 @@ code.unverified {
 
 .since-drawer {
     position: fixed;
-    top: 52px; right: 0; bottom: 0;
+    top: var(--header-h, 52px); right: 0; bottom: 0;
     width: min(440px, 100vw);
     background: var(--bg-card-2);
     border-left: 1px solid var(--border-strong);
@@ -1000,9 +1005,7 @@ code.unverified {
     0%, 40% { background: var(--success-flash); }
     100%    { background: transparent; }
 }
-@media (max-width: 700px) {
-    .since-drawer { top: 96px; }
-}
+
 
 /* ---------- PRINT ---------- */
 .print-head { display: none; }

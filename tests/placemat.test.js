@@ -210,10 +210,21 @@ function extractScripts(html) {
     assert.ok(/localStorage\.setItem\('placemat-theme', next\)/.test(html));
   });
 
-  test('changelog.html: .change-list li wraps instead of squeezing code chips onto one line', () => {
-    // Regression guard: linking placemat.css's code{word-break:break-word} into an
-    // unwrapped flex row broke long flags mid-word (e.g. "--permissio n-mode").
-    assert.ok(/\.change-list li \{[^}]*flex-wrap:\s*wrap/.test(html));
+  test('changelog.html: .change-list li is a two-column grid (tag | text) so wrapped lines align under the text', () => {
+    // Regression guard: as a flex row, a long entry wrapped its second line under the
+    // tag at the far left instead of under the text it belongs to.
+    assert.ok(/\.change-list li \{[^}]*display:\s*grid/.test(html), 'change-list li must be a grid');
+    assert.ok(/\.change-list li \{[^}]*grid-template-columns:\s*46px minmax\(0, 1fr\)/.test(html), 'tag | text columns missing');
+    const entries = (html.match(/<li><span class="tag tag-\w+">\w+<\/span><span class="entry">/g) || []).length;
+    const items = (html.match(/<li><span class="tag /g) || []).length;
+    assert.strictEqual(entries, items, `${entries} wrapped entries for ${items} list items`);
+  });
+
+  test('changelog.html: only the newest month group is open by default', () => {
+    const groups = html.match(/<details class="month-group"( open)?>/g) || [];
+    assert.ok(groups.length > 3, 'month groups not found');
+    assert.strictEqual(groups[0], '<details class="month-group" open>', 'newest month must be open');
+    assert.strictEqual(groups.slice(1).filter((g) => g.includes(' open')).length, 0, 'older months must start closed');
   });
 }
 
@@ -265,6 +276,43 @@ function extractScripts(html) {
     assert.ok(xml.includes('<feed xmlns="http://www.w3.org/2005/Atom">'));
     assert.ok(xml.includes('<link rel="self" href="https://dommango.github.io/claude-code-placemat/feed.xml"/>'));
     assert.ok((xml.match(/<entry>/g) || []).length >= 1);
+  });
+}
+
+// --- index.html <-> changelog.html consistency ---
+{
+  const index = read('index.html');
+  const changelog = read('changelog.html');
+  const num = (v) => v.split('.').map(Number).reduce((a, b) => a * 1000 + b, 0);
+
+  test('index.html release tag stays within 3 versions of the newest changelog release', () => {
+    const tag = index.match(/As of release: v([\d.]+)</)[1];
+    const newest = changelog.match(/<h3 id="cc-v([\d-]+)">/)[1].replace(/-/g, '.');
+    assert.ok(num(tag) >= num(newest), `release tag ${tag} is older than changelog ${newest}`);
+    // Releases with no placemat-relevant changes get no changelog entry, so a little slack is expected.
+    assert.ok(num(tag) - num(newest) <= 3, `release tag ${tag} is more than 3 versions ahead of changelog ${newest}`);
+  });
+
+  test('index.html footer sync date matches the newest changelog release date', () => {
+    const footer = index.match(/Content synced (\d{4}-\d{2}-\d{2})/);
+    assert.ok(footer, 'footer sync date missing');
+    const newest = changelog.match(/<h3 id="cc-v[\d-]+">CC v[\d.–v]+ <span class="version-date">(\d{4}-\d{2}-\d{2})<\/span>/);
+    assert.strictEqual(footer[1], newest[1], 'footer sync date is stale');
+  });
+
+  test('index.html: command builder effort options do not name models', () => {
+    const builder = index.match(/<div class="compact-builder">[\s\S]*?<\/div>/)[0];
+    assert.ok(!/\((Opus|Haiku)\)/.test(builder), 'effort options still name a model');
+    assert.ok(builder.includes('value="--effort xhigh"'), 'xhigh effort missing');
+    assert.ok(builder.includes('id="labMode"') && builder.includes('id="labModel"'), 'permission/model selects missing');
+  });
+
+  test('index.html + changelog.html: og:image, twitter card and canonical are present', () => {
+    [index, changelog].forEach((page) => {
+      assert.ok(page.includes('<meta property="og:image" content="https://dommango.github.io/claude-code-placemat/og-image.png">'));
+      assert.ok(page.includes('<meta name="twitter:card" content="summary_large_image">'));
+      assert.ok(/<link rel="canonical" href="https:\/\/dommango\.github\.io\/claude-code-placemat\//.test(page));
+    });
   });
 }
 

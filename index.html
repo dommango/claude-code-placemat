@@ -9,6 +9,9 @@
     <meta property="og:description" content="Single-page reference for Claude Code — commands, shortcuts, flags, configuration, hooks, MCP, skills, and agents.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://dommango.github.io/claude-code-placemat/">
+    <meta property="og:image" content="https://dommango.github.io/claude-code-placemat/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://dommango.github.io/claude-code-placemat/">
     <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iI2Q5Nzc1NyIvPjx0ZXh0IHg9IjE2IiB5PSIyMyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzFlMWUxZSI+Jmd0O188L3RleHQ+PC9zdmc+Cg==">
     <link rel="alternate" type="application/atom+xml" title="Claude Code Placemat changes" href="feed.xml">
     <link rel="stylesheet" href="placemat.css">
@@ -114,10 +117,25 @@
                 <div class="compact-builder">
                     <span class="builder-label">Builder ▸</span>
                     <input type="text" id="labPrompt" placeholder="Instruction (e.g., refactor auth)">
-                    <select id="labEffort">
+                    <select id="labEffort" aria-label="Effort">
                         <option value="">Effort: Auto</option>
-                        <option value="--effort high">High (Opus)</option>
-                        <option value="--effort low">Low (Haiku)</option>
+                        <option value="--effort low">Low</option>
+                        <option value="--effort medium">Medium</option>
+                        <option value="--effort high">High</option>
+                        <option value="--effort xhigh">xhigh</option>
+                    </select>
+                    <select id="labModel" aria-label="Model">
+                        <option value="">Model: Default</option>
+                        <option value="--model claude-sonnet-5">Sonnet 5</option>
+                        <option value="--model claude-opus-5">Opus 5</option>
+                        <option value="--model claude-haiku-4-5-20251001">Haiku 4.5</option>
+                    </select>
+                    <select id="labMode" aria-label="Permission mode">
+                        <option value="">Permission: Default</option>
+                        <option value="--permission-mode plan">Plan</option>
+                        <option value="--permission-mode acceptEdits">Accept edits</option>
+                        <option value="--permission-mode auto">Auto</option>
+                        <option value="--dangerously-skip-permissions">Bypass</option>
                     </select>
                     <select id="labFormat">
                         <option value="">Text Output</option>
@@ -706,7 +724,7 @@
         <div class="no-results search-exclude" id="noResults">No matches — clear search to see everything.</div>
 
         <footer class="global-footer">
-            Template v1.1 | March 2026<br>
+            Template v1.2 · Content synced 2026-09-04<br>
             <a href="https://dommango.github.io" target="_blank" rel="noopener noreferrer">Context//Collapse</a>
         </footer>
 
@@ -792,6 +810,23 @@
         function applyGroupState(term) {
             groupEls.forEach((group) => { group.open = term ? true : !collapsedGroups.has(group.dataset.group); });
         }
+
+        // --- FIXED BAR HEIGHTS: measured so the header and nav always clear each other ---
+        (function trackBarHeights() {
+            const header = document.querySelector('.global-header');
+            const nav = document.querySelector('.section-nav');
+            const sync = () => {
+                document.documentElement.style.setProperty('--header-h', Math.round(header.offsetHeight) + 'px');
+                document.documentElement.style.setProperty('--nav-h', Math.round(nav.offsetHeight) + 'px');
+            };
+            sync();
+            if (typeof ResizeObserver === 'function') {
+                const observer = new ResizeObserver(sync);
+                observer.observe(header);
+                observer.observe(nav);
+            }
+            window.addEventListener('resize', sync);
+        })();
 
         // --- SECTION NAV: counts, active chip, collapse/expand all ---
         const navChips = Array.from(document.querySelectorAll('.section-chips a'));
@@ -1024,6 +1059,8 @@
         const labPrompt = document.getElementById('labPrompt');
         const labEffort = document.getElementById('labEffort');
         const labFormat = document.getElementById('labFormat');
+        const labModel = document.getElementById('labModel');
+        const labMode = document.getElementById('labMode');
         const labBare = document.getElementById('labBare');
         const genOut = document.getElementById('generatedCmd');
 
@@ -1032,20 +1069,13 @@
         const shellSingleQuote = (str) => `'${str.replace(/'/g, `'\\''`)}'`;
 
         const updateCmd = () => {
-            const prompt = shellSingleQuote(labPrompt.value);
-            const effort = labEffort.value;
-            const format = labFormat.value;
-            const bare = labBare.checked ? '--bare' : '';
-
-            let cmd = `claude -p ${prompt}`;
-            if (effort) cmd += ` ${effort}`;
-            if (format) cmd += ` ${format}`;
-            if (bare) cmd += ` ${bare}`;
-
-            genOut.innerText = cmd.trim();
+            const parts = [`claude -p ${shellSingleQuote(labPrompt.value)}`];
+            [labEffort.value, labModel.value, labMode.value, labFormat.value, labBare.checked ? '--bare' : '']
+                .forEach((flag) => { if (flag) parts.push(flag); });
+            genOut.innerText = parts.join(' ');
         };
 
-        [labPrompt, labEffort, labFormat].forEach(el => el.addEventListener('input', updateCmd));
+        [labPrompt, labEffort, labModel, labMode, labFormat].forEach(el => el.addEventListener('input', updateCmd));
         labBare.addEventListener('change', updateCmd);
         updateCmd();
 

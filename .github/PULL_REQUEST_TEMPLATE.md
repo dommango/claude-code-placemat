@@ -18,9 +18,12 @@
 
 - [ ] I read the **Style Guide** and **Content Rules** sections of [CLAUDE.md](../CLAUDE.md)
 - [ ] No `versions/*.html` files were edited (they're frozen snapshots)
-- [ ] New CC-release entries are marked with `class="new"` and `<!-- added:vX.Y.Z -->`
-- [ ] Unverified items are marked with `class="unverified"`
+- [ ] Unverified items are marked with `class="unverified"` (nothing writes `class="new"` — the page computes that per visitor)
+- [ ] New rows have an `id="i-<slug>"` and a matching `.row-link` permalink
+- [ ] No summary over 90 characters; behaviour changes went into notes, not the summary
 - [ ] No code text is truncated with `...`
+- [ ] `node tests/placemat.test.js` passes
+- [ ] `node scripts/build-changes.js` was run if `changelog.html` changed
 - [ ] I previewed locally (`python3 -m http.server 8000`)
 - [ ] HTML validation passes (CI will check)
 

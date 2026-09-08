@@ -23,7 +23,7 @@ delta — humans review and merge.
 
 1. Scheduled agent detects new CC release(s)
 2. Parses changelog, maps changes to placemat sections
-3. Updates `index.html`, `changelog.html`, and the What's New popup data
+3. Updates `index.html` and `changelog.html`, and regenerates `changes.json` / `feed.xml`
 4. Opens PR on a `claude/placemat-update-vX.Y.Z` branch with a change summary + self-review checklist
 5. Human reviews & merges
 6. GitHub Pages auto-deploys from `main`
@@ -43,6 +43,13 @@ Zero-dependency structural/regression checks — no npm install, just Node:
 
 ```bash
 node tests/placemat.test.js
+```
+
+Regenerate the machine-readable change feed after editing `changelog.html`:
+
+```bash
+node scripts/build-changes.js          # writes changes.json + feed.xml
+node scripts/build-changes.js --check  # CI-style staleness check
 ```
 
 ## Contributing
