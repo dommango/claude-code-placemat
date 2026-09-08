@@ -147,7 +147,7 @@
                 <div class="month-content">
 
                     <div class="change-section">
-                        <h3>CC v2.1.261 <span class="version-date">2026-09-04</span></h3>
+                        <h3 id="cc-v2-1-261">CC v2.1.261 <span class="version-date">2026-09-04</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>/skill-doctor</code> — shows which loaded skills go unused and what they cost in context, so you can prune them</li>
                             <li><span class="tag tag-add">ADD</span><code>--append-subagent-system-prompt-file</code> CLI flag — reads the subagent system prompt from a file, for prompts too large to pass on the command line</li>
@@ -156,7 +156,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.260 <span class="version-date">2026-09-03</span></h3>
+                        <h3 id="cc-v2-1-260">CC v2.1.260 <span class="version-date">2026-09-03</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>/diff</code> — in fullscreen mode, opens as a panel beside the conversation showing uncommitted changes as Claude edits</li>
                             <li><span class="tag tag-change">CHG</span><code>Ctrl L</code> in fullscreen — clears the transcript view like a terminal <code>clear</code>; scroll up to see earlier messages</li>
@@ -166,7 +166,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.259 <span class="version-date">2026-09-02</span></h3>
+                        <h3 id="cc-v2-1-259">CC v2.1.259 <span class="version-date">2026-09-02</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>managedMcpServers</code> managed setting — provide HTTP/SSE MCP servers to every user in the organization (same entry shape as <code>.mcp.json</code>); entries naming a command to run are skipped</li>
                             <li><span class="tag tag-add">ADD</span><code>deniedMcpServers</code> managed setting — blocklist of managed MCP servers to deny; as of v2.1.259, <code>allowedMcpServers</code> governs only user-added servers and no longer filters <code>managed-mcp.json</code> servers</li>
@@ -176,7 +176,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.257 <span class="version-date">2026-09-01</span></h3>
+                        <h3 id="cc-v2-1-257">CC v2.1.257 <span class="version-date">2026-09-01</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>timeFormat</code> / <code>timeZone</code> JSON settings — control the turn-end clock and transcript timestamp format (12h, 24h, 24h UTC, or strftime pattern) and time zone</li>
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_SUBAGENT_MODEL_FORCE</code> env var — apply <code>CLAUDE_CODE_SUBAGENT_MODEL</code> (or the main model) to every subagent, ignoring per-spawn and agent-definition model overrides</li>
@@ -196,7 +196,7 @@
                 <div class="month-content">
 
                     <div class="change-section">
-                        <h3>CC v2.1.251 <span class="version-date">2026-08-28</span></h3>
+                        <h3 id="cc-v2-1-251">CC v2.1.251 <span class="version-date">2026-08-28</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>PreModelSwitch</code> / <code>PostModelSwitch</code> hook events — block, confirm, or annotate a model switch before or after it happens</li>
                             <li><span class="tag tag-add">ADD</span><code>prompt_cache</code> status line script JSON input field — per-session prompt-cache stats (hit ratio, misses, tokens re-cached, warm/cold)</li>
@@ -207,7 +207,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.248 <span class="version-date">2026-08-27</span></h3>
+                        <h3 id="cc-v2-1-248">CC v2.1.248 <span class="version-date">2026-08-27</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>--restricted</code> CLI flag / <code>CLAUDE_CODE_RESTRICTED=1</code> env var — removes built-in tools that run commands or code and <code>WebFetch</code> (unless named in <code>--tools</code>); keeps file tools inside the working directory; refuses <code>bypassPermissions</code>; ignores user, project and local settings files</li>
                             <li><span class="tag tag-add">ADD</span><code>experimental.cacheTtl</code> (agent frontmatter) — per-agent prompt cache TTL (<code>"5m"</code> or <code>"1h"</code>); used when no subagent TTL setting is configured in the session</li>
@@ -218,7 +218,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.247 <span class="version-date">2026-08-26</span></h3>
+                        <h3 id="cc-v2-1-247">CC v2.1.247 <span class="version-date">2026-08-26</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>feedbackDrafts</code> JSON setting — set to <code>false</code> to prevent Claude from auto-drafting a feedback report when something goes wrong; draft appears in <code>/feedback</code></li>
                             <li><span class="tag tag-change">CHG</span><code>/claude-api</code> — added <code>cost-optimize</code> subcommand (profiles Claude API spend and works through cost levers); updated with Admin API coverage (organization members, invites, workspaces, API keys, rate limit reports, workload identity federation, CMEK)</li>
@@ -227,7 +227,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.246 <span class="version-date">2026-08-25</span></h3>
+                        <h3 id="cc-v2-1-246">CC v2.1.246 <span class="version-date">2026-08-25</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>/permissions</code> — new Auto mode tab for viewing and editing auto mode classifier rules</li>
                             <li><span class="tag tag-change">CHG</span><code>/cd</code> — project settings, hooks, <code>.mcp.json</code> servers (behind the usual approval prompt), skills, and agents now take effect immediately after the move instead of on <code>--resume</code></li>
@@ -237,7 +237,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.243 <span class="version-date">2026-08-25</span></h3>
+                        <h3 id="cc-v2-1-243">CC v2.1.243 <span class="version-date">2026-08-25</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>modelPicker</code> JSON setting — curate the <code>/model</code> picker with an ordered, labeled list of models (any id spelling, including Vertex/Bedrock ids); entries are appended to or replace the built-in lineup</li>
                             <li><span class="tag tag-add">ADD</span><code>modelPricing</code> managed setting — set an organization's contracted per-model rates and discount multiplier for <code>/cost</code>, status line, and telemetry cost figures instead of list price</li>
@@ -249,7 +249,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.239 <span class="version-date">2026-08-21</span></h3>
+                        <h3 id="cc-v2-1-239">CC v2.1.239 <span class="version-date">2026-08-21</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>claude plugin enable/disable &lt;name&gt;@synced</code> — cloud-synced plugins from claude.ai appear as <code>name@synced</code>; managed with <code>enable/disable &lt;name&gt;@synced</code>; never override a locally installed same-named plugin</li>
                             <li><span class="tag tag-add">ADD</span><code>/claude-api upgrade</code> — new subcommand; migrates Python projects from <code>anthropic</code> 0.x to 1.x (timeouts use <code>anthropic.Timeout</code>, not <code>httpx.Timeout</code>)</li>
@@ -261,7 +261,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.238 <span class="version-date">2026-08-20</span></h3>
+                        <h3 id="cc-v2-1-238">CC v2.1.238 <span class="version-date">2026-08-20</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>keybindingFlavor</code> JSON setting — set to <code>"readline"</code> to make Ctrl+W delete back to previous whitespace (Bash-style); default <code>"classic"</code> unchanged</li>
                             <li><span class="tag tag-add">ADD</span><code>headersHelper</code> (plugin marketplace / catalog entry) — command that mints HTTP headers (e.g. a short-lived token) for catalog and same-origin archive fetches; for catalog entries, runs only on <code>claude plugin install/update</code> after displaying the command (<code>-y</code> to skip prompt)</li>
@@ -273,14 +273,14 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.237 <span class="version-date">2026-08-20</span></h3>
+                        <h3 id="cc-v2-1-237">CC v2.1.237 <span class="version-date">2026-08-20</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>outputStyle</code> JSON setting — <code>"concise"</code> makes Claude lead with results and skip preamble/narration; configure via <code>/config</code> → Output style</li>
                         </ul>
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.236 <span class="version-date">2026-08-19</span></h3>
+                        <h3 id="cc-v2-1-236">CC v2.1.236 <span class="version-date">2026-08-19</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>ANTHROPIC_DEFAULT_MODEL</code> env var — sets the model new sessions start on; a <code>/model</code> pick still overrides it and persists across restarts, unlike <code>ANTHROPIC_MODEL</code></li>
                             <li><span class="tag tag-change">CHG</span><code>SendMessage</code> — added <code>notify_when_idle</code> option: ask another session to send one notice when it next goes idle, opt-in, one-shot, no polling (macOS and Linux)</li>
@@ -288,14 +288,14 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.235 <span class="version-date">2026-08-18</span></h3>
+                        <h3 id="cc-v2-1-235">CC v2.1.235 <span class="version-date">2026-08-18</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>spellcheck</code> JSON setting — underline misspelled words in the prompt input as you type; requires <code>aspell</code>, <code>hunspell</code>, or <code>ispell</code></li>
                         </ul>
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.234 <span class="version-date">2026-08-17</span></h3>
+                        <h3 id="cc-v2-1-234">CC v2.1.234 <span class="version-date">2026-08-17</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>selection:clear</code> keybinding action — bind to a key via <code>/keybindings</code> to clear an in-app text selection; works in agents view</li>
                             <li><span class="tag tag-change">CHG</span><code>/goal</code> — clears itself on unrecoverable errors (revoked auth, exhausted credits, context overflow); checks in on background tasks waiting 30+ min (set <code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES=0</code> to opt out)</li>
@@ -307,7 +307,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.233 <span class="version-date">2026-08-14</span></h3>
+                        <h3 id="cc-v2-1-233">CC v2.1.233 <span class="version-date">2026-08-14</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_TOOL_MEMORY_LIMIT</code> env var — opt-in memory cgroup limit for Bash tool commands on Linux; prevents a runaway build from stalling the session</li>
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS</code> env var — configure the WebFetch session URL cache TTL in milliseconds (default: 15 minutes)</li>
@@ -317,7 +317,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.232 <span class="version-date">2026-08-13</span></h3>
+                        <h3 id="cc-v2-1-232">CC v2.1.232 <span class="version-date">2026-08-13</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>/advisor</code> slash command — AI advisor mode; Fable 5 available for organizations with Fable access (enable via <code>/model fable</code>)</li>
                             <li><span class="tag tag-add">ADD</span><code>additionalMarketplaces</code> JSON setting — friendlier alias for <code>extraKnownMarketplaces</code>; add plugin marketplace repos beyond the built-in list</li>
@@ -326,7 +326,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.229 <span class="version-date">2026-08-12</span></h3>
+                        <h3 id="cc-v2-1-229">CC v2.1.229 <span class="version-date">2026-08-12</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>claude remote-control --continue</code> — resume the most recent Remote Control session</li>
                             <li><span class="tag tag-change">CHG</span><code>/commit-push-pr</code> — git/gh commands with dangerous flags (<code>--force</code>, <code>--amend</code>, <code>--no-verify</code>, etc.) are no longer auto-approved</li>
@@ -336,14 +336,14 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.225 <span class="version-date">2026-08-08</span></h3>
+                        <h3 id="cc-v2-1-225">CC v2.1.225 <span class="version-date">2026-08-08</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>SendMessage</code> — can now initiate a conversation with a Remote Control session on another machine by name, without needing <code>ListAgents</code></li>
                         </ul>
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.224 <span class="version-date">2026-08-07</span></h3>
+                        <h3 id="cc-v2-1-224">CC v2.1.224 <span class="version-date">2026-08-07</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>claude self-hosted-runner</code> CLI command — turn your own machine or container into a session host for Claude Code web, mobile, and desktop sessions (Team and Enterprise plans)</li>
                             <li><span class="tag tag-add">ADD</span><code>ANTHROPIC_BEDROCK_REGION_PREFIX</code> env var — prefer a specific Bedrock cross-region inference profile over the <code>AWS_REGION</code>-derived one</li>
@@ -356,7 +356,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.223 <span class="version-date">2026-08-06</span></h3>
+                        <h3 id="cc-v2-1-223">CC v2.1.223 <span class="version-date">2026-08-06</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>claude --teleport &lt;session-id&gt;</code> — continue a cloud session locally; session ID shown in the <code>/teleport</code> hint that appears in cloud sessions</li>
                             <li><span class="tag tag-change">CHG</span><code>/code-review [level] [pr#]</code> — <code>/review</code> is now an alias; supports PR number as target; <code>ultra</code> level triggers a deep cloud review; effort level persists across invocations (no arg reuses last level)</li>
@@ -367,14 +367,14 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.222 <span class="version-date">2026-08-04</span></h3>
+                        <h3 id="cc-v2-1-222">CC v2.1.222 <span class="version-date">2026-08-04</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>disable-model-invocation</code> (skill frontmatter) — prevent Claude from auto-invoking the skill; Claude is told to ask you to run it manually instead</li>
                         </ul>
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.221 <span class="version-date">2026-08-04</span></h3>
+                        <h3 id="cc-v2-1-221">CC v2.1.221 <span class="version-date">2026-08-04</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>/fork</code> — forked sessions now create their own git worktree instead of working in the original session's checkout</li>
                             <li><span class="tag tag-change">CHG</span><code>/status</code> — now shows session kind: <code>interactive</code>, or a background job that is <code>attached</code> or <code>unattended</code></li>
@@ -393,7 +393,7 @@
                 <div class="month-content">
 
                     <div class="change-section">
-                        <h3>CC v2.1.219 <span class="version-date">2026-07-24</span></h3>
+                        <h3 id="cc-v2-1-219">CC v2.1.219 <span class="version-date">2026-07-24</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>DirectoryAdded</code> hook — fires after <code>/add-dir</code> or SDK <code>register_repo_root</code> registers a new working directory mid-session</li>
                             <li><span class="tag tag-add">ADD</span><code>sandbox.network.strictAllowlist</code> JSON setting — deny non-allowlisted hosts for sandboxed commands without prompting</li>
@@ -403,7 +403,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.218 <span class="version-date">2026-07-22</span></h3>
+                        <h3 id="cc-v2-1-218">CC v2.1.218 <span class="version-date">2026-07-22</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>/deep-research</code> slash command — structured deep-research session; must be explicitly invoked (Claude no longer auto-starts it)</li>
                             <li><span class="tag tag-change">CHG</span><code>/code-review</code> — now runs as a background subagent; review work no longer fills your conversation; keeps stacked slash commands as review target</li>
@@ -414,7 +414,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.217 <span class="version-date">2026-07-21</span></h3>
+                        <h3 id="cc-v2-1-217">CC v2.1.217 <span class="version-date">2026-07-21</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>emojiCompletionEnabled</code> JSON setting — disable emoji shortcode autocomplete in the prompt input (e.g. <code>:heart:</code> → ❤️)</li>
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS</code> env var — cap on concurrently-running subagents (default 20); prevents unbounded fan-out from a single message</li>
@@ -424,14 +424,14 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.216 <span class="version-date">2026-07-20</span></h3>
+                        <h3 id="cc-v2-1-216">CC v2.1.216 <span class="version-date">2026-07-20</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>sandbox.filesystem.disabled</code> JSON setting — skip filesystem isolation while keeping network egress control</li>
                         </ul>
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.215 <span class="version-date">2026-07-19</span></h3>
+                        <h3 id="cc-v2-1-215">CC v2.1.215 <span class="version-date">2026-07-19</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>/verify</code> built-in skill — verify a code change works end-to-end; must be explicitly invoked (Claude no longer auto-runs it)</li>
                             <li><span class="tag tag-change">CHG</span><code>/code-review</code> — Claude no longer auto-runs it; must be explicitly invoked with <code>/code-review</code></li>
@@ -439,7 +439,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.214 <span class="version-date">2026-07-18</span></h3>
+                        <h3 id="cc-v2-1-214">CC v2.1.214 <span class="version-date">2026-07-18</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH</code> env var — configure the 60 KB truncation limit on OpenTelemetry content attributes</li>
                             <li><span class="tag tag-change">CHG</span><code>SessionStart</code> hook — now reports source <code>"fork"</code> when a session begins as a fork instead of <code>"resume"</code></li>
@@ -448,7 +448,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.212 <span class="version-date">2026-07-17</span></h3>
+                        <h3 id="cc-v2-1-212">CC v2.1.212 <span class="version-date">2026-07-17</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>/fork</code> — now copies conversation into a new background session (its own row in <code>claude agents</code>); old in-session subagent behavior moved to new <code>/subtask</code></li>
                             <li><span class="tag tag-add">ADD</span><code>/subtask</code> slash command — launch an in-session subagent for the current task (formerly what <code>/fork</code> did)</li>
@@ -461,7 +461,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.211 <span class="version-date">2026-07-15</span></h3>
+                        <h3 id="cc-v2-1-211">CC v2.1.211 <span class="version-date">2026-07-15</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>--forward-subagent-text</code> CLI flag — include subagent text and thinking in <code>--output-format stream-json</code> output; paired with <code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code> env var</li>
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code> env var — include subagent text and thinking in stream-json output; paired with <code>--forward-subagent-text</code> flag</li>
@@ -471,14 +471,14 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.210 <span class="version-date">2026-07-14</span></h3>
+                        <h3 id="cc-v2-1-210">CC v2.1.210 <span class="version-date">2026-07-14</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>Write(path)</code> / <code>NotebookEdit(path)</code> / <code>Glob(path)</code> — deprecated permission-rule tool names; startup warns to use <code>Edit(path)</code> or <code>Read(path)</code> instead</li>
                         </ul>
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.208 <span class="version-date">2026-07-14</span></h3>
+                        <h3 id="cc-v2-1-208">CC v2.1.208 <span class="version-date">2026-07-14</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>--ax-screen-reader</code> CLI flag — opt-in plain-text rendering for screen reader users; also set via <code>CLAUDE_AX_SCREEN_READER=1</code> env var or <code>axScreenReader: true</code> in settings</li>
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_AX_SCREEN_READER=1</code> env var — enable screen reader mode; paired with <code>--ax-screen-reader</code> flag and <code>axScreenReader</code> JSON setting</li>
@@ -489,7 +489,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.207 <span class="version-date">2026-07-11</span></h3>
+                        <h3 id="cc-v2-1-207">CC v2.1.207 <span class="version-date">2026-07-11</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>disableAutoMode</code> JSON setting — set to <code>true</code> to disable auto mode on Bedrock, Vertex AI, and Foundry (auto mode now available there by default without opt-in)</li>
                             <li><span class="tag tag-add">ADD</span><code>$CLAUDE_PLUGIN_OPTION_&lt;KEY&gt;</code> (hook env var) — access plugin config option values in exec-form hook commands; replaces rejected shell-form <code>${user_config.*}</code></li>
@@ -499,7 +499,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.206 <span class="version-date">2026-07-09</span></h3>
+                        <h3 id="cc-v2-1-206">CC v2.1.206 <span class="version-date">2026-07-09</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>/commit-push-pr</code> slash command — commit, push, and open a PR in one step; auto-allows <code>git push</code> to the repo's configured push remote (<code>remote.pushDefault</code>, or the sole remote) in addition to <code>origin</code></li>
                             <li><span class="tag tag-add">ADD</span><code>Ctrl X</code> (Keys &amp; Shortcuts) — in <code>claude agents</code>: permanently removes a completed session; deleted background jobs stay deleted</li>
@@ -510,14 +510,14 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.205 <span class="version-date">2026-07-08</span></h3>
+                        <h3 id="cc-v2-1-205">CC v2.1.205 <span class="version-date">2026-07-08</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>/doctor</code> — upgraded to a full setup checkup that can diagnose and fix issues; <code>/checkup</code> added as alias</li>
                         </ul>
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.203 <span class="version-date">2026-07-07</span></h3>
+                        <h3 id="cc-v2-1-203">CC v2.1.203 <span class="version-date">2026-07-07</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>roots/list</code> MCP — additional working directories (from <code>/add-dir</code>) now included; <code>notifications/roots/list_changed</code> sent when the set changes</li>
                             <li><span class="tag tag-add">ADD</span><code>/status</code> slash command — show CC environment status and warnings (moved from startup output)</li>
@@ -526,14 +526,14 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.202 <span class="version-date">2026-07-06</span></h3>
+                        <h3 id="cc-v2-1-202">CC v2.1.202 <span class="version-date">2026-07-06</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>dynamicWorkflowSize</code> JSON setting — controls how large Claude makes dynamic workflows (small/medium/large agent counts); advisory guideline, not a hard cap</li>
                         </ul>
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.200 <span class="version-date">2026-07-03</span></h3>
+                        <h3 id="cc-v2-1-200">CC v2.1.200 <span class="version-date">2026-07-03</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>--permission-mode manual</code> — new accepted value for the default permission mode; renamed from <code>default</code> — both values honored</li>
                             <li><span class="tag tag-add">ADD</span><code>defaultMode</code> JSON setting — set default permission mode; <code>"manual"</code> (formerly <code>"default"</code>) — both values accepted</li>
@@ -542,7 +542,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.199 <span class="version-date">2026-07-02</span></h3>
+                        <h3 id="cc-v2-1-199">CC v2.1.199 <span class="version-date">2026-07-02</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>/skill-a /skill-b [prompt]</code> — stacked slash-skill invocations load up to 5 leading skills simultaneously</li>
                             <li><span class="tag tag-change">CHG</span><code>CLAUDE_CODE_RETRY_WATCHDOG</code> — raises default retry count for non-capacity transient errors to 300 and lifts the cap of 15 on <code>CLAUDE_CODE_MAX_RETRIES</code></li>
@@ -551,7 +551,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.198 <span class="version-date">2026-07-01</span></h3>
+                        <h3 id="cc-v2-1-198">CC v2.1.198 <span class="version-date">2026-07-01</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>Notification</code> hook — fires when a background agent session needs input or finishes; events: <code>agent_needs_input</code> / <code>agent_completed</code></li>
                             <li><span class="tag tag-add">ADD</span><code>/dataviz</code> skill — chart and dashboard design guidance with a runnable color-palette validator</li>
@@ -568,28 +568,28 @@
                 <div class="month-content">
 
                     <div class="change-section">
-                        <h3>CC v2.1.197 <span class="version-date">2026-06-30</span></h3>
+                        <h3 id="cc-v2-1-197">CC v2.1.197 <span class="version-date">2026-06-30</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>/model</code> — <code>claude-sonnet-5</code> is now the default model with a native 1M-token context window</li>
                         </ul>
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.196 <span class="version-date">2026-06-27</span></h3>
+                        <h3 id="cc-v2-1-196">CC v2.1.196 <span class="version-date">2026-06-27</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>mcp__name__.*</code> (hook matcher) — hyphenated identifiers now exact-match; use glob suffix to match all tools from a hyphenated MCP server (e.g. <code>mcp__brave-search__.*</code>)</li>
                         </ul>
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.195 <span class="version-date">2026-06-26</span></h3>
+                        <h3 id="cc-v2-1-195">CC v2.1.195 <span class="version-date">2026-06-26</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_DISABLE_MOUSE_CLICKS</code> env var — disable mouse click/drag/hover in fullscreen mode while keeping wheel scroll active</li>
                         </ul>
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.193 <span class="version-date">2026-06-25</span></h3>
+                        <h3 id="cc-v2-1-193">CC v2.1.193 <span class="version-date">2026-06-25</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>autoMode.classifyAllShell</code> JSON setting — route all Bash/PowerShell commands through the auto-mode classifier instead of only arbitrary-code-execution patterns</li>
                             <li><span class="tag tag-add">ADD</span><code>OTEL_LOG_ASSISTANT_RESPONSES</code> env var — opt in to emitting the model's response text as an OTEL log event (<code>claude_code.assistant_response</code>); when unset, follows <code>OTEL_LOG_USER_PROMPTS</code>; set to <code>0</code> to log prompts but not responses</li>
@@ -598,7 +598,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.191 <span class="version-date">2026-06-24</span></h3>
+                        <h3 id="cc-v2-1-191">CC v2.1.191 <span class="version-date">2026-06-24</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>/rewind</code> — now supports resuming a conversation from before <code>/clear</code> was run</li>
                             <li><span class="tag tag-add">ADD</span><code>"Bash,PowerShell"</code> (hook matcher) — comma-separated tool type names in a hook's matcher field fire the hook on any of the listed types</li>
@@ -606,7 +606,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.187 <span class="version-date">2026-06-23</span></h3>
+                        <h3 id="cc-v2-1-187">CC v2.1.187 <span class="version-date">2026-06-23</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>sandbox.credentials</code> JSON setting — block sandboxed commands from reading credential files and secret environment variables</li>
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT</code> env var — override the default 5-minute idle timeout for remote MCP tool calls; stalled calls abort with an error instead of blocking indefinitely</li>
@@ -618,7 +618,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.186 <span class="version-date">2026-06-22</span></h3>
+                        <h3 id="cc-v2-1-186">CC v2.1.186 <span class="version-date">2026-06-22</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>claude mcp login/logout &lt;name&gt;</code> — authenticate or de-authenticate an MCP server from the CLI without opening <code>/mcp</code>; <code>--no-browser</code> redirects auth code to stdin for SSH completion</li>
                             <li><span class="tag tag-change">CHG</span><code>/workflows</code> — press <code>f</code> in the agent detail view to filter sessions by status</li>
@@ -631,7 +631,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.183 <span class="version-date">2026-06-19</span></h3>
+                        <h3 id="cc-v2-1-183">CC v2.1.183 <span class="version-date">2026-06-19</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>attribution.sessionUrl</code> JSON setting — set to <code>false</code> to omit the claude.ai session link from commits and PRs in web and Remote Control sessions</li>
                             <li><span class="tag tag-add">ADD</span><code>/config --help</code> — list all available shorthand keys for <code>/config key=value</code></li>
@@ -640,7 +640,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.181 <span class="version-date">2026-06-17</span></h3>
+                        <h3 id="cc-v2-1-181">CC v2.1.181 <span class="version-date">2026-06-17</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>/config key=value</code> — set any setting from the prompt (e.g. <code>/config thinking=false</code>); works in interactive, <code>-p</code>, and Remote Control</li>
                             <li><span class="tag tag-add">ADD</span><code>sandbox.allowAppleEvents</code> JSON setting — opt-in macOS setting to allow sandboxed commands to send Apple Events</li>
@@ -649,7 +649,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.178 <span class="version-date">2026-06-15</span></h3>
+                        <h3 id="cc-v2-1-178">CC v2.1.178 <span class="version-date">2026-06-15</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>Tool(param:value)</code> permission rule syntax — match a tool's input parameters (supports <code>*</code> wildcard); e.g. <code>Agent(model:opus)</code> to block Opus subagents</li>
                             <li><span class="tag tag-change">CHG</span><code>.claude/skills/&lt;name&gt;/</code> — nested skill directories now load when working on files there; name clashes use <code>&lt;dir&gt;:&lt;name&gt;</code> form</li>
@@ -657,7 +657,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.176 <span class="version-date">2026-06-12</span></h3>
+                        <h3 id="cc-v2-1-176">CC v2.1.176 <span class="version-date">2026-06-12</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>language</code> JSON setting — pin session-title language; titles auto-detect the conversation language by default; set to a BCP 47 tag (e.g. <code>en</code>, <code>ja</code>) to override</li>
                             <li><span class="tag tag-add">ADD</span><code>footerLinksRegexes</code> JSON setting — array of regex patterns for regex-matched link badges in the footer row; configurable via user or managed settings</li>
@@ -665,21 +665,21 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.175 <span class="version-date">2026-06-12</span></h3>
+                        <h3 id="cc-v2-1-175">CC v2.1.175 <span class="version-date">2026-06-12</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>enforceAvailableModels</code> managed setting — when enabled, the <code>availableModels</code> allowlist constrains the Default model (a Default that resolves to a disallowed model falls back to the first allowed model); user or project settings cannot widen a managed <code>availableModels</code> list</li>
                         </ul>
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.174 <span class="version-date">2026-06-12</span></h3>
+                        <h3 id="cc-v2-1-174">CC v2.1.174 <span class="version-date">2026-06-12</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>wheelScrollAccelerationEnabled</code> JSON setting — set to <code>false</code> to disable mouse-wheel scroll acceleration in fullscreen mode</li>
                         </ul>
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.172 <span class="version-date">2026-06-10</span></h3>
+                        <h3 id="cc-v2-1-172">CC v2.1.172 <span class="version-date">2026-06-10</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>SubagentStart</code> / <code>SubagentStop</code> — sub-agents can now spawn their own sub-agents, up to 5 levels deep</li>
                             <li><span class="tag tag-change">CHG</span><code>/plugin list</code> — search bar now available when browsing marketplace plugins</li>
@@ -687,7 +687,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.169 <span class="version-date">2026-06-08</span></h3>
+                        <h3 id="cc-v2-1-169">CC v2.1.169 <span class="version-date">2026-06-08</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>/cd</code> slash command — move session to a new working directory without breaking the prompt cache mid-session</li>
                             <li><span class="tag tag-add">ADD</span><code>--safe-mode</code> CLI flag — start with all customizations (CLAUDE.md, plugins, skills, hooks, MCP servers) disabled for troubleshooting; paired with <code>CLAUDE_CODE_SAFE_MODE</code> env var</li>
@@ -700,7 +700,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.166 <span class="version-date">2026-06-06</span></h3>
+                        <h3 id="cc-v2-1-166">CC v2.1.166 <span class="version-date">2026-06-06</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>fallbackModel</code> JSON setting — configure up to three fallback models tried in order when the primary model is overloaded or unavailable</li>
                             <li><span class="tag tag-add">ADD</span><code>--thinking disabled</code> CLI flag — disable thinking on models that think by default; equivalent to <code>MAX_THINKING_TOKENS=0</code> or the per-model thinking toggle</li>
@@ -711,7 +711,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.163 <span class="version-date">2026-06-04</span></h3>
+                        <h3 id="cc-v2-1-163">CC v2.1.163 <span class="version-date">2026-06-04</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>requiredMinimumVersion</code> / <code>requiredMaximumVersion</code> managed settings — CC refuses to start if its version is outside the allowed range; directs user to an approved version</li>
                             <li><span class="tag tag-add">ADD</span><code>/plugin list</code> slash command — list installed plugins; <code>--enabled</code>/<code>--disabled</code> filters</li>
@@ -722,7 +722,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.162 <span class="version-date">2026-06-03</span></h3>
+                        <h3 id="cc-v2-1-162">CC v2.1.162 <span class="version-date">2026-06-03</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>/terminal-setup</code> — renamed Windsurf to Devin Desktop following the editor's rebrand</li>
                             <li><span class="tag tag-change">CHG</span><code>claude agents --json</code> — output now includes <code>waitingFor</code> field showing what a waiting session is blocked on</li>
@@ -731,14 +731,14 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.161 <span class="version-date">2026-06-02</span></h3>
+                        <h3 id="cc-v2-1-161">CC v2.1.161 <span class="version-date">2026-06-02</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>OTEL_RESOURCE_ATTRIBUTES</code> env var — values now used as labels on metric datapoints; slice usage metrics by custom dimensions (e.g. team, repo)</li>
                         </ul>
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.160 <span class="version-date">2026-06-02</span></h3>
+                        <h3 id="cc-v2-1-160">CC v2.1.160 <span class="version-date">2026-06-02</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>ultracode</code> prompt trigger keyword — type in the prompt to start a dynamic workflow; highlighted in violet in the prompt input</li>
                         </ul>
@@ -753,14 +753,14 @@
                 <div class="month-content">
 
                     <div class="change-section">
-                        <h3>CC v2.1.158 <span class="version-date">2026-05-30</span></h3>
+                        <h3 id="cc-v2-1-158">CC v2.1.158 <span class="version-date">2026-05-30</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_ENABLE_AUTO_MODE=1</code> env var — opt in to Auto mode on Bedrock, Vertex, and Foundry for Opus 4.7 and Opus 4.8</li>
                         </ul>
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.157 <span class="version-date">2026-05-29</span></h3>
+                        <h3 id="cc-v2-1-157">CC v2.1.157 <span class="version-date">2026-05-29</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>claude plugin init &lt;name&gt;</code> CLI command — scaffold a new plugin in <code>.claude/skills</code></li>
                             <li><span class="tag tag-add">ADD</span><code>agent</code> JSON setting — default agent name honored for dispatched sessions in <code>claude agents</code>; override per-session with <code>--agent &lt;name&gt;</code></li>
@@ -772,7 +772,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.154 <span class="version-date">2026-05-28</span></h3>
+                        <h3 id="cc-v2-1-154">CC v2.1.154 <span class="version-date">2026-05-28</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>/workflows</code> slash command — view and manage dynamic workflow runs; orchestrates work across tens to hundreds of background agents for large, complex tasks</li>
                             <li><span class="tag tag-add">ADD</span><code>claude --bg --exec '&lt;cmd&gt;'</code> CLI flag — run a shell command as a background session you can attach to and detach from; also available as <code>! &lt;cmd&gt;</code> in the <code>claude agents</code> TUI</li>
@@ -787,7 +787,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.153 <span class="version-date">2026-05-28</span></h3>
+                        <h3 id="cc-v2-1-153">CC v2.1.153 <span class="version-date">2026-05-28</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>/model</code> — selection now saved as default for new sessions; press <code>s</code> in picker to switch for current session only (replaces <code>d</code>)</li>
                             <li><span class="tag tag-change">CHG</span><code>/doctor</code> — now shows result of last update attempt; lists npm auto-update fix hints</li>
@@ -796,7 +796,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.152 <span class="version-date">2026-05-27</span></h3>
+                        <h3 id="cc-v2-1-152">CC v2.1.152 <span class="version-date">2026-05-27</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>/reload-skills</code> slash command — re-scan skill directories without restarting the session</li>
                             <li><span class="tag tag-add">ADD</span><code>/simplify</code> built-in skill — back as alias for <code>/code-review --fix</code>; applies review findings to working tree</li>
@@ -813,7 +813,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.149 <span class="version-date">2026-05-22</span></h3>
+                        <h3 id="cc-v2-1-149">CC v2.1.149 <span class="version-date">2026-05-22</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>/usage</code> — per-category limits breakdown (skills, subagents, plugins, per-MCP-server cost)</li>
                             <li><span class="tag tag-change">CHG</span><code>/diff</code> — detail view now scrollable with arrows, <code>j</code>/<code>k</code>, <code>PgUp</code>/<code>PgDn</code>, <code>Space</code>, <code>Home</code>/<code>End</code></li>
@@ -822,21 +822,21 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.147 <span class="version-date">2026-05-21</span></h3>
+                        <h3 id="cc-v2-1-147">CC v2.1.147 <span class="version-date">2026-05-21</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>Ctrl T</code> — in <code>claude agents</code>: pin/unpin background session; pinned sessions stay alive when idle and restart in place for CC updates</li>
                         </ul>
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.146 <span class="version-date">2026-05-21</span></h3>
+                        <h3 id="cc-v2-1-146">CC v2.1.146 <span class="version-date">2026-05-21</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>/simplify</code> renamed to <code>/code-review [effort]</code> — optional effort level (e.g. <code>/code-review high</code>)</li>
                         </ul>
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.145 <span class="version-date">2026-05-19</span></h3>
+                        <h3 id="cc-v2-1-145">CC v2.1.145 <span class="version-date">2026-05-19</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>claude agents --json</code> — list live sessions as JSON for scripting (tmux-resurrect, status bars, session pickers)</li>
                             <li><span class="tag tag-change">CHG</span><code>Stop</code> / <code>SubagentStop</code> hook input — now includes <code>background_tasks</code> and <code>session_crons</code> fields</li>
@@ -844,7 +844,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.144 <span class="version-date">2026-05-19</span></h3>
+                        <h3 id="cc-v2-1-144">CC v2.1.144 <span class="version-date">2026-05-19</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>/extra-usage</code> renamed to <code>/usage-credits</code>; old name still works</li>
                             <li><span class="tag tag-change">CHG</span><code>/model</code> — now changes model for current session only; press <code>d</code> in the picker to set a default for new sessions</li>
@@ -853,14 +853,14 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.143 <span class="version-date">2026-05-15</span></h3>
+                        <h3 id="cc-v2-1-143">CC v2.1.143 <span class="version-date">2026-05-15</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>worktree.bgIsolation</code> JSON setting — set to <code>"none"</code> to disable worktree isolation for background sessions</li>
                         </ul>
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.142 <span class="version-date">2026-05-14</span></h3>
+                        <h3 id="cc-v2-1-142">CC v2.1.142 <span class="version-date">2026-05-14</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>claude agents</code> — new dispatch flags for configuring background sessions: <code>--add-dir</code>, <code>--settings</code>, <code>--mcp-config</code>, <code>--plugin-dir</code>, <code>--permission-mode</code>, <code>--model</code>, <code>--effort</code>, <code>--dangerously-skip-permissions</code></li>
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE=1</code> env var — pin Fast mode to Opus 4.6; fast mode now defaults to Opus 4.7</li>
@@ -868,7 +868,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.141 <span class="version-date">2026-05-13</span></h3>
+                        <h3 id="cc-v2-1-141">CC v2.1.141 <span class="version-date">2026-05-13</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>terminalSequence</code> hook JSON output field — emit desktop notifications, window titles, and bells without a controlling terminal</li>
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_PLUGIN_PREFER_HTTPS</code> env var — clone GitHub plugin sources over HTTPS instead of SSH; for environments without a GitHub SSH key</li>
@@ -878,7 +878,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.139 <span class="version-date">2026-05-11</span></h3>
+                        <h3 id="cc-v2-1-139">CC v2.1.139 <span class="version-date">2026-05-11</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>claude agents</code> CLI command — agent view (Research Preview): a single list of every CC session — running, blocked on you, or done</li>
                             <li><span class="tag tag-add">ADD</span><code>/goal [condition]</code> slash command — set a completion condition; Claude keeps working across turns until met; works in interactive, <code>-p</code>, and Remote Control; shows elapsed/turns/tokens overlay</li>
@@ -892,7 +892,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.136 <span class="version-date">2026-05-08</span></h3>
+                        <h3 id="cc-v2-1-136">CC v2.1.136 <span class="version-date">2026-05-08</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>autoMode.hard_deny</code> JSON setting — auto mode classifier rules that block unconditionally regardless of user intent; unlike <code>autoMode.soft_deny</code>, cannot be overridden by allow exceptions</li>
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL</code> env var — re-enable session quality survey for enterprises capturing responses through OpenTelemetry</li>
@@ -900,7 +900,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.133 <span class="version-date">2026-05-07</span></h3>
+                        <h3 id="cc-v2-1-133">CC v2.1.133 <span class="version-date">2026-05-07</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>worktree.baseRef</code> JSON setting — <code>fresh</code> (default) branches worktrees from <code>origin/&lt;default&gt;</code>; <code>head</code> branches from local <code>HEAD</code>; applies to <code>--worktree</code>, <code>EnterWorktree</code>, and agent-isolation</li>
                             <li><span class="tag tag-add">ADD</span><code>sandbox.bwrapPath</code> / <code>sandbox.socatPath</code> managed settings — custom bubblewrap and socat binary paths (Linux/WSL)</li>
@@ -912,7 +912,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.132 <span class="version-date">2026-05-06</span></h3>
+                        <h3 id="cc-v2-1-132">CC v2.1.132 <span class="version-date">2026-05-06</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_SESSION_ID</code> env var — Session ID injected into Bash tool subprocess environment, matching the <code>session_id</code> passed to hooks</li>
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1</code> env var — Opt out of the fullscreen alternate-screen renderer; keeps conversation in the terminal's native scrollback</li>
@@ -920,7 +920,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.129 <span class="version-date">2026-05-06</span></h3>
+                        <h3 id="cc-v2-1-129">CC v2.1.129 <span class="version-date">2026-05-06</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>Ctrl R</code> — History picker now searches all projects by default; press <code>Ctrl+S</code> to narrow to current project or session</li>
                             <li><span class="tag tag-add">ADD</span><code>--plugin-url &lt;url&gt;</code> CLI flag — Fetch a plugin <code>.zip</code> archive from a URL for the current session</li>
@@ -932,7 +932,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.128 <span class="version-date">2026-05-04</span></h3>
+                        <h3 id="cc-v2-1-128">CC v2.1.128 <span class="version-date">2026-05-04</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>/color [color]</code> — Bare <code>/color</code> with no args now picks a random session color</li>
                             <li><span class="tag tag-change">CHG</span><code>/mcp</code> — Now shows tool count for each connected server and flags servers with 0 tools</li>
@@ -943,7 +943,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.126 <span class="version-date">2026-05-01</span></h3>
+                        <h3 id="cc-v2-1-126">CC v2.1.126 <span class="version-date">2026-05-01</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>claude project purge [path]</code> CLI subcommand — Delete all Claude Code state for a project (transcripts, tasks, file history, config entry); supports <code>--dry-run</code>, <code>-y/--yes</code>, <code>-i/--interactive</code>, and <code>--all</code></li>
                             <li><span class="tag tag-change">CHG</span><code>--dangerously-skip-permissions</code> — Now bypasses prompts for writes to <code>.claude/</code>, <code>.git/</code>, <code>.vscode/</code>, shell config files, and other protected paths (catastrophic removal commands still prompt)</li>
@@ -961,14 +961,14 @@
                 <div class="month-content">
 
                     <div class="change-section">
-                        <h3>CC v2.1.122–v2.1.123 <span class="version-date">2026-04-29</span></h3>
+                        <h3 id="cc-v2-1-123">CC v2.1.122–v2.1.123 <span class="version-date">2026-04-29</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>ANTHROPIC_BEDROCK_SERVICE_TIER</code> env var — Select a Bedrock service tier (<code>default</code>, <code>flex</code>, or <code>priority</code>); sent as the <code>X-Amzn-Bedrock-Service-Tier</code> header</li>
                         </ul>
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.120–v2.1.121 <span class="version-date">2026-04-28</span></h3>
+                        <h3 id="cc-v2-1-121">CC v2.1.120–v2.1.121 <span class="version-date">2026-04-28</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>claude ultrareview [target]</code> CLI subcommand — Run <code>/ultrareview</code> non-interactively from CI or scripts; prints findings to stdout; <code>--json</code> for raw output</li>
                             <li><span class="tag tag-add">ADD</span><code>${CLAUDE_EFFORT}</code> skill template variable — Reference current effort level in skill content</li>
@@ -983,7 +983,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.119 <span class="version-date">2026-04-23</span></h3>
+                        <h3 id="cc-v2-1-119">CC v2.1.119 <span class="version-date">2026-04-23</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>prUrlTemplate</code> JSON setting — Point footer PR badge at a custom code-review URL instead of github.com</li>
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_HIDE_CWD</code> env var — Hide working directory in the startup logo</li>
@@ -995,7 +995,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.118 <span class="version-date">2026-04-23</span></h3>
+                        <h3 id="cc-v2-1-118">CC v2.1.118 <span class="version-date">2026-04-23</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>/usage</code> slash command — Unified usage view (cost + stats tabs); <code>/cost</code> and <code>/stats</code> become shortcuts that open the relevant tab</li>
                             <li><span class="tag tag-change">CHG</span><code>/stats</code> — Description updated to note it is now a shortcut to the /usage stats tab</li>
@@ -1010,7 +1010,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.117 <span class="version-date">2026-04-22</span></h3>
+                        <h3 id="cc-v2-1-117">CC v2.1.117 <span class="version-date">2026-04-22</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_FORK_SUBAGENT=1</code> env var — Enable forked subagents on external builds</li>
                             <li><span class="tag tag-add">ADD</span><code>mcpServers</code> agent frontmatter field — Loaded for main-thread agent sessions via <code>--agent</code></li>
@@ -1020,7 +1020,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.116 <span class="version-date">2026-04-20</span></h3>
+                        <h3 id="cc-v2-1-116">CC v2.1.116 <span class="version-date">2026-04-20</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>/terminal-setup</code> — description updated to note scroll sensitivity configuration in VS Code, Cursor, and Windsurf</li>
                             <li><span class="tag tag-change">CHG</span><code>/config</code> — description updated to note search matches option values</li>
@@ -1031,7 +1031,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.113 <span class="version-date">2026-04-17</span></h3>
+                        <h3 id="cc-v2-1-113">CC v2.1.113 <span class="version-date">2026-04-17</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>sandbox.network.deniedDomains</code> JSON setting — Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</li>
                             <li><span class="tag tag-add">ADD</span><code>Ctrl A</code> / <code>Ctrl E</code> (multiline input) — Move to start/end of current logical line, matching readline behavior</li>
@@ -1041,7 +1041,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.110–v2.1.112 <span class="version-date">2026-04-16</span></h3>
+                        <h3 id="cc-v2-1-112">CC v2.1.110–v2.1.112 <span class="version-date">2026-04-16</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>/tui [fullscreen]</code> slash command — Switch to flicker-free fullscreen TUI rendering in same conversation</li>
                             <li><span class="tag tag-add">ADD</span><code>/focus</code> slash command — Toggle focus view in fullscreen/TUI mode</li>
@@ -1063,7 +1063,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.108–v2.1.109 <span class="version-date">2026-04-14</span></h3>
+                        <h3 id="cc-v2-1-109">CC v2.1.108–v2.1.109 <span class="version-date">2026-04-14</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>/recap</code> slash command — Summarize away context; auto-triggered on return or invoke manually</li>
                             <li><span class="tag tag-add">ADD</span><code>/rewind</code> / <code>/undo</code> slash commands — Rewind conversation; <code>/undo</code> is new alias for <code>/rewind</code></li>
@@ -1077,7 +1077,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.105 <span class="version-date">2026-04-13</span></h3>
+                        <h3 id="cc-v2-1-105">CC v2.1.105 <span class="version-date">2026-04-13</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>/proactive</code> slash command — alias for <code>/loop</code></li>
                             <li><span class="tag tag-add">ADD</span><code>PreCompact</code> hook event — fires before compaction; block by exiting with code 2 or returning <code>{"decision":"block"}</code></li>
@@ -1086,7 +1086,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.101 <span class="version-date">2026-04-10</span></h3>
+                        <h3 id="cc-v2-1-101">CC v2.1.101 <span class="version-date">2026-04-10</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>/team-onboarding</code> slash command — Generate teammate ramp-up guide from local CC usage</li>
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_CERT_STORE=bundled</code> env var — Use only bundled CAs; by default OS CA cert store is now trusted (enterprise TLS proxy support)</li>
@@ -1095,7 +1095,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.98 <span class="version-date">2026-04-09</span></h3>
+                        <h3 id="cc-v2-1-98">CC v2.1.98 <span class="version-date">2026-04-09</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_PERFORCE_MODE</code> env var — Edit/Write/NotebookEdit fail on read-only files with a <code>p4 edit</code> hint</li>
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_SCRIPT_CAPS</code> env var — Limit per-session script invocations (subprocess sandboxing)</li>
@@ -1106,7 +1106,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.97 <span class="version-date">2026-04-08</span></h3>
+                        <h3 id="cc-v2-1-97">CC v2.1.97 <span class="version-date">2026-04-08</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>Ctrl O</code> — Description updated to note focus view toggle in NO_FLICKER mode</li>
                             <li><span class="tag tag-add">ADD</span><code>statusLine.refreshInterval</code> JSON setting — Re-run status line command every N seconds</li>
@@ -1114,7 +1114,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.94 <span class="version-date">2026-04-07</span></h3>
+                        <h3 id="cc-v2-1-94">CC v2.1.94 <span class="version-date">2026-04-07</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_USE_MANTLE=1</code> env var — Enable Amazon Bedrock powered by Mantle</li>
                             <li><span class="tag tag-add">ADD</span><code>keep-coding-instructions</code> skill frontmatter field — Control plugin output style for coding tasks</li>
@@ -1123,7 +1123,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.92 <span class="version-date">2026-04-04</span></h3>
+                        <h3 id="cc-v2-1-92">CC v2.1.92 <span class="version-date">2026-04-04</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>forceRemoteSettingsRefresh</code> JSON setting — Block startup until remote managed settings are freshly fetched; fail-closed on fetch failure</li>
                             <li><span class="tag tag-add">ADD</span><code>/release-notes</code> slash command — Interactive version picker for release notes</li>
@@ -1134,7 +1134,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.91 <span class="version-date">2026-04-02</span></h3>
+                        <h3 id="cc-v2-1-91">CC v2.1.91 <span class="version-date">2026-04-02</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>disableSkillShellExecution</code> JSON setting — Disable inline shell execution in skills and custom slash commands</li>
                             <li><span class="tag tag-add">ADD</span><code>_meta["anthropic/maxResultSizeChars"]</code> MCP annotation — Override max result size per tool call (up to 500K chars)</li>
@@ -1143,7 +1143,7 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.89–v2.1.90 <span class="version-date">2026-04-01</span></h3>
+                        <h3 id="cc-v2-1-90">CC v2.1.89–v2.1.90 <span class="version-date">2026-04-01</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>/powerup</code> slash command — Interactive lessons teaching CC features with animated demos</li>
                             <li><span class="tag tag-add">ADD</span><code>MCP_CONNECTION_NONBLOCKING=true</code> env var — Skip MCP connection wait in headless (-p) mode</li>
@@ -1161,7 +1161,7 @@
                 <div class="month-content">
 
                     <div class="change-section">
-                        <h3>CC v2.1.88 <span class="version-date">2026-03-31</span></h3>
+                        <h3 id="cc-v2-1-88">CC v2.1.88 <span class="version-date">2026-03-31</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_NO_FLICKER=1</code> env var — Opt into flicker-free alt-screen rendering with virtualized scrollback</li>
                             <li><span class="tag tag-add">ADD</span><code>PermissionDenied</code> hook event — Fires after auto mode classifier denials; return <code>{retry:true}</code> to allow retry</li>
@@ -1170,14 +1170,14 @@
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.86 <span class="version-date">2026-03-28</span></h3>
+                        <h3 id="cc-v2-1-86">CC v2.1.86 <span class="version-date">2026-03-28</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-add">ADD</span><code>CLAUDE_CODE_MCP_SERVER_NAME</code> / <code>CLAUDE_CODE_MCP_SERVER_URL</code> — Inject server identity into MCP <code>headersHelper</code> scripts, enabling one helper to serve multiple servers (v2.1.85)</li>
                         </ul>
                     </div>
 
                     <div class="change-section">
-                        <h3>CC v2.1.82–v2.1.85 <span class="version-date">2026-03-27</span></h3>
+                        <h3 id="cc-v2-1-85">CC v2.1.82–v2.1.85 <span class="version-date">2026-03-27</span></h3>
                         <ul class="change-list">
                             <li><span class="tag tag-change">CHG</span><code>Ctrl F</code> &rarr; <code>Ctrl X K</code> for killing background agents (v2.1.83)</li>
                             <li><span class="tag tag-add">ADD</span><code>CwdChanged</code> / <code>FileChanged</code> hook events (v2.1.83)</li>

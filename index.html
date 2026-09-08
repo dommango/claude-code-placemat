@@ -10,6 +10,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://dommango.github.io/claude-code-placemat/">
     <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iI2Q5Nzc1NyIvPjx0ZXh0IHg9IjE2IiB5PSIyMyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzFlMWUxZSI+Jmd0O188L3RleHQ+PC9zdmc+Cg==">
+    <link rel="alternate" type="application/atom+xml" title="Claude Code Placemat changes" href="feed.xml">
     <link rel="stylesheet" href="placemat.css">
     <script>
         (function() {
@@ -50,6 +51,7 @@
         <div class="global-controls">
             <span class="release-tag">As of release: v2.1.263</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
+            <a href="feed.xml" class="header-link" title="Subscribe to placemat changes (RSS)">RSS</a>
             <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
             <div class="search-wrap">
                 <input type="text" id="dashboardSearch" placeholder="Search the placemat…" aria-label="Search the placemat">
@@ -81,12 +83,23 @@
 
     <main class="dashboard-grid">
 
+        <div class="card full-width search-exclude since-strip" id="sinceStrip" hidden>
+            <div class="since-row">
+                <span class="since-dot" aria-hidden="true"></span>
+                <span class="since-text" id="sinceText"></span>
+                <span class="since-actions">
+                    <button type="button" id="sinceShow">Show changes</button>
+                    <button type="button" id="sinceRead" class="quiet">Mark as read</button>
+                </span>
+            </div>
+        </div>
+
         <!-- Legend + Command Builder -->
         <div class="card full-width search-exclude legend-strip">
             <div class="legend-strip-row">
                 <div class="legend">
                     <div class="legend-item"><span class="legend-swatch swatch-default"></span> Verified</div>
-                    <div class="legend-item"><span class="legend-swatch swatch-new"></span> New (recent release)</div>
+                    <div class="legend-item"><span class="legend-swatch swatch-new"></span> <span id="legendNew">New since your last visit</span></div>
                     <div class="legend-item"><span class="legend-swatch swatch-unverified"></span> Unverified</div>
                     <div class="legend-item"><button type="button" class="notes-all" id="notesAll" aria-pressed="false">Show all notes</button></div>
                 </div>
@@ -268,7 +281,7 @@
                     <tr class="search-item" id="i-ultracode"><td><a class="row-link" href="#i-ultracode" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>ultracode</code></td><td class="desc">Prompt trigger keyword — type in the prompt to start a dynamic workflow; highlighted in violet in the prompt input</td></tr>
                     <tr class="search-item" id="i-voice"><td><a class="row-link" href="#i-voice" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>/voice</code></td><td class="desc">Push-to-talk voice prompting</td></tr>
                     <tr class="search-item" id="i-doctor"><td><a class="row-link" href="#i-doctor" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>/doctor</code></td><td class="desc"><span class="summary">Full setup checkup — diagnose and fix installation or environment issues</span> <button type="button" class="notes-btn" aria-expanded="false">+4</button><ul class="notes" hidden><li>Press <code>f</code> to auto-fix; can be opened while Claude is responding</li><li>Shows the result of the last update attempt and npm auto-update fix hints</li><li>Proposes trimming checked-in <code>CLAUDE.md</code> content Claude could derive from the codebase</li><li><code>/checkup</code> is an alias</li></ul></td></tr>
-                    <tr class="search-item" id="i-skill-doctor"><td><a class="row-link" href="#i-skill-doctor" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code class="new">/skill-doctor</code> <!-- added:v2.1.261 --></td><td class="desc">Show which loaded skills go unused and what they cost in context — helps prune skills that aren't contributing</td></tr>
+                    <tr class="search-item" id="i-skill-doctor"><td><a class="row-link" href="#i-skill-doctor" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>/skill-doctor</code></td><td class="desc">Show which loaded skills go unused and what they cost in context — helps prune skills that aren't contributing</td></tr>
                     <tr class="search-item" id="i-status"><td><a class="row-link" href="#i-status" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>/status</code></td><td class="desc"><span class="summary">Show environment status, warnings and what kind of session this is</span> <button type="button" class="notes-btn" aria-expanded="false">+6</button><ul class="notes" hidden><li>Warns about a broken setup (e.g. "claude command missing or broken")</li><li>Session kind: <code>interactive</code>, or a background job that is <code>attached</code> or <code>unattended</code></li><li><code>Skipped sources</code> line lists managed settings sources present but not applied</li><li>Shows GitHub connection status for Claude Code on the web (Pro/Max)</li><li>Explains a managed-settings load failure or why they weren't fetched (Bedrock/Vertex/third-party provider, custom <code>ANTHROPIC_BASE_URL</code>)</li><li>Moved out of the startup output in v2.1.203</li></ul></td></tr>
                     <tr class="search-item" id="i-pr-comments-pr"><td><a class="row-link" href="#i-pr-comments-pr" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>/pr-comments [PR]</code></td><td class="desc">Fetch GitHub PR comments</td></tr>
                     <tr class="search-item" id="i-security-review"><td><a class="row-link" href="#i-security-review" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>/security-review</code></td><td class="desc">Security analysis of uncommitted code</td></tr>
@@ -315,7 +328,7 @@
                     <tr class="search-item" id="i-restricted"><td><a class="row-link" href="#i-restricted" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>--restricted</code></td><td class="desc"><span class="summary">Remove built-in tools that run commands or code and <code>WebFetch</code> (unless named in <code>--tools</code>)</span> <button type="button" class="notes-btn" aria-expanded="false">+4</button><ul class="notes" hidden><li>Keep file tools inside the working directory</li><li>Refuse <code>bypassPermissions</code></li><li>Ignore user, project and local settings files</li><li>Paired with <code>CLAUDE_CODE_RESTRICTED=1</code> env var</li></ul></td></tr>
                     <tr class="search-item" id="i-bare"><td><a class="row-link" href="#i-bare" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>--bare</code></td><td class="desc">Minimal headless (no hooks/LSP)</td></tr>
                     <tr class="search-item" id="i-permission-prompts-none"><td><a class="row-link" href="#i-permission-prompts-none" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>--permission-prompts none</code></td><td class="desc">Deny any action that would prompt for unattended headless hosts; the active permission mode (including auto mode) still decides normally</td></tr>
-                    <tr class="search-item" id="i-append-subagent-system-prompt-file"><td><a class="row-link" href="#i-append-subagent-system-prompt-file" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code class="new">--append-subagent-system-prompt-file</code> <!-- added:v2.1.261 --></td><td class="desc">Read the subagent system prompt from a file; for prompts too large to pass on the command line</td></tr>
+                    <tr class="search-item" id="i-append-subagent-system-prompt-file"><td><a class="row-link" href="#i-append-subagent-system-prompt-file" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>--append-subagent-system-prompt-file</code></td><td class="desc">Read the subagent system prompt from a file; for prompts too large to pass on the command line</td></tr>
                     <tr class="search-item" id="i-channels"><td><a class="row-link" href="#i-channels" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>--channels</code></td><td class="desc">Permission relay / MCP push msg; now works with console (API key) auth — console orgs with managed settings must set <code>channelsEnabled: true</code></td></tr>
                     <tr class="search-item" id="i-output-format-json"><td><a class="row-link" href="#i-output-format-json" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>--output-format json</code></td><td class="desc">Structured JSON output</td></tr>
                     <tr class="search-item" id="i-json-schema"><td><a class="row-link" href="#i-json-schema" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>--json-schema</code></td><td class="desc">Strict JSON schema validation</td></tr>
@@ -424,7 +437,7 @@
                     <tr class="search-item" id="i-crosssessioninbound"><td><a class="row-link" href="#i-crosssessioninbound" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>crossSessionInbound</code></td><td class="desc">Cross-session messages sent to a session running with bypassed permissions are held for your approval before delivery</td></tr>
                     <tr class="search-item" id="i-dialogexpiry"><td><a class="row-link" href="#i-dialogexpiry" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>dialogExpiry</code></td><td class="desc">Timeout for inbound cross-session message approval dialogs; messages to sessions without bypassed permissions auto-deliver</td></tr>
                     <tr class="search-item" id="i-feedbackdrafts"><td><a class="row-link" href="#i-feedbackdrafts" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>feedbackDrafts</code></td><td class="desc"><span class="summary">Set to <code>false</code> to stop Claude auto-drafting a feedback report</span> <button type="button" class="notes-btn" aria-expanded="false">+1</button><ul class="notes" hidden><li>When enabled (default), Claude drafts a report for you to review and send via <code>/feedback</code></li></ul></td></tr>
-                    <tr class="search-item" id="i-bashoutputmaxchars"><td><a class="row-link" href="#i-bashoutputmaxchars" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code class="new">bashOutputMaxChars</code> / <code class="new">taskOutputMaxChars</code> <!-- added:v2.1.261 --></td><td class="desc"><span class="summary">Raise how much command or task output Claude receives inline before it is saved to a file</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li><code>bashOutputMaxChars</code> covers Bash output, <code>taskOutputMaxChars</code> covers background-task output</li><li>Both cap at 128K characters</li></ul></td></tr>
+                    <tr class="search-item" id="i-bashoutputmaxchars"><td><a class="row-link" href="#i-bashoutputmaxchars" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>bashOutputMaxChars</code> / <code>taskOutputMaxChars</code></td><td class="desc"><span class="summary">Raise how much command or task output Claude receives inline before it is saved to a file</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li><code>bashOutputMaxChars</code> covers Bash output, <code>taskOutputMaxChars</code> covers background-task output</li><li>Both cap at 128K characters</li></ul></td></tr>
                 </table>
             </details>
 
@@ -691,13 +704,17 @@
 
     </main>
 
-    <script type="application/json" id="whatsNewData">
-    {
-        "version": "v2.1.263",
-        "date": "2026-09-06",
-        "changes": []
-    }
-    </script>
+    <aside class="since-drawer" id="sinceDrawer" hidden aria-label="Changes since your last visit">
+        <div class="since-drawer-head">
+            <h2 id="sinceDrawerTitle">Since your last visit</h2>
+            <button type="button" class="whats-new-close" id="sinceClose" aria-label="Close">&times;</button>
+        </div>
+        <div class="since-drawer-body" id="sinceBody"></div>
+        <div class="since-drawer-foot">
+            <button type="button" id="sinceReadAll">Mark all as read</button>
+            <a href="feed.xml">RSS</a> · <a href="changes.json">changes.json</a> · <a href="changelog.html">Full changelog</a>
+        </div>
+    </aside>
 
     <script>
         // --- THEME TOGGLE LOGIC ---
@@ -1026,59 +1043,107 @@
         makeCopyable(genOut, () => genOut.innerText);
         genOut.tabIndex = 0;
 
-        // --- WHAT'S NEW POPUP LOGIC ---
-        (function initWhatsNew() {
-            const dataEl = document.getElementById('whatsNewData');
-            if (!dataEl) return;
-
+        // --- SINCE YOUR LAST VISIT ---
+        const versionNumber = (v) => v.replace(/^v/, '').split('.').map(Number).reduce((a, b) => a * 1000 + b, 0);
+        (async function initSince() {
+            const SEEN_KEY = 'placemat-seen-version';
+            const current = (document.querySelector('.release-tag').textContent.match(/v[\d.]+/) || [])[0];
+            if (!current) return;
             let data;
             try {
-                data = JSON.parse(dataEl.textContent);
+                const res = await fetch('changes.json');
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                data = await res.json();
             } catch (err) {
-                console.error("Failed to parse What's New data:", err);
+                console.warn('changes.json unavailable:', err.message);
                 return;
             }
 
-            const seen = localStorage.getItem('placemat-seen-version');
-            if (seen === data.version) return;
-            if (!data.changes || !data.changes.length) return;
-
             const tagClass = { ADD: 'tag-add', CHG: 'tag-change', DEL: 'tag-remove', FIX: 'tag-fix' };
-            const items = data.changes.map(c =>
-                `<li><span class="tag ${tagClass[c.tag] || 'tag-add'}">${c.tag}</span>${c.text}</li>`
-            ).join('');
+            const rows = Array.from(document.querySelectorAll('.search-item'));
+            const byCode = new Map();
+            rows.forEach((row) => row.querySelectorAll('td:first-child code').forEach((chip) => {
+                const key = chip.innerText.trim();
+                if (!byCode.has(key)) byCode.set(key, row);
+            }));
+            const findRow = (entry) => {
+                if (entry.row) return document.getElementById(entry.row);
+                const item = entry.item;
+                if (!item) return null;
+                if (byCode.has(item)) return byCode.get(item);
+                for (const [key, row] of byCode) if (key.startsWith(item + ' ') || key.startsWith(item + '=')) return row;
+                for (const [key, row] of byCode) if (key.includes(item)) return row;
+                return null;
+            };
 
-            const overlay = document.createElement('div');
-            overlay.className = 'whats-new-overlay';
-            overlay.innerHTML = `
-                <div class="whats-new-modal" role="dialog" aria-modal="true" aria-labelledby="whatsNewTitle">
-                    <div class="whats-new-header">
-                        <h2 id="whatsNewTitle">What's New <span class="version-date">${data.version} &mdash; ${data.date}</span></h2>
-                        <button type="button" class="whats-new-close" title="Dismiss" aria-label="Dismiss What's New">&times;</button>
-                    </div>
-                    <ul class="whats-new-list">${items}</ul>
-                </div>`;
+            const strip = document.getElementById('sinceStrip');
+            const text = document.getElementById('sinceText');
+            const drawer = document.getElementById('sinceDrawer');
+            const body = document.getElementById('sinceBody');
+            const title = document.getElementById('sinceDrawerTitle');
+            const legend = document.getElementById('legendNew');
 
-            document.body.appendChild(overlay);
+            function render() {
+                let seen = null;
+                try { seen = localStorage.getItem(SEEN_KEY); } catch (err) {}
+                rows.forEach((row) => row.querySelectorAll('td:first-child code.new').forEach((chip) => chip.classList.remove('new')));
 
-            const previouslyFocused = document.activeElement;
-            const closeBtn = overlay.querySelector('.whats-new-close');
-            closeBtn.focus();
+                let releases;
+                if (!seen) releases = data.releases.slice(0, 3);
+                else if (versionNumber(seen) < versionNumber(current)) {
+                    releases = data.releases.filter((rel) => versionNumber(rel.version) > versionNumber(seen)
+                        && versionNumber(rel.version) <= versionNumber(current));
+                } else releases = [];
 
-            function escHandler(e) {
-                if (e.key === 'Escape') dismiss();
+                const changes = releases.reduce((sum, rel) => sum + rel.entries.length, 0);
+                legend.textContent = seen ? 'New since your last visit (' + seen + ')' : 'New in the last 3 releases';
+                if (!changes) { strip.hidden = true; drawer.hidden = true; return; }
+
+                const linked = new Set();
+                releases.forEach((rel) => rel.entries.forEach((entry) => {
+                    const row = findRow(entry);
+                    if (row) { row.querySelector('td:first-child code').classList.add('new'); linked.add(row); }
+                }));
+                text.innerHTML = seen
+                    ? '<b>' + releases.length + (releases.length === 1 ? ' release' : ' releases') + ' · ' + changes
+                        + (changes === 1 ? ' change' : ' changes') + '</b> since your last visit <code>' + seen
+                        + '</code> → <code>' + current + '</code>; ' + linked.size + ' entries highlighted below'
+                    : '<b>Welcome.</b> ' + changes + ' changes across the last ' + releases.length
+                        + ' releases are highlighted; next time you will see only what changed since today';
+                strip.hidden = false;
+                title.textContent = seen ? 'Since ' + seen : 'Recent changes';
+                body.innerHTML = releases.map((rel) =>
+                    '<section class="since-release"><h3>CC ' + rel.label + ' <span>' + rel.date + '</span></h3><ul>'
+                    + rel.entries.map((entry) => {
+                        const row = findRow(entry);
+                        return '<li' + (row ? ' data-row="' + row.id + '"' : ' class="unlinked"') + '><span class="tag '
+                            + (tagClass[entry.tag] || 'tag-add') + '">' + entry.tag + '</span><span>' + entry.html + '</span></li>';
+                    }).join('') + '</ul></section>').join('');
             }
+            render();
 
-            function dismiss() {
-                localStorage.setItem('placemat-seen-version', data.version);
-                overlay.remove();
-                window.removeEventListener('keydown', escHandler);
-                if (previouslyFocused && previouslyFocused.focus) previouslyFocused.focus();
-            }
-
-            closeBtn.addEventListener('click', dismiss);
-            overlay.addEventListener('click', (e) => { if (e.target === overlay) dismiss(); });
-            window.addEventListener('keydown', escHandler);
+            const markRead = () => {
+                try { localStorage.setItem(SEEN_KEY, current); } catch (err) {}
+                render();
+            };
+            document.getElementById('sinceShow').addEventListener('click', () => {
+                drawer.hidden = false;
+                document.getElementById('sinceClose').focus();
+            });
+            document.getElementById('sinceClose').addEventListener('click', () => { drawer.hidden = true; });
+            document.getElementById('sinceRead').addEventListener('click', markRead);
+            document.getElementById('sinceReadAll').addEventListener('click', markRead);
+            body.addEventListener('click', (e) => {
+                const item = e.target.closest('li[data-row]');
+                if (!item) return;
+                const row = document.getElementById(item.dataset.row);
+                if (!row) return;
+                row.scrollIntoView({ block: 'center', behavior: 'smooth' });
+                row.classList.remove('flash');
+                void row.offsetWidth;
+                row.classList.add('flash');
+            });
+            window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !drawer.hidden) drawer.hidden = true; });
         })();
 
     </script>

@@ -51,23 +51,6 @@ function extractScripts(html) {
     scripts.forEach((s) => new vm.Script(s));
   });
 
-  test('index.html: whatsNewData JSON block parses', () => {
-    const m = html.match(/<script type="application\/json" id="whatsNewData">\s*([\s\S]*?)\s*<\/script>/);
-    assert.ok(m, 'whatsNewData script block not found');
-    const data = JSON.parse(m[1]);
-    assert.ok(data.version && data.date && Array.isArray(data.changes));
-  });
-
-  // Regression guard for a real bug: the whatsNewData <script> element must appear
-  // BEFORE the <script> that reads it via getElementById, or initWhatsNew's early
-  // `if (!dataEl) return` silently no-ops on every single page load, forever.
-  test('index.html: whatsNewData script tag appears before the script that reads it', () => {
-    const dataTagIndex = html.indexOf('<script type="application/json" id="whatsNewData">');
-    const readerIndex = html.indexOf("getElementById('whatsNewData')");
-    assert.ok(dataTagIndex !== -1 && readerIndex !== -1, 'expected markers not found');
-    assert.ok(dataTagIndex < readerIndex, 'whatsNewData script tag must precede the script that reads it');
-  });
-
   test('index.html: every <table> has a matching <thead> with sr-only <th scope="col">', () => {
     const tableCount = (html.match(/<table>/g) || []).length;
     const theadCount = (html.match(/<thead><tr><th scope="col" class="sr-only">/g) || []).length;
@@ -91,11 +74,9 @@ function extractScripts(html) {
 
   test('index.html: every search-group is a <details> with a summary, h3 and count span', () => {
     const groupCount = (html.match(/<details class="search-group" open data-group="[^"]+">/g) || []).length;
-    const h3Count = (html.match(/<h3>/g) || []).length;
     const summaryCount = (html.match(/<summary><h3>[^<]+<\/h3><span class="group-count"><\/span><\/summary>/g) || []).length;
     assert.ok(groupCount > 0, 'no details.search-group found');
-    assert.strictEqual(groupCount, h3Count, `${groupCount} details for ${h3Count} h3 headings`);
-    assert.strictEqual(summaryCount, h3Count, `${summaryCount} well-formed summaries for ${h3Count} h3 headings`);
+    assert.strictEqual(summaryCount, groupCount, `${summaryCount} well-formed summaries for ${groupCount} groups`);
     assert.strictEqual((html.match(/<div class="search-group">/g) || []).length, 0, 'old div.search-group still present');
   });
 
@@ -159,6 +140,22 @@ function extractScripts(html) {
     });
   });
 
+  test('index.html: the What\'s New modal is gone; the since-strip and drawer replace it', () => {
+    assert.ok(!html.includes('whatsNewData'), 'whatsNewData block still present');
+    assert.ok(!html.includes('initWhatsNew'), 'initWhatsNew still present');
+    assert.ok(html.includes('id="sinceStrip"') && html.includes('id="sinceDrawer"'));
+    assert.ok(/<link rel="alternate" type="application\/atom\+xml"[^>]*href="feed\.xml">/.test(html));
+    assert.ok(html.indexOf('id="sinceDrawer"') < html.indexOf("fetch('changes.json')"), 'drawer markup must precede the script that uses it');
+  });
+
+  test('index.html: version comparison orders v2.1.9 < v2.1.10 < v2.2.0', () => {
+    const fn = html.match(/const versionNumber = \(v\) => (.*?);\n/);
+    assert.ok(fn, 'versionNumber not found');
+    const num = new Function('return (v) => ' + fn[1])();
+    assert.ok(num('v2.1.9') < num('v2.1.10'));
+    assert.ok(num('v2.1.263') < num('v2.2.0'));
+  });
+
   test('index.html: command builder single-quote escaping is shell-safe', () => {
     // Extract shellSingleQuote's body and re-run it in isolation — this is the
     // exact logic that generates a copy-pasteable `claude -p '...'` command.
@@ -220,6 +217,38 @@ function extractScripts(html) {
     test(`placemat.css: defines ${selector}`, () => {
       assert.ok(css.includes(selector), `${selector} not found in placemat.css`);
     });
+  });
+}
+
+// --- changes.json + feed.xml (derived from changelog.html) ---
+{
+  const changelog = read('changelog.html');
+
+  test('changelog.html: every CC release heading has an id cc-v…', () => {
+    const heads = changelog.match(/<h3[^>]*>CC v[\d.]+(?:–v[\d.]+)? <span class="version-date">/g) || [];
+    assert.ok(heads.length > 50, `only ${heads.length} release headings found`);
+    const ids = heads.map((h) => (h.match(/ id="(cc-v[\d-]+)"/) || [])[1]);
+    assert.strictEqual(ids.filter((x) => !x).length, 0, 'release heading without id');
+    assert.strictEqual(new Set(ids).size, ids.length, 'duplicate release ids');
+  });
+
+  test('changes.json: parses and matches the newest changelog release', () => {
+    const data = JSON.parse(read('changes.json'));
+    assert.ok(Array.isArray(data.releases) && data.releases.length > 50, 'too few releases');
+    const newest = changelog.match(/<h3 id="cc-(v[\d-]+)">/)[1].replace(/-/g, '.');
+    assert.strictEqual(data.releases[0].version, newest, 'changes.json is stale — run node scripts/build-changes.js');
+    assert.strictEqual(data.latest, newest);
+    const versions = data.releases.map((r) => r.version);
+    assert.strictEqual(new Set(versions).size, versions.length, 'duplicate versions');
+    data.releases.forEach((r) => r.entries.forEach((e) => assert.ok(['ADD', 'CHG', 'DEL', 'FIX'].includes(e.tag), `bad tag ${e.tag}`)));
+  });
+
+  test('feed.xml: is Atom with a self link and at least one entry', () => {
+    const xml = read('feed.xml');
+    assert.ok(xml.startsWith('<?xml version="1.0" encoding="utf-8"?>'));
+    assert.ok(xml.includes('<feed xmlns="http://www.w3.org/2005/Atom">'));
+    assert.ok(xml.includes('<link rel="self" href="https://dommango.github.io/claude-code-placemat/feed.xml"/>'));
+    assert.ok((xml.match(/<entry>/g) || []).length >= 1);
   });
 }
 

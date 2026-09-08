@@ -869,3 +869,137 @@ code.unverified {
     .dashboard-grid { grid-template-columns: 1fr; }
     .whats-new-modal { width: 95%; max-height: 80vh; }
 }
+
+/* ---------- SINCE YOUR LAST VISIT ---------- */
+.since-strip { padding: 8px 16px; border-color: var(--teal); background: var(--new-bg); }
+.since-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 12.5px;
+}
+.since-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--teal);
+    box-shadow: 0 0 0 3px var(--new-bg);
+    flex-shrink: 0;
+}
+.since-text b { color: var(--fg-main); }
+.since-text code { cursor: default; }
+.since-actions { margin-left: auto; display: flex; gap: 6px; }
+.since-actions button,
+.since-drawer-foot button {
+    background: var(--teal);
+    color: #0a0a0a;
+    border: 1px solid var(--teal);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 4px 10px;
+    border-radius: var(--r-sm);
+    cursor: pointer;
+}
+.since-actions button.quiet {
+    background: none;
+    color: var(--fg-muted);
+    border-color: var(--border-strong);
+}
+.since-actions button.quiet:hover { color: var(--fg-main); border-color: var(--teal); }
+
+.since-drawer {
+    position: fixed;
+    top: 52px; right: 0; bottom: 0;
+    width: min(440px, 100vw);
+    background: var(--bg-card-2);
+    border-left: 1px solid var(--border-strong);
+    z-index: 1002;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -12px 0 40px rgba(0, 0, 0, 0.35);
+    animation: drawerIn 0.2s var(--ease);
+}
+.since-drawer[hidden] { display: none; }
+@keyframes drawerIn {
+    from { transform: translateX(24px); opacity: 0; }
+    to   { transform: none; opacity: 1; }
+}
+.since-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px 10px;
+    border-bottom: 1px solid var(--border);
+}
+.since-drawer-head h2 {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--coral);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+.since-drawer-body { overflow-y: auto; padding: 8px 16px; flex: 1; }
+.since-release { margin: 10px 0 14px; }
+.since-release h3 {
+    margin: 0 0 6px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+}
+.since-release h3 span { color: var(--fg-dim); font-weight: 400; text-transform: none; letter-spacing: 0; }
+.since-release ul { list-style: none; margin: 0; padding: 0; }
+.since-release li {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 1px dotted var(--border);
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--fg-main);
+    cursor: pointer;
+}
+.since-release li:hover { background: var(--row-hover); }
+.since-release li.unlinked { color: var(--fg-muted); cursor: default; }
+.since-release li .tag {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 2px 0;
+    border-radius: var(--r-xs);
+    text-align: center;
+    align-self: start;
+    text-transform: uppercase;
+}
+.since-release li .tag-add    { background: rgba(135, 157, 134, 0.16); color: var(--teal-2); border: 1px solid var(--teal); }
+.since-release li .tag-change { background: rgba(245, 158, 11, 0.10);  color: #fbbf24;       border: 1px solid #f59e0b; }
+.since-release li .tag-remove { background: rgba(239, 68, 68, 0.10);   color: #f87171;       border: 1px solid #ef4444; }
+.since-release li .tag-fix    { background: rgba(96, 165, 250, 0.10);  color: #60a5fa;       border: 1px solid #3b82f6; }
+.since-drawer-foot {
+    padding: 10px 16px;
+    border-top: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--fg-dim);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.since-drawer-foot a { color: var(--teal); text-decoration: none; }
+.since-drawer-foot a:hover { text-decoration: underline; }
+.search-item.flash { animation: rowFlash 1.6s ease-out; }
+@keyframes rowFlash {
+    0%, 40% { background: var(--success-flash); }
+    100%    { background: transparent; }
+}
+@media (max-width: 700px) {
+    .since-drawer { top: 96px; }
+}
