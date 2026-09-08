@@ -578,6 +578,65 @@ code.unverified {
     padding: 0 4px 1px;
 }
 
+/* ---------- TWO-TIER ENTRIES ---------- */
+.desc .summary { display: inline; }
+.notes-btn {
+    display: inline-block;
+    vertical-align: 1px;
+    margin-left: 4px;
+    background: none;
+    border: 1px solid var(--border-strong);
+    color: var(--teal-2);
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    padding: 0 5px;
+    border-radius: 999px;
+    cursor: pointer;
+    line-height: 1.5;
+}
+.notes-btn:hover,
+.notes-btn[aria-expanded="true"] {
+    border-color: var(--teal);
+    color: var(--fg-main);
+    background: var(--new-bg);
+}
+.notes {
+    list-style: none;
+    margin: 5px 0 2px;
+    padding: 0 0 0 10px;
+    border-left: 1px solid var(--border-strong);
+}
+.notes li {
+    position: relative;
+    padding: 2px 0 2px 10px;
+    font-size: 11px;
+    line-height: 1.35;
+    color: var(--fg-muted);
+}
+.notes li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    color: var(--teal);
+    font-size: 9px;
+}
+.notes-all {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--fg-muted);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 3px 8px;
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.notes-all:hover,
+.notes-all[aria-pressed="true"] { color: var(--teal-2); border-color: var(--teal); }
+
 /* ---------- LEGEND + BUILDER (full-width strip) ---------- */
 .legend {
     display: flex;

@@ -142,6 +142,23 @@ function extractScripts(html) {
     assert.ok(/el\.tabIndex = -1;/.test(html), 'makeCopyable must keep chips out of the tab order');
   });
 
+  test('index.html: no description exceeds 160 visible characters outside its notes', () => {
+    const strip = (s) => s.replace(/<ul class="notes"[\s\S]*?<\/ul>/g, '').replace(/<[^>]+>/g, '').replace(/&[a-z]+;/g, 'x');
+    const cells = Array.from(html.matchAll(/<td class="desc">([\s\S]*?)<\/td><\/tr>/g), (m) => m[1]);
+    const long = cells.map(strip).filter((t) => t.length > 160);
+    assert.strictEqual(long.length, 0, `${long.length} descriptions over 160 chars, e.g. "${(long[0] || '').slice(0, 80)}…"`);
+  });
+
+  test('index.html: every notes-btn is followed by a hidden ul.notes whose li count matches its +N label', () => {
+    const blocks = Array.from(html.matchAll(/<button type="button" class="notes-btn" aria-expanded="false">\+(\d+)<\/button><ul class="notes" hidden>([\s\S]*?)<\/ul>/g));
+    const buttons = (html.match(/class="notes-btn"/g) || []).length;
+    assert.strictEqual(blocks.length, buttons, `${blocks.length} well-formed notes blocks for ${buttons} buttons`);
+    blocks.forEach((m) => {
+      const items = (m[2].match(/<li>/g) || []).length;
+      assert.strictEqual(items, Number(m[1]), `+${m[1]} label but ${items} notes`);
+    });
+  });
+
   test('index.html: command builder single-quote escaping is shell-safe', () => {
     // Extract shellSingleQuote's body and re-run it in isolation — this is the
     // exact logic that generates a copy-pasteable `claude -p '...'` command.
