@@ -109,6 +109,39 @@ function extractScripts(html) {
     assert.ok(html.indexOf('<nav class="section-nav"') < html.indexOf('class="dashboard-grid"'), 'nav must precede the grid');
   });
 
+  test('index.html: every search-item row has a unique i- id and a matching permalink', () => {
+    const rows = html.match(/<tr class="search-item"[^>]*>/g) || [];
+    assert.ok(rows.length > 0, 'no rows found');
+    const ids = rows.map((r) => (r.match(/ id="(i-[a-z0-9-]+)"/) || [])[1]);
+    assert.strictEqual(ids.filter((x) => !x).length, 0, 'rows without an i- id');
+    assert.strictEqual(new Set(ids).size, ids.length, 'duplicate row ids');
+    const links = Array.from(html.matchAll(/<tr class="search-item" id="(i-[a-z0-9-]+)"><td><a class="row-link" href="#(i-[a-z0-9-]+)"/g));
+    assert.strictEqual(links.length, rows.length, `${links.length} permalinks for ${rows.length} rows`);
+    links.forEach((m) => assert.strictEqual(m[1], m[2], 'permalink href must match the row id'));
+  });
+
+  test('index.html: search normaliser strips separators so "ctrl+r" matches "Ctrl R"', () => {
+    const fn = html.match(/const normaliseSearch = \(s\) => (.*?);\n/);
+    assert.ok(fn, 'normaliseSearch not found');
+    const norm = new Function('return (s) => ' + fn[1])();
+    assert.strictEqual(norm('Ctrl R'), norm('ctrl+r'));
+    assert.strictEqual(norm('--permission-mode manual'), 'permissionmodemanual');
+    assert.strictEqual(norm('~/.claude/settings.json'), 'claudesettingsjson');
+  });
+
+  test('index.html: search box has a live result count and the grid is a main landmark', () => {
+    assert.ok(/<span class="search-count" id="searchCount" aria-live="polite"><\/span>/.test(html));
+    assert.ok(html.includes('<main class="dashboard-grid">') && html.includes('</main>'));
+    assert.ok(html.includes('<a class="skip-link" href="#card-keys">'));
+  });
+
+  test('index.html: code chips and row links are outside the tab order (roving focus owns it)', () => {
+    assert.ok(!/<a class="row-link"[^>]*>(?![\s\S]*tabindex="-1")/.test(html.split('\n')[0]), 'sanity');
+    const links = html.match(/<a class="row-link"[^>]*>/g) || [];
+    assert.ok(links.length > 0 && links.every((l) => l.includes('tabindex="-1"')), 'row links must be tabindex=-1');
+    assert.ok(/el\.tabIndex = -1;/.test(html), 'makeCopyable must keep chips out of the tab order');
+  });
+
   test('index.html: command builder single-quote escaping is shell-safe', () => {
     // Extract shellSingleQuote's body and re-run it in isolation — this is the
     // exact logic that generates a copy-pasteable `claude -p '...'` command.

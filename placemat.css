@@ -251,6 +251,35 @@ body {
     padding: 1px 5px;
     pointer-events: none;
 }
+.search-count {
+    position: absolute;
+    right: 8px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--teal-2);
+    background: var(--bg-card);
+    border: 1px solid var(--teal);
+    border-radius: var(--r-xs);
+    padding: 1px 5px;
+    pointer-events: none;
+    display: none;
+}
+.search-wrap.has-term .kbd { display: none; }
+.search-wrap.has-term .search-count { display: inline-block; }
+
+.skip-link {
+    position: absolute;
+    left: -999px;
+    top: 8px;
+    z-index: 1001;
+    background: var(--coral);
+    color: #0a0a0a;
+    padding: 6px 10px;
+    border-radius: var(--r-sm);
+    font-weight: 700;
+    text-decoration: none;
+}
+.skip-link:focus { left: 8px; }
 
 /* ---------- SECTION NAV ---------- */
 .section-nav {
@@ -350,7 +379,7 @@ body.density-compact .dashboard-grid {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--r-md);
-    padding: 14px 16px 12px;
+    padding: 14px 16px 12px 22px;
     transition: border-color var(--dur) var(--ease);
 }
 .card:hover { border-color: var(--border-strong); }
@@ -467,6 +496,36 @@ tr:hover { background-color: var(--row-hover); }
     font-size: 11.5px;
     line-height: 1.35;
 }
+
+/* permalinks + roving focus */
+.search-item { scroll-margin-top: 100px; }
+.search-item td:first-child { position: relative; }
+.row-link {
+    position: absolute;
+    left: -14px;
+    top: 5px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--fg-dim);
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.search-item:hover .row-link,
+.search-item:focus-within .row-link,
+.row-link:focus-visible { opacity: 1; }
+.row-link:hover { color: var(--coral); }
+.row-link.copied { color: var(--teal-2); }
+.search-item:target { background: var(--new-bg); box-shadow: inset 2px 0 0 0 var(--teal); }
+.search-item:focus { outline: none; background: var(--row-hover); box-shadow: inset 2px 0 0 0 var(--coral); }
+
+mark.hit {
+    background: rgba(217, 119, 87, 0.28);
+    color: inherit;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+:root[data-theme="light"] mark.hit { background: rgba(194, 65, 12, 0.22); }
 
 /* ---------- CODE CHIPS ---------- */
 code {
