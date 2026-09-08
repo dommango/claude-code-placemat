@@ -1,5 +1,15 @@
 # Placemat Audit — 2026-09-07
 
+> **Status: implemented.** Every recommendation below (P1–P9) was built on
+> `feat/placemat-v1.2`, one commit per plan. The mock-ups in `mockups/` and the plans in
+> `plans/` are the frozen record of the proposal, written against the placemat at commit
+> `89e0325` (CC v2.1.263) *before* the work landed — the mock-up build scripts refuse to
+> run against the implemented markup for that reason. What shipped, measured on the
+> implemented page: 16,923 px → 9,407 px tall, 749 → 46 tab stops, longest description
+> 677 → 160 characters, 16 portrait print pages → 7 A4 landscape, and no horizontal
+> overflow at 390 px. Outstanding: P10's optional card re-groupings, and the two
+> repository-hygiene steps that touch GitHub (see *Process and hygiene*).
+
 What would make the Claude Code Placemat more valuable to the people who use it.
 Audited against the live site (`origin/main` at `89e0325`, CC v2.1.263), the full
 codebase, the changelog, the PR history, and headless-browser measurements of the
@@ -20,7 +30,7 @@ Deliverables in this folder:
 
 The content pipeline is excellent and the brand is distinctive. The **reading experience
 has not kept up with the content**. Six months of daily syncs turned a one-screen
-placemat into a 17-screen scroll of 377 rows, with descriptions that read as
+placemat into a 17-screen scroll of 373 rows, with descriptions that read as
 concatenated changelogs. Members who come to *look something up* wade through a
 10,000-pixel column; members who come to *see what changed* get a modal that only
 covers the newest release and stayed silent on the last deploy because that release
@@ -35,7 +45,7 @@ The five changes below fix that. Every one is mocked up on the real page in
 
 | Metric | Value | Why it matters |
 |--------|-------|----------------|
-| Rows (`.search-item`) | 377 | Up from 132 at Template v1.1 (March) |
+| Rows (`.search-item`) | 373 | Up from 132 at Template v1.1 (March) |
 | Page height @1440px | 16,923 px (~19 screens) | A placemat should fit a table |
 | Page height @390px (mobile) | 35,150 px | ~42 phone screens |
 | Tallest card: Config & Environment | 149 rows, 10,857 px | 40 % of all rows in one column; the grid is `align-items: start`, so the other columns end 8,000 px above it |
@@ -61,7 +71,7 @@ Ranked by value to members (readers of the site), then by cost. **M** = mock-up,
 
 ### P1 — The placemat no longer fits on a table  (M01, P01)
 
-**Evidence.** 377 rows; 16,923 px tall at 1440 px; the Config card alone is 10,857 px
+**Evidence.** 373 rows; 16,923 px tall at 1440 px; the Config card alone is 10,857 px
 and holds 149 rows. Because the grid uses `align-items: start` and `auto-fill`, the
 layout degrades as content grows: at 1920 px the page gets *taller* (18,620 px) because
 five narrower columns wrap more text.

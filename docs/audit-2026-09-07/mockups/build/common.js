@@ -3,8 +3,21 @@ const fs = require('fs');
 const path = require('path');
 const ROOT = path.resolve(__dirname, '..', '..', '..', '..');
 const OUT = path.resolve(__dirname, '..');
-// Mock-ups are built from the repo's live index.html so they always show real content.
+// Mock-ups were built from index.html as it stood at the time of the audit
+// (CC v2.1.263, before the audit's recommendations were implemented). They are
+// frozen artefacts of the proposal — rebuilding them against the implemented
+// placemat would apply the proposals a second time, so refuse loudly instead.
 const SRC = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+if (!SRC.includes('<div class="search-group">') || SRC.includes('id="sinceStrip"')) {
+  console.error([
+    'These mock-ups are frozen at the pre-implementation placemat and cannot be rebuilt.',
+    'index.html has already adopted the audit recommendations (feat/placemat-v1.2).',
+    'To see the proposals as they were pitched, open the committed HTML files in',
+    'docs/audit-2026-09-07/mockups/ directly, or rebuild from the audit base commit:',
+    '  git worktree add /tmp/placemat-audit-base 89e0325',
+  ].join('\n'));
+  process.exit(1);
+}
 
 const stripTags = (s) => s.replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&').replace(/&quot;/g, '"');
 
