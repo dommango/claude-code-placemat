@@ -1,0 +1,2663 @@
+{
+ "generated": "2026-09-07",
+ "latest": "v2.1.261",
+ "releases": [
+  {
+   "version": "v2.1.261",
+   "label": "v2.1.261",
+   "date": "2026-09-04",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "/skill-doctor",
+     "html": "<code>/skill-doctor</code> — shows which loaded skills go unused and what they cost in context, so you can prune them"
+    },
+    {
+     "tag": "ADD",
+     "item": "--append-subagent-system-prompt-file",
+     "html": "<code>--append-subagent-system-prompt-file</code> CLI flag — reads the subagent system prompt from a file, for prompts too large to pass on the command line"
+    },
+    {
+     "tag": "ADD",
+     "item": "bashOutputMaxChars",
+     "html": "<code>bashOutputMaxChars</code> / <code>taskOutputMaxChars</code> JSON settings — raise how much Bash command or background-task output Claude receives inline before saving to a file (cap at 128K characters)"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.260",
+   "label": "v2.1.260",
+   "date": "2026-09-03",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "/diff",
+     "html": "<code>/diff</code> — in fullscreen mode, opens as a panel beside the conversation showing uncommitted changes as Claude edits"
+    },
+    {
+     "tag": "CHG",
+     "item": "Ctrl L",
+     "html": "<code>Ctrl L</code> in fullscreen — clears the transcript view like a terminal <code>clear</code>; scroll up to see earlier messages"
+    },
+    {
+     "tag": "CHG",
+     "item": "/advisor",
+     "html": "<code>/advisor</code> — text form (<code>/advisor</code>, <code>/advisor &lt;model&gt;</code>, <code>/advisor off</code>) now works in desktop, Remote Control, and headless (<code>-p</code>/Agent SDK) sessions"
+    },
+    {
+     "tag": "CHG",
+     "item": "/reload-plugins",
+     "html": "<code>/reload-plugins</code> — now available in headless sessions (Claude Code Desktop and SDK)"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.259",
+   "label": "v2.1.259",
+   "date": "2026-09-02",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "managedMcpServers",
+     "html": "<code>managedMcpServers</code> managed setting — provide HTTP/SSE MCP servers to every user in the organization (same entry shape as <code>.mcp.json</code>); entries naming a command to run are skipped"
+    },
+    {
+     "tag": "ADD",
+     "item": "deniedMcpServers",
+     "html": "<code>deniedMcpServers</code> managed setting — blocklist of managed MCP servers to deny; as of v2.1.259, <code>allowedMcpServers</code> governs only user-added servers and no longer filters <code>managed-mcp.json</code> servers"
+    },
+    {
+     "tag": "ADD",
+     "item": "--permission-prompts none",
+     "html": "<code>--permission-prompts none</code> CLI flag — deny any action that would prompt for unattended headless hosts; the active permission mode (including auto mode) still decides normally"
+    },
+    {
+     "tag": "CHG",
+     "item": "claude plugin validate",
+     "html": "<code>claude plugin validate</code> — added <code>--json</code> for a machine-readable validation report"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.257",
+   "label": "v2.1.257",
+   "date": "2026-09-01",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "timeFormat",
+     "html": "<code>timeFormat</code> / <code>timeZone</code> JSON settings — control the turn-end clock and transcript timestamp format (12h, 24h, 24h UTC, or strftime pattern) and time zone"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_SUBAGENT_MODEL_FORCE",
+     "html": "<code>CLAUDE_CODE_SUBAGENT_MODEL_FORCE</code> env var — apply <code>CLAUDE_CODE_SUBAGENT_MODEL</code> (or the main model) to every subagent, ignoring per-spawn and agent-definition model overrides"
+    },
+    {
+     "tag": "ADD",
+     "item": "permissions.blockReadsOutsideWorkingDirectories",
+     "html": "<code>permissions.blockReadsOutsideWorkingDirectories</code> JSON setting — block file reads outside the configured working directories; a one-time prompt appears before the first such read in auto mode"
+    },
+    {
+     "tag": "CHG",
+     "item": "/effort",
+     "html": "<code>/effort</code> — press <code>s</code> in the interactive picker to switch effort for the current session only, matching <code>/model</code>"
+    },
+    {
+     "tag": "CHG",
+     "item": "/btw",
+     "html": "<code>/btw</code> — history browsing changed from <code>←</code>/<code>→</code> to <code>Shift+←</code>/<code>Shift+→</code> (or <code>[</code>/<code>]</code>)"
+    },
+    {
+     "tag": "CHG",
+     "item": "defaultMode",
+     "html": "<code>defaultMode</code> — <code>\"bypassPermissions\"</code> is now ignored in <code>.claude/settings.json</code> or <code>.claude/settings.local.json</code>; set in user or managed settings, or pass <code>--permission-mode bypassPermissions</code>"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.251",
+   "label": "v2.1.251",
+   "date": "2026-08-28",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "PreModelSwitch",
+     "html": "<code>PreModelSwitch</code> / <code>PostModelSwitch</code> hook events — block, confirm, or annotate a model switch before or after it happens"
+    },
+    {
+     "tag": "ADD",
+     "item": "prompt_cache",
+     "html": "<code>prompt_cache</code> status line script JSON input field — per-session prompt-cache stats (hit ratio, misses, tokens re-cached, warm/cold)"
+    },
+    {
+     "tag": "CHG",
+     "item": "/usage",
+     "html": "<code>/usage</code> — spend limit bar for gateway users with spend limits; <code>/cost</code> now shows a per-session prompt-cache line (hit ratio, misses, tokens re-cached, warm/cold)"
+    },
+    {
+     "tag": "CHG",
+     "item": "/effort",
+     "html": "<code>/effort</code> — saves the default effort level per model; each model keeps its own setting when you switch"
+    },
+    {
+     "tag": "CHG",
+     "item": "SessionStart",
+     "html": "<code>SessionStart</code> — resume hooks now receive session staleness and estimated re-cache cost"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.248",
+   "label": "v2.1.248",
+   "date": "2026-08-27",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "--restricted",
+     "html": "<code>--restricted</code> CLI flag / <code>CLAUDE_CODE_RESTRICTED=1</code> env var — removes built-in tools that run commands or code and <code>WebFetch</code> (unless named in <code>--tools</code>); keeps file tools inside the working directory; refuses <code>bypassPermissions</code>; ignores user, project and local settings files"
+    },
+    {
+     "tag": "ADD",
+     "item": "experimental.cacheTtl",
+     "html": "<code>experimental.cacheTtl</code> (agent frontmatter) — per-agent prompt cache TTL (<code>\"5m\"</code> or <code>\"1h\"</code>); used when no subagent TTL setting is configured in the session"
+    },
+    {
+     "tag": "ADD",
+     "item": "claude self-hosted-runner --client-label <label>",
+     "html": "<code>claude self-hosted-runner --client-label &lt;label&gt;</code> / <code>SELF_HOSTED_RUNNER_CLIENT_LABEL</code> — override the label the runner registers with (default: hostname)"
+    },
+    {
+     "tag": "CHG",
+     "item": "SendMessage",
+     "html": "<code>SendMessage</code> / <code>ListAgents</code> — cross-session messaging between sessions on the same machine now available on Bedrock, Vertex, Foundry, and when telemetry is disabled"
+    },
+    {
+     "tag": "CHG",
+     "item": "/status",
+     "html": "<code>/status</code> — shows a line explaining a managed-settings load failure or why settings weren't fetched (e.g. Bedrock/Vertex/third-party provider, custom <code>ANTHROPIC_BASE_URL</code>)"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.247",
+   "label": "v2.1.247",
+   "date": "2026-08-26",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "feedbackDrafts",
+     "html": "<code>feedbackDrafts</code> JSON setting — set to <code>false</code> to prevent Claude from auto-drafting a feedback report when something goes wrong; draft appears in <code>/feedback</code>"
+    },
+    {
+     "tag": "CHG",
+     "item": "/claude-api",
+     "html": "<code>/claude-api</code> — added <code>cost-optimize</code> subcommand (profiles Claude API spend and works through cost levers); updated with Admin API coverage (organization members, invites, workspaces, API keys, rate limit reports, workload identity federation, CMEK)"
+    },
+    {
+     "tag": "CHG",
+     "item": "/loop",
+     "html": "<code>/loop</code> — self-paced dynamic mode and no-prompt autonomous default now always available, including on Bedrock, Vertex, and Foundry"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.246",
+   "label": "v2.1.246",
+   "date": "2026-08-25",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "/permissions",
+     "html": "<code>/permissions</code> — new Auto mode tab for viewing and editing auto mode classifier rules"
+    },
+    {
+     "tag": "CHG",
+     "item": "/cd",
+     "html": "<code>/cd</code> — project settings, hooks, <code>.mcp.json</code> servers (behind the usual approval prompt), skills, and agents now take effect immediately after the move instead of on <code>--resume</code>"
+    },
+    {
+     "tag": "CHG",
+     "item": "/code-review",
+     "html": "<code>/code-review</code> — Claude can also start it on its own on Bedrock, Vertex AI, Foundry, through the Claude apps gateway, and when telemetry or non-essential traffic is disabled"
+    },
+    {
+     "tag": "CHG",
+     "item": "/goal",
+     "html": "<code>/goal</code> — idle sessions start at most three check-ins per goal; your next message allows three more"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.243",
+   "label": "v2.1.243",
+   "date": "2026-08-25",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "modelPicker",
+     "html": "<code>modelPicker</code> JSON setting — curate the <code>/model</code> picker with an ordered, labeled list of models (any id spelling, including Vertex/Bedrock ids); entries are appended to or replace the built-in lineup"
+    },
+    {
+     "tag": "ADD",
+     "item": "modelPricing",
+     "html": "<code>modelPricing</code> managed setting — set an organization's contracted per-model rates and discount multiplier for <code>/cost</code>, status line, and telemetry cost figures instead of list price"
+    },
+    {
+     "tag": "ADD",
+     "item": "promptCacheTtl",
+     "html": "<code>promptCacheTtl</code> / <code>subagentPromptCacheTtl</code> JSON settings — set a 1-hour prompt cache TTL for the main conversation while subagents stay at 5 minutes; for API-key and cloud-provider users"
+    },
+    {
+     "tag": "CHG",
+     "item": "/usage",
+     "html": "<code>/usage</code> — new Loops breakdown: per-loop run count, total tokens, tokens per run, and last run"
+    },
+    {
+     "tag": "CHG",
+     "item": "/status",
+     "html": "<code>/status</code> — new <code>Skipped sources</code> line listing managed settings sources present but not applied; shows GitHub connection status for Claude Code on the web (Pro/Max)"
+    },
+    {
+     "tag": "CHG",
+     "item": "/mcp",
+     "html": "<code>/mcp</code> — shows a <code>managed</code> marker on claude.ai connectors whose authentication is managed by your organization"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.239",
+   "label": "v2.1.239",
+   "date": "2026-08-21",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "claude plugin enable/disable <name>@synced",
+     "html": "<code>claude plugin enable/disable &lt;name&gt;@synced</code> — cloud-synced plugins from claude.ai appear as <code>name@synced</code>; managed with <code>enable/disable &lt;name&gt;@synced</code>; never override a locally installed same-named plugin"
+    },
+    {
+     "tag": "ADD",
+     "item": "/claude-api upgrade",
+     "html": "<code>/claude-api upgrade</code> — new subcommand; migrates Python projects from <code>anthropic</code> 0.x to 1.x (timeouts use <code>anthropic.Timeout</code>, not <code>httpx.Timeout</code>)"
+    },
+    {
+     "tag": "CHG",
+     "item": "/goal",
+     "html": "<code>/goal</code> — check-ins back off (30 min → 1 h → 2 h) instead of repeating every 30 min; resuming via <code>claude --resume</code> now restores the active goal"
+    },
+    {
+     "tag": "CHG",
+     "item": "keybindingFlavor: \"readline\"",
+     "html": "<code>keybindingFlavor: \"readline\"</code> — extended with word-motion keys: Alt+F and Ctrl/Option+→ stop at end of word, Alt+D deletes to it (Ctrl+Y pastes back), punctuation separates words"
+    },
+    {
+     "tag": "CHG",
+     "item": "ListAgents",
+     "html": "<code>ListAgents</code> / <code>SendMessage</code> — <code>ListAgents</code> now reports the session's own name (the identifier peers use to message it) and includes live teammates in its listing"
+    },
+    {
+     "tag": "CHG",
+     "item": "CLAUDE_CODE_RETRY_WATCHDOG",
+     "html": "<code>CLAUDE_CODE_RETRY_WATCHDOG</code> — now fails immediately on organization spend-limit and out-of-credits errors instead of waiting indefinitely"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.238",
+   "label": "v2.1.238",
+   "date": "2026-08-20",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "keybindingFlavor",
+     "html": "<code>keybindingFlavor</code> JSON setting — set to <code>\"readline\"</code> to make Ctrl+W delete back to previous whitespace (Bash-style); default <code>\"classic\"</code> unchanged"
+    },
+    {
+     "tag": "ADD",
+     "item": "headersHelper",
+     "html": "<code>headersHelper</code> (plugin marketplace / catalog entry) — command that mints HTTP headers (e.g. a short-lived token) for catalog and same-origin archive fetches; for catalog entries, runs only on <code>claude plugin install/update</code> after displaying the command (<code>-y</code> to skip prompt)"
+    },
+    {
+     "tag": "ADD",
+     "item": "claude self-hosted-runner --defer-shutdown-max-min <minutes>",
+     "html": "<code>claude self-hosted-runner --defer-shutdown-max-min &lt;minutes&gt;</code> — on SIGTERM, keep serving attached sessions for up to N minutes before parking remaining sessions and exiting"
+    },
+    {
+     "tag": "ADD",
+     "item": "claude self-hosted-runner --proxy-authorization-command",
+     "html": "<code>claude self-hosted-runner --proxy-authorization-command</code> / <code>--proxy-authorization-file</code> — supply a freshly issued <code>Proxy-Authorization</code> header on every connection for egress proxies requiring per-request credentials"
+    },
+    {
+     "tag": "CHG",
+     "item": "Ctrl L",
+     "html": "<code>Ctrl L</code> / <code>Cmd+K</code> in fullscreen — now always just repaints; the double-press <code>/clear</code> shortcut was removed"
+    },
+    {
+     "tag": "CHG",
+     "item": "claude mcp list",
+     "html": "<code>claude mcp list</code> / <code>claude mcp get</code> — disabled servers now show as <code>⊘ Disabled</code> instead of connecting for a health check"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.237",
+   "label": "v2.1.237",
+   "date": "2026-08-20",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "outputStyle",
+     "html": "<code>outputStyle</code> JSON setting — <code>\"concise\"</code> makes Claude lead with results and skip preamble/narration; configure via <code>/config</code> → Output style"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.236",
+   "label": "v2.1.236",
+   "date": "2026-08-19",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "ANTHROPIC_DEFAULT_MODEL",
+     "html": "<code>ANTHROPIC_DEFAULT_MODEL</code> env var — sets the model new sessions start on; a <code>/model</code> pick still overrides it and persists across restarts, unlike <code>ANTHROPIC_MODEL</code>"
+    },
+    {
+     "tag": "CHG",
+     "item": "SendMessage",
+     "html": "<code>SendMessage</code> — added <code>notify_when_idle</code> option: ask another session to send one notice when it next goes idle, opt-in, one-shot, no polling (macOS and Linux)"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.235",
+   "label": "v2.1.235",
+   "date": "2026-08-18",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "spellcheck",
+     "html": "<code>spellcheck</code> JSON setting — underline misspelled words in the prompt input as you type; requires <code>aspell</code>, <code>hunspell</code>, or <code>ispell</code>"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.234",
+   "label": "v2.1.234",
+   "date": "2026-08-17",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "selection:clear",
+     "html": "<code>selection:clear</code> keybinding action — bind to a key via <code>/keybindings</code> to clear an in-app text selection; works in agents view"
+    },
+    {
+     "tag": "CHG",
+     "item": "/goal",
+     "html": "<code>/goal</code> — clears itself on unrecoverable errors (revoked auth, exhausted credits, context overflow); checks in on background tasks waiting 30+ min (set <code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES=0</code> to opt out)"
+    },
+    {
+     "tag": "CHG",
+     "item": "/permissions",
+     "html": "<code>/permissions</code> — can now be opened while Claude is working; rule changes apply to the rest of the current turn"
+    },
+    {
+     "tag": "CHG",
+     "item": "/add-dir <path>",
+     "html": "<code>/add-dir &lt;path&gt;</code> — now usable while Claude is working"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_PROJECT_DIR_NAME",
+     "html": "<code>CLAUDE_CODE_PROJECT_DIR_NAME</code> env var — custom short name for the per-project transcript directory"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_GOAL_CHECKIN_MINUTES",
+     "html": "<code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES</code> env var — set to <code>0</code> to disable automatic check-ins when <code>/goal</code> is waiting on background tasks for 30+ min"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.233",
+   "label": "v2.1.233",
+   "date": "2026-08-14",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_TOOL_MEMORY_LIMIT",
+     "html": "<code>CLAUDE_CODE_TOOL_MEMORY_LIMIT</code> env var — opt-in memory cgroup limit for Bash tool commands on Linux; prevents a runaway build from stalling the session"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS",
+     "html": "<code>CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS</code> env var — configure the WebFetch session URL cache TTL in milliseconds (default: 15 minutes)"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_ENABLE_TODO_TOOLS=1",
+     "html": "<code>CLAUDE_CODE_ENABLE_TODO_TOOLS=1</code> env var — re-enable task/todo tools (<code>TaskCreate</code>/<code>Get</code>/<code>Update</code>/<code>List</code>, <code>TodoWrite</code>) on Opus 4.8, Sonnet 5, Fable 5, Mythos 5, and newer models where they are no longer available by default"
+    },
+    {
+     "tag": "CHG",
+     "item": "claude plugin validate",
+     "html": "<code>claude plugin validate</code> — now also checks a bare <code>.claude/skills</code> directory, reporting SKILL.md files whose frontmatter fails to parse"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.232",
+   "label": "v2.1.232",
+   "date": "2026-08-13",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "/advisor",
+     "html": "<code>/advisor</code> slash command — AI advisor mode; Fable 5 available for organizations with Fable access (enable via <code>/model fable</code>)"
+    },
+    {
+     "tag": "ADD",
+     "item": "additionalMarketplaces",
+     "html": "<code>additionalMarketplaces</code> JSON setting — friendlier alias for <code>extraKnownMarketplaces</code>; add plugin marketplace repos beyond the built-in list"
+    },
+    {
+     "tag": "CHG",
+     "item": "strictKnownMarketplaces",
+     "html": "<code>strictKnownMarketplaces</code> — now also accepted as <code>allowedMarketplaces</code>"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.229",
+   "label": "v2.1.229",
+   "date": "2026-08-12",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "claude remote-control --continue",
+     "html": "<code>claude remote-control --continue</code> — resume the most recent Remote Control session"
+    },
+    {
+     "tag": "CHG",
+     "item": "/commit-push-pr",
+     "html": "<code>/commit-push-pr</code> — git/gh commands with dangerous flags (<code>--force</code>, <code>--amend</code>, <code>--no-verify</code>, etc.) are no longer auto-approved"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS=0",
+     "html": "<code>CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS=0</code> env var — set to <code>0</code> to disable automatic staggering of same-prefix sibling workflow agents"
+    },
+    {
+     "tag": "ADD",
+     "item": "command",
+     "html": "<code>command</code> (plugin marketplace source) — specify a plugin directory via a local command's output; re-resolved each session without restart; <code>mode: \"link\"</code> uses it in place"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.225",
+   "label": "v2.1.225",
+   "date": "2026-08-08",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "SendMessage",
+     "html": "<code>SendMessage</code> — can now initiate a conversation with a Remote Control session on another machine by name, without needing <code>ListAgents</code>"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.224",
+   "label": "v2.1.224",
+   "date": "2026-08-07",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "claude self-hosted-runner",
+     "html": "<code>claude self-hosted-runner</code> CLI command — turn your own machine or container into a session host for Claude Code web, mobile, and desktop sessions (Team and Enterprise plans)"
+    },
+    {
+     "tag": "ADD",
+     "item": "ANTHROPIC_BEDROCK_REGION_PREFIX",
+     "html": "<code>ANTHROPIC_BEDROCK_REGION_PREFIX</code> env var — prefer a specific Bedrock cross-region inference profile over the <code>AWS_REGION</code>-derived one"
+    },
+    {
+     "tag": "ADD",
+     "item": "crossSessionInbound",
+     "html": "<code>crossSessionInbound</code> / <code>dialogExpiry</code> (JSON settings) — <code>crossSessionInbound</code> holds inbound cross-session messages for approval when the receiving session has bypassed permissions; <code>dialogExpiry</code> controls the approval dialog timeout"
+    },
+    {
+     "tag": "CHG",
+     "item": "sandbox.credentials",
+     "html": "<code>sandbox.credentials</code> — new masking options: <code>extract</code>/<code>onExtractNoMatch</code> for structured env values, <code>decode: \"jwt\"</code> with <code>maskClaims</code> for JWT-aware masking, <code>awsPairs</code>/<code>sigv4</code> for AWS SigV4 re-signing; requires <code>network.tlsTerminate</code>"
+    },
+    {
+     "tag": "CHG",
+     "item": "CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION",
+     "html": "<code>CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION</code> — built-in 200-spawn limit removed; long-running sessions no longer refuse new agents by default; concurrency and depth limits still apply"
+    },
+    {
+     "tag": "CHG",
+     "item": "SendMessage",
+     "html": "<code>SendMessage</code> — supports cross-session messaging across machines; use <code>ListAgents</code> to discover sessions (macOS and Linux)"
+    },
+    {
+     "tag": "CHG",
+     "item": "/plugin install",
+     "html": "<code>/plugin install</code> — now supports <code>archive</code> source: install plugins from a zip over HTTPS without git or npm; optional SHA-256 pinning"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.223",
+   "label": "v2.1.223",
+   "date": "2026-08-06",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "claude --teleport <session-id>",
+     "html": "<code>claude --teleport &lt;session-id&gt;</code> — continue a cloud session locally; session ID shown in the <code>/teleport</code> hint that appears in cloud sessions"
+    },
+    {
+     "tag": "CHG",
+     "item": "/code-review [level] [pr#]",
+     "html": "<code>/code-review [level] [pr#]</code> — <code>/review</code> is now an alias; supports PR number as target; <code>ultra</code> level triggers a deep cloud review; effort level persists across invocations (no arg reuses last level)"
+    },
+    {
+     "tag": "ADD",
+     "item": "strictKnownMarketplaces",
+     "html": "<code>strictKnownMarketplaces</code> / <code>blockedMarketplaces</code> (managed settings) — allowlist/blocklist marketplace repos as plugin sources; support <code>\"owner/*\"</code> wildcard for GitHub org-wide control"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_DISABLE_1M_CONTEXT",
+     "html": "<code>CLAUDE_CODE_DISABLE_1M_CONTEXT</code> env var — hold every model with a native 1M context window to 200K via auto-compaction; startup warning appears when auto-compaction isn't holding the session to 200K"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT=1",
+     "html": "<code>CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT=1</code> env var — opt out of auto-compact enforcement for sessions on unrecognized model IDs"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.222",
+   "label": "v2.1.222",
+   "date": "2026-08-04",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "disable-model-invocation",
+     "html": "<code>disable-model-invocation</code> (skill frontmatter) — prevent Claude from auto-invoking the skill; Claude is told to ask you to run it manually instead"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.221",
+   "label": "v2.1.221",
+   "date": "2026-08-04",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "/fork",
+     "html": "<code>/fork</code> — forked sessions now create their own git worktree instead of working in the original session's checkout"
+    },
+    {
+     "tag": "CHG",
+     "item": "/status",
+     "html": "<code>/status</code> — now shows session kind: <code>interactive</code>, or a background job that is <code>attached</code> or <code>unattended</code>"
+    },
+    {
+     "tag": "ADD",
+     "item": "/plugin install <name>",
+     "html": "<code>/plugin install &lt;name&gt;</code> slash command — install from marketplace; refreshes stale catalog before failing; activates immediately when safe without requiring <code>/reload-plugins</code>"
+    },
+    {
+     "tag": "ADD",
+     "item": "claude plugin validate",
+     "html": "<code>claude plugin validate</code> CLI command — validates plugin manifest; warns when a plugin or marketplace name would be rejected by Claude Desktop's managed marketplace sync"
+    },
+    {
+     "tag": "CHG",
+     "item": "sandbox.credentials",
+     "html": "<code>sandbox.credentials</code> — new <code>mode: \"mask\"</code> option (Linux/WSL): sandboxed commands read a sentinel copy; sandbox proxy substitutes the real value on egress; macOS falls back to <code>deny</code>"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.219",
+   "label": "v2.1.219",
+   "date": "2026-07-24",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "DirectoryAdded",
+     "html": "<code>DirectoryAdded</code> hook — fires after <code>/add-dir</code> or SDK <code>register_repo_root</code> registers a new working directory mid-session"
+    },
+    {
+     "tag": "ADD",
+     "item": "sandbox.network.strictAllowlist",
+     "html": "<code>sandbox.network.strictAllowlist</code> JSON setting — deny non-allowlisted hosts for sandboxed commands without prompting"
+    },
+    {
+     "tag": "ADD",
+     "item": "workflowSizeGuideline",
+     "html": "<code>workflowSizeGuideline</code> JSON setting — set the advisory Dynamic workflow size guideline from any settings file; <code>/config</code> row hidden while one is set"
+    },
+    {
+     "tag": "CHG",
+     "item": "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH",
+     "html": "<code>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</code> — default nesting depth changed to 3 (was 1); set to <code>1</code> to disable nesting"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.218",
+   "label": "v2.1.218",
+   "date": "2026-07-22",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "/deep-research",
+     "html": "<code>/deep-research</code> slash command — structured deep-research session; must be explicitly invoked (Claude no longer auto-starts it)"
+    },
+    {
+     "tag": "CHG",
+     "item": "/code-review",
+     "html": "<code>/code-review</code> — now runs as a background subagent; review work no longer fills your conversation; keeps stacked slash commands as review target"
+    },
+    {
+     "tag": "CHG",
+     "item": "/mcp",
+     "html": "<code>/mcp</code> — shows HTTP status and error text when a server fails to connect; warns for MCP config values with hidden leading or trailing whitespace"
+    },
+    {
+     "tag": "CHG",
+     "item": "context: fork",
+     "html": "<code>context: fork</code> (skill frontmatter) — skills now run in the background by default; opt out per skill with <code>background: false</code>"
+    },
+    {
+     "tag": "ADD",
+     "item": "yes",
+     "html": "Frontmatter booleans — <code>yes</code>/<code>no</code>/<code>on</code>/<code>off</code>/<code>1</code>/<code>0</code> now accepted alongside <code>true</code>/<code>false</code> in skill and plugin frontmatter"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.217",
+   "label": "v2.1.217",
+   "date": "2026-07-21",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "emojiCompletionEnabled",
+     "html": "<code>emojiCompletionEnabled</code> JSON setting — disable emoji shortcode autocomplete in the prompt input (e.g. <code>:heart:</code> → ❤️)"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS",
+     "html": "<code>CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS</code> env var — cap on concurrently-running subagents (default 20); prevents unbounded fan-out from a single message"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH",
+     "html": "<code>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</code> env var — allow nested subagent spawning; subagents no longer spawn nested subagents by default"
+    },
+    {
+     "tag": "ADD",
+     "item": "FORCE_HYPERLINK=0",
+     "html": "<code>FORCE_HYPERLINK=0</code> env var — opt out of clickable hyperlinks in footer PR badge links (on by default even without terminal detection)"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.216",
+   "label": "v2.1.216",
+   "date": "2026-07-20",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "sandbox.filesystem.disabled",
+     "html": "<code>sandbox.filesystem.disabled</code> JSON setting — skip filesystem isolation while keeping network egress control"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.215",
+   "label": "v2.1.215",
+   "date": "2026-07-19",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "/verify",
+     "html": "<code>/verify</code> built-in skill — verify a code change works end-to-end; must be explicitly invoked (Claude no longer auto-runs it)"
+    },
+    {
+     "tag": "CHG",
+     "item": "/code-review",
+     "html": "<code>/code-review</code> — Claude no longer auto-runs it; must be explicitly invoked with <code>/code-review</code>"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.214",
+   "label": "v2.1.214",
+   "date": "2026-07-18",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH",
+     "html": "<code>CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH</code> env var — configure the 60 KB truncation limit on OpenTelemetry content attributes"
+    },
+    {
+     "tag": "CHG",
+     "item": "SessionStart",
+     "html": "<code>SessionStart</code> hook — now reports source <code>\"fork\"</code> when a session begins as a fork instead of <code>\"resume\"</code>"
+    },
+    {
+     "tag": "CHG",
+     "item": "if:",
+     "html": "<code>if:</code> hook field — single-segment <code>dir/**</code> conditions now match only <code>&lt;cwd&gt;/dir</code>; write <code>**/dir/**</code> for any-depth matching (<code>deny</code>/<code>ask</code> permission rules keep any-depth match)"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.212",
+   "label": "v2.1.212",
+   "date": "2026-07-17",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "/fork",
+     "html": "<code>/fork</code> — now copies conversation into a new background session (its own row in <code>claude agents</code>); old in-session subagent behavior moved to new <code>/subtask</code>"
+    },
+    {
+     "tag": "ADD",
+     "item": "/subtask",
+     "html": "<code>/subtask</code> slash command — launch an in-session subagent for the current task (formerly what <code>/fork</code> did)"
+    },
+    {
+     "tag": "ADD",
+     "item": "claude auto-mode reset",
+     "html": "<code>claude auto-mode reset</code> — restore default auto-mode configuration; prompts for confirmation (<code>--yes</code> to skip)"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION",
+     "html": "<code>CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION</code> env var — session-wide limit on WebSearch tool calls (default 200)"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION",
+     "html": "<code>CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION</code> env var — per-session cap on subagent spawns (default 200); <code>/clear</code> resets the budget"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS",
+     "html": "<code>CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS</code> env var — threshold (ms) after which long-running MCP tool calls move to background automatically (default 120000); set to <code>0</code> to disable"
+    },
+    {
+     "tag": "CHG",
+     "item": "/resume",
+     "html": "<code>/resume</code> — in the agent view, now opens a picker of past sessions including deleted ones and resumes the chosen session as a background session"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.211",
+   "label": "v2.1.211",
+   "date": "2026-07-15",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "--forward-subagent-text",
+     "html": "<code>--forward-subagent-text</code> CLI flag — include subagent text and thinking in <code>--output-format stream-json</code> output; paired with <code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code> env var"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_FORWARD_SUBAGENT_TEXT",
+     "html": "<code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code> env var — include subagent text and thinking in stream-json output; paired with <code>--forward-subagent-text</code> flag"
+    },
+    {
+     "tag": "ADD",
+     "item": "s",
+     "html": "Vim mode <code>s</code> / <code>S</code> — substitute char / substitute line in NORMAL mode, matching vim behavior"
+    },
+    {
+     "tag": "CHG",
+     "item": "/usage-credits",
+     "html": "<code>/usage-credits</code> — now asks for confirmation before sending request to organization admins"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.210",
+   "label": "v2.1.210",
+   "date": "2026-07-14",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "Write(path)",
+     "html": "<code>Write(path)</code> / <code>NotebookEdit(path)</code> / <code>Glob(path)</code> — deprecated permission-rule tool names; startup warns to use <code>Edit(path)</code> or <code>Read(path)</code> instead"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.208",
+   "label": "v2.1.208",
+   "date": "2026-07-14",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "--ax-screen-reader",
+     "html": "<code>--ax-screen-reader</code> CLI flag — opt-in plain-text rendering for screen reader users; also set via <code>CLAUDE_AX_SCREEN_READER=1</code> env var or <code>axScreenReader: true</code> in settings"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_AX_SCREEN_READER=1",
+     "html": "<code>CLAUDE_AX_SCREEN_READER=1</code> env var — enable screen reader mode; paired with <code>--ax-screen-reader</code> flag and <code>axScreenReader</code> JSON setting"
+    },
+    {
+     "tag": "ADD",
+     "item": "axScreenReader",
+     "html": "<code>axScreenReader</code> JSON setting — set to <code>true</code> for opt-in plain-text rendering for screen reader users"
+    },
+    {
+     "tag": "ADD",
+     "item": "vimInsertModeRemaps",
+     "html": "<code>vimInsertModeRemaps</code> JSON setting — map two-key insert-mode sequences to keys in vim mode (e.g. <code>jj</code> → Escape)"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_PROCESS_WRAPPER",
+     "html": "<code>CLAUDE_CODE_PROCESS_WRAPPER</code> env var — run every Claude Code self-spawn through a required corporate launcher executable"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.207",
+   "label": "v2.1.207",
+   "date": "2026-07-11",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "disableAutoMode",
+     "html": "<code>disableAutoMode</code> JSON setting — set to <code>true</code> to disable auto mode on Bedrock, Vertex AI, and Foundry (auto mode now available there by default without opt-in)"
+    },
+    {
+     "tag": "ADD",
+     "item": "$CLAUDE_PLUGIN_OPTION_<KEY>",
+     "html": "<code>$CLAUDE_PLUGIN_OPTION_&lt;KEY&gt;</code> (hook env var) — access plugin config option values in exec-form hook commands; replaces rejected shell-form <code>${user_config.*}</code>"
+    },
+    {
+     "tag": "CHG",
+     "item": "CLAUDE_CODE_ENABLE_AUTO_MODE",
+     "html": "<code>CLAUDE_CODE_ENABLE_AUTO_MODE</code> — no longer needed; auto mode now available by default on Bedrock, Vertex AI, and Foundry"
+    },
+    {
+     "tag": "CHG",
+     "item": "autoMode",
+     "html": "<code>autoMode</code> settings — no longer read from <code>.claude/settings.local.json</code>; configure in <code>~/.claude/settings.json</code> instead"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.206",
+   "label": "v2.1.206",
+   "date": "2026-07-09",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "/commit-push-pr",
+     "html": "<code>/commit-push-pr</code> slash command — commit, push, and open a PR in one step; auto-allows <code>git push</code> to the repo's configured push remote (<code>remote.pushDefault</code>, or the sole remote) in addition to <code>origin</code>"
+    },
+    {
+     "tag": "ADD",
+     "item": "Ctrl X",
+     "html": "<code>Ctrl X</code> (Keys &amp; Shortcuts) — in <code>claude agents</code>: permanently removes a completed session; deleted background jobs stay deleted"
+    },
+    {
+     "tag": "CHG",
+     "item": "/cd",
+     "html": "<code>/cd</code> — now supports directory path suggestions, matching <code>/add-dir</code> behavior"
+    },
+    {
+     "tag": "CHG",
+     "item": "/doctor",
+     "html": "<code>/doctor</code> — now proposes trimming checked-in <code>CLAUDE.md</code> files by cutting content Claude could derive from the codebase"
+    },
+    {
+     "tag": "CHG",
+     "item": "EnterWorktree",
+     "html": "<code>EnterWorktree</code> hook — now asks for confirmation before entering a git worktree outside the project's <code>.claude/worktrees/</code> directory"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.205",
+   "label": "v2.1.205",
+   "date": "2026-07-08",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "/doctor",
+     "html": "<code>/doctor</code> — upgraded to a full setup checkup that can diagnose and fix issues; <code>/checkup</code> added as alias"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.203",
+   "label": "v2.1.203",
+   "date": "2026-07-07",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "roots/list",
+     "html": "<code>roots/list</code> MCP — additional working directories (from <code>/add-dir</code>) now included; <code>notifications/roots/list_changed</code> sent when the set changes"
+    },
+    {
+     "tag": "ADD",
+     "item": "/status",
+     "html": "<code>/status</code> slash command — show CC environment status and warnings (moved from startup output)"
+    },
+    {
+     "tag": "CHG",
+     "item": "Esc",
+     "html": "<code>Esc</code> (Keys &amp; Shortcuts) — now explicitly closes background-tasks, diff, and workflow detail views; left arrow no longer closes these views"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.202",
+   "label": "v2.1.202",
+   "date": "2026-07-06",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "dynamicWorkflowSize",
+     "html": "<code>dynamicWorkflowSize</code> JSON setting — controls how large Claude makes dynamic workflows (small/medium/large agent counts); advisory guideline, not a hard cap"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.200",
+   "label": "v2.1.200",
+   "date": "2026-07-03",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "--permission-mode manual",
+     "html": "<code>--permission-mode manual</code> — new accepted value for the default permission mode; renamed from <code>default</code> — both values honored"
+    },
+    {
+     "tag": "ADD",
+     "item": "defaultMode",
+     "html": "<code>defaultMode</code> JSON setting — set default permission mode; <code>\"manual\"</code> (formerly <code>\"default\"</code>) — both values accepted"
+    },
+    {
+     "tag": "CHG",
+     "item": "permissionMode",
+     "html": "<code>permissionMode</code> (agent frontmatter) — <code>manual</code> replaces <code>default</code>; both accepted"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.199",
+   "label": "v2.1.199",
+   "date": "2026-07-02",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "/skill-a /skill-b [prompt]",
+     "html": "<code>/skill-a /skill-b [prompt]</code> — stacked slash-skill invocations load up to 5 leading skills simultaneously"
+    },
+    {
+     "tag": "CHG",
+     "item": "CLAUDE_CODE_RETRY_WATCHDOG",
+     "html": "<code>CLAUDE_CODE_RETRY_WATCHDOG</code> — raises default retry count for non-capacity transient errors to 300 and lifts the cap of 15 on <code>CLAUDE_CODE_MAX_RETRIES</code>"
+    },
+    {
+     "tag": "CHG",
+     "item": "CLAUDE_CODE_MAX_RETRIES",
+     "html": "<code>CLAUDE_CODE_MAX_RETRIES</code> — cap of 15 is lifted when <code>CLAUDE_CODE_RETRY_WATCHDOG</code> is set"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.198",
+   "label": "v2.1.198",
+   "date": "2026-07-01",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "Notification",
+     "html": "<code>Notification</code> hook — fires when a background agent session needs input or finishes; events: <code>agent_needs_input</code> / <code>agent_completed</code>"
+    },
+    {
+     "tag": "ADD",
+     "item": "/dataviz",
+     "html": "<code>/dataviz</code> skill — chart and dashboard design guidance with a runnable color-palette validator"
+    },
+    {
+     "tag": "DEL",
+     "item": "/agents",
+     "html": "<code>/agents</code> slash-command wizard removed — create or manage subagents by asking Claude or editing <code>.claude/agents/</code> directly"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.197",
+   "label": "v2.1.197",
+   "date": "2026-06-30",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "/model",
+     "html": "<code>/model</code> — <code>claude-sonnet-5</code> is now the default model with a native 1M-token context window"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.196",
+   "label": "v2.1.196",
+   "date": "2026-06-27",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "mcp__name__.*",
+     "html": "<code>mcp__name__.*</code> (hook matcher) — hyphenated identifiers now exact-match; use glob suffix to match all tools from a hyphenated MCP server (e.g. <code>mcp__brave-search__.*</code>)"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.195",
+   "label": "v2.1.195",
+   "date": "2026-06-26",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_DISABLE_MOUSE_CLICKS",
+     "html": "<code>CLAUDE_CODE_DISABLE_MOUSE_CLICKS</code> env var — disable mouse click/drag/hover in fullscreen mode while keeping wheel scroll active"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.193",
+   "label": "v2.1.193",
+   "date": "2026-06-25",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "autoMode.classifyAllShell",
+     "html": "<code>autoMode.classifyAllShell</code> JSON setting — route all Bash/PowerShell commands through the auto-mode classifier instead of only arbitrary-code-execution patterns"
+    },
+    {
+     "tag": "ADD",
+     "item": "OTEL_LOG_ASSISTANT_RESPONSES",
+     "html": "<code>OTEL_LOG_ASSISTANT_RESPONSES</code> env var — opt in to emitting the model's response text as an OTEL log event (<code>claude_code.assistant_response</code>); when unset, follows <code>OTEL_LOG_USER_PROMPTS</code>; set to <code>0</code> to log prompts but not responses"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP=1",
+     "html": "<code>CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP=1</code> env var — disable automatic memory-pressure reaping of idle background shell commands"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.191",
+   "label": "v2.1.191",
+   "date": "2026-06-24",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "/rewind",
+     "html": "<code>/rewind</code> — now supports resuming a conversation from before <code>/clear</code> was run"
+    },
+    {
+     "tag": "ADD",
+     "item": "\"Bash,PowerShell\"",
+     "html": "<code>\"Bash,PowerShell\"</code> (hook matcher) — comma-separated tool type names in a hook's matcher field fire the hook on any of the listed types"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.187",
+   "label": "v2.1.187",
+   "date": "2026-06-23",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "sandbox.credentials",
+     "html": "<code>sandbox.credentials</code> JSON setting — block sandboxed commands from reading credential files and secret environment variables"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT",
+     "html": "<code>CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT</code> env var — override the default 5-minute idle timeout for remote MCP tool calls; stalled calls abort with an error instead of blocking indefinitely"
+    },
+    {
+     "tag": "CHG",
+     "item": "/btw",
+     "html": "<code>/btw</code> — ←/→ arrow navigation to step through earlier answers"
+    },
+    {
+     "tag": "ADD",
+     "item": "/install-github-app",
+     "html": "<code>/install-github-app</code> slash command — install GitHub App with optional GitHub Actions workflow and repo secret setup"
+    },
+    {
+     "tag": "CHG",
+     "item": "/plugin list",
+     "html": "<code>/plugin list</code> — surfaces recently-unused plugins for cleanup"
+    },
+    {
+     "tag": "CHG",
+     "item": "/model",
+     "html": "<code>/model</code> — org-restricted models show \"restricted by your organization's settings\""
+    }
+   ]
+  },
+  {
+   "version": "v2.1.186",
+   "label": "v2.1.186",
+   "date": "2026-06-22",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "claude mcp login/logout <name>",
+     "html": "<code>claude mcp login/logout &lt;name&gt;</code> — authenticate or de-authenticate an MCP server from the CLI without opening <code>/mcp</code>; <code>--no-browser</code> redirects auth code to stdin for SSH completion"
+    },
+    {
+     "tag": "CHG",
+     "item": "/workflows",
+     "html": "<code>/workflows</code> — press <code>f</code> in the agent detail view to filter sessions by status"
+    },
+    {
+     "tag": "ADD",
+     "item": "teammateMode: \"iterm2\"",
+     "html": "<code>teammateMode: \"iterm2\"</code> JSON setting — use iTerm2 as the teammate backend; warns when auto mode cannot find the <code>it2</code> CLI"
+    },
+    {
+     "tag": "ADD",
+     "item": "awsAuthRefresh",
+     "html": "<code>awsAuthRefresh</code> JSON setting — configures \"Claude Platform on AWS — refresh credentials\" option in <code>/login</code>"
+    },
+    {
+     "tag": "ADD",
+     "item": "respondToBashCommands",
+     "html": "<code>respondToBashCommands</code> JSON setting — set to <code>false</code> to keep <code>!</code> bash command output as context-only (default: Claude responds automatically)"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_MAX_RETRIES",
+     "html": "<code>CLAUDE_CODE_MAX_RETRIES</code> env var — capped at 15; for unattended sessions use <code>CLAUDE_CODE_RETRY_WATCHDOG</code> instead"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_RETRY_WATCHDOG",
+     "html": "<code>CLAUDE_CODE_RETRY_WATCHDOG</code> env var — retry watchdog for unattended sessions; replaces high <code>CLAUDE_CODE_MAX_RETRIES</code> values"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.183",
+   "label": "v2.1.183",
+   "date": "2026-06-19",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "attribution.sessionUrl",
+     "html": "<code>attribution.sessionUrl</code> JSON setting — set to <code>false</code> to omit the claude.ai session link from commits and PRs in web and Remote Control sessions"
+    },
+    {
+     "tag": "ADD",
+     "item": "/config --help",
+     "html": "<code>/config --help</code> — list all available shorthand keys for <code>/config key=value</code>"
+    },
+    {
+     "tag": "CHG",
+     "item": "/config",
+     "html": "<code>/config</code> toggle — Enter and Space both change the selected setting; Esc now saves and closes instead of reverting"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.181",
+   "label": "v2.1.181",
+   "date": "2026-06-17",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "/config key=value",
+     "html": "<code>/config key=value</code> — set any setting from the prompt (e.g. <code>/config thinking=false</code>); works in interactive, <code>-p</code>, and Remote Control"
+    },
+    {
+     "tag": "ADD",
+     "item": "sandbox.allowAppleEvents",
+     "html": "<code>sandbox.allowAppleEvents</code> JSON setting — opt-in macOS setting to allow sandboxed commands to send Apple Events"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CLIENT_PRESENCE_FILE",
+     "html": "<code>CLAUDE_CLIENT_PRESENCE_FILE</code> env var — path to a marker file; while the file exists, mobile push notifications are suppressed"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.178",
+   "label": "v2.1.178",
+   "date": "2026-06-15",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "Tool(param:value)",
+     "html": "<code>Tool(param:value)</code> permission rule syntax — match a tool's input parameters (supports <code>*</code> wildcard); e.g. <code>Agent(model:opus)</code> to block Opus subagents"
+    },
+    {
+     "tag": "CHG",
+     "item": ".claude/skills/<name>/",
+     "html": "<code>.claude/skills/&lt;name&gt;/</code> — nested skill directories now load when working on files there; name clashes use <code>&lt;dir&gt;:&lt;name&gt;</code> form"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.176",
+   "label": "v2.1.176",
+   "date": "2026-06-12",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "language",
+     "html": "<code>language</code> JSON setting — pin session-title language; titles auto-detect the conversation language by default; set to a BCP 47 tag (e.g. <code>en</code>, <code>ja</code>) to override"
+    },
+    {
+     "tag": "ADD",
+     "item": "footerLinksRegexes",
+     "html": "<code>footerLinksRegexes</code> JSON setting — array of regex patterns for regex-matched link badges in the footer row; configurable via user or managed settings"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.175",
+   "label": "v2.1.175",
+   "date": "2026-06-12",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "enforceAvailableModels",
+     "html": "<code>enforceAvailableModels</code> managed setting — when enabled, the <code>availableModels</code> allowlist constrains the Default model (a Default that resolves to a disallowed model falls back to the first allowed model); user or project settings cannot widen a managed <code>availableModels</code> list"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.174",
+   "label": "v2.1.174",
+   "date": "2026-06-12",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "wheelScrollAccelerationEnabled",
+     "html": "<code>wheelScrollAccelerationEnabled</code> JSON setting — set to <code>false</code> to disable mouse-wheel scroll acceleration in fullscreen mode"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.172",
+   "label": "v2.1.172",
+   "date": "2026-06-10",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "SubagentStart",
+     "html": "<code>SubagentStart</code> / <code>SubagentStop</code> — sub-agents can now spawn their own sub-agents, up to 5 levels deep"
+    },
+    {
+     "tag": "CHG",
+     "item": "/plugin list",
+     "html": "<code>/plugin list</code> — search bar now available when browsing marketplace plugins"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.169",
+   "label": "v2.1.169",
+   "date": "2026-06-08",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "/cd",
+     "html": "<code>/cd</code> slash command — move session to a new working directory without breaking the prompt cache mid-session"
+    },
+    {
+     "tag": "ADD",
+     "item": "--safe-mode",
+     "html": "<code>--safe-mode</code> CLI flag — start with all customizations (CLAUDE.md, plugins, skills, hooks, MCP servers) disabled for troubleshooting; paired with <code>CLAUDE_CODE_SAFE_MODE</code> env var"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_SAFE_MODE",
+     "html": "<code>CLAUDE_CODE_SAFE_MODE</code> env var — paired with <code>--safe-mode</code> CLI flag"
+    },
+    {
+     "tag": "ADD",
+     "item": "disableBundledSkills",
+     "html": "<code>disableBundledSkills</code> JSON setting — hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code> env var"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_DISABLE_BUNDLED_SKILLS",
+     "html": "<code>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code> env var — hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>disableBundledSkills</code> JSON setting"
+    },
+    {
+     "tag": "ADD",
+     "item": "API_FORCE_IDLE_TIMEOUT=0",
+     "html": "<code>API_FORCE_IDLE_TIMEOUT=0</code> env var — opt out of the default 5-minute idle timeout on Vertex/Foundry"
+    },
+    {
+     "tag": "CHG",
+     "item": "claude agents --json",
+     "html": "<code>claude agents --json</code> — now includes <code>id</code> and <code>state</code> fields; new <code>--all</code> flag includes completed sessions"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.166",
+   "label": "v2.1.166",
+   "date": "2026-06-06",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "fallbackModel",
+     "html": "<code>fallbackModel</code> JSON setting — configure up to three fallback models tried in order when the primary model is overloaded or unavailable"
+    },
+    {
+     "tag": "ADD",
+     "item": "--thinking disabled",
+     "html": "<code>--thinking disabled</code> CLI flag — disable thinking on models that think by default; equivalent to <code>MAX_THINKING_TOKENS=0</code> or the per-model thinking toggle"
+    },
+    {
+     "tag": "CHG",
+     "item": "--fallback-model",
+     "html": "<code>--fallback-model</code> — now also applies to interactive sessions (previously headless only)"
+    },
+    {
+     "tag": "CHG",
+     "item": "MAX_THINKING_TOKENS",
+     "html": "<code>MAX_THINKING_TOKENS</code> — setting to <code>0</code> now disables thinking on models that think by default via the Claude API"
+    },
+    {
+     "tag": "ADD",
+     "item": "\"*\"",
+     "html": "<code>\"*\"</code> (deny rule glob) — glob patterns now supported in deny rule tool-name position; <code>\"*\"</code> denies all tools; allow rules reject non-MCP globs; unknown tool names warn at startup"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.163",
+   "label": "v2.1.163",
+   "date": "2026-06-04",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "requiredMinimumVersion",
+     "html": "<code>requiredMinimumVersion</code> / <code>requiredMaximumVersion</code> managed settings — CC refuses to start if its version is outside the allowed range; directs user to an approved version"
+    },
+    {
+     "tag": "ADD",
+     "item": "/plugin list",
+     "html": "<code>/plugin list</code> slash command — list installed plugins; <code>--enabled</code>/<code>--disabled</code> filters"
+    },
+    {
+     "tag": "CHG",
+     "item": "/btw",
+     "html": "<code>/btw</code> — press <code>c</code> to copy raw markdown answer to clipboard"
+    },
+    {
+     "tag": "CHG",
+     "item": "Stop",
+     "html": "<code>Stop</code> / <code>SubagentStop</code> hooks — can now return <code>hookSpecificOutput.additionalContext</code> to give Claude feedback and continue the turn"
+    },
+    {
+     "tag": "ADD",
+     "item": "\\$",
+     "html": "<code>\\$</code> escape syntax in skill command bodies — include a literal <code>$</code> before a digit"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.162",
+   "label": "v2.1.162",
+   "date": "2026-06-03",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "/terminal-setup",
+     "html": "<code>/terminal-setup</code> — renamed Windsurf to Devin Desktop following the editor's rebrand"
+    },
+    {
+     "tag": "CHG",
+     "item": "claude agents --json",
+     "html": "<code>claude agents --json</code> — output now includes <code>waitingFor</code> field showing what a waiting session is blocked on"
+    },
+    {
+     "tag": "CHG",
+     "item": "/effort",
+     "html": "<code>/effort</code> — now confirms when your chosen level will persist as the default for new sessions"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.161",
+   "label": "v2.1.161",
+   "date": "2026-06-02",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "OTEL_RESOURCE_ATTRIBUTES",
+     "html": "<code>OTEL_RESOURCE_ATTRIBUTES</code> env var — values now used as labels on metric datapoints; slice usage metrics by custom dimensions (e.g. team, repo)"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.160",
+   "label": "v2.1.160",
+   "date": "2026-06-02",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "ultracode",
+     "html": "<code>ultracode</code> prompt trigger keyword — type in the prompt to start a dynamic workflow; highlighted in violet in the prompt input"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.158",
+   "label": "v2.1.158",
+   "date": "2026-05-30",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_ENABLE_AUTO_MODE=1",
+     "html": "<code>CLAUDE_CODE_ENABLE_AUTO_MODE=1</code> env var — opt in to Auto mode on Bedrock, Vertex, and Foundry for Opus 4.7 and Opus 4.8"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.157",
+   "label": "v2.1.157",
+   "date": "2026-05-29",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "claude plugin init <name>",
+     "html": "<code>claude plugin init &lt;name&gt;</code> CLI command — scaffold a new plugin in <code>.claude/skills</code>"
+    },
+    {
+     "tag": "ADD",
+     "item": "agent",
+     "html": "<code>agent</code> JSON setting — default agent name honored for dispatched sessions in <code>claude agents</code>; override per-session with <code>--agent &lt;name&gt;</code>"
+    },
+    {
+     "tag": "ADD",
+     "item": "EnterWorktree",
+     "html": "<code>EnterWorktree</code> hook event — fires on worktree entry; can now switch between Claude-managed worktrees mid-session"
+    },
+    {
+     "tag": "CHG",
+     "item": "claude agents",
+     "html": "<code>claude agents</code> — dispatch flags now include <code>--agent &lt;name&gt;</code>"
+    },
+    {
+     "tag": "CHG",
+     "item": ".claude/skills/<name>/",
+     "html": "<code>.claude/skills/&lt;name&gt;/</code> — plugins in <code>.claude/skills</code> directories now auto-loaded, no marketplace required"
+    },
+    {
+     "tag": "CHG",
+     "item": "/terminal-setup",
+     "html": "<code>/terminal-setup</code> — now also disables GPU acceleration in VS Code, Cursor, and Windsurf to prevent garbled-text rendering"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.154",
+   "label": "v2.1.154",
+   "date": "2026-05-28",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "/workflows",
+     "html": "<code>/workflows</code> slash command — view and manage dynamic workflow runs; orchestrates work across tens to hundreds of background agents for large, complex tasks"
+    },
+    {
+     "tag": "ADD",
+     "item": "claude --bg --exec '<cmd>'",
+     "html": "<code>claude --bg --exec '&lt;cmd&gt;'</code> CLI flag — run a shell command as a background session you can attach to and detach from; also available as <code>! &lt;cmd&gt;</code> in the <code>claude agents</code> TUI"
+    },
+    {
+     "tag": "CHG",
+     "item": "/simplify",
+     "html": "<code>/simplify</code> — now runs cleanup-only review (reuse, simplification, efficiency, altitude) and applies fixes; no longer invokes the full <code>/code-review --fix</code> bug hunt"
+    },
+    {
+     "tag": "CHG",
+     "item": "/effort",
+     "html": "<code>/effort</code> / <code>--effort</code> — interactive slider labels renamed from Speed/Intelligence to Faster/Smarter; xhigh now Opus 4.8 only (was 4.7)"
+    },
+    {
+     "tag": "CHG",
+     "item": "CLAUDE_CODE_SESSION_ID",
+     "html": "<code>CLAUDE_CODE_SESSION_ID</code> / <code>CLAUDECODE</code> — now also injected into stdio MCP server subprocess environments"
+    },
+    {
+     "tag": "CHG",
+     "item": "claude mcp list",
+     "html": "<code>claude mcp list</code>/<code>get</code> — unapproved <code>.mcp.json</code> servers now shown as <code>⏸ Pending approval</code> instead of auto-connecting"
+    },
+    {
+     "tag": "DEL",
+     "item": "CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE",
+     "html": "<code>CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE</code> — deprecated; use <code>/model claude-opus-4-6[1m]</code> then <code>/fast on</code> for Opus 4.6 fast mode"
+    },
+    {
+     "tag": "ADD",
+     "item": "defaultEnabled: false",
+     "html": "<code>defaultEnabled: false</code> plugin manifest field (<code>plugin.json</code>) — plugin starts disabled; enable with <code>/plugin</code> or <code>claude plugin enable</code>"
+    },
+    {
+     "tag": "CHG",
+     "item": "/chrome",
+     "html": "<code>/chrome</code> — now shows browser selector to pick which connected browser to use when multiple are connected"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.153",
+   "label": "v2.1.153",
+   "date": "2026-05-28",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "/model",
+     "html": "<code>/model</code> — selection now saved as default for new sessions; press <code>s</code> in picker to switch for current session only (replaces <code>d</code>)"
+    },
+    {
+     "tag": "CHG",
+     "item": "/doctor",
+     "html": "<code>/doctor</code> — now shows result of last update attempt; lists npm auto-update fix hints"
+    },
+    {
+     "tag": "ADD",
+     "item": "COLUMNS",
+     "html": "<code>COLUMNS</code> / <code>LINES</code> env vars — injected into status line command subprocesses for terminal-width sizing"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.152",
+   "label": "v2.1.152",
+   "date": "2026-05-27",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "/reload-skills",
+     "html": "<code>/reload-skills</code> slash command — re-scan skill directories without restarting the session"
+    },
+    {
+     "tag": "ADD",
+     "item": "/simplify",
+     "html": "<code>/simplify</code> built-in skill — back as alias for <code>/code-review --fix</code>; applies review findings to working tree"
+    },
+    {
+     "tag": "CHG",
+     "item": "/code-review",
+     "html": "<code>/code-review</code> — new <code>--fix</code> flag applies findings to working tree (surfacing reuse/simplification/efficiency suggestions)"
+    },
+    {
+     "tag": "ADD",
+     "item": "disallowed-tools",
+     "html": "<code>disallowed-tools</code> frontmatter field — remove tools from the model while a skill or slash command is active"
+    },
+    {
+     "tag": "ADD",
+     "item": "SessionStart",
+     "html": "<code>SessionStart</code> hook — return <code>reloadSkills: true</code> to re-scan skills; set <code>hookSpecificOutput.sessionTitle</code> to name the session on startup/resume"
+    },
+    {
+     "tag": "ADD",
+     "item": "MessageDisplay",
+     "html": "<code>MessageDisplay</code> hook event — transform or hide assistant message text as it is displayed"
+    },
+    {
+     "tag": "ADD",
+     "item": "pluginSuggestionMarketplaces",
+     "html": "<code>pluginSuggestionMarketplaces</code> managed setting — allowlist org marketplaces whose plugins may be suggested via context-aware tips"
+    },
+    {
+     "tag": "CHG",
+     "item": "--fallback-model",
+     "html": "<code>--fallback-model</code> — now activates for the rest of the session when the primary model is not found, not just overloaded"
+    },
+    {
+     "tag": "CHG",
+     "item": "Ctrl+O",
+     "html": "<code>Ctrl+O</code> — in a collapsed thinking group, shows the full thinking"
+    },
+    {
+     "tag": "ADD",
+     "item": "/",
+     "html": "Vim NORMAL mode <code>/</code> key — opens reverse history search (like Ctrl+R), matching bash/zsh vi-mode"
+    },
+    {
+     "tag": "ADD",
+     "item": "OTEL_METRICS_INCLUDE_ENTRYPOINT=true",
+     "html": "<code>OTEL_METRICS_INCLUDE_ENTRYPOINT=true</code> env var — opt in to <code>app.entrypoint</code> as an OpenTelemetry metric attribute"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.149",
+   "label": "v2.1.149",
+   "date": "2026-05-22",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "/usage",
+     "html": "<code>/usage</code> — per-category limits breakdown (skills, subagents, plugins, per-MCP-server cost)"
+    },
+    {
+     "tag": "CHG",
+     "item": "/diff",
+     "html": "<code>/diff</code> — detail view now scrollable with arrows, <code>j</code>/<code>k</code>, <code>PgUp</code>/<code>PgDn</code>, <code>Space</code>, <code>Home</code>/<code>End</code>"
+    },
+    {
+     "tag": "ADD",
+     "item": "allowAllClaudeAiMcps",
+     "html": "<code>allowAllClaudeAiMcps</code> — enterprise managed setting to load claude.ai cloud MCP connectors alongside <code>managed-mcp.json</code>"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.147",
+   "label": "v2.1.147",
+   "date": "2026-05-21",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "Ctrl T",
+     "html": "<code>Ctrl T</code> — in <code>claude agents</code>: pin/unpin background session; pinned sessions stay alive when idle and restart in place for CC updates"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.146",
+   "label": "v2.1.146",
+   "date": "2026-05-21",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "/simplify",
+     "html": "<code>/simplify</code> renamed to <code>/code-review [effort]</code> — optional effort level (e.g. <code>/code-review high</code>)"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.145",
+   "label": "v2.1.145",
+   "date": "2026-05-19",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "claude agents --json",
+     "html": "<code>claude agents --json</code> — list live sessions as JSON for scripting (tmux-resurrect, status bars, session pickers)"
+    },
+    {
+     "tag": "CHG",
+     "item": "Stop",
+     "html": "<code>Stop</code> / <code>SubagentStop</code> hook input — now includes <code>background_tasks</code> and <code>session_crons</code> fields"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.144",
+   "label": "v2.1.144",
+   "date": "2026-05-19",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "/extra-usage",
+     "html": "<code>/extra-usage</code> renamed to <code>/usage-credits</code>; old name still works"
+    },
+    {
+     "tag": "CHG",
+     "item": "/model",
+     "html": "<code>/model</code> — now changes model for current session only; press <code>d</code> in the picker to set a default for new sessions"
+    },
+    {
+     "tag": "CHG",
+     "item": "/resume",
+     "html": "<code>/resume</code> — background sessions (from <code>--bg</code> or agent view) now appear alongside interactive sessions in the picker, marked with <code>bg</code>"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.143",
+   "label": "v2.1.143",
+   "date": "2026-05-15",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "worktree.bgIsolation",
+     "html": "<code>worktree.bgIsolation</code> JSON setting — set to <code>\"none\"</code> to disable worktree isolation for background sessions"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.142",
+   "label": "v2.1.142",
+   "date": "2026-05-14",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "claude agents",
+     "html": "<code>claude agents</code> — new dispatch flags for configuring background sessions: <code>--add-dir</code>, <code>--settings</code>, <code>--mcp-config</code>, <code>--plugin-dir</code>, <code>--permission-mode</code>, <code>--model</code>, <code>--effort</code>, <code>--dangerously-skip-permissions</code>"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE=1",
+     "html": "<code>CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE=1</code> env var — pin Fast mode to Opus 4.6; fast mode now defaults to Opus 4.7"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.141",
+   "label": "v2.1.141",
+   "date": "2026-05-13",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "terminalSequence",
+     "html": "<code>terminalSequence</code> hook JSON output field — emit desktop notifications, window titles, and bells without a controlling terminal"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_PLUGIN_PREFER_HTTPS",
+     "html": "<code>CLAUDE_CODE_PLUGIN_PREFER_HTTPS</code> env var — clone GitHub plugin sources over HTTPS instead of SSH; for environments without a GitHub SSH key"
+    },
+    {
+     "tag": "ADD",
+     "item": "ANTHROPIC_WORKSPACE_ID",
+     "html": "<code>ANTHROPIC_WORKSPACE_ID</code> env var — workload identity federation; scopes the minted token to a specific workspace when the federation rule covers more than one"
+    },
+    {
+     "tag": "CHG",
+     "item": "claude agents",
+     "html": "<code>claude agents</code> — new <code>--cwd &lt;path&gt;</code> flag scopes the session list to a directory"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.139",
+   "label": "v2.1.139",
+   "date": "2026-05-11",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "claude agents",
+     "html": "<code>claude agents</code> CLI command — agent view (Research Preview): a single list of every CC session — running, blocked on you, or done"
+    },
+    {
+     "tag": "ADD",
+     "item": "/goal [condition]",
+     "html": "<code>/goal [condition]</code> slash command — set a completion condition; Claude keeps working across turns until met; works in interactive, <code>-p</code>, and Remote Control; shows elapsed/turns/tokens overlay"
+    },
+    {
+     "tag": "ADD",
+     "item": "/scroll-speed",
+     "html": "<code>/scroll-speed</code> slash command — tune mouse wheel scroll speed with a live preview"
+    },
+    {
+     "tag": "ADD",
+     "item": "claude plugin details <name>",
+     "html": "<code>claude plugin details &lt;name&gt;</code> CLI command — show plugin component inventory and projected per-session token cost"
+    },
+    {
+     "tag": "ADD",
+     "item": "?",
+     "html": "Transcript view nav keys: <code>?</code> for shortcuts, <code>{</code>/<code>}</code> to jump between user prompts, <code>v</code> to toggle shortcut panel"
+    },
+    {
+     "tag": "ADD",
+     "item": "args: string[]",
+     "html": "<code>args: string[]</code> hook field (exec form) — spawns command directly without a shell; path placeholders never need quoting"
+    },
+    {
+     "tag": "ADD",
+     "item": "continueOnBlock",
+     "html": "<code>continueOnBlock</code> hook option for <code>PostToolUse</code> — feeds hook's rejection reason back to Claude and continues the turn"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_PROJECT_DIR",
+     "html": "<code>CLAUDE_PROJECT_DIR</code> env var — injected into MCP stdio server environments; referenceable as <code>${CLAUDE_PROJECT_DIR}</code> in plugin configs"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.136",
+   "label": "v2.1.136",
+   "date": "2026-05-08",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "autoMode.hard_deny",
+     "html": "<code>autoMode.hard_deny</code> JSON setting — auto mode classifier rules that block unconditionally regardless of user intent; unlike <code>autoMode.soft_deny</code>, cannot be overridden by allow exceptions"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL",
+     "html": "<code>CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL</code> env var — re-enable session quality survey for enterprises capturing responses through OpenTelemetry"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.133",
+   "label": "v2.1.133",
+   "date": "2026-05-07",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "worktree.baseRef",
+     "html": "<code>worktree.baseRef</code> JSON setting — <code>fresh</code> (default) branches worktrees from <code>origin/&lt;default&gt;</code>; <code>head</code> branches from local <code>HEAD</code>; applies to <code>--worktree</code>, <code>EnterWorktree</code>, and agent-isolation"
+    },
+    {
+     "tag": "ADD",
+     "item": "sandbox.bwrapPath",
+     "html": "<code>sandbox.bwrapPath</code> / <code>sandbox.socatPath</code> managed settings — custom bubblewrap and socat binary paths (Linux/WSL)"
+    },
+    {
+     "tag": "ADD",
+     "item": "parentSettingsBehavior",
+     "html": "<code>parentSettingsBehavior</code> admin-tier key — <code>first-wins</code> or <code>merge</code>; opts SDK <code>managedSettings</code> parent tier into policy merge"
+    },
+    {
+     "tag": "ADD",
+     "item": "--remote-control",
+     "html": "<code>--remote-control</code> CLI flag — enable Remote Control mode; bridges CLI session to claude.ai/code"
+    },
+    {
+     "tag": "CHG",
+     "item": "effort.level",
+     "html": "<code>effort.level</code> JSON input field — now also injected into hooks; previously status line only"
+    },
+    {
+     "tag": "CHG",
+     "item": "${CLAUDE_EFFORT}",
+     "html": "<code>${CLAUDE_EFFORT}</code> description — now available in hooks and Bash tool commands, not just skill content"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.132",
+   "label": "v2.1.132",
+   "date": "2026-05-06",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_SESSION_ID",
+     "html": "<code>CLAUDE_CODE_SESSION_ID</code> env var — Session ID injected into Bash tool subprocess environment, matching the <code>session_id</code> passed to hooks"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1",
+     "html": "<code>CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1</code> env var — Opt out of the fullscreen alternate-screen renderer; keeps conversation in the terminal's native scrollback"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.129",
+   "label": "v2.1.129",
+   "date": "2026-05-06",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "Ctrl R",
+     "html": "<code>Ctrl R</code> — History picker now searches all projects by default; press <code>Ctrl+S</code> to narrow to current project or session"
+    },
+    {
+     "tag": "ADD",
+     "item": "--plugin-url <url>",
+     "html": "<code>--plugin-url &lt;url&gt;</code> CLI flag — Fetch a plugin <code>.zip</code> archive from a URL for the current session"
+    },
+    {
+     "tag": "ADD",
+     "item": "skillOverrides",
+     "html": "<code>skillOverrides</code> JSON setting — <code>off</code> hides from model and <code>/</code>; <code>user-invocable-only</code> hides from model only; <code>name-only</code> collapses description"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_FORCE_SYNC_OUTPUT=1",
+     "html": "<code>CLAUDE_CODE_FORCE_SYNC_OUTPUT=1</code> env var — Force-enable synchronized output on terminals that auto-detection misses (e.g. Emacs <code>eat</code>)"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE",
+     "html": "<code>CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE</code> env var — On Homebrew or WinGet installs, runs the upgrade command in the background and prompts to restart when set"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1",
+     "html": "<code>CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1</code> env var — Opt in to listing gateway <code>/v1/models</code> in the <code>/model</code> picker when using a custom <code>ANTHROPIC_BASE_URL</code> gateway (was automatic in v2.1.126–v2.1.128)"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.128",
+   "label": "v2.1.128",
+   "date": "2026-05-04",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "/color [color]",
+     "html": "<code>/color [color]</code> — Bare <code>/color</code> with no args now picks a random session color"
+    },
+    {
+     "tag": "CHG",
+     "item": "/mcp",
+     "html": "<code>/mcp</code> — Now shows tool count for each connected server and flags servers with 0 tools"
+    },
+    {
+     "tag": "CHG",
+     "item": "--channels",
+     "html": "<code>--channels</code> — Now works with console (API key) auth; console orgs with managed settings must set <code>channelsEnabled: true</code>"
+    },
+    {
+     "tag": "ADD",
+     "item": "channelsEnabled",
+     "html": "<code>channelsEnabled</code> JSON setting — Enable <code>--channels</code> with console auth for managed-settings orgs"
+    },
+    {
+     "tag": "ADD",
+     "item": "--plugin-dir <path>",
+     "html": "<code>--plugin-dir &lt;path&gt;</code> CLI flag — Load plugins from a directory or <code>.zip</code> archive at launch"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.126",
+   "label": "v2.1.126",
+   "date": "2026-05-01",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "claude project purge [path]",
+     "html": "<code>claude project purge [path]</code> CLI subcommand — Delete all Claude Code state for a project (transcripts, tasks, file history, config entry); supports <code>--dry-run</code>, <code>-y/--yes</code>, <code>-i/--interactive</code>, and <code>--all</code>"
+    },
+    {
+     "tag": "CHG",
+     "item": "--dangerously-skip-permissions",
+     "html": "<code>--dangerously-skip-permissions</code> — Now bypasses prompts for writes to <code>.claude/</code>, <code>.git/</code>, <code>.vscode/</code>, shell config files, and other protected paths (catastrophic removal commands still prompt)"
+    },
+    {
+     "tag": "CHG",
+     "item": "/model",
+     "html": "<code>/model</code> — Picker lists models from gateway's <code>/v1/models</code> endpoint when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway"
+    },
+    {
+     "tag": "CHG",
+     "item": "claude auth login",
+     "html": "<code>claude auth login</code> — Accepts OAuth code pasted in terminal when browser callback can't reach localhost (WSL2, SSH, containers)"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.123",
+   "label": "v2.1.122–v2.1.123",
+   "date": "2026-04-29",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "ANTHROPIC_BEDROCK_SERVICE_TIER",
+     "html": "<code>ANTHROPIC_BEDROCK_SERVICE_TIER</code> env var — Select a Bedrock service tier (<code>default</code>, <code>flex</code>, or <code>priority</code>); sent as the <code>X-Amzn-Bedrock-Service-Tier</code> header"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.121",
+   "label": "v2.1.120–v2.1.121",
+   "date": "2026-04-28",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "claude ultrareview [target]",
+     "html": "<code>claude ultrareview [target]</code> CLI subcommand — Run <code>/ultrareview</code> non-interactively from CI or scripts; prints findings to stdout; <code>--json</code> for raw output"
+    },
+    {
+     "tag": "ADD",
+     "item": "${CLAUDE_EFFORT}",
+     "html": "<code>${CLAUDE_EFFORT}</code> skill template variable — Reference current effort level in skill content"
+    },
+    {
+     "tag": "ADD",
+     "item": "alwaysLoad",
+     "html": "<code>alwaysLoad</code> MCP server config option — All tools from that server skip tool-search deferral when <code>true</code>"
+    },
+    {
+     "tag": "ADD",
+     "item": "claude plugin prune",
+     "html": "<code>claude plugin prune</code> CLI command — Remove orphaned auto-installed plugin dependencies; <code>plugin uninstall --prune</code> cascades"
+    },
+    {
+     "tag": "CHG",
+     "item": "/skills",
+     "html": "<code>/skills</code> — Now includes a type-to-filter search box for long skill lists"
+    },
+    {
+     "tag": "CHG",
+     "item": "PostToolUse",
+     "html": "<code>PostToolUse</code> — Can now replace tool output via <code>hookSpecificOutput.updatedToolOutput</code> for all tools (was MCP-only)"
+    },
+    {
+     "tag": "CHG",
+     "item": "CLAUDE_CODE_FORK_SUBAGENT=1",
+     "html": "<code>CLAUDE_CODE_FORK_SUBAGENT=1</code> — Now also works in non-interactive sessions"
+    },
+    {
+     "tag": "CHG",
+     "item": "--dangerously-skip-permissions",
+     "html": "<code>--dangerously-skip-permissions</code> — No longer prompts for writes to <code>.claude/skills/</code>, <code>.claude/agents/</code>, and <code>.claude/commands/</code>"
+    },
+    {
+     "tag": "CHG",
+     "item": "/terminal-setup",
+     "html": "<code>/terminal-setup</code> — Now also enables iTerm2 clipboard access for <code>/copy</code>"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.119",
+   "label": "v2.1.119",
+   "date": "2026-04-23",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "prUrlTemplate",
+     "html": "<code>prUrlTemplate</code> JSON setting — Point footer PR badge at a custom code-review URL instead of github.com"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_HIDE_CWD",
+     "html": "<code>CLAUDE_CODE_HIDE_CWD</code> env var — Hide working directory in the startup logo"
+    },
+    {
+     "tag": "ADD",
+     "item": "PostToolUseFailure",
+     "html": "<code>PostToolUseFailure</code> hook event — Fires when a tool call fails; hook input includes <code>duration_ms</code>"
+    },
+    {
+     "tag": "ADD",
+     "item": "effort.level",
+     "html": "<code>effort.level</code> / <code>thinking.enabled</code> status line stdin JSON input fields — current effort level and thinking state"
+    },
+    {
+     "tag": "CHG",
+     "item": "--from-pr",
+     "html": "<code>--from-pr</code> — Description updated to note it now accepts GitLab MR, Bitbucket PR, and GitHub Enterprise URLs"
+    },
+    {
+     "tag": "CHG",
+     "item": "PreToolUse",
+     "html": "<code>PreToolUse</code> / <code>PostToolUse</code> — Description updated to note <code>PostToolUse</code> hook input now includes <code>duration_ms</code> (tool exec time)"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.118",
+   "label": "v2.1.118",
+   "date": "2026-04-23",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "/usage",
+     "html": "<code>/usage</code> slash command — Unified usage view (cost + stats tabs); <code>/cost</code> and <code>/stats</code> become shortcuts that open the relevant tab"
+    },
+    {
+     "tag": "CHG",
+     "item": "/stats",
+     "html": "<code>/stats</code> — Description updated to note it is now a shortcut to the /usage stats tab"
+    },
+    {
+     "tag": "ADD",
+     "item": "v",
+     "html": "Vim Mode section in Keys &amp; Shortcuts — <code>v</code> / <code>V</code> enter visual / visual-line selection mode in NORMAL mode"
+    },
+    {
+     "tag": "ADD",
+     "item": "type: \"mcp_tool\"",
+     "html": "<code>type: \"mcp_tool\"</code> hook type — Hooks can now directly invoke MCP tools"
+    },
+    {
+     "tag": "ADD",
+     "item": "DISABLE_UPDATES",
+     "html": "<code>DISABLE_UPDATES</code> env var — Block all update paths including manual <code>claude update</code>; stricter than <code>DISABLE_AUTOUPDATER</code>"
+    },
+    {
+     "tag": "ADD",
+     "item": "wslInheritsWindowsSettings",
+     "html": "<code>wslInheritsWindowsSettings</code> JSON setting (policy key) — WSL sessions inherit Windows-side managed settings"
+    },
+    {
+     "tag": "ADD",
+     "item": "\"$defaults\"",
+     "html": "<code>\"$defaults\"</code> (autoMode) JSON setting — Include in <code>autoMode.allow</code>, <code>autoMode.soft_deny</code>, or <code>autoMode.environment</code> to add custom rules alongside the built-in list"
+    },
+    {
+     "tag": "ADD",
+     "item": "claude plugin tag",
+     "html": "<code>claude plugin tag</code> CLI command — Create release git tags for plugins with version validation"
+    },
+    {
+     "tag": "CHG",
+     "item": "/theme",
+     "html": "<code>/theme</code> — Description updated to note named custom themes via <code>~/.claude/themes/</code> and plugin theme shipping"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.117",
+   "label": "v2.1.117",
+   "date": "2026-04-22",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_FORK_SUBAGENT=1",
+     "html": "<code>CLAUDE_CODE_FORK_SUBAGENT=1</code> env var — Enable forked subagents on external builds"
+    },
+    {
+     "tag": "ADD",
+     "item": "mcpServers",
+     "html": "<code>mcpServers</code> agent frontmatter field — Loaded for main-thread agent sessions via <code>--agent</code>"
+    },
+    {
+     "tag": "CHG",
+     "item": "/model",
+     "html": "<code>/model</code> — Description updated to note selections persist across restarts; startup header shows model pin source"
+    },
+    {
+     "tag": "CHG",
+     "item": "/resume",
+     "html": "<code>/resume</code> — Description updated to note it offers to summarize stale large sessions before re-reading"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.116",
+   "label": "v2.1.116",
+   "date": "2026-04-20",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "/terminal-setup",
+     "html": "<code>/terminal-setup</code> — description updated to note scroll sensitivity configuration in VS Code, Cursor, and Windsurf"
+    },
+    {
+     "tag": "CHG",
+     "item": "/config",
+     "html": "<code>/config</code> — description updated to note search matches option values"
+    },
+    {
+     "tag": "CHG",
+     "item": "/doctor",
+     "html": "<code>/doctor</code> — description updated to note openable while Claude is responding"
+    },
+    {
+     "tag": "CHG",
+     "item": "/reload-plugins",
+     "html": "<code>/reload-plugins</code> — description updated to note auto-installs missing dependencies from added marketplaces"
+    },
+    {
+     "tag": "ADD",
+     "item": "hooks:",
+     "html": "<code>hooks:</code> agent frontmatter field — fires when running as main-thread agent via <code>--agent</code>"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.113",
+   "label": "v2.1.113",
+   "date": "2026-04-17",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "sandbox.network.deniedDomains",
+     "html": "<code>sandbox.network.deniedDomains</code> JSON setting — Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them"
+    },
+    {
+     "tag": "ADD",
+     "item": "Ctrl A",
+     "html": "<code>Ctrl A</code> / <code>Ctrl E</code> (multiline input) — Move to start/end of current logical line, matching readline behavior"
+    },
+    {
+     "tag": "ADD",
+     "item": "Ctrl Backspace",
+     "html": "<code>Ctrl Backspace</code> (Windows) — Delete previous word"
+    },
+    {
+     "tag": "ADD",
+     "item": "/extra-usage",
+     "html": "<code>/extra-usage</code> slash command — Request extra usage allowance; now also available from Remote Control clients"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.112",
+   "label": "v2.1.110–v2.1.112",
+   "date": "2026-04-16",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "/tui [fullscreen]",
+     "html": "<code>/tui [fullscreen]</code> slash command — Switch to flicker-free fullscreen TUI rendering in same conversation"
+    },
+    {
+     "tag": "ADD",
+     "item": "/focus",
+     "html": "<code>/focus</code> slash command — Toggle focus view in fullscreen/TUI mode"
+    },
+    {
+     "tag": "CHG",
+     "item": "Ctrl O",
+     "html": "<code>Ctrl O</code> — Now toggles between normal and verbose transcript only; focus view moved to <code>/focus</code>"
+    },
+    {
+     "tag": "ADD",
+     "item": "autoScrollEnabled",
+     "html": "<code>autoScrollEnabled</code> JSON setting — Disable conversation auto-scroll in fullscreen mode"
+    },
+    {
+     "tag": "ADD",
+     "item": "tui",
+     "html": "<code>tui</code> JSON setting — Default TUI mode; set to \"fullscreen\" for flicker-free alt-screen rendering"
+    },
+    {
+     "tag": "ADD",
+     "item": "TRACEPARENT",
+     "html": "<code>TRACEPARENT</code> / <code>TRACESTATE</code> env vars — Distributed trace context for SDK/headless sessions"
+    },
+    {
+     "tag": "CHG",
+     "item": "/effort [level]",
+     "html": "<code>/effort [level]</code> — Added <code>xhigh</code> level (Opus 4.7 only); no-arg invocation opens interactive slider"
+    },
+    {
+     "tag": "CHG",
+     "item": "--effort",
+     "html": "<code>--effort</code> — Updated to include <code>xhigh</code> level (Opus 4.7 only)"
+    },
+    {
+     "tag": "ADD",
+     "item": "/less-permission-prompts",
+     "html": "<code>/less-permission-prompts</code> skill — Scan transcripts for read-only Bash/MCP calls; propose settings.json allowlist"
+    },
+    {
+     "tag": "ADD",
+     "item": "/ultrareview [PR#]",
+     "html": "<code>/ultrareview [PR#]</code> skill — Cloud code review via parallel agents; no args for current branch, PR# for specific PR"
+    },
+    {
+     "tag": "ADD",
+     "item": "Ctrl U",
+     "html": "<code>Ctrl U</code> key — Clear entire input buffer"
+    },
+    {
+     "tag": "ADD",
+     "item": "Ctrl Y",
+     "html": "<code>Ctrl Y</code> key — Restore input buffer cleared by Ctrl+U"
+    },
+    {
+     "tag": "ADD",
+     "item": "[",
+     "html": "Transcript view: <code>[</code> dump to scrollback, <code>v</code> open in editor"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_USE_POWERSHELL_TOOL",
+     "html": "<code>CLAUDE_CODE_USE_POWERSHELL_TOOL</code> env var — Enable PowerShell tool; Windows opt in/out, Linux/macOS requires pwsh on PATH"
+    },
+    {
+     "tag": "ADD",
+     "item": "OTEL_LOG_RAW_API_BODIES",
+     "html": "<code>OTEL_LOG_RAW_API_BODIES</code> env var — Emit full API request/response bodies as OTEL log events for debugging"
+    },
+    {
+     "tag": "CHG",
+     "item": "/theme",
+     "html": "<code>/theme</code> — Added \"Auto (match terminal)\" option"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.109",
+   "label": "v2.1.108–v2.1.109",
+   "date": "2026-04-14",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "/recap",
+     "html": "<code>/recap</code> slash command — Summarize away context; auto-triggered on return or invoke manually"
+    },
+    {
+     "tag": "ADD",
+     "item": "/rewind",
+     "html": "<code>/rewind</code> / <code>/undo</code> slash commands — Rewind conversation; <code>/undo</code> is new alias for <code>/rewind</code>"
+    },
+    {
+     "tag": "ADD",
+     "item": "Ctrl A",
+     "html": "<code>Ctrl A</code> session picker key — Show all projects (picker now defaults to current directory)"
+    },
+    {
+     "tag": "ADD",
+     "item": "ENABLE_PROMPT_CACHING_1H",
+     "html": "<code>ENABLE_PROMPT_CACHING_1H</code> env var — Opt into 1-hour prompt cache TTL (API key, Bedrock, Vertex, Foundry)"
+    },
+    {
+     "tag": "ADD",
+     "item": "FORCE_PROMPT_CACHING_5M",
+     "html": "<code>FORCE_PROMPT_CACHING_5M</code> env var — Force 5-minute prompt cache TTL"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_ENABLE_AWAY_SUMMARY",
+     "html": "<code>CLAUDE_CODE_ENABLE_AWAY_SUMMARY</code> env var — Force-enable recap/away summary when telemetry disabled"
+    },
+    {
+     "tag": "CHG",
+     "item": "/model",
+     "html": "<code>/model</code> — Now warns before switching models mid-conversation"
+    },
+    {
+     "tag": "CHG",
+     "item": "/doctor",
+     "html": "<code>/doctor</code> — Press f to auto-fix reported issues (v2.1.105, missed in prior update)"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.105",
+   "label": "v2.1.105",
+   "date": "2026-04-13",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "/proactive",
+     "html": "<code>/proactive</code> slash command — alias for <code>/loop</code>"
+    },
+    {
+     "tag": "ADD",
+     "item": "PreCompact",
+     "html": "<code>PreCompact</code> hook event — fires before compaction; block by exiting with code 2 or returning <code>{\"decision\":\"block\"}</code>"
+    },
+    {
+     "tag": "ADD",
+     "item": "monitors",
+     "html": "<code>monitors</code> plugin manifest key — background monitor support; auto-arms at session start or on skill invoke"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.101",
+   "label": "v2.1.101",
+   "date": "2026-04-10",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "/team-onboarding",
+     "html": "<code>/team-onboarding</code> slash command — Generate teammate ramp-up guide from local CC usage"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_CERT_STORE=bundled",
+     "html": "<code>CLAUDE_CODE_CERT_STORE=bundled</code> env var — Use only bundled CAs; by default OS CA cert store is now trusted (enterprise TLS proxy support)"
+    },
+    {
+     "tag": "ADD",
+     "item": "OTEL_LOG_USER_PROMPTS",
+     "html": "<code>OTEL_LOG_USER_PROMPTS</code> / <code>OTEL_LOG_TOOL_DETAILS</code> / <code>OTEL_LOG_TOOL_CONTENT</code> env vars — OTEL beta tracing: opt in to emit sensitive span attributes"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.98",
+   "label": "v2.1.98",
+   "date": "2026-04-09",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_PERFORCE_MODE",
+     "html": "<code>CLAUDE_CODE_PERFORCE_MODE</code> env var — Edit/Write/NotebookEdit fail on read-only files with a <code>p4 edit</code> hint"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_SCRIPT_CAPS",
+     "html": "<code>CLAUDE_CODE_SCRIPT_CAPS</code> env var — Limit per-session script invocations (subprocess sandboxing)"
+    },
+    {
+     "tag": "CHG",
+     "item": "CLAUDE_CODE_SUBPROCESS_ENV_SCRUB",
+     "html": "<code>CLAUDE_CODE_SUBPROCESS_ENV_SCRUB</code> — Description updated to include PID namespace isolation on Linux"
+    },
+    {
+     "tag": "ADD",
+     "item": "--exclude-dynamic-system-prompt-sections",
+     "html": "<code>--exclude-dynamic-system-prompt-sections</code> CLI flag — Exclude dynamic prompt sections in print mode for cross-user prompt caching"
+    },
+    {
+     "tag": "ADD",
+     "item": "workspace.git_worktree",
+     "html": "<code>workspace.git_worktree</code> status line JSON input field — Set when current directory is inside a linked git worktree"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.97",
+   "label": "v2.1.97",
+   "date": "2026-04-08",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "Ctrl O",
+     "html": "<code>Ctrl O</code> — Description updated to note focus view toggle in NO_FLICKER mode"
+    },
+    {
+     "tag": "ADD",
+     "item": "statusLine.refreshInterval",
+     "html": "<code>statusLine.refreshInterval</code> JSON setting — Re-run status line command every N seconds"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.94",
+   "label": "v2.1.94",
+   "date": "2026-04-07",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_USE_MANTLE=1",
+     "html": "<code>CLAUDE_CODE_USE_MANTLE=1</code> env var — Enable Amazon Bedrock powered by Mantle"
+    },
+    {
+     "tag": "ADD",
+     "item": "keep-coding-instructions",
+     "html": "<code>keep-coding-instructions</code> skill frontmatter field — Control plugin output style for coding tasks"
+    },
+    {
+     "tag": "ADD",
+     "item": "UserPromptSubmit",
+     "html": "<code>UserPromptSubmit</code> hook event — Fires on user prompt submit; supports <code>hookSpecificOutput.sessionTitle</code> to set session title"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.92",
+   "label": "v2.1.92",
+   "date": "2026-04-04",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "forceRemoteSettingsRefresh",
+     "html": "<code>forceRemoteSettingsRefresh</code> JSON setting — Block startup until remote managed settings are freshly fetched; fail-closed on fetch failure"
+    },
+    {
+     "tag": "ADD",
+     "item": "/release-notes",
+     "html": "<code>/release-notes</code> slash command — Interactive version picker for release notes"
+    },
+    {
+     "tag": "ADD",
+     "item": "--remote-control-session-name-prefix",
+     "html": "<code>--remote-control-session-name-prefix</code> CLI flag — Custom hostname prefix for Remote Control session names"
+    },
+    {
+     "tag": "CHG",
+     "item": "/cost",
+     "html": "<code>/cost</code> — Description updated to reflect per-model and cache-hit breakdown"
+    },
+    {
+     "tag": "DEL",
+     "item": "/vim",
+     "html": "<code>/vim</code> slash command removed — toggle vim mode via <code>/config</code> &rarr; Editor mode"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.91",
+   "label": "v2.1.91",
+   "date": "2026-04-02",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "disableSkillShellExecution",
+     "html": "<code>disableSkillShellExecution</code> JSON setting — Disable inline shell execution in skills and custom slash commands"
+    },
+    {
+     "tag": "ADD",
+     "item": "_meta[\"anthropic/maxResultSizeChars\"]",
+     "html": "<code>_meta[\"anthropic/maxResultSizeChars\"]</code> MCP annotation — Override max result size per tool call (up to 500K chars)"
+    },
+    {
+     "tag": "ADD",
+     "item": "plugin: bin/",
+     "html": "<code>plugin: bin/</code> — Plugin executables in <code>bin/</code> invocable as bare commands from Bash tool"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.90",
+   "label": "v2.1.89–v2.1.90",
+   "date": "2026-04-01",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "/powerup",
+     "html": "<code>/powerup</code> slash command — Interactive lessons teaching CC features with animated demos"
+    },
+    {
+     "tag": "ADD",
+     "item": "MCP_CONNECTION_NONBLOCKING=true",
+     "html": "<code>MCP_CONNECTION_NONBLOCKING=true</code> env var — Skip MCP connection wait in headless (-p) mode"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_PLUGIN_KEEP_MARKETPLACE_ON_FAILURE",
+     "html": "<code>CLAUDE_CODE_PLUGIN_KEEP_MARKETPLACE_ON_FAILURE</code> env var — Keep marketplace cache when git pull fails (offline envs)"
+    },
+    {
+     "tag": "ADD",
+     "item": "\"defer\"",
+     "html": "<code>\"defer\"</code> PreToolUse hook decision — Headless sessions pause at tool call; resume with <code>-p --resume</code> to re-evaluate"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.88",
+   "label": "v2.1.88",
+   "date": "2026-03-31",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_NO_FLICKER=1",
+     "html": "<code>CLAUDE_CODE_NO_FLICKER=1</code> env var — Opt into flicker-free alt-screen rendering with virtualized scrollback"
+    },
+    {
+     "tag": "ADD",
+     "item": "PermissionDenied",
+     "html": "<code>PermissionDenied</code> hook event — Fires after auto mode classifier denials; return <code>{retry:true}</code> to allow retry"
+    },
+    {
+     "tag": "ADD",
+     "item": "showThinkingSummaries",
+     "html": "<code>showThinkingSummaries</code> JSON setting — Show thinking summaries in interactive sessions (default: false since v2.1.88)"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.86",
+   "label": "v2.1.86",
+   "date": "2026-03-28",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_MCP_SERVER_NAME",
+     "html": "<code>CLAUDE_CODE_MCP_SERVER_NAME</code> / <code>CLAUDE_CODE_MCP_SERVER_URL</code> — Inject server identity into MCP <code>headersHelper</code> scripts, enabling one helper to serve multiple servers (v2.1.85)"
+    }
+   ]
+  },
+  {
+   "version": "v2.1.85",
+   "label": "v2.1.82–v2.1.85",
+   "date": "2026-03-27",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "Ctrl F",
+     "html": "<code>Ctrl F</code> &rarr; <code>Ctrl X K</code> for killing background agents (v2.1.83)"
+    },
+    {
+     "tag": "ADD",
+     "item": "CwdChanged",
+     "html": "<code>CwdChanged</code> / <code>FileChanged</code> hook events (v2.1.83)"
+    },
+    {
+     "tag": "ADD",
+     "item": "initialPrompt",
+     "html": "<code>initialPrompt</code> agent frontmatter field (v2.1.83)"
+    },
+    {
+     "tag": "ADD",
+     "item": "managed-settings.d/",
+     "html": "<code>managed-settings.d/</code> drop-in policy directory (v2.1.83)"
+    },
+    {
+     "tag": "ADD",
+     "item": "TaskCreated",
+     "html": "<code>TaskCreated</code> hook event (v2.1.84)"
+    },
+    {
+     "tag": "ADD",
+     "item": "if:",
+     "html": "<code>if:</code> conditional field for hooks (v2.1.85)"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_SUBPROCESS_ENV_SCRUB",
+     "html": "<code>CLAUDE_CODE_SUBPROCESS_ENV_SCRUB</code> env var (v2.1.83)"
+    },
+    {
+     "tag": "FIX",
+     "item": "SubAgentStart",
+     "html": "Fixed <code>SubAgentStart</code> &rarr; <code>SubagentStart</code> casing"
+    }
+   ]
+  }
+ ]
+}

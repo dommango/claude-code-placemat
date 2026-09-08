@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock-up 05 — Printable placemat</title>
+    <meta name="description" content="Single-page reference for Claude Code — commands, shortcuts, flags, configuration, hooks, MCP, skills, and agents. Auto-updated from the official changelog.">
+    <meta property="og:title" content="Claude Code Placemat">
+    <meta property="og:description" content="Single-page reference for Claude Code — commands, shortcuts, flags, configuration, hooks, MCP, skills, and agents.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dommango.github.io/claude-code-placemat/">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iI2Q5Nzc1NyIvPjx0ZXh0IHg9IjE2IiB5PSIyMyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9IjcwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzFlMWUxZSI+Jmd0O188L3RleHQ+PC9zdmc+Cg==">
+    <link rel="stylesheet" href="placemat.css">
+    <style>
+/* ---- mock-up banner (not part of the proposal) ---- */
+.mock-banner { grid-column: 1 / -1; border: 1px dashed var(--coral); border-radius: var(--r-md); padding: 8px 14px; background: rgba(217,119,87,0.06); font-size: 12px; }
+.mock-banner-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.mock-tag { font-family: var(--font-pixel); font-size: 8px; color: var(--coral); letter-spacing: 0; }
+.mock-try { color: var(--fg-muted); display: flex; flex-wrap: wrap; gap: 6px; }
+.mock-try span { border: 1px solid var(--border-strong); border-radius: 999px; padding: 1px 8px; font-family: var(--font-mono); font-size: 10.5px; }
+.mock-try span::before { content: "→ "; color: var(--teal); }
+@media print { .mock-banner { display: none !important; } }
+
+
+/* ---- proposal: print stylesheet ---- */
+.print-head { display: none; justify-content: space-between; gap: 6mm; font-family: var(--font-mono); font-size: 7pt; color: #333; border-bottom: 1.5px solid #111; padding-bottom: 1mm; margin-bottom: 3mm; }
+.print-head-title { font-family: var(--font-sans); font-weight: 700; font-size: 9pt; color: #111; }
+.print-head-title b { font-family: var(--font-pixel); font-size: 6pt; color: #c2410c; font-weight: 400; margin-left: 4px; }
+.print-btn { cursor: pointer; background: none; font-family: var(--font-sans); }
+@page { size: A4 landscape; margin: 7mm 8mm; }
+@media print {
+ .notes,  .notes-btn,  .global-header,  .legend-strip,  .no-results,  .whats-new-overlay { display: none !important; }
+ .print-head { display: flex; }
+ html,  body { padding: 0; background: #fff; color: #111; font-size: 8pt; line-height: 1.25; }
+ .dashboard-grid { display: block; column-count: 4; column-gap: 5mm; column-fill: auto; max-width: none; }
+ .card { break-inside: auto; page-break-inside: auto; display: block; margin: 0 0 3mm; padding: 0; border: none; border-radius: 0; background: none; }
+ .card h2 { font-size: 8.5pt; color: #111; border-bottom: 1.5px solid #111; padding-bottom: 1.5px; margin: 0 0 2mm; break-after: avoid; page-break-after: avoid; }
+ .card h2::before { background: #c2410c; }
+ .search-group { margin-bottom: 2mm; break-inside: auto; }
+ .search-group h3 { font-size: 6.5pt; color: #0f766e; margin: 0 0 1mm; break-after: avoid; page-break-after: avoid; }
+ .search-group h3::before { color: #c2410c; }
+ .search-group + .search-group h3 { border-top: 1px dashed #bbb; padding-top: 1mm; margin-top: 1mm; }
+ table { font-size: 7.5pt; }
+ tr { break-inside: avoid; page-break-inside: avoid; }
+ td { padding: 0.6mm 1mm 0.4mm 0; border-bottom: 0.4pt dotted #999; vertical-align: top; }
+ td:first-child { width: 40%; }
+ .desc { font-size: 7pt; color: #333; line-height: 1.25; }
+ code { font-size: 6.8pt; background: #f1efe9; color: #111; border: 0.4pt solid #ddd; padding: 0 2px; cursor: default; }
+ .desc code { font-size: 6.5pt; }
+ code.new { background: #dfe8de; border-color: #0f766e; box-shadow: inset 2px 0 0 0 #0f766e; }
+ code.new::after { content: " ■"; color: #0f766e; font-size: 5pt; }
+ code.unverified { background: #f7edd6; border-color: #b47400; box-shadow: inset 2px 0 0 0 #b47400; }
+ code.unverified::after { content: " □"; color: #b47400; font-size: 5pt; }
+ .global-footer { border: none; padding: 2mm 0 0; font-size: 6pt; color: #666; text-align: left; }
+ .global-footer a { color: #666; }
+ .global-footer br { display: none; }
+ * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+/* on-screen preview of the same rules (mock-up aid; production keeps only the @media print block) */
+html:has(body.print-preview) { background: #777 !important; }
+body.print-preview { width: 297mm; margin: 12px auto; box-shadow: 0 0 0 1px #ccc, 0 8px 30px rgba(0,0,0,0.4); padding: 7mm 8mm !important; background: #fff !important; color: #111 !important; }
+body.print-preview .dashboard-grid { column-fill: balance; }
+
+.print-preview .notes, .print-preview .notes-btn, .print-preview .global-header, .print-preview .legend-strip, .print-preview .no-results, .print-preview .whats-new-overlay { display: none !important; }
+.print-preview .print-head { display: flex; }
+.print-preview html, .print-preview body { padding: 0; background: #fff; color: #111; font-size: 8pt; line-height: 1.25; }
+.print-preview .dashboard-grid { display: block; column-count: 4; column-gap: 5mm; column-fill: auto; max-width: none; }
+.print-preview .card { break-inside: auto; page-break-inside: auto; display: block; margin: 0 0 3mm; padding: 0; border: none; border-radius: 0; background: none; }
+.print-preview .card h2 { font-size: 8.5pt; color: #111; border-bottom: 1.5px solid #111; padding-bottom: 1.5px; margin: 0 0 2mm; break-after: avoid; page-break-after: avoid; }
+.print-preview .card h2::before { background: #c2410c; }
+.print-preview .search-group { margin-bottom: 2mm; break-inside: auto; }
+.print-preview .search-group h3 { font-size: 6.5pt; color: #0f766e; margin: 0 0 1mm; break-after: avoid; page-break-after: avoid; }
+.print-preview .search-group h3::before { color: #c2410c; }
+.print-preview .search-group + .search-group h3 { border-top: 1px dashed #bbb; padding-top: 1mm; margin-top: 1mm; }
+.print-preview table { font-size: 7.5pt; }
+.print-preview tr { break-inside: avoid; page-break-inside: avoid; }
+.print-preview td { padding: 0.6mm 1mm 0.4mm 0; border-bottom: 0.4pt dotted #999; vertical-align: top; }
+.print-preview td:first-child { width: 40%; }
+.print-preview .desc { font-size: 7pt; color: #333; line-height: 1.25; }
+.print-preview code { font-size: 6.8pt; background: #f1efe9; color: #111; border: 0.4pt solid #ddd; padding: 0 2px; cursor: default; }
+.print-preview .desc code { font-size: 6.5pt; }
+.print-preview code.new { background: #dfe8de; border-color: #0f766e; box-shadow: inset 2px 0 0 0 #0f766e; }
+.print-preview code.new::after { content: " ■"; color: #0f766e; font-size: 5pt; }
+.print-preview code.unverified { background: #f7edd6; border-color: #b47400; box-shadow: inset 2px 0 0 0 #b47400; }
+.print-preview code.unverified::after { content: " □"; color: #b47400; font-size: 5pt; }
+.print-preview .global-footer { border: none; padding: 2mm 0 0; font-size: 6pt; color: #666; text-align: left; }
+.print-preview .global-footer a { color: #666; }
+.print-preview .global-footer br { display: none; }
+.print-preview * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+.print-preview .mock-banner { display: block !important; grid-column: auto; column-span: all; background: #fff5f0; color: #111; margin-bottom: 3mm; }
+.print-preview .mock-banner .mock-try { color: #333; }
+.print-preview .print-head { column-span: all; }
+
+    </style>
+    <script>
+        (function() {
+            var stored = localStorage.getItem('placemat-theme');
+            var theme = (stored === 'light' || stored === 'dark')
+                ? stored
+                : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            document.documentElement.dataset.theme = theme;
+        })();
+    </script>
+</head>
+<body>
+
+    <header class="global-header">
+        <div class="header-title">
+            <!-- 8-bit Claude Code minion icon -->
+            <svg class="minion-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <rect x="5" y="1" width="6" height="2" fill="#d97757"/>
+                <rect x="4" y="3" width="8" height="2" fill="#d97757"/>
+                <rect x="3" y="5" width="10" height="3" fill="#d97757"/>
+                <rect x="5" y="5" width="2" height="2" fill="#1e1e1e"/>
+                <rect x="9" y="5" width="2" height="2" fill="#1e1e1e"/>
+                <rect x="6" y="6" width="1" height="1" fill="#f1f1f1"/>
+                <rect x="10" y="6" width="1" height="1" fill="#f1f1f1"/>
+                <rect x="4" y="8" width="8" height="2" fill="#d97757"/>
+                <rect x="6" y="9" width="4" height="1" fill="#1e1e1e"/>
+                <rect x="3" y="10" width="3" height="3" fill="#d97757"/>
+                <rect x="10" y="10" width="3" height="3" fill="#d97757"/>
+                <rect x="5" y="10" width="6" height="3" fill="#d97757"/>
+                <rect x="3" y="13" width="3" height="2" fill="#d97757"/>
+                <rect x="10" y="13" width="3" height="2" fill="#d97757"/>
+            </svg>
+            <h1>Claude Code <span class="wm-pixel">PLACEMAT</span></h1>
+            <span class="header-tagline">Auto-updated reference — always current</span>
+        </div>
+        <div class="global-controls">
+            <span class="release-tag">As of release: v2.1.263</span>
+            <a href="changelog.html" class="header-link">Changelog →</a>
+            <button type="button" class="header-link print-btn" id="printBtn" title="Print or save as PDF (Ctrl P)">⎙ Print</button>
+            <button type="button" class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle light and dark theme">&#9728;&#65039;</button>
+            <div class="search-wrap">
+                <input type="text" id="dashboardSearch" placeholder="Search the placemat…" aria-label="Search the placemat">
+                <span class="kbd" id="searchKbd">⌘K</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="print-head" aria-hidden="true">
+        <span class="print-head-title">Claude Code <b>PLACEMAT</b></span>
+        <span>As of release v2.1.263</span>
+        <span>■ = new in recent release &nbsp; □ = unverified</span>
+        <span>dommango.github.io/claude-code-placemat</span>
+    </div>
+    <div class="dashboard-grid">
+    <div class="mock-banner" role="note">
+      <div class="mock-banner-row">
+        <span class="mock-tag">MOCK-UP 05</span>
+        <strong>A placemat you can actually print — A4 landscape, 4 columns, summaries only, status glyphs that survive greyscale</strong>
+        <span class="mock-try">Try: <span>click ⎙ Print in the header (or Ctrl P) and check the preview</span><span>or click the preview button here →</span></span>
+      <button type="button" id="previewBtn" class="theme-toggle" aria-pressed="false">Preview print layout</button></div>
+    </div>
+
+        <!-- Legend + Command Builder -->
+        <div class="card full-width search-exclude legend-strip">
+            <div class="legend-strip-row">
+                <div class="legend">
+                    <div class="legend-item"><span class="legend-swatch swatch-default"></span> Verified</div>
+                    <div class="legend-item"><span class="legend-swatch swatch-new"></span> New (recent release)</div>
+                    <div class="legend-item"><span class="legend-swatch swatch-unverified"></span> Unverified</div>
+                    <div class="legend-item"><button type="button" class="notes-all" id="notesAll" aria-pressed="false">Show all notes</button></div>
+                </div>
+                <div class="compact-builder">
+                    <span class="builder-label">Builder ▸</span>
+                    <input type="text" id="labPrompt" placeholder="Instruction (e.g., refactor auth)">
+                    <select id="labEffort">
+                        <option value="">Effort: Auto</option>
+                        <option value="--effort high">High (Opus)</option>
+                        <option value="--effort low">Low (Haiku)</option>
+                    </select>
+                    <select id="labFormat">
+                        <option value="">Text Output</option>
+                        <option value="--output-format json">JSON Output</option>
+                    </select>
+                    <label class="builder-label"><input type="checkbox" id="labBare"> Bare Headless</label>
+                    <code id="generatedCmd" title="Click to copy">claude -p ""</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Keys & Shortcuts</h2>
+
+            <div class="search-group">
+                <h3>General Controls</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-ctrl-c"><td><code>Ctrl C</code> / <code>D</code></td><td class="desc">Cancel input / Exit session</td></tr>
+                    <tr class="search-item" id="i-ctrl-l"><td><code>Ctrl L</code></td><td class="desc">Clear screen + full redraw; in fullscreen mode, clears the transcript view like a terminal <code>clear</code> — scroll up to see earlier messages</td></tr>
+                    <tr class="search-item" id="i-ctrl-o"><td><code>Ctrl O</code></td><td class="desc">Toggle between normal and verbose transcript; in a collapsed thinking group, shows the full thinking; focus view toggled with /focus</td></tr>
+                    <tr class="search-item" id="i-ctrl-r"><td><code>Ctrl R</code></td><td class="desc">History picker — searches all projects by default; press <code>Ctrl S</code> to narrow to current project or session</td></tr>
+                    <tr class="search-item" id="i-ctrl-g"><td><code>Ctrl G</code></td><td class="desc">Open prompt in external editor</td></tr>
+                    <tr class="search-item" id="i-ctrl-b"><td><code>Ctrl B</code></td><td class="desc">Background running task</td></tr>
+                    <tr class="search-item" id="i-ctrl-t"><td><code>Ctrl T</code></td><td class="desc">Toggle task list; in <code>claude agents</code>: pin/unpin background session (pinned sessions stay alive when idle, restart in place for CC updates)</td></tr>
+                    <tr class="search-item" id="i-ctrl-v"><td><code>Ctrl V</code></td><td class="desc">Paste image from clipboard</td></tr>
+                    <tr class="search-item" id="i-ctrl-backspace"><td><code>Ctrl Backspace</code></td><td class="desc">Delete previous word (Windows)</td></tr>
+                    <tr class="search-item" id="i-ctrl-u"><td><code>Ctrl U</code></td><td class="desc">Clear entire input buffer (Ctrl+Y to restore)</td></tr>
+                    <tr class="search-item" id="i-ctrl-y"><td><code>Ctrl Y</code></td><td class="desc">Restore input buffer cleared by Ctrl+U</td></tr>
+                    <tr class="search-item" id="i-ctrl-x-k"><td><code>Ctrl X K</code></td><td class="desc">Kill background agents (chord, x2)</td></tr>
+                    <tr class="search-item" id="i-ctrl-x"><td><code>Ctrl X</code></td><td class="desc">In <code>claude agents</code>: permanently removes a completed session; deleted background jobs stay deleted</td></tr>
+                    <tr class="search-item" id="i-esc-esc"><td><code>Esc Esc</code></td><td class="desc">Rewind / undo state</td></tr>
+                    <tr class="search-item" id="i-esc"><td><code>Esc</code></td><td class="desc">Close background-tasks, diff, and workflow detail views (left arrow no longer closes these)</td></tr>
+                    <tr class="search-item" id="i-selection-clear"><td><code>selection:clear</code></td><td class="desc">Keybinding action — bind to a key in <code>/keybindings</code> to clear an in-app text selection; works in agents view</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Mode & Input</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-tab"><td><code>Tab</code></td><td class="desc">Cycle permission modes</td></tr>
+                    <tr class="search-item" id="i-p"><td><code>\ P</code></td><td class="desc">Switch model</td></tr>
+                    <tr class="search-item" id="i-t"><td><code>\ T</code></td><td class="desc">Toggle thinking on/off</td></tr>
+                    <tr class="search-item" id="i-enter"><td><code>\ Enter</code></td><td class="desc">Newline (quick)</td></tr>
+                    <tr class="search-item" id="i-ctrl-j"><td><code>Ctrl J</code></td><td class="desc">Newline (control seq)</td></tr>
+                    <tr class="search-item" id="i-ctrl-a"><td><code>Ctrl A</code> / <code>Ctrl E</code></td><td class="desc">Move to start/end of current logical line (multiline input)</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Session Picker Nav</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-p-2"><td><code>P</code> / <code>R</code></td><td class="desc">Preview / Rename session</td></tr>
+                    <tr class="search-item" id="i-item"><td><code>/</code></td><td class="desc">Search sessions</td></tr>
+                    <tr class="search-item" id="i-a"><td><code>A</code> / <code>B</code></td><td class="desc">Filter All projects / Current branch</td></tr>
+                    <tr class="search-item" id="i-ctrl-a-2"><td><code>Ctrl A</code></td><td class="desc">Show all projects in /resume picker (picker defaults to current dir)</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Transcript View</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-item-2"><td><code>[</code></td><td class="desc">Dump transcript to scrollback</td></tr>
+                    <tr class="search-item" id="i-v"><td><code>v</code></td><td class="desc">Open transcript in editor</td></tr>
+                    <tr class="search-item" id="i-item-3"><td><code>?</code></td><td class="desc">Show keyboard shortcuts in transcript nav view</td></tr>
+                    <tr class="search-item" id="i-item-4"><td><code>{</code> / <code>}</code></td><td class="desc">Jump between user prompts in transcript nav view</td></tr>
+                    <tr class="search-item" id="i-v-2"><td><code>v</code> (nav view)</td><td class="desc">Toggle shortcut panel in transcript nav view</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Vim Mode</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-v-3"><td><code>v</code> / <code>V</code></td><td class="desc">Visual / visual-line selection mode (NORMAL mode)</td></tr>
+                    <tr class="search-item" id="i-normal-mode"><td><code>/ (NORMAL mode)</code></td><td class="desc">Open reverse history search (like Ctrl+R), matching bash/zsh vi-mode</td></tr>
+                    <tr class="search-item" id="i-s"><td><code>s</code> / <code>S</code></td><td class="desc">Substitute char / substitute line in NORMAL mode, matching vim behavior</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Slash Commands (Core)</h2>
+
+            <div class="search-group">
+                <h3>Session Management</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-clear"><td><code>/clear</code></td><td class="desc">Clear conversation context; resets the per-session subagent spawn budget</td></tr>
+                    <tr class="search-item" id="i-compact-focus"><td><code>/compact [focus]</code></td><td class="desc">Compact context to free space</td></tr>
+                    <tr class="search-item" id="i-resume"><td><code>/resume</code></td><td class="desc"><span class="summary">Open the session picker; background sessions are listed alongside interactive ones</span> <button type="button" class="notes-btn" aria-expanded="false">+3</button><ul class="notes" hidden><li>Background sessions (from <code>--bg</code> or the agent view) are marked <code>bg</code></li><li>Offers to summarize stale large sessions before re-reading them</li><li>In the agent view: picks from past sessions, including deleted ones, and resumes the choice as a background session</li></ul></td></tr>
+                    <tr class="search-item" id="i-rename-name"><td><code>/rename [name]</code></td><td class="desc">Name current session</td></tr>
+                    <tr class="search-item" id="i-branch-name"><td><code>/branch [name]</code></td><td class="desc">Branch conversation</td></tr>
+                    <tr class="search-item" id="i-fork"><td><code>/fork</code></td><td class="desc"><span class="summary">Copy conversation into a new background session (its own row in <code>claude agents</code>) with its own git worktree, while you keep working in the current session</span> <button type="button" class="notes-btn" aria-expanded="false">+1</button><ul class="notes" hidden><li>Old in-session subagent behavior moved to <code>/subtask</code></li></ul></td></tr>
+                    <tr class="search-item" id="i-subtask"><td><code>/subtask</code></td><td class="desc">Launch an in-session subagent for the current task; formerly what <code>/fork</code> did before v2.1.212</td></tr>
+                    <tr class="search-item" id="i-usage"><td><code>/usage</code></td><td class="desc"><span class="summary">Unified usage view — cost, stats, limits, and loops in one place</span> <button type="button" class="notes-btn" aria-expanded="false">+5</button><ul class="notes" hidden><li>Per-category limits breakdown: skills, subagents, plugins, per-MCP-server cost</li><li>Loops tab: run count, total tokens, tokens per run, last run — spots runaway <code>/loop</code> tasks</li><li>Spend-limit bar for gateway users with spend limits</li><li><code>/cost</code> adds a per-session prompt-cache line (hit ratio, misses, re-cached, warm/cold)</li><li><code>/cost</code> and <code>/stats</code> open the matching tab directly</li></ul></td></tr>
+                    <tr class="search-item" id="i-usage-credits"><td><code>/usage-credits</code></td><td class="desc"><span class="summary">Request extra usage allowance</span> <button type="button" class="notes-btn" aria-expanded="false">+4</button><ul class="notes" hidden><li>Available for Enterprise organizations billed through AWS Marketplace, self-serve Enterprise, and Enterprise trials</li><li>Asks for confirmation before sending to organization admins</li><li>Old name <code>/extra-usage</code> still works</li><li>Accessible from Remote Control clients</li></ul></td></tr>
+                    <tr class="search-item" id="i-context"><td><code>/context</code></td><td class="desc">Visualize context window (grid)</td></tr>
+                    <tr class="search-item" id="i-diff"><td><code>/diff</code></td><td class="desc"><span class="summary">Interactive diff viewer</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li>In fullscreen mode, opens as a panel beside the conversation showing uncommitted changes as Claude edits</li><li>Detail view scrollable with arrows, <code>j</code>/<code>k</code>, <code>PgUp</code>/<code>PgDn</code>, <code>Space</code>, <code>Home</code>/<code>End</code></li></ul></td></tr>
+                    <tr class="search-item" id="i-copy"><td><code>/copy</code></td><td class="desc">Copy last response</td></tr>
+                    <tr class="search-item" id="i-export"><td><code>/export</code></td><td class="desc">Export conversation</td></tr>
+                    <tr class="search-item" id="i-recap"><td><code>/recap</code></td><td class="desc">Summarize away context; auto-triggered on return or invoke manually</td></tr>
+                    <tr class="search-item" id="i-rewind"><td><code>/rewind</code> / <code>/undo</code></td><td class="desc">Rewind conversation to previous state; /undo is alias; supports resuming a conversation from before <code>/clear</code> was run</td></tr>
+                    <tr class="search-item" id="i-goal-condition"><td><code>/goal [condition]</code></td><td class="desc"><span class="summary">Set a completion condition; Claude keeps working across turns until it is met</span> <button type="button" class="notes-btn" aria-expanded="false">+5</button><ul class="notes" hidden><li>Works in interactive, <code>-p</code>, and Remote Control; shows a live elapsed/turns/tokens overlay</li><li>Clears itself on unrecoverable errors (revoked auth, exhausted credits, context overflow)</li><li>Checks in on background tasks waiting 30+ min; <code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES=0</code> opts out</li><li>Idle sessions get at most three check-ins per goal, backing off 30 min → 1 h → 2 h; your next message allows three more</li><li><code>claude --resume</code> restores the active goal</li></ul></td></tr>
+                    <tr class="search-item" id="i-cd"><td><code>/cd</code></td><td class="desc"><span class="summary">Move session to a new working directory without breaking the prompt cache mid-session</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li>Project settings, hooks, <code>.mcp.json</code> servers (behind the usual approval prompt), skills, and agents take effect immediately after the move instead of on <code>--resume</code></li><li>Supports directory path suggestions (matching <code>/add-dir</code>)</li></ul></td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Configuration</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-config"><td><code>/config</code></td><td class="desc">Open settings interface; search matches option values; Enter and Space change the selected setting; Esc saves and closes</td></tr>
+                    <tr class="search-item" id="i-config-key-value"><td><code>/config key=value</code></td><td class="desc">Set any setting from the prompt (e.g. <code>/config thinking=false</code>) — works in interactive, <code>-p</code>, and Remote Control</td></tr>
+                    <tr class="search-item" id="i-config-help"><td><code>/config --help</code></td><td class="desc">List all available shorthand keys for <code>/config key=value</code></td></tr>
+                    <tr class="search-item" id="i-model-model"><td><code>/model [model]</code></td><td class="desc"><span class="summary">Switch model; the choice becomes the default for new sessions</span> <button type="button" class="notes-btn" aria-expanded="false">+5</button><ul class="notes" hidden><li><code>claude-sonnet-5</code> is the default (native 1M-token context)</li><li>Press <code>s</code> in the picker to switch for the current session only</li><li>Warns before switching mid-conversation; the startup header shows where the model pin came from</li><li>Lists the gateway's <code>/v1/models</code> when <code>ANTHROPIC_BASE_URL</code> points at a compatible gateway</li><li>Org-restricted models show "restricted by your organization's settings"</li></ul></td></tr>
+                    <tr class="search-item" id="i-effort-level"><td><code>/effort [level]</code></td><td class="desc"><span class="summary">Set effort (low/med/high/xhigh/auto)</span> <button type="button" class="notes-btn" aria-expanded="false">+4</button><ul class="notes" hidden><li>No args opens interactive slider (Faster/Smarter labels)</li><li>Press <code>s</code> in interactive picker to switch for current session only, matching <code>/model</code></li><li>Xhigh is Opus 4.8 only</li><li>Saves the default effort level per model — each model keeps its own setting when you switch</li></ul></td></tr>
+                    <tr class="search-item" id="i-fast-on-off"><td><code>/fast [on/off]</code></td><td class="desc">Toggle Fast mode</td></tr>
+                    <tr class="search-item" id="i-permissions"><td><code>/permissions</code></td><td class="desc"><span class="summary">View/update tool permissions</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li>Can be opened while Claude is working — rule changes apply to the rest of the current turn</li><li>Auto mode tab shows and edits auto mode classifier rules</li></ul></td></tr>
+                    <tr class="search-item" id="i-color-color"><td><code>/color [color]</code></td><td class="desc">Set prompt-bar color; bare <code>/color</code> with no args picks a random session color</td></tr>
+                    <tr class="search-item" id="i-keybindings"><td><code>/keybindings</code></td><td class="desc">Customize keyboard shortcuts</td></tr>
+                    <tr class="search-item" id="i-terminal-setup"><td><code>/terminal-setup</code></td><td class="desc"><span class="summary">Configure terminal integration</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li>Configures scroll sensitivity and disables GPU acceleration in VS Code, Cursor, and Devin Desktop to prevent garbled-text rendering</li><li>Enables iTerm2 clipboard access for <code>/copy</code></li></ul></td></tr>
+                    <tr class="search-item" id="i-theme"><td><code>/theme</code></td><td class="desc">Change color theme; create/switch named custom themes, hand-edit <code>~/.claude/themes/</code>; plugins ship via <code>themes/</code> dir; includes "Auto (match terminal)"</td></tr>
+                    <tr class="search-item" id="i-tui-fullscreen"><td><code>/tui [fullscreen]</code></td><td class="desc">Switch to flicker-free fullscreen TUI rendering in same conversation</td></tr>
+                    <tr class="search-item" id="i-focus"><td><code>/focus</code></td><td class="desc">Toggle focus view (fullscreen/TUI mode)</td></tr>
+                    <tr class="search-item" id="i-release-notes"><td><code>/release-notes</code></td><td class="desc">Interactive version picker for release notes</td></tr>
+                    <tr class="search-item" id="i-scroll-speed"><td><code>/scroll-speed</code></td><td class="desc">Tune mouse wheel scroll speed with a live preview</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Slash Commands (Tools)</h2>
+
+            <div class="search-group">
+                <h3>Development Tools</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-init"><td><code>/init</code></td><td class="desc">Create CLAUDE.md memory</td></tr>
+                    <tr class="search-item" id="i-memory"><td><code>/memory</code></td><td class="desc">Edit CLAUDE.md files directly</td></tr>
+                    <tr class="search-item" id="i-mcp"><td><code>/mcp</code></td><td class="desc"><span class="summary">Manage MCP servers; see per-server tool counts and connection errors</span> <button type="button" class="notes-btn" aria-expanded="false">+4</button><ul class="notes" hidden><li>Flags servers with 0 tools</li><li>Shows HTTP status and error text when a server fails to connect</li><li>Warns about config values with hidden leading or trailing whitespace</li><li>Shows a <code>managed</code> marker on claude.ai connectors whose auth is managed by your organization</li></ul></td></tr>
+                    <tr class="search-item" id="i-hooks"><td><code>/hooks</code></td><td class="desc">Manage event lifecycle hooks</td></tr>
+                    <tr class="search-item" id="i-install-github-app"><td><code>/install-github-app</code></td><td class="desc">Install the GitHub App; GitHub Actions workflow and repo secret setup is optional — install just the GitHub App and skip the workflow/secret steps</td></tr>
+                    <tr class="search-item" id="i-commit-push-pr"><td><code>/commit-push-pr</code></td><td class="desc"><span class="summary">Commit, push, and open a PR in one step</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li>Auto-allows <code>git push</code> to the repo's configured push remote (<code>remote.pushDefault</code>, or the sole remote when only one is configured) in addition to <code>origin</code></li><li>Git/gh commands with dangerous flags (<code>--force</code>, <code>--amend</code>, <code>--no-verify</code>, etc.) are no longer auto-approved</li></ul></td></tr>
+                    <tr class="search-item" id="i-skills"><td><code>/skills</code></td><td class="desc">List available active skills; includes type-to-filter search box for long lists</td></tr>
+                    <tr class="search-item" id="i-chrome"><td><code>/chrome</code></td><td class="desc">Chrome browser integration; pick which connected browser to use via <code>/chrome</code> → "Select browser…", or in-chat when a browser action runs with multiple connected</td></tr>
+                    <tr class="search-item" id="i-add-dir-path"><td><code>/add-dir &lt;path&gt;</code></td><td class="desc">Add working directory to context; usable while Claude is working</td></tr>
+                    <tr class="search-item" id="i-reload-plugins"><td><code>/reload-plugins</code></td><td class="desc">Hot-reload local plugins; available in headless sessions (Claude Code Desktop and SDK); auto-installs missing dependencies from added marketplaces</td></tr>
+                    <tr class="search-item" id="i-reload-skills"><td><code>/reload-skills</code></td><td class="desc">Re-scan skill directories without restarting the session</td></tr>
+                    <tr class="search-item" id="i-plugin-list"><td><code>/plugin list</code></td><td class="desc">List installed plugins; <code>--enabled</code>/<code>--disabled</code> filters; search bar available when browsing marketplace plugins; surfaces recently-unused plugins for cleanup</td></tr>
+                    <tr class="search-item" id="i-plugin-install-name"><td><code>/plugin install &lt;name&gt;</code></td><td class="desc"><span class="summary">Install a plugin from the marketplace</span> <button type="button" class="notes-btn" aria-expanded="false">+3</button><ul class="notes" hidden><li>Supports <code>archive</code> source — install from a zip over HTTPS without git or npm, with optional SHA-256 pinning</li><li>Refreshes a stale catalog and retries before reporting not found</li><li>Activates immediately when safe without requiring <code>/reload-plugins</code></li></ul></td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Special & Utility</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-btw-query"><td><code>/btw &lt;query&gt;</code></td><td class="desc">Side question (does not alter context); press <code>c</code> to copy raw markdown answer to clipboard; <code>Shift+←</code>/<code>Shift+→</code> (or <code>[</code>/<code>]</code>) to step through earlier answers</td></tr>
+                    <tr class="search-item" id="i-plan-desc"><td><code>/plan [desc]</code></td><td class="desc">Switch to Plan Mode directly</td></tr>
+                    <tr class="search-item" id="i-loop-interval"><td><code>/loop [interval]</code></td><td class="desc">Schedule recurring background task; self-paced dynamic mode and no-prompt autonomous default are now always available, including on Bedrock, Vertex, and Foundry</td></tr>
+                    <tr class="search-item" id="i-proactive"><td><code>/proactive</code></td><td class="desc">Alias for /loop — schedule recurring background task</td></tr>
+                    <tr class="search-item" id="i-schedule"><td><code>/schedule</code></td><td class="desc">Cloud scheduled tasks</td></tr>
+                    <tr class="search-item" id="i-deep-research"><td><code>/deep-research</code></td><td class="desc">Structured deep-research session; must be explicitly invoked — Claude no longer auto-starts it</td></tr>
+                    <tr class="search-item" id="i-workflows"><td><code>/workflows</code></td><td class="desc"><span class="summary">View and manage dynamic workflow runs</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li>Workflows orchestrate work across tens to hundreds of background agents for large, complex tasks</li><li>Press <code>f</code> in the agent detail view to filter by status</li></ul></td></tr>
+                    <tr class="search-item" id="i-ultracode"><td><code>ultracode</code></td><td class="desc">Prompt trigger keyword — type in the prompt to start a dynamic workflow; highlighted in violet in the prompt input</td></tr>
+                    <tr class="search-item" id="i-voice"><td><code>/voice</code></td><td class="desc">Push-to-talk voice prompting</td></tr>
+                    <tr class="search-item" id="i-doctor"><td><code>/doctor</code></td><td class="desc"><span class="summary">Full setup checkup — diagnose and fix installation or environment issues</span> <button type="button" class="notes-btn" aria-expanded="false">+4</button><ul class="notes" hidden><li>Press <code>f</code> to auto-fix; can be opened while Claude is responding</li><li>Shows the result of the last update attempt and npm auto-update fix hints</li><li>Proposes trimming checked-in <code>CLAUDE.md</code> content Claude could derive from the codebase</li><li><code>/checkup</code> is an alias</li></ul></td></tr>
+                    <tr class="search-item" id="i-skill-doctor"><td><code class="new">/skill-doctor</code> <!-- added:v2.1.261 --></td><td class="desc">Show which loaded skills go unused and what they cost in context — helps prune skills that aren't contributing</td></tr>
+                    <tr class="search-item" id="i-status"><td><code>/status</code></td><td class="desc"><span class="summary">Show environment status, warnings, and what kind of session this is</span> <button type="button" class="notes-btn" aria-expanded="false">+5</button><ul class="notes" hidden><li>Session kind: <code>interactive</code>, or a background job that is <code>attached</code> or <code>unattended</code></li><li><code>Skipped sources</code> line lists managed-settings sources present but not applied</li><li>Shows GitHub connection status for Claude Code on the web (Pro/Max)</li><li>Explains a managed-settings load failure or why they weren't fetched (Bedrock/Vertex/third-party provider, custom <code>ANTHROPIC_BASE_URL</code>)</li><li>Moved out of the startup output in v2.1.203</li></ul></td></tr>
+                    <tr class="search-item" id="i-pr-comments-pr"><td><code>/pr-comments [PR]</code></td><td class="desc">Fetch GitHub PR comments</td></tr>
+                    <tr class="search-item" id="i-security-review"><td><code>/security-review</code></td><td class="desc">Security analysis of uncommitted code</td></tr>
+                    <tr class="search-item" id="i-powerup"><td><code>/powerup</code></td><td class="desc">Interactive lessons teaching CC features with animated demos</td></tr>
+                    <tr class="search-item" id="i-stats"><td><code>/stats</code> / <code>/insights</code></td><td class="desc">Shortcut to /usage stats tab / HTML sessions report</td></tr>
+                    <tr class="search-item" id="i-desktop"><td><code>/desktop</code></td><td class="desc">Continue session in Desktop app</td></tr>
+                    <tr class="search-item" id="i-remote-control"><td><code>/remote-control</code></td><td class="desc">Bridge session to claude.ai/code</td></tr>
+                    <tr class="search-item" id="i-team-onboarding"><td><code>/team-onboarding</code></td><td class="desc">Generate teammate ramp-up guide from local CC usage</td></tr>
+                    <tr class="search-item" id="i-advisor"><td><code>/advisor</code></td><td class="desc"><span class="summary">AI advisor mode</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li>Text form: <code>/advisor</code>, <code>/advisor &lt;model&gt;</code>, <code>/advisor off</code> — works in desktop, Remote Control, and headless (<code>-p</code>/Agent SDK) sessions</li><li>Fable 5 available for organizations with Fable access — enable via <code>/model fable</code></li></ul></td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>CLI & Headless Flags</h2>
+
+            <div class="search-group">
+                <h3>Core Execution</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-claude"><td><code>claude</code></td><td class="desc">Start interactive REPL</td></tr>
+                    <tr class="search-item" id="i-claude-p-q"><td><code>claude -p "q"</code></td><td class="desc">Headless execution (scripting)</td></tr>
+                    <tr class="search-item" id="i-claude-c"><td><code>claude -c</code> / <code>-r "n"</code></td><td class="desc">Continue last / Resume specific</td></tr>
+                    <tr class="search-item" id="i-claude-from-pr"><td><code>claude --from-pr</code></td><td class="desc">Resume session linked to a PR; accepts GitHub, GitLab MR, Bitbucket PR, and GitHub Enterprise URLs</td></tr>
+                    <tr class="search-item" id="i-claude-fork-session"><td><code>claude --fork-session</code></td><td class="desc">Fork existing session on resume</td></tr>
+                    <tr class="search-item" id="i-claude-teleport-session-id"><td><code>claude --teleport &lt;session-id&gt;</code></td><td class="desc">Continue a cloud session locally; session ID shown in the <code>/teleport</code> hint that appears in cloud sessions</td></tr>
+                    <tr class="search-item" id="i-claude-ultrareview-target"><td><code>claude ultrareview [target]</code></td><td class="desc">Run <code>/ultrareview</code> non-interactively from CI or scripts; prints findings to stdout; use <code>--json</code> for raw output</td></tr>
+                    <tr class="search-item" id="i-claude-project-purge-path"><td><code>claude project purge [path]</code></td><td class="desc">Delete all Claude Code state for a project (transcripts, tasks, file history, config entry); supports <code>--dry-run</code>, <code>-y/--yes</code>, <code>-i/--interactive</code>, and <code>--all</code></td></tr>
+                    <tr class="search-item" id="i-claude-auto-mode-reset"><td><code>claude auto-mode reset</code></td><td class="desc">Restore default auto-mode configuration; prompts for confirmation (pass <code>--yes</code> to skip)</td></tr>
+                    <tr class="search-item" id="i-claude-agents"><td><code>claude agents</code></td><td class="desc"><span class="summary">Agent view (Research Preview) — every CC session in one list: running, blocked on you, or done</span> <button type="button" class="notes-btn" aria-expanded="false">+4</button><ul class="notes" hidden><li>Type <code>! &lt;cmd&gt;</code> to launch a shell command as a background session you can attach to or detach from</li><li><code>--cwd &lt;path&gt;</code> scopes the list to a directory; <code>--all</code> includes completed sessions</li><li><code>--json</code> lists live sessions (<code>waitingFor</code>, <code>id</code>, <code>state</code> fields)</li><li>Dispatch flags for background sessions: <code>--add-dir</code>, <code>--settings</code>, <code>--mcp-config</code>, <code>--plugin-dir</code>, <code>--permission-mode</code>, <code>--model</code>, <code>--effort</code>, <code>--agent</code>, <code>--dangerously-skip-permissions</code></li></ul></td></tr>
+                    <tr class="search-item" id="i-claude-bg-exec-cmd"><td><code>claude --bg --exec '&lt;cmd&gt;'</code></td><td class="desc">Run a shell command as a background session you can attach to and detach from; equivalent to typing <code>! &lt;cmd&gt;</code> inside <code>claude agents</code></td></tr>
+                    <tr class="search-item" id="i-claude-self-hosted-runner"><td><code>claude self-hosted-runner</code></td><td class="desc">Turn your own machine or container into a session host for Claude Code web, mobile, and desktop sessions (Team and Enterprise plans)</td></tr>
+                    <tr class="search-item" id="i-claude-self-hosted-runner-defer-shutdown-max-min-minutes"><td><code>claude self-hosted-runner --defer-shutdown-max-min &lt;minutes&gt;</code></td><td class="desc">On SIGTERM, keep serving attached sessions for up to the given number of minutes before parking remaining sessions and exiting</td></tr>
+                    <tr class="search-item" id="i-claude-self-hosted-runner-proxy-authorization-command"><td><code>claude self-hosted-runner --proxy-authorization-command</code> / <code>--proxy-authorization-file</code></td><td class="desc">Supply a freshly issued <code>Proxy-Authorization</code> header on every connection for egress proxies that require per-request credentials</td></tr>
+                    <tr class="search-item" id="i-claude-remote-control-continue"><td><code>claude remote-control --continue</code></td><td class="desc">Resume the most recent Remote Control session</td></tr>
+                    <tr class="search-item" id="i-claude-self-hosted-runner-client-label-label"><td><code>claude self-hosted-runner --client-label &lt;label&gt;</code></td><td class="desc">Override the label the runner registers with (default: hostname); paired with <code>SELF_HOSTED_RUNNER_CLIENT_LABEL</code> env var</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Headless & CI Flags</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-restricted"><td><code>--restricted</code></td><td class="desc"><span class="summary">Remove built-in tools that run commands or code and <code>WebFetch</code> (unless named in <code>--tools</code>)</span> <button type="button" class="notes-btn" aria-expanded="false">+4</button><ul class="notes" hidden><li>Keep file tools inside the working directory</li><li>Refuse <code>bypassPermissions</code></li><li>Ignore user, project and local settings files</li><li>Paired with <code>CLAUDE_CODE_RESTRICTED=1</code> env var</li></ul></td></tr>
+                    <tr class="search-item" id="i-bare"><td><code>--bare</code></td><td class="desc">Minimal headless (no hooks/LSP)</td></tr>
+                    <tr class="search-item" id="i-permission-prompts-none"><td><code>--permission-prompts none</code></td><td class="desc">Deny any action that would prompt for unattended headless hosts; the active permission mode (including auto mode) still decides normally</td></tr>
+                    <tr class="search-item" id="i-append-subagent-system-prompt-file"><td><code class="new">--append-subagent-system-prompt-file</code> <!-- added:v2.1.261 --></td><td class="desc">Read the subagent system prompt from a file; for prompts too large to pass on the command line</td></tr>
+                    <tr class="search-item" id="i-channels"><td><code>--channels</code></td><td class="desc">Permission relay / MCP push msg; now works with console (API key) auth — console orgs with managed settings must set <code>channelsEnabled: true</code></td></tr>
+                    <tr class="search-item" id="i-output-format-json"><td><code>--output-format json</code></td><td class="desc">Structured JSON output</td></tr>
+                    <tr class="search-item" id="i-json-schema"><td><code>--json-schema</code></td><td class="desc">Strict JSON schema validation</td></tr>
+                    <tr class="search-item" id="i-dangerously-skip-permissions"><td><code>--dangerously-skip-permissions</code></td><td class="desc"><span class="summary">Skip all approval prompts</span> <button type="button" class="notes-btn" aria-expanded="false">+1</button><ul class="notes" hidden><li>Bypasses prompts for writes to <code>.claude/</code>, <code>.git/</code>, <code>.vscode/</code>, shell config files, and other protected paths (catastrophic removal commands still prompt)</li></ul></td></tr>
+                    <tr class="search-item" id="i-exclude-dynamic-system-prompt-sections"><td><code>--exclude-dynamic-system-prompt-sections</code></td><td class="desc">Exclude dynamic prompt sections in print mode for cross-user prompt caching</td></tr>
+                    <tr class="search-item" id="i-forward-subagent-text"><td><code>--forward-subagent-text</code></td><td class="desc">Include subagent text and thinking in <code>--output-format stream-json</code> output; paired with <code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code> env var</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>State & Behavior</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-w"><td><code>-w</code> / <code>--worktree</code></td><td class="desc">Start in isolated git worktree</td></tr>
+                    <tr class="search-item" id="i-effort"><td><code>--effort</code></td><td class="desc">Set effort level (low/med/high/xhigh); xhigh is Opus 4.8 only</td></tr>
+                    <tr class="search-item" id="i-model"><td><code>--model</code></td><td class="desc">Override specific model at launch</td></tr>
+                    <tr class="search-item" id="i-fallback-model"><td><code>--fallback-model</code></td><td class="desc"><span class="summary">Fallback model for when the primary model is overloaded or unavailable</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li>Applies to interactive sessions and headless (-p) mode</li><li>Configure up to three in order via <code>fallbackModel</code> JSON setting</li></ul></td></tr>
+                    <tr class="search-item" id="i-thinking-disabled"><td><code>--thinking disabled</code></td><td class="desc">Disable thinking on models that think by default; equivalent to <code>MAX_THINKING_TOKENS=0</code> or toggling the per-model thinking switch</td></tr>
+                    <tr class="search-item" id="i-permission-mode-plan"><td><code>--permission-mode plan</code></td><td class="desc">Start in read-only plan mode</td></tr>
+                    <tr class="search-item" id="i-permission-mode-manual"><td><code>--permission-mode manual</code></td><td class="desc">Start in manual (default) permission mode; renamed from <code>default</code> — both values accepted</td></tr>
+                    <tr class="search-item" id="i-max-budget-usd"><td><code>--max-budget-usd</code></td><td class="desc">Set cost cap for session</td></tr>
+                    <tr class="search-item" id="i-remote"><td><code>--remote</code></td><td class="desc">Start web-accessible session</td></tr>
+                    <tr class="search-item" id="i-remote-control-2"><td><code>--remote-control</code></td><td class="desc">Enable Remote Control mode; bridges CLI session to claude.ai/code</td></tr>
+                    <tr class="search-item" id="i-remote-control-session-name-prefix"><td><code>--remote-control-session-name-prefix</code></td><td class="desc">Custom hostname prefix for Remote Control session names</td></tr>
+                    <tr class="search-item" id="i-plugin-dir-path"><td><code>--plugin-dir &lt;path&gt;</code></td><td class="desc">Load plugins from a directory or <code>.zip</code> archive at launch</td></tr>
+                    <tr class="search-item" id="i-plugin-url-url"><td><code>--plugin-url &lt;url&gt;</code></td><td class="desc">Fetch a plugin <code>.zip</code> archive from a URL for the current session</td></tr>
+                    <tr class="search-item" id="i-safe-mode"><td><code>--safe-mode</code></td><td class="desc">Start with all customizations (CLAUDE.md, plugins, skills, hooks, MCP servers) disabled for troubleshooting; paired with <code>CLAUDE_CODE_SAFE_MODE</code> env var</td></tr>
+                    <tr class="search-item" id="i-ax-screen-reader"><td><code>--ax-screen-reader</code></td><td class="desc"><span class="summary">Enable screen reader mode — opt-in plain-text rendering for screen reader users</span> <button type="button" class="notes-btn" aria-expanded="false">+1</button><ul class="notes" hidden><li>Also set via <code>CLAUDE_AX_SCREEN_READER=1</code> env var or <code>axScreenReader: true</code> in settings</li></ul></td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Config & Environment</h2>
+
+            <div class="search-group">
+                <h3>Files & Priority</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-claude-settings-json"><td><code>~/.claude/settings.json</code></td><td class="desc">User global defaults</td></tr>
+                    <tr class="search-item" id="i-claude-settings-json-2"><td><code>.claude/settings.json</code></td><td class="desc">Project shared (committed)</td></tr>
+                    <tr class="search-item" id="i-claude-settings-local-json"><td><code>.claude/settings.local.json</code></td><td class="desc">Project local only (gitignored)</td></tr>
+                    <tr class="search-item" id="i-claude-json"><td><code>~/.claude.json</code></td><td class="desc">OAuth, MCP, state configuration</td></tr>
+                    <tr class="search-item" id="i-mcp-json"><td><code>.mcp.json</code></td><td class="desc">Project-specific MCP servers</td></tr>
+                    <tr class="search-item" id="i-managed-settings-d"><td><code>managed-settings.d/</code></td><td class="desc">Drop-in policy fragments (alphabetical merge)</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Key JSON Settings</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-modeloverrides"><td><code>modelOverrides</code></td><td class="desc">Map model picker to custom IDs</td></tr>
+                    <tr class="search-item" id="i-modelpicker"><td><code>modelPicker</code></td><td class="desc"><span class="summary">Curate the <code>/model</code> picker with an ordered, labeled list of models (any id spelling, including Vertex/Bedrock ids)</span> <button type="button" class="notes-btn" aria-expanded="false">+1</button><ul class="notes" hidden><li>Entries are appended to or replace the built-in lineup</li></ul></td></tr>
+                    <tr class="search-item" id="i-modelpricing"><td><code>modelPricing</code></td><td class="desc"><span class="summary">Managed setting — set an organization's contracted per-model rates and discount multiplier</span> <button type="button" class="notes-btn" aria-expanded="false">+1</button><ul class="notes" hidden><li>Used for <code>/cost</code>, the status line, and telemetry cost figures instead of list price</li></ul></td></tr>
+                    <tr class="search-item" id="i-promptcachettl"><td><code>promptCacheTtl</code> / <code>subagentPromptCacheTtl</code></td><td class="desc"><span class="summary">Set a 1-hour prompt cache TTL for the main conversation (<code>promptCacheTtl</code>) while subagents stay at 5 minutes (<code>subagentPromptCacheTtl</code>)</span> <button type="button" class="notes-btn" aria-expanded="false">+1</button><ul class="notes" hidden><li>For API-key and cloud-provider users</li></ul></td></tr>
+                    <tr class="search-item" id="i-defaultmode"><td><code>defaultMode</code></td><td class="desc"><span class="summary">Set default permission mode</span> <button type="button" class="notes-btn" aria-expanded="false">+3</button><ul class="notes" hidden><li><code>"manual"</code> (formerly <code>"default"</code>) — both values accepted</li><li><code>"bypassPermissions"</code> is ignored in project/local settings (same as <code>"auto"</code>) — set it in user or managed settings, or pass <code>--permission-mode bypassPermissions</code></li><li>Paired with <code>--permission-mode</code> CLI flag</li></ul></td></tr>
+                    <tr class="search-item" id="i-automemorydirectory"><td><code>autoMemoryDirectory</code></td><td class="desc">Custom auto-loaded memory dir</td></tr>
+                    <tr class="search-item" id="i-worktree-sparsepaths"><td><code>worktree.sparsePaths</code></td><td class="desc">Sparse checkout dirs for agents</td></tr>
+                    <tr class="search-item" id="i-worktree-baseref"><td><code>worktree.baseRef</code></td><td class="desc"><code>fresh</code> (default) branches worktrees from <code>origin/&lt;default&gt;</code>; <code>head</code> branches from local <code>HEAD</code> — applies to <code>--worktree</code>, <code>EnterWorktree</code>, and agent-isolation</td></tr>
+                    <tr class="search-item" id="i-worktree-bgisolation"><td><code>worktree.bgIsolation</code></td><td class="desc">Set to <code>"none"</code> to disable worktree isolation for background sessions</td></tr>
+                    <tr class="search-item" id="i-agent"><td><code>agent</code></td><td class="desc">Default agent name for dispatched sessions in <code>claude agents</code>; override per-session with <code>--agent &lt;name&gt;</code></td></tr>
+                    <tr class="search-item" id="i-fallbackmodel"><td><code>fallbackModel</code></td><td class="desc">Configure up to three fallback models tried in order when the primary model is overloaded or unavailable; paired with <code>--fallback-model</code> CLI flag</td></tr>
+                    <tr class="search-item" id="i-showthinkingsummaries"><td><code>showThinkingSummaries</code></td><td class="desc">Show thinking summaries in interactive sessions (default: false)</td></tr>
+                    <tr class="search-item" id="i-language"><td><code>language</code></td><td class="desc">Pin session-title language; titles auto-detect the conversation language by default — set to a BCP 47 tag (e.g. <code>en</code>, <code>ja</code>) to override</td></tr>
+                    <tr class="search-item" id="i-disableskillshellexecution"><td><code>disableSkillShellExecution</code></td><td class="desc">Disable inline shell execution in skills and custom slash commands</td></tr>
+                    <tr class="search-item" id="i-skilloverrides"><td><code>skillOverrides</code></td><td class="desc"><code>off</code> hides skill from model and <code>/</code>; <code>user-invocable-only</code> hides from model only; <code>name-only</code> collapses description</td></tr>
+                    <tr class="search-item" id="i-forceremotesettingsrefresh"><td><code>forceRemoteSettingsRefresh</code></td><td class="desc">Block startup until remote managed settings are freshly fetched; fail-closed on fetch failure</td></tr>
+                    <tr class="search-item" id="i-statusline-refreshinterval"><td><code>statusLine.refreshInterval</code></td><td class="desc">Re-run status line command every N seconds</td></tr>
+                    <tr class="search-item" id="i-workspace-git-worktree"><td><code>workspace.git_worktree</code></td><td class="desc">Status line JSON input field — set when current directory is inside a linked git worktree</td></tr>
+                    <tr class="search-item" id="i-effort-level-2"><td><code>effort.level</code> / <code>thinking.enabled</code></td><td class="desc">Hooks and status line stdin JSON input fields — current effort level and thinking state</td></tr>
+                    <tr class="search-item" id="i-prompt-cache"><td><code>prompt_cache</code></td><td class="desc">Status line script JSON input field — per-session prompt-cache stats (hit ratio, misses, tokens re-cached, warm/cold)</td></tr>
+                    <tr class="search-item" id="i-autoscrollenabled"><td><code>autoScrollEnabled</code></td><td class="desc">Disable conversation auto-scroll in fullscreen mode</td></tr>
+                    <tr class="search-item" id="i-wheelscrollaccelerationenabled"><td><code>wheelScrollAccelerationEnabled</code></td><td class="desc">Set to <code>false</code> to disable mouse-wheel scroll acceleration in fullscreen mode</td></tr>
+                    <tr class="search-item" id="i-tui"><td><code>tui</code></td><td class="desc">Default TUI mode; set to "fullscreen" for flicker-free alt-screen rendering</td></tr>
+                    <tr class="search-item" id="i-axscreenreader"><td><code>axScreenReader</code></td><td class="desc">Set to <code>true</code> for opt-in plain-text rendering for screen reader users; paired with <code>--ax-screen-reader</code> flag and <code>CLAUDE_AX_SCREEN_READER=1</code> env var</td></tr>
+                    <tr class="search-item" id="i-spellcheck"><td><code>spellcheck</code></td><td class="desc">Underline misspelled words in the prompt input as you type; requires <code>aspell</code>, <code>hunspell</code>, or <code>ispell</code> to be installed</td></tr>
+                    <tr class="search-item" id="i-keybindingflavor"><td><code>keybindingFlavor</code></td><td class="desc"><span class="summary">Set to <code>"readline"</code> to make Ctrl+W delete back to the previous whitespace (Bash-style)</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li>Default <code>"classic"</code> is unchanged</li><li>In <code>"readline"</code> mode, Alt+F and Ctrl/Option+→ stop at end of word, Alt+D deletes to it (Ctrl+Y pastes back), and punctuation separates words</li></ul></td></tr>
+                    <tr class="search-item" id="i-outputstyle"><td><code>outputStyle</code></td><td class="desc"><span class="summary">Built-in output style</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li><code>"concise"</code> makes Claude lead with results and skip preamble and narration while working just as thoroughly</li><li>Configure via <code>/config</code> → Output style</li></ul></td></tr>
+                    <tr class="search-item" id="i-timeformat"><td><code>timeFormat</code></td><td class="desc">Turn-end clock and transcript timestamp format: <code>"12h"</code>, <code>"24h"</code>, <code>"24h-utc"</code>, or a strftime pattern; paired with <code>timeZone</code></td></tr>
+                    <tr class="search-item" id="i-timezone"><td><code>timeZone</code></td><td class="desc">Time zone for the turn-end clock and transcript timestamps; paired with <code>timeFormat</code></td></tr>
+                    <tr class="search-item" id="i-viminsertmoderemaps"><td><code>vimInsertModeRemaps</code></td><td class="desc">Map two-key insert-mode sequences to keys in vim mode; e.g. map <code>jj</code> to Escape</td></tr>
+                    <tr class="search-item" id="i-permissions-blockreadsoutsideworkingdirectories"><td><code>permissions.blockReadsOutsideWorkingDirectories</code></td><td class="desc">Block file reads outside configured working directories; in auto mode, a one-time prompt appears before the first such read</td></tr>
+                    <tr class="search-item" id="i-sandbox-network-denieddomains"><td><code>sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr>
+                    <tr class="search-item" id="i-sandbox-network-strictallowlist"><td><code>sandbox.network.strictAllowlist</code></td><td class="desc">Deny non-allowlisted hosts for sandboxed commands without prompting</td></tr>
+                    <tr class="search-item" id="i-sandbox-bwrappath"><td><code>sandbox.bwrapPath</code> / <code>sandbox.socatPath</code></td><td class="desc">Custom bubblewrap and socat binary paths (Linux/WSL managed settings)</td></tr>
+                    <tr class="search-item" id="i-sandbox-allowappleevents"><td><code>sandbox.allowAppleEvents</code></td><td class="desc">Opt-in macOS setting to allow sandboxed commands to send Apple Events</td></tr>
+                    <tr class="search-item" id="i-sandbox-credentials"><td><code>sandbox.credentials</code></td><td class="desc"><span class="summary">Block sandboxed commands from reading credential files and secret env vars</span> <button type="button" class="notes-btn" aria-expanded="false">+3</button><ul class="notes" hidden><li><code>mode: "mask"</code> (Linux/WSL) exposes a sentinel copy; the proxy substitutes the real value on egress</li><li><code>extract</code> / <code>onExtractNoMatch</code> for structured values; <code>decode: "jwt"</code> with <code>maskClaims</code> for JWT-aware masking; <code>awsPairs</code> / <code>sigv4</code> for AWS SigV4 re-signing</li><li>Requires <code>network.tlsTerminate</code>; macOS falls back to <code>deny</code></li></ul></td></tr>
+                    <tr class="search-item" id="i-sandbox-filesystem-disabled"><td><code>sandbox.filesystem.disabled</code></td><td class="desc">Skip filesystem isolation while keeping network egress control</td></tr>
+                    <tr class="search-item" id="i-wslinheritswindowssettings"><td><code>wslInheritsWindowsSettings</code></td><td class="desc">WSL sessions inherit Windows-side managed settings (policy key)</td></tr>
+                    <tr class="search-item" id="i-parentsettingsbehavior"><td><code>parentSettingsBehavior</code></td><td class="desc">Admin-tier key: <code>first-wins</code> (default) or <code>merge</code> — opts SDK <code>managedSettings</code> parent tier into policy merge</td></tr>
+                    <tr class="search-item" id="i-defaults"><td><code>"$defaults"</code> (autoMode)</td><td class="desc"><span class="summary">Include in <code>autoMode.allow</code>, <code>autoMode.soft_deny</code>, or <code>autoMode.environment</code> to add custom rules alongside the built-in list</span> <button type="button" class="notes-btn" aria-expanded="false">+1</button><ul class="notes" hidden><li><code>autoMode</code> settings are read only from <code>~/.claude/settings.json</code>, not from <code>.claude/settings.local.json</code></li></ul></td></tr>
+                    <tr class="search-item" id="i-automode-hard-deny"><td><code>autoMode.hard_deny</code></td><td class="desc">Auto mode classifier rules that block unconditionally regardless of user intent — unlike <code>autoMode.soft_deny</code>, cannot be overridden by allow exceptions</td></tr>
+                    <tr class="search-item" id="i-automode-classifyallshell"><td><code>autoMode.classifyAllShell</code></td><td class="desc">Route all Bash/PowerShell commands through the auto-mode classifier instead of only arbitrary-code-execution patterns</td></tr>
+                    <tr class="search-item" id="i-disableautomode"><td><code>disableAutoMode</code></td><td class="desc">Set to <code>true</code> to disable auto mode on Bedrock, Vertex AI, and Foundry — auto mode is now available there by default without opt-in</td></tr>
+                    <tr class="search-item" id="i-item-5"><td><code>"*"</code> (deny rule glob)</td><td class="desc"><span class="summary">Glob patterns supported in deny rule tool-name position</span> <button type="button" class="notes-btn" aria-expanded="false">+3</button><ul class="notes" hidden><li><code>"*"</code> denies all tools</li><li>Allow rules reject non-MCP globs</li><li>Unknown tool names in deny rules warn at startup</li></ul></td></tr>
+                    <tr class="search-item" id="i-tool-param-value"><td><code>Tool(param:value)</code></td><td class="desc">Permission rule syntax to match a tool's input parameters (supports <code>*</code> wildcard); e.g. <code>Agent(model:opus)</code> to block Opus subagents</td></tr>
+                    <tr class="search-item" id="i-write-path"><td><code>Write(path)</code> / <code>NotebookEdit(path)</code> / <code>Glob(path)</code></td><td class="desc">Deprecated permission-rule tool names — startup warns to use <code>Edit(path)</code> or <code>Read(path)</code> instead</td></tr>
+                    <tr class="search-item" id="i-attribution-sessionurl"><td><code>attribution.sessionUrl</code></td><td class="desc">Set to <code>false</code> to omit the claude.ai session link from commits and PRs in web and Remote Control sessions</td></tr>
+                    <tr class="search-item" id="i-prurltemplate"><td><code>prUrlTemplate</code></td><td class="desc">Point footer PR badge at a custom code-review URL instead of github.com</td></tr>
+                    <tr class="search-item" id="i-footerlinksregexes"><td><code>footerLinksRegexes</code></td><td class="desc">Array of regex patterns for regex-matched link badges in the footer row; configurable via user or managed settings</td></tr>
+                    <tr class="search-item" id="i-channelsenabled"><td><code>channelsEnabled</code></td><td class="desc">Set to <code>true</code> in managed settings to allow <code>--channels</code> with console (API key) auth</td></tr>
+                    <tr class="search-item" id="i-allowallclaudeaimcps"><td><code>allowAllClaudeAiMcps</code></td><td class="desc">Enterprise managed setting — load claude.ai cloud MCP connectors alongside <code>managed-mcp.json</code></td></tr>
+                    <tr class="search-item" id="i-managedmcpservers"><td><code>managedMcpServers</code></td><td class="desc">Managed setting — provide HTTP/SSE MCP servers to every user in the organization (same entry shape as <code>.mcp.json</code>); entries naming a command to run are skipped</td></tr>
+                    <tr class="search-item" id="i-deniedmcpservers"><td><code>deniedMcpServers</code></td><td class="desc"><span class="summary">Managed setting — blocklist of managed MCP servers to deny</span> <button type="button" class="notes-btn" aria-expanded="false">+1</button><ul class="notes" hidden><li>Use to suppress servers from <code>managed-mcp.json</code> (as of v2.1.259, <code>allowedMcpServers</code> governs only user-added servers and no longer filters managed servers)</li></ul></td></tr>
+                    <tr class="search-item" id="i-pluginsuggestionmarketplaces"><td><code>pluginSuggestionMarketplaces</code></td><td class="desc">Managed setting — allowlist org marketplaces whose plugins may be suggested via context-aware tips</td></tr>
+                    <tr class="search-item" id="i-additionalmarketplaces"><td><code>additionalMarketplaces</code></td><td class="desc">Add plugin marketplace repos beyond the built-in list; friendlier alias for <code>extraKnownMarketplaces</code></td></tr>
+                    <tr class="search-item" id="i-strictknownmarketplaces"><td><code>strictKnownMarketplaces</code></td><td class="desc"><span class="summary">Managed setting — allowlist of marketplace repos allowed as plugin sources</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li>Supports <code>"owner/*"</code> wildcard to allow all repos under a GitHub org</li><li>Also accepted as <code>allowedMarketplaces</code></li></ul></td></tr>
+                    <tr class="search-item" id="i-blockedmarketplaces"><td><code>blockedMarketplaces</code></td><td class="desc">Managed setting — blocklist of marketplace repos denied as plugin sources; supports <code>"owner/*"</code> wildcard to block all repos under a GitHub org</td></tr>
+                    <tr class="search-item" id="i-requiredminimumversion"><td><code>requiredMinimumVersion</code> / <code>requiredMaximumVersion</code></td><td class="desc">Managed settings — CC refuses to start if its version is outside the allowed range; directs user to an approved version</td></tr>
+                    <tr class="search-item" id="i-disablebundledskills"><td><code>disableBundledSkills</code></td><td class="desc">Hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code> env var</td></tr>
+                    <tr class="search-item" id="i-enforceavailablemodels"><td><code>enforceAvailableModels</code></td><td class="desc"><span class="summary">Managed setting — when enabled, the <code>availableModels</code> allowlist also constrains the Default model (a Default that resolves to a disallowed model falls back to the first allowed model)</span> <button type="button" class="notes-btn" aria-expanded="false">+1</button><ul class="notes" hidden><li>User or project settings cannot widen a managed <code>availableModels</code> list</li></ul></td></tr>
+                    <tr class="search-item" id="i-teammatemode-iterm2"><td><code>teammateMode: "iterm2"</code></td><td class="desc">Use iTerm2 as the teammate backend; shows a warning when auto mode cannot find the <code>it2</code> CLI</td></tr>
+                    <tr class="search-item" id="i-awsauthrefresh"><td><code>awsAuthRefresh</code></td><td class="desc">Configures the "Claude Platform on AWS — refresh credentials" option in <code>/login</code></td></tr>
+                    <tr class="search-item" id="i-respondtobashcommands"><td><code>respondToBashCommands</code></td><td class="desc">Set to <code>false</code> to keep <code>!</code> bash command output as context-only; default behavior is for Claude to respond automatically</td></tr>
+                    <tr class="search-item" id="i-dynamicworkflowsize"><td><code>dynamicWorkflowSize</code></td><td class="desc">Controls how large Claude makes dynamic workflows (small/medium/large agent counts) — advisory guideline, not a hard cap; configured via <code>/config</code></td></tr>
+                    <tr class="search-item" id="i-workflowsizeguideline"><td><code>workflowSizeGuideline</code></td><td class="desc">Set the advisory Dynamic workflow size guideline from any settings file; the <code>/config</code> row is hidden while one is set</td></tr>
+                    <tr class="search-item" id="i-emojicompletionenabled"><td><code>emojiCompletionEnabled</code></td><td class="desc">Set to <code>false</code> to disable emoji shortcode autocomplete in the prompt input (e.g. <code>:heart:</code> → ❤️)</td></tr>
+                    <tr class="search-item" id="i-crosssessioninbound"><td><code>crossSessionInbound</code></td><td class="desc">Cross-session messages sent to a session running with bypassed permissions are held for your approval before delivery</td></tr>
+                    <tr class="search-item" id="i-dialogexpiry"><td><code>dialogExpiry</code></td><td class="desc">Timeout for inbound cross-session message approval dialogs; messages to sessions without bypassed permissions auto-deliver</td></tr>
+                    <tr class="search-item" id="i-feedbackdrafts"><td><code>feedbackDrafts</code></td><td class="desc"><span class="summary">Set to <code>false</code> to prevent Claude from auto-drafting a feedback report when something goes wrong</span> <button type="button" class="notes-btn" aria-expanded="false">+1</button><ul class="notes" hidden><li>When enabled (default), Claude drafts a report for you to review and send via <code>/feedback</code></li></ul></td></tr>
+                    <tr class="search-item" id="i-bashoutputmaxchars"><td><code class="new">bashOutputMaxChars</code> / <code class="new">taskOutputMaxChars</code> <!-- added:v2.1.261 --></td><td class="desc"><span class="summary">Raise how much Bash command output (<code>bashOutputMaxChars</code>) or background-task output (<code>taskOutputMaxChars</code>) Claude receives inline before it is saved to a file</span> <button type="button" class="notes-btn" aria-expanded="false">+1</button><ul class="notes" hidden><li>Both cap at 128K characters</li></ul></td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Environment Variables</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-anthropic-api-key"><td><code>ANTHROPIC_API_KEY</code></td><td class="desc">Auth override</td></tr>
+                    <tr class="search-item" id="i-anthropic-model"><td><code>ANTHROPIC_MODEL</code></td><td class="desc">Default model override</td></tr>
+                    <tr class="search-item" id="i-claude-code-effort-level"><td><code>CLAUDE_CODE_EFFORT_LEVEL</code></td><td class="desc">Default effort (low/med/high)</td></tr>
+                    <tr class="search-item" id="i-max-thinking-tokens"><td><code>MAX_THINKING_TOKENS</code></td><td class="desc">Cap extended thinking limits; set to <code>0</code> to disable thinking on models that think by default via the Claude API</td></tr>
+                    <tr class="search-item" id="i-claude-code-plugin-seed-dir"><td><code>CLAUDE_CODE_PLUGIN_SEED_DIR</code></td><td class="desc">Multiple plugin seed directories</td></tr>
+                    <tr class="search-item" id="i-is-demo"><td><code>IS_DEMO</code></td><td class="desc">Demo mode (hides email/org)</td></tr>
+                    <tr class="search-item" id="i-claudecode"><td><code>CLAUDECODE</code></td><td class="desc">Detects if running inside CC shell; also injected into stdio MCP server subprocess environments</td></tr>
+                    <tr class="search-item" id="i-claude-code-subprocess-env-scrub"><td><code>CLAUDE_CODE_SUBPROCESS_ENV_SCRUB</code></td><td class="desc">Strip credentials from subprocesses; enables PID namespace isolation on Linux (sandboxing)</td></tr>
+                    <tr class="search-item" id="i-claude-code-mcp-server-name"><td><code>CLAUDE_CODE_MCP_SERVER_NAME</code> / <code>CLAUDE_CODE_MCP_SERVER_URL</code></td><td class="desc">Inject server identity into MCP headerHelper scripts</td></tr>
+                    <tr class="search-item" id="i-claude-code-no-flicker-1"><td><code>CLAUDE_CODE_NO_FLICKER=1</code></td><td class="desc">Opt into flicker-free alt-screen rendering with virtualized scrollback</td></tr>
+                    <tr class="search-item" id="i-mcp-connection-nonblocking-true"><td><code>MCP_CONNECTION_NONBLOCKING=true</code></td><td class="desc">Skip MCP connection wait in headless (-p) mode</td></tr>
+                    <tr class="search-item" id="i-claude-code-plugin-keep-marketplace-on-failure"><td><code>CLAUDE_CODE_PLUGIN_KEEP_MARKETPLACE_ON_FAILURE</code></td><td class="desc">Keep marketplace cache when git pull fails (offline envs)</td></tr>
+                    <tr class="search-item" id="i-claude-code-use-mantle-1"><td><code>CLAUDE_CODE_USE_MANTLE=1</code></td><td class="desc">Enable Amazon Bedrock powered by Mantle</td></tr>
+                    <tr class="search-item" id="i-claude-code-perforce-mode"><td><code>CLAUDE_CODE_PERFORCE_MODE</code></td><td class="desc">When set, Edit/Write/NotebookEdit fail on read-only files with a p4 edit hint</td></tr>
+                    <tr class="search-item" id="i-claude-code-script-caps"><td><code>CLAUDE_CODE_SCRIPT_CAPS</code></td><td class="desc">Limit per-session script invocations (subprocess sandboxing)</td></tr>
+                    <tr class="search-item" id="i-claude-code-cert-store-bundled"><td><code>CLAUDE_CODE_CERT_STORE=bundled</code></td><td class="desc">Use only bundled CAs; by default OS CA cert store is trusted (enterprise TLS proxy support)</td></tr>
+                    <tr class="search-item" id="i-otel-log-user-prompts"><td><code>OTEL_LOG_USER_PROMPTS</code> / <code>OTEL_LOG_TOOL_DETAILS</code> / <code>OTEL_LOG_TOOL_CONTENT</code></td><td class="desc">OTEL beta tracing: opt in to emit sensitive span attributes (prompts/tool details/tool content)</td></tr>
+                    <tr class="search-item" id="i-otel-log-assistant-responses"><td><code>OTEL_LOG_ASSISTANT_RESPONSES</code></td><td class="desc"><span class="summary">Opt in to emitting the model's response text as an OTEL log event (<code>claude_code.assistant_response</code>)</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li>When unset, follows <code>OTEL_LOG_USER_PROMPTS</code></li><li>Set to <code>0</code> to log prompts but not responses</li></ul></td></tr>
+                    <tr class="search-item" id="i-enable-prompt-caching-1h"><td><code>ENABLE_PROMPT_CACHING_1H</code></td><td class="desc">Opt into 1-hour prompt cache TTL (API key, Bedrock, Vertex, Foundry)</td></tr>
+                    <tr class="search-item" id="i-force-prompt-caching-5m"><td><code>FORCE_PROMPT_CACHING_5M</code></td><td class="desc">Force 5-minute prompt cache TTL</td></tr>
+                    <tr class="search-item" id="i-claude-code-enable-away-summary"><td><code>CLAUDE_CODE_ENABLE_AWAY_SUMMARY</code></td><td class="desc">Force-enable recap/away summary (useful when telemetry disabled)</td></tr>
+                    <tr class="search-item" id="i-claude-code-use-powershell-tool"><td><code>CLAUDE_CODE_USE_POWERSHELL_TOOL</code></td><td class="desc">Enable PowerShell tool; on Windows opt in/out, on Linux/macOS requires pwsh on PATH</td></tr>
+                    <tr class="search-item" id="i-otel-log-raw-api-bodies"><td><code>OTEL_LOG_RAW_API_BODIES</code></td><td class="desc">Emit full API request/response bodies as OTEL log events for debugging</td></tr>
+                    <tr class="search-item" id="i-claude-code-otel-content-max-length"><td><code>CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH</code></td><td class="desc">Configure the 60 KB truncation limit on OpenTelemetry content attributes</td></tr>
+                    <tr class="search-item" id="i-traceparent"><td><code>TRACEPARENT</code> / <code>TRACESTATE</code></td><td class="desc">Distributed trace context injected from environment for SDK/headless sessions</td></tr>
+                    <tr class="search-item" id="i-claude-code-fork-subagent-1"><td><code>CLAUDE_CODE_FORK_SUBAGENT=1</code></td><td class="desc">Enable forked subagents on external (non-Anthropic) builds; also works in non-interactive sessions</td></tr>
+                    <tr class="search-item" id="i-disable-updates"><td><code>DISABLE_UPDATES</code></td><td class="desc">Block all update paths including manual <code>claude update</code>; stricter than <code>DISABLE_AUTOUPDATER</code></td></tr>
+                    <tr class="search-item" id="i-claude-code-hide-cwd"><td><code>CLAUDE_CODE_HIDE_CWD</code></td><td class="desc">Hide working directory in the startup logo</td></tr>
+                    <tr class="search-item" id="i-anthropic-bedrock-service-tier"><td><code>ANTHROPIC_BEDROCK_SERVICE_TIER</code></td><td class="desc">Select a Bedrock service tier (<code>default</code>, <code>flex</code>, or <code>priority</code>); sent as the <code>X-Amzn-Bedrock-Service-Tier</code> header</td></tr>
+                    <tr class="search-item" id="i-anthropic-bedrock-region-prefix"><td><code>ANTHROPIC_BEDROCK_REGION_PREFIX</code></td><td class="desc">Prefer a specific Bedrock cross-region inference profile over the <code>AWS_REGION</code>-derived one</td></tr>
+                    <tr class="search-item" id="i-claude-code-force-sync-output-1"><td><code>CLAUDE_CODE_FORCE_SYNC_OUTPUT=1</code></td><td class="desc">Force-enable synchronized output on terminals that auto-detection misses (e.g. Emacs <code>eat</code>)</td></tr>
+                    <tr class="search-item" id="i-claude-code-package-manager-auto-update"><td><code>CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE</code></td><td class="desc">On Homebrew or WinGet installs, runs the upgrade command in the background and prompts to restart when set</td></tr>
+                    <tr class="search-item" id="i-claude-code-enable-gateway-model-discovery-1"><td><code>CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1</code></td><td class="desc">Opt in to listing gateway <code>/v1/models</code> in the <code>/model</code> picker when using a custom <code>ANTHROPIC_BASE_URL</code> gateway (was automatic in v2.1.126–v2.1.128)</td></tr>
+                    <tr class="search-item" id="i-claude-code-disable-1m-context"><td><code>CLAUDE_CODE_DISABLE_1M_CONTEXT</code></td><td class="desc"><span class="summary">Hold every Claude model with a native 1M context window to 200K via auto-compaction</span> <button type="button" class="notes-btn" aria-expanded="false">+1</button><ul class="notes" hidden><li>A startup warning appears when auto-compaction isn't holding the session to 200K</li></ul></td></tr>
+                    <tr class="search-item" id="i-claude-code-disable-unknown-model-window-enforcement-1"><td><code>CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT=1</code></td><td class="desc"><span class="summary">Restore previous behavior where sessions on unrecognized model IDs may grow past the assumed context window</span> <button type="button" class="notes-btn" aria-expanded="false">+1</button><ul class="notes" hidden><li>By default, auto-compact now holds unrecognized models within the assumed window</li></ul></td></tr>
+                    <tr class="search-item" id="i-claude-code-session-id"><td><code>CLAUDE_CODE_SESSION_ID</code></td><td class="desc">Session ID injected into Bash tool subprocess environment and stdio MCP server subprocess environments, matching the <code>session_id</code> passed to hooks</td></tr>
+                    <tr class="search-item" id="i-claude-code-disable-alternate-screen-1"><td><code>CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1</code></td><td class="desc">Opt out of the fullscreen alternate-screen renderer; keeps conversation in the terminal's native scrollback</td></tr>
+                    <tr class="search-item" id="i-claude-code-enable-feedback-survey-for-otel"><td><code>CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL</code></td><td class="desc">Re-enable the session quality survey for enterprises capturing responses through OpenTelemetry</td></tr>
+                    <tr class="search-item" id="i-claude-project-dir"><td><code>CLAUDE_PROJECT_DIR</code></td><td class="desc">Injected into MCP stdio server environments; referenceable as <code>${CLAUDE_PROJECT_DIR}</code> in plugin configs</td></tr>
+                    <tr class="search-item" id="i-claude-code-plugin-prefer-https"><td><code>CLAUDE_CODE_PLUGIN_PREFER_HTTPS</code></td><td class="desc">Clone GitHub plugin sources over HTTPS instead of SSH; for environments without a GitHub SSH key</td></tr>
+                    <tr class="search-item" id="i-anthropic-workspace-id"><td><code>ANTHROPIC_WORKSPACE_ID</code></td><td class="desc">Workload identity federation — scopes the minted token to a specific workspace when the federation rule covers more than one</td></tr>
+                    <tr class="search-item" id="i-otel-metrics-include-entrypoint-true"><td><code>OTEL_METRICS_INCLUDE_ENTRYPOINT=true</code></td><td class="desc">Opt in to including session entrypoint as an OpenTelemetry metric attribute (<code>app.entrypoint</code>)</td></tr>
+                    <tr class="search-item" id="i-columns"><td><code>COLUMNS</code> / <code>LINES</code></td><td class="desc">Injected into status line command subprocesses so scripts can size output to the terminal width</td></tr>
+                    <tr class="search-item" id="i-claude-code-enable-auto-mode-1"><td><code>CLAUDE_CODE_ENABLE_AUTO_MODE=1</code></td><td class="desc"><span class="summary">Previously required to opt in to auto mode on Bedrock, Vertex, and Foundry — no longer needed as auto mode is now available there by default</span> <button type="button" class="notes-btn" aria-expanded="false">+1</button><ul class="notes" hidden><li>Use <code>disableAutoMode</code> setting to disable</li></ul></td></tr>
+                    <tr class="search-item" id="i-otel-resource-attributes"><td><code>OTEL_RESOURCE_ATTRIBUTES</code></td><td class="desc">Standard OTEL env var — values are now used as labels on metric datapoints, so you can slice usage metrics by custom dimensions (e.g. team, repo)</td></tr>
+                    <tr class="search-item" id="i-claude-code-safe-mode"><td><code>CLAUDE_CODE_SAFE_MODE</code></td><td class="desc">Start with all customizations (CLAUDE.md, plugins, skills, hooks, MCP servers) disabled; paired with <code>--safe-mode</code> CLI flag</td></tr>
+                    <tr class="search-item" id="i-claude-code-disable-bundled-skills"><td><code>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code></td><td class="desc">Hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>disableBundledSkills</code> JSON setting</td></tr>
+                    <tr class="search-item" id="i-api-force-idle-timeout-0"><td><code>API_FORCE_IDLE_TIMEOUT=0</code></td><td class="desc">Opt out of the default 5-minute idle timeout on Vertex/Foundry; stalled streams will hang indefinitely instead of aborting</td></tr>
+                    <tr class="search-item" id="i-claude-client-presence-file"><td><code>CLAUDE_CLIENT_PRESENCE_FILE</code></td><td class="desc">Path to a marker file — while the file exists, mobile push notifications are suppressed (signals you're at the machine)</td></tr>
+                    <tr class="search-item" id="i-claude-code-max-retries"><td><code>CLAUDE_CODE_MAX_RETRIES</code></td><td class="desc">Retry attempt limit; cap of 15 is lifted when <code>CLAUDE_CODE_RETRY_WATCHDOG</code> is set — for unattended sessions use the watchdog instead</td></tr>
+                    <tr class="search-item" id="i-claude-code-retry-watchdog"><td><code>CLAUDE_CODE_RETRY_WATCHDOG</code></td><td class="desc"><span class="summary">Retry watchdog for unattended sessions</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li>Raises default retry count for non-capacity transient errors to 300 and lifts the cap of 15 on <code>CLAUDE_CODE_MAX_RETRIES</code></li><li>Fails immediately on organization spend-limit and out-of-credits errors instead of waiting indefinitely</li></ul></td></tr>
+                    <tr class="search-item" id="i-claude-code-mcp-tool-idle-timeout"><td><code>CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT</code></td><td class="desc">Override the default 5-minute idle timeout for remote MCP tool calls; stalled calls abort with an error instead of blocking indefinitely</td></tr>
+                    <tr class="search-item" id="i-claude-code-disable-bg-shell-pressure-reap-1"><td><code>CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP=1</code></td><td class="desc">Disable automatic memory-pressure reaping of idle background shell commands</td></tr>
+                    <tr class="search-item" id="i-claude-code-disable-mouse-clicks"><td><code>CLAUDE_CODE_DISABLE_MOUSE_CLICKS</code></td><td class="desc">Disable mouse click/drag/hover in fullscreen mode while keeping wheel scroll active</td></tr>
+                    <tr class="search-item" id="i-claude-ax-screen-reader-1"><td><code>CLAUDE_AX_SCREEN_READER=1</code></td><td class="desc">Enable screen reader mode — opt-in plain-text rendering; paired with <code>--ax-screen-reader</code> flag and <code>axScreenReader</code> JSON setting</td></tr>
+                    <tr class="search-item" id="i-claude-code-process-wrapper"><td><code>CLAUDE_CODE_PROCESS_WRAPPER</code></td><td class="desc">Corporate launcher wrapper — agent view and background service run every Claude Code self-spawn through the specified executable</td></tr>
+                    <tr class="search-item" id="i-claude-code-forward-subagent-text"><td><code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code></td><td class="desc">Include subagent text and thinking in stream-json output; paired with <code>--forward-subagent-text</code> flag</td></tr>
+                    <tr class="search-item" id="i-claude-code-max-web-searches-per-session"><td><code>CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION</code></td><td class="desc">Session-wide limit on WebSearch tool calls (default 200); prevents runaway search loops</td></tr>
+                    <tr class="search-item" id="i-claude-code-subagent-model-force"><td><code>CLAUDE_CODE_SUBAGENT_MODEL_FORCE</code></td><td class="desc">Apply <code>CLAUDE_CODE_SUBAGENT_MODEL</code> (or the main model when unset) to every subagent, ignoring per-spawn and agent-definition model overrides</td></tr>
+                    <tr class="search-item" id="i-claude-code-max-subagents-per-session"><td><code>CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION</code></td><td class="desc"><span class="summary">Set a per-session subagent spawn cap</span> <button type="button" class="notes-btn" aria-expanded="false">+3</button><ul class="notes" hidden><li>The built-in 200-spawn limit was removed — long-running sessions no longer refuse new agents by default</li><li><code>/clear</code> resets the budget</li><li>Concurrency and depth limits still apply</li></ul></td></tr>
+                    <tr class="search-item" id="i-claude-code-max-concurrent-subagents"><td><code>CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS</code></td><td class="desc">Cap on concurrently-running subagents (default 20); prevents a single message from fanning out unbounded background agents</td></tr>
+                    <tr class="search-item" id="i-claude-code-max-subagent-spawn-depth"><td><code>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</code></td><td class="desc">Max nesting depth for subagent spawning (default 3); set to <code>1</code> to disable nesting</td></tr>
+                    <tr class="search-item" id="i-claude-code-mcp-auto-background-ms"><td><code>CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS</code></td><td class="desc">Threshold in ms after which long-running MCP tool calls move to background automatically (default 120000 / 2 min); set to <code>0</code> to disable</td></tr>
+                    <tr class="search-item" id="i-force-hyperlink-0"><td><code>FORCE_HYPERLINK=0</code></td><td class="desc">Opt out of clickable hyperlinks in footer PR badge links (hyperlinks are on by default even when terminal support can't be detected, e.g. over ssh/tmux)</td></tr>
+                    <tr class="search-item" id="i-claude-code-workflow-prefix-stagger-ms-0"><td><code>CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS=0</code></td><td class="desc">Set to <code>0</code> to disable automatic staggering of same-prefix sibling workflow agents; staggering is on by default so later agents reuse the cached prompt prefix</td></tr>
+                    <tr class="search-item" id="i-claude-code-tool-memory-limit"><td><code>CLAUDE_CODE_TOOL_MEMORY_LIMIT</code></td><td class="desc">Opt-in memory cgroup limit for Bash tool commands on Linux; prevents a runaway build from stalling the session</td></tr>
+                    <tr class="search-item" id="i-claude-code-webfetch-cache-ttl-ms"><td><code>CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS</code></td><td class="desc">Configure the WebFetch session URL cache TTL in milliseconds (default: 15 minutes)</td></tr>
+                    <tr class="search-item" id="i-claude-code-enable-todo-tools-1"><td><code>CLAUDE_CODE_ENABLE_TODO_TOOLS=1</code></td><td class="desc">Re-enable task/todo tools (<code>TaskCreate</code>/<code>Get</code>/<code>Update</code>/<code>List</code>, <code>TodoWrite</code>) on Opus 4.8, Sonnet 5, Fable 5, Mythos 5, and newer models where they are no longer available by default</td></tr>
+                    <tr class="search-item" id="i-claude-code-project-dir-name"><td><code>CLAUDE_CODE_PROJECT_DIR_NAME</code></td><td class="desc">Custom short name for the per-project transcript directory; for hosts that give each session its own config directory</td></tr>
+                    <tr class="search-item" id="i-claude-code-goal-checkin-minutes"><td><code>CLAUDE_CODE_GOAL_CHECKIN_MINUTES</code></td><td class="desc">Set to <code>0</code> to disable automatic check-ins when a <code>/goal</code> is waiting on background tasks for 30+ min</td></tr>
+                    <tr class="search-item" id="i-anthropic-default-model"><td><code>ANTHROPIC_DEFAULT_MODEL</code></td><td class="desc">Sets the model new sessions start on; a <code>/model</code> pick still overrides it and persists across restarts — unlike <code>ANTHROPIC_MODEL</code></td></tr>
+                    <tr class="search-item" id="i-claude-code-restricted-1"><td><code>CLAUDE_CODE_RESTRICTED=1</code></td><td class="desc"><span class="summary">Removes built-in tools that run commands or code and <code>WebFetch</code> (unless named in <code>--tools</code>), keeps file tools inside the working directory, refuses <code>bypassPermissions</code>, and ignores user, project and local settings files</span> <button type="button" class="notes-btn" aria-expanded="false">+1</button><ul class="notes" hidden><li>Paired with <code>--restricted</code> CLI flag</li></ul></td></tr>
+                    <tr class="search-item" id="i-self-hosted-runner-client-label"><td><code>SELF_HOSTED_RUNNER_CLIENT_LABEL</code></td><td class="desc">Override the label the self-hosted runner registers with (default: hostname); paired with <code>claude self-hosted-runner --client-label &lt;label&gt;</code> CLI flag</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Skills & Agent Frontmatter</h2>
+
+            <div class="search-group">
+                <h3>Built-in Skills & Locations</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-code-review-level-pr"><td><code>/code-review [level] [pr#]</code></td><td class="desc"><span class="summary">Code review as a background subagent; <code>/review</code> is an alias</span> <button type="button" class="notes-btn" aria-expanded="false">+4</button><ul class="notes" hidden><li>Must be invoked explicitly — Claude no longer auto-runs it (except on Bedrock, Vertex AI, Foundry, the Claude apps gateway, or when telemetry is off)</li><li>Pass a PR number to review that PR; <code>/code-review ultra</code> runs a deep cloud review</li><li>Effort level persists — no argument reuses the last level</li><li><code>--fix</code> applies findings to the working tree; <code>--comment</code> posts them as inline PR comments</li></ul></td></tr>
+                    <tr class="search-item" id="i-verify"><td><code>/verify</code></td><td class="desc">Verify a code change works end-to-end; must be explicitly invoked — Claude no longer auto-runs it</td></tr>
+                    <tr class="search-item" id="i-simplify"><td><code>/simplify</code></td><td class="desc">Cleanup-only review (reuse, simplification, efficiency, altitude) applied to working tree; does not run the full <code>/code-review --fix</code> bug hunt</td></tr>
+                    <tr class="search-item" id="i-batch"><td><code>/batch</code></td><td class="desc">Large parallel changes (5-30 worktrees)</td></tr>
+                    <tr class="search-item" id="i-claude-api"><td><code>/claude-api</code></td><td class="desc"><span class="summary">Load the API + SDK reference into context</span> <button type="button" class="notes-btn" aria-expanded="false">+3</button><ul class="notes" hidden><li><code>upgrade</code> subcommand migrates Python projects from <code>anthropic</code> 0.x to 1.x (timeouts use <code>anthropic.Timeout</code>, not <code>httpx.Timeout</code>)</li><li><code>cost-optimize</code> subcommand profiles a project's API spend and works through cost levers (caching, token hygiene, batch, effort, model choice)</li><li>Covers the Admin API: members, invites, workspaces, API keys, rate-limit reports, workload identity federation, CMEK</li></ul></td></tr>
+                    <tr class="search-item" id="i-less-permission-prompts"><td><code>/less-permission-prompts</code></td><td class="desc">Scan transcripts for read-only Bash/MCP calls; propose settings.json allowlist</td></tr>
+                    <tr class="search-item" id="i-ultrareview-pr"><td><code>/ultrareview [PR#]</code></td><td class="desc">Cloud code review via parallel agents; no args for current branch, PR# for specific PR</td></tr>
+                    <tr class="search-item" id="i-dataviz"><td><code>/dataviz</code></td><td class="desc">Chart and dashboard design guidance with a runnable color-palette validator</td></tr>
+                    <tr class="search-item" id="i-skill-a-skill-b-prompt"><td><code>/skill-a /skill-b [prompt]</code></td><td class="desc">Stacked slash-skill invocations — up to 5 leading skills all load simultaneously (e.g. <code>/skill-a /skill-b do XYZ</code>)</td></tr>
+                    <tr class="search-item" id="i-claude-skills-name"><td><code>.claude/skills/&lt;name&gt;/</code></td><td class="desc"><span class="summary">Project skill directory</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li>Auto-loaded without marketplace</li><li>Nested <code>.claude/skills/</code> directories also load when working on files there — on a name clash, the nested skill appears as <code>&lt;dir&gt;:&lt;name&gt;</code></li></ul></td></tr>
+                    <tr class="search-item" id="i-claude-skills-name-2"><td><code>~/.claude/skills/&lt;name&gt;/</code></td><td class="desc">Global personal skill directory</td></tr>
+                    <tr class="search-item" id="i-plugin-bin"><td><code>plugin: bin/</code></td><td class="desc">Plugin executables in bin/ invocable as bare commands from Bash tool</td></tr>
+                    <tr class="search-item" id="i-command"><td><code>command</code> (plugin marketplace source)</td><td class="desc">Specify a plugin directory via a local command's output (e.g. from an IDE); re-resolved each session without restart; <code>mode: "link"</code> uses it in place</td></tr>
+                    <tr class="search-item" id="i-headershelper"><td><code>headersHelper</code> (plugin marketplace / catalog entry)</td><td class="desc"><span class="summary">Command that mints HTTP headers (e.g. a short-lived token) for catalog and same-origin archive fetches on a <code>url</code> marketplace</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li>For a catalog entry, runs only on <code>claude plugin install/update</code> after displaying the command</li><li>Prompts <code>[y/N]</code> or pass <code>-y</code></li></ul></td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Skill YAML Frontmatter</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-description"><td><code>description</code></td><td class="desc">Auto-invocation trigger string</td></tr>
+                    <tr class="search-item" id="i-effort-2"><td><code>effort</code></td><td class="desc">Override effort level specifically for skill</td></tr>
+                    <tr class="search-item" id="i-allowed-tools"><td><code>allowed-tools</code></td><td class="desc">Skip permission prompts for skill</td></tr>
+                    <tr class="search-item" id="i-disallowed-tools"><td><code>disallowed-tools</code></td><td class="desc">Remove tools from the model while the skill or slash command is active</td></tr>
+                    <tr class="search-item" id="i-disable-model-invocation"><td><code>disable-model-invocation</code></td><td class="desc">Prevent Claude from auto-invoking the skill; Claude is told to ask you to run it manually instead</td></tr>
+                    <tr class="search-item" id="i-context-fork"><td><code>context: fork</code></td><td class="desc">Run skill in an isolated subagent; runs in the background by default — opt out per skill with <code>background: false</code></td></tr>
+                    <tr class="search-item" id="i-arguments"><td><code>$ARGUMENTS</code></td><td class="desc">User input placeholder replacement</td></tr>
+                    <tr class="search-item" id="i-item-6"><td><code>\$</code></td><td class="desc">Escape to include a literal <code>$</code> before a digit in skill command bodies</td></tr>
+                    <tr class="search-item" id="i-file-path"><td><code class="unverified">$FILE_PATH</code></td><td class="desc">File path resolution (hook strings only)</td></tr>
+                    <tr class="search-item" id="i-claude-skill-dir"><td><code>${CLAUDE_SKILL_DIR}</code></td><td class="desc">Reference the skill's own directory</td></tr>
+                    <tr class="search-item" id="i-claude-effort"><td><code>${CLAUDE_EFFORT}</code></td><td class="desc">Current effort level — available in hooks, Bash tool commands, and skill content</td></tr>
+                    <tr class="search-item" id="i-cmd"><td><code>! 'cmd'</code></td><td class="desc">Dynamic bash execution context injection</td></tr>
+                    <tr class="search-item" id="i-keep-coding-instructions"><td><code>keep-coding-instructions</code></td><td class="desc">Control plugin output style for coding tasks</td></tr>
+                    <tr class="search-item" id="i-monitors"><td><code>monitors</code> (plugin manifest)</td><td class="desc">Background monitor support for plugins; auto-arms at session start or on skill invoke</td></tr>
+                    <tr class="search-item" id="i-defaultenabled-false"><td><code>defaultEnabled: false</code> (plugin manifest)</td><td class="desc">Plugin starts disabled by default; enable with <code>/plugin</code> or <code>claude plugin enable</code>; dependency plugins of enabled plugins are still enabled automatically</td></tr>
+                    <tr class="search-item" id="i-true-false-yes-no-on-off-1-0"><td><code>true/false/yes/no/on/off/1/0</code></td><td class="desc">Accepted values for boolean frontmatter fields in skills and plugins (case-insensitive); all resolve to <code>true</code> or <code>false</code></td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Agent YAML Frontmatter</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-experimental-cachettl"><td><code>experimental.cacheTtl</code></td><td class="desc">Per-agent prompt cache TTL; set to <code>"5m"</code> or <code>"1h"</code>; used when no subagent TTL setting is configured in the session</td></tr>
+                    <tr class="search-item" id="i-permissionmode"><td><code>permissionMode</code></td><td class="desc">manual / acceptEdits / plan / bypass; <code>manual</code> replaces <code>default</code> — both accepted</td></tr>
+                    <tr class="search-item" id="i-isolation-worktree"><td><code>isolation: worktree</code></td><td class="desc">Run agent in isolated git worktree</td></tr>
+                    <tr class="search-item" id="i-memory-user-project"><td><code>memory: user|project</code></td><td class="desc">Persistent memory storage scope</td></tr>
+                    <tr class="search-item" id="i-background-true"><td><code>background: true</code></td><td class="desc">Run entirely as background task</td></tr>
+                    <tr class="search-item" id="i-initialprompt"><td><code>initialPrompt</code></td><td class="desc">Auto-submit first turn on spawn</td></tr>
+                    <tr class="search-item" id="i-sendmessage"><td><code>SendMessage</code></td><td class="desc"><span class="summary">Message another agent or session; auto-resumes stopped agents</span> <button type="button" class="notes-btn" aria-expanded="false">+4</button><ul class="notes" hidden><li>Cross-session messaging across machines — discover peers with <code>ListAgents</code> (same-machine also on Bedrock, Vertex, Foundry, and with telemetry off)</li><li>Can open a conversation with a Remote Control session on another machine by name (macOS and Linux)</li><li><code>notify_when_idle</code> — one-shot, opt-in notice when another session next goes idle (macOS and Linux)</li><li><code>ListAgents</code> reports a session's own name and lists live teammates alongside subagents and other sessions</li></ul></td></tr>
+                    <tr class="search-item" id="i-hooks-2"><td><code>hooks:</code></td><td class="desc">Agent lifecycle hooks; fire when running as main-thread agent via <code>--agent</code></td></tr>
+                    <tr class="search-item" id="i-mcpservers"><td><code>mcpServers</code></td><td class="desc">MCP servers for the agent; now loaded for main-thread agent sessions via <code>--agent</code></td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Plugin CLI Commands</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-claude-plugin-enable-disable-name"><td><code>claude plugin enable/disable &lt;name&gt;</code></td><td class="desc"><span class="summary">Enable or disable an installed plugin</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li>Cloud-synced plugins (from claude.ai) appear as <code>&lt;name&gt;@synced</code> and are managed with <code>claude plugin enable/disable &lt;name&gt;@synced</code></li><li>Synced plugins never override a locally installed same-named plugin</li></ul></td></tr>
+                    <tr class="search-item" id="i-claude-plugin-init-name"><td><code>claude plugin init &lt;name&gt;</code></td><td class="desc">Scaffold a new plugin in <code>.claude/skills</code></td></tr>
+                    <tr class="search-item" id="i-claude-plugin-tag"><td><code>claude plugin tag</code></td><td class="desc">Create release git tags for plugins with version validation</td></tr>
+                    <tr class="search-item" id="i-claude-plugin-prune"><td><code>claude plugin prune</code></td><td class="desc">Remove orphaned auto-installed plugin dependencies; <code>plugin uninstall --prune</code> cascades</td></tr>
+                    <tr class="search-item" id="i-claude-plugin-details-name"><td><code>claude plugin details &lt;name&gt;</code></td><td class="desc">Show a plugin's component inventory and projected per-session token cost</td></tr>
+                    <tr class="search-item" id="i-claude-plugin-validate"><td><code>claude plugin validate</code></td><td class="desc"><span class="summary">Validate plugin manifest</span> <button type="button" class="notes-btn" aria-expanded="false">+3</button><ul class="notes" hidden><li>Warns when a marketplace or plugin name would be rejected by Claude Desktop's managed marketplace sync</li><li>Also checks a bare <code>.claude/skills</code> directory, reporting SKILL.md files whose frontmatter fails to parse</li><li>Use <code>--json</code> for a machine-readable validation report</li></ul></td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Memory, Hooks & MCP</h2>
+
+            <div class="search-group">
+                <h3>Rules & Auto-Memory</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-claude-rules-md"><td><code>.claude/rules/*.md</code></td><td class="desc">Project specific structural rules</td></tr>
+                    <tr class="search-item" id="i-claude-rules-md-2"><td><code>~/.claude/rules/*.md</code></td><td class="desc">User specific global rules</td></tr>
+                    <tr class="search-item" id="i-paths"><td><code>paths:</code> (frontmatter)</td><td class="desc">Path-specific rule triggers</td></tr>
+                    <tr class="search-item" id="i-path-to-file"><td><code>@path/to/file</code></td><td class="desc">Import file directly in CLAUDE.md</td></tr>
+                    <tr class="search-item" id="i-memory-memory-md"><td><code>.../memory/MEMORY.md</code></td><td class="desc">Topic files, automatically loaded</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Event Hooks</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-pretooluse"><td><code>PreToolUse</code> / <code>PostToolUse</code></td><td class="desc"><span class="summary">Intercept before/after tool execution</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li><code>PostToolUse</code> hook input includes <code>duration_ms</code></li><li>Can replace tool output via <code>hookSpecificOutput.updatedToolOutput</code> for all tools</li></ul></td></tr>
+                    <tr class="search-item" id="i-posttoolusefailure"><td><code>PostToolUseFailure</code></td><td class="desc">Fires when a tool call fails; hook input includes <code>duration_ms</code></td></tr>
+                    <tr class="search-item" id="i-sessionstart"><td><code>SessionStart</code></td><td class="desc"><span class="summary">Fires on session start/resume</span> <button type="button" class="notes-btn" aria-expanded="false">+4</button><ul class="notes" hidden><li>Return <code>reloadSkills: true</code> to re-scan skill directories</li><li>Set <code>hookSpecificOutput.sessionTitle</code> to name the session</li><li>Reports source <code>"fork"</code> when a session begins as a fork instead of <code>"resume"</code></li><li>Resume hooks receive session staleness and estimated re-cache cost</li></ul></td></tr>
+                    <tr class="search-item" id="i-premodelswitch"><td><code>PreModelSwitch</code> / <code>PostModelSwitch</code></td><td class="desc">Block, confirm, or annotate a model switch before or after it happens</td></tr>
+                    <tr class="search-item" id="i-subagentstart"><td><code>SubagentStart</code> / <code>Stop</code> / <code>SubagentStop</code></td><td class="desc"><span class="summary">Lifecycle triggers for agent spawning</span> <button type="button" class="notes-btn" aria-expanded="false">+3</button><ul class="notes" hidden><li>Sub-agents can spawn their own sub-agents (up to 5 levels deep)</li><li>Stop and SubagentStop hook input includes <code>background_tasks</code> and <code>session_crons</code> fields</li><li>Stop and SubagentStop can return <code>hookSpecificOutput.additionalContext</code> to give Claude feedback and continue the turn</li></ul></td></tr>
+                    <tr class="search-item" id="i-sessionend"><td><code>SessionEnd</code></td><td class="desc">Run cleanup script when session closes</td></tr>
+                    <tr class="search-item" id="i-cwdchanged"><td><code>CwdChanged</code> / <code>FileChanged</code></td><td class="desc">React to directory or file changes</td></tr>
+                    <tr class="search-item" id="i-taskcreated"><td><code>TaskCreated</code></td><td class="desc">Fires when task created via TaskCreate</td></tr>
+                    <tr class="search-item" id="i-directoryadded"><td><code>DirectoryAdded</code></td><td class="desc">Fires after <code>/add-dir</code> or the SDK <code>register_repo_root</code> registers a new working directory mid-session</td></tr>
+                    <tr class="search-item" id="i-if"><td><code>if:</code> (hook field)</td><td class="desc"><span class="summary">Conditional execution (permission rule syntax)</span> <button type="button" class="notes-btn" aria-expanded="false">+1</button><ul class="notes" hidden><li>Single-segment <code>dir/**</code> <code>if:</code> conditions match only <code>&lt;cwd&gt;/dir</code> — write <code>**/dir/**</code> for any-depth matching (<code>deny</code>/<code>ask</code> permission rules keep any-depth match)</li></ul></td></tr>
+                    <tr class="search-item" id="i-bash-powershell"><td><code>"Bash,PowerShell"</code> (hook matcher)</td><td class="desc"><span class="summary">Comma-separated tool type names in a hook's matcher field — fires the hook on any of the listed types</span> <button type="button" class="notes-btn" aria-expanded="false">+1</button><ul class="notes" hidden><li>E.g. <code>"Bash,PowerShell"</code> fires on both Bash and PowerShell commands</li></ul></td></tr>
+                    <tr class="search-item" id="i-mcp-name"><td><code>mcp__name__.*</code> (hook matcher pattern)</td><td class="desc">Hyphenated hook matcher identifiers exact-match — use <code>mcp__name__.*</code> glob to match all tools from a hyphenated MCP server (e.g. <code>mcp__brave-search__.*</code>)</td></tr>
+                    <tr class="search-item" id="i-permissiondenied"><td><code>PermissionDenied</code></td><td class="desc">Fires after auto mode classifier denials; return {retry:true} to allow retry</td></tr>
+                    <tr class="search-item" id="i-defer"><td><code>"defer"</code> (PreToolUse)</td><td class="desc">Headless sessions pause at tool call; resume with -p --resume to re-evaluate</td></tr>
+                    <tr class="search-item" id="i-userpromptsubmit"><td><code>UserPromptSubmit</code></td><td class="desc">Fires on user prompt submit; supports hookSpecificOutput.sessionTitle to set session title</td></tr>
+                    <tr class="search-item" id="i-precompact"><td><code>PreCompact</code></td><td class="desc">Fires before compaction; block by exiting with code 2 or returning {"decision":"block"}</td></tr>
+                    <tr class="search-item" id="i-type-mcp-tool"><td><code>type: "mcp_tool"</code> (hook)</td><td class="desc">Hook directly invokes an MCP tool</td></tr>
+                    <tr class="search-item" id="i-args-string"><td><code>args: string[]</code> (hook field)</td><td class="desc">Exec form — spawns command directly without a shell; path placeholders never need quoting</td></tr>
+                    <tr class="search-item" id="i-claude-plugin-option-key"><td><code>$CLAUDE_PLUGIN_OPTION_&lt;KEY&gt;</code></td><td class="desc"><span class="summary">Hook env var for accessing plugin config option values in exec-form hook commands</span> <button type="button" class="notes-btn" aria-expanded="false">+1</button><ul class="notes" hidden><li>Use instead of <code>${user_config.*}</code> in shell-form commands (shell-form <code>${user_config.*}</code> is now rejected as a security fix)</li></ul></td></tr>
+                    <tr class="search-item" id="i-continueonblock"><td><code>continueOnBlock</code> (PostToolUse)</td><td class="desc">Set to <code>true</code> to feed the hook's rejection reason back to Claude and continue the turn</td></tr>
+                    <tr class="search-item" id="i-terminalsequence"><td><code>terminalSequence</code> (hook output)</td><td class="desc">Hook JSON output field — emit desktop notifications, window titles, and bells without a controlling terminal</td></tr>
+                    <tr class="search-item" id="i-messagedisplay"><td><code>MessageDisplay</code></td><td class="desc">Fires as assistant message text is displayed; hooks can transform or hide the output</td></tr>
+                    <tr class="search-item" id="i-enterworktree"><td><code>EnterWorktree</code></td><td class="desc"><span class="summary">Fires when entering a worktree</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li>Can now switch between Claude-managed worktrees mid-session</li><li>Asks for confirmation before entering a git worktree outside the project's <code>.claude/worktrees/</code> directory</li></ul></td></tr>
+                    <tr class="search-item" id="i-notification"><td><code>Notification</code></td><td class="desc">Fires when a background agent session needs input or finishes; events: <code>agent_needs_input</code> / <code>agent_completed</code></td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>MCP Servers</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-claude-mcp-list-add-remove"><td><code>claude mcp list/add/remove</code></td><td class="desc"><span class="summary">Standard MCP server management</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li><code>claude mcp list</code>/<code>get</code> show unapproved <code>.mcp.json</code> servers as <code>⏸ Pending approval</code> instead of auto-connecting</li><li>Disabled servers now show as <code>⊘ Disabled</code> without connecting for a health check</li></ul></td></tr>
+                    <tr class="search-item" id="i-claude-mcp-login-logout-name"><td><code>claude mcp login/logout &lt;name&gt;</code></td><td class="desc">Authenticate or de-authenticate an MCP server from the CLI without opening <code>/mcp</code>; <code>--no-browser</code> redirects auth code to stdin for SSH completion</td></tr>
+                    <tr class="search-item" id="i-claude-mcp-serve"><td><code>claude mcp serve</code></td><td class="desc">Run Claude Code as an MCP server</td></tr>
+                    <tr class="search-item" id="i-transport-http-stdio-sse"><td><code>--transport http/stdio/sse</code></td><td class="desc">Protocol connection methods</td></tr>
+                    <tr class="search-item" id="i-elicitation"><td><code>Elicitation</code></td><td class="desc">Servers can request input mid-task</td></tr>
+                    <tr class="search-item" id="i-meta-anthropic-maxresultsizechars"><td><code>_meta["anthropic/maxResultSizeChars"]</code></td><td class="desc">Override max MCP result size per call (up to 500K chars)</td></tr>
+                    <tr class="search-item" id="i-alwaysload"><td><code>alwaysLoad</code> (MCP server config)</td><td class="desc">When <code>true</code>, all tools from that server skip tool-search deferral and are always available</td></tr>
+                    <tr class="search-item" id="i-roots-list"><td><code>roots/list</code></td><td class="desc">Session additional working directories (from <code>/add-dir</code>) are included in MCP <code>roots/list</code>; <code>notifications/roots/list_changed</code> sent to servers when the set changes</td></tr>
+                </table>
+            </div>
+
+            <div class="search-group">
+                <h3>Auth Commands</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item" id="i-claude-auth-login-logout"><td><code>claude auth login/logout</code></td><td class="desc">Session authentication control; <code>auth login</code> accepts OAuth code pasted in terminal when browser callback can't reach localhost (WSL2, SSH, containers)</td></tr>
+                    <tr class="search-item" id="i-claude-auth-status"><td><code>claude auth status</code></td><td class="desc">Check current authentication validity</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="no-results search-exclude" id="noResults">No matches — clear search to see everything.</div>
+
+        <footer class="global-footer">
+            Template v1.1 | March 2026<br>
+            <a href="https://dommango.github.io" target="_blank" rel="noopener noreferrer">Context//Collapse</a>
+        </footer>
+
+    </div>
+
+    <script type="application/json" id="whatsNewData">
+    {
+        "version": "v2.1.263",
+        "date": "2026-09-06",
+        "changes": []
+    }
+    </script>
+
+    <script>
+        // --- THEME TOGGLE LOGIC ---
+        function setThemeIcon(theme) {
+            const btn = document.getElementById('themeBtn');
+            if (btn) btn.innerHTML = theme === 'dark' ? '&#9728;&#65039;' : '&#127769;';
+        }
+        function toggleTheme() {
+            const root = document.documentElement;
+            const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+            root.dataset.theme = next;
+            localStorage.setItem('placemat-theme', next);
+            setThemeIcon(next);
+        }
+        setThemeIcon(document.documentElement.dataset.theme);
+
+        // --- CLICK TO COPY LOGIC (mouse + keyboard) ---
+        function makeCopyable(el, getText) {
+            el.title = "Click to copy";
+            el.tabIndex = 0;
+            el.setAttribute('role', 'button');
+            el.addEventListener('click', () => copyText(el, getText()));
+            el.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    copyText(el, getText());
+                }
+            });
+        }
+
+        document.querySelectorAll('code').forEach(el => {
+            if(el.id === 'generatedCmd') return;
+            makeCopyable(el, () => el.innerText);
+        });
+
+        async function copyText(element, text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                element.classList.add('copied');
+                setTimeout(() => element.classList.remove('copied'), 300);
+            } catch (err) { console.error('Failed to copy: ', err); }
+        }
+
+        // --- HIERARCHICAL SEARCH LOGIC ---
+        const searchInput = document.getElementById('dashboardSearch');
+        searchInput.addEventListener('input', (e) => performSearch(e.target.value));
+
+        const searchKbd = document.getElementById('searchKbd');
+        if (searchKbd && !/mac/i.test(navigator.platform || navigator.userAgentData?.platform || '')) {
+            searchKbd.textContent = 'Ctrl K';
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault(); searchInput.focus();
+            }
+        });
+
+        function performSearch(term) {
+            term = term.toLowerCase().trim();
+            const cards = document.querySelectorAll('.dashboard-grid .card:not(.search-exclude)');
+            const noResults = document.getElementById('noResults');
+            let anyCardVisible = false;
+
+            cards.forEach(card => {
+                let cardHasMatch = false;
+
+                if (!term) {
+                    card.style.display = 'block';
+                    card.querySelectorAll('.search-group').forEach(sg => sg.style.display = 'block');
+                    card.querySelectorAll('.search-item').forEach(item => item.style.display = 'table-row');
+                    anyCardVisible = true;
+                    return;
+                }
+
+                const cardTitle = card.querySelector('h2').innerText.toLowerCase();
+                if (cardTitle.includes(term)) {
+                    card.style.display = 'block';
+                    card.querySelectorAll('.search-group').forEach(sg => sg.style.display = 'block');
+                    card.querySelectorAll('.search-item').forEach(item => item.style.display = 'table-row');
+                    anyCardVisible = true;
+                    return;
+                }
+
+                const groups = card.querySelectorAll('.search-group');
+                groups.forEach(group => {
+                    let groupHasMatch = false;
+                    const heading = group.querySelector('h3');
+
+                    if (heading && heading.innerText.toLowerCase().includes(term)) {
+                        groupHasMatch = true;
+                        group.querySelectorAll('.search-item').forEach(item => item.style.display = 'table-row');
+                    } else {
+                        const items = group.querySelectorAll('.search-item');
+                        items.forEach(item => {
+                            if (item.textContent.toLowerCase().includes(term)) {
+                                item.style.display = 'table-row';
+                                groupHasMatch = true;
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        });
+                    }
+
+                    group.style.display = groupHasMatch ? 'block' : 'none';
+                    if (groupHasMatch) cardHasMatch = true;
+                });
+
+                card.style.display = cardHasMatch ? 'block' : 'none';
+                if (cardHasMatch) anyCardVisible = true;
+            });
+
+            if (noResults) noResults.classList.toggle('is-visible', !anyCardVisible);
+        }
+
+        // --- COMPACT COMMAND BUILDER LOGIC ---
+        const labPrompt = document.getElementById('labPrompt');
+        const labEffort = document.getElementById('labEffort');
+        const labFormat = document.getElementById('labFormat');
+        const labBare = document.getElementById('labBare');
+        const genOut = document.getElementById('generatedCmd');
+
+        // Single-quote the prompt and escape embedded single quotes the POSIX-safe way
+        // ('\'') — unlike double-quote escaping, this is immune to $VAR and `cmd` expansion.
+        const shellSingleQuote = (str) => `'${str.replace(/'/g, `'\\''`)}'`;
+
+        const updateCmd = () => {
+            const prompt = shellSingleQuote(labPrompt.value);
+            const effort = labEffort.value;
+            const format = labFormat.value;
+            const bare = labBare.checked ? '--bare' : '';
+
+            let cmd = `claude -p ${prompt}`;
+            if (effort) cmd += ` ${effort}`;
+            if (format) cmd += ` ${format}`;
+            if (bare) cmd += ` ${bare}`;
+
+            genOut.innerText = cmd.trim();
+        };
+
+        [labPrompt, labEffort, labFormat].forEach(el => el.addEventListener('input', updateCmd));
+        labBare.addEventListener('change', updateCmd);
+        updateCmd();
+
+        makeCopyable(genOut, () => genOut.innerText);
+
+        // --- WHAT'S NEW POPUP LOGIC ---
+        (function initWhatsNew() {
+            const dataEl = document.getElementById('whatsNewData');
+            if (!dataEl) return;
+
+            let data;
+            try {
+                data = JSON.parse(dataEl.textContent);
+            } catch (err) {
+                console.error("Failed to parse What's New data:", err);
+                return;
+            }
+
+            const seen = localStorage.getItem('placemat-seen-version');
+            if (seen === data.version) return;
+            if (!data.changes || !data.changes.length) return;
+
+            const tagClass = { ADD: 'tag-add', CHG: 'tag-change', DEL: 'tag-remove', FIX: 'tag-fix' };
+            const items = data.changes.map(c =>
+                `<li><span class="tag ${tagClass[c.tag] || 'tag-add'}">${c.tag}</span>${c.text}</li>`
+            ).join('');
+
+            const overlay = document.createElement('div');
+            overlay.className = 'whats-new-overlay';
+            overlay.innerHTML = `
+                <div class="whats-new-modal" role="dialog" aria-modal="true" aria-labelledby="whatsNewTitle">
+                    <div class="whats-new-header">
+                        <h2 id="whatsNewTitle">What's New <span class="version-date">${data.version} &mdash; ${data.date}</span></h2>
+                        <button type="button" class="whats-new-close" title="Dismiss" aria-label="Dismiss What's New">&times;</button>
+                    </div>
+                    <ul class="whats-new-list">${items}</ul>
+                </div>`;
+
+            document.body.appendChild(overlay);
+
+            const previouslyFocused = document.activeElement;
+            const closeBtn = overlay.querySelector('.whats-new-close');
+            closeBtn.focus();
+
+            function escHandler(e) {
+                if (e.key === 'Escape') dismiss();
+            }
+
+            function dismiss() {
+                localStorage.setItem('placemat-seen-version', data.version);
+                overlay.remove();
+                window.removeEventListener('keydown', escHandler);
+                if (previouslyFocused && previouslyFocused.focus) previouslyFocused.focus();
+            }
+
+            closeBtn.addEventListener('click', dismiss);
+            overlay.addEventListener('click', (e) => { if (e.target === overlay) dismiss(); });
+            window.addEventListener('keydown', escHandler);
+        })();
+
+    </script>
+    <script>
+
+document.getElementById('printBtn').addEventListener('click', () => window.print());
+// mock-only: toggle an on-screen preview of the print layout
+(function () {
+  const b = document.getElementById('previewBtn');
+  b.addEventListener('click', () => { const on = document.body.classList.toggle('print-preview'); b.setAttribute('aria-pressed', String(on)); b.textContent = on ? 'Back to screen view' : 'Preview print layout'; });
+})();
+
+    </script>
+</body>
+</html>

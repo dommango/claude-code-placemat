@@ -6,6 +6,9 @@ on:
       - "**.html"
       - "**.css"
       - "tests/**"
+      - "scripts/**"
+      - "changes.json"
+      - "feed.xml"
       - ".github/workflows/html-validate.yml"
   push:
     branches: [main]
@@ -13,6 +16,9 @@ on:
       - "**.html"
       - "**.css"
       - "tests/**"
+      - "scripts/**"
+      - "changes.json"
+      - "feed.xml"
 
 permissions:
   contents: read
@@ -42,3 +48,6 @@ jobs:
           node-version: 20
       - name: Run structural/regression tests
         run: node tests/placemat.test.js
+
+      - name: changes.json and feed.xml are up to date
+        run: node scripts/build-changes.js --check
