@@ -79,6 +79,16 @@ function extractScripts(html) {
     assert.strictEqual(/style="/.test(html), false);
   });
 
+  test('index.html: Config card is split into Settings (JSON) and Environment Variables', () => {
+    assert.ok(!html.includes('<h2>Config & Environment</h2>'), 'old Config card still present');
+    const settings = html.indexOf('<h2>Settings (JSON)</h2>');
+    const env = html.indexOf('<h2>Environment Variables</h2>');
+    assert.ok(settings !== -1 && env !== -1, 'new cards missing');
+    assert.ok(settings < env, 'Settings card must come before Environment Variables');
+    const managed = html.indexOf('<h3>Managed & Enterprise</h3>');
+    assert.ok(managed > settings && managed < env, 'Managed & Enterprise group must live in the Settings card');
+  });
+
   test('index.html: command builder single-quote escaping is shell-safe', () => {
     // Extract shellSingleQuote's body and re-run it in isolation — this is the
     // exact logic that generates a copy-pasteable `claude -p '...'` command.

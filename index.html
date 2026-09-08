@@ -325,7 +325,7 @@
         </div>
 
         <div class="card">
-            <h2>Config & Environment</h2>
+            <h2>Settings (JSON)</h2>
 
             <div class="search-group">
                 <h3>Files & Priority</h3>
@@ -359,7 +359,6 @@
                     <tr class="search-item"><td><code>language</code></td><td class="desc">Pin session-title language; titles auto-detect the conversation language by default — set to a BCP 47 tag (e.g. <code>en</code>, <code>ja</code>) to override</td></tr>
                     <tr class="search-item"><td><code>disableSkillShellExecution</code></td><td class="desc">Disable inline shell execution in skills and custom slash commands</td></tr>
                     <tr class="search-item"><td><code>skillOverrides</code></td><td class="desc"><code>off</code> hides skill from model and <code>/</code>; <code>user-invocable-only</code> hides from model only; <code>name-only</code> collapses description</td></tr>
-                    <tr class="search-item"><td><code>forceRemoteSettingsRefresh</code></td><td class="desc">Block startup until remote managed settings are freshly fetched; fail-closed on fetch failure</td></tr>
                     <tr class="search-item"><td><code>statusLine.refreshInterval</code></td><td class="desc">Re-run status line command every N seconds</td></tr>
                     <tr class="search-item"><td><code>workspace.git_worktree</code></td><td class="desc">Status line JSON input field — set when current directory is inside a linked git worktree</td></tr>
                     <tr class="search-item"><td><code>effort.level</code> / <code>thinking.enabled</code></td><td class="desc">Hooks and status line stdin JSON input fields — current effort level and thinking state</td></tr>
@@ -377,12 +376,9 @@
                     <tr class="search-item"><td><code>permissions.blockReadsOutsideWorkingDirectories</code></td><td class="desc">Block file reads outside configured working directories; in auto mode, a one-time prompt appears before the first such read</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.deniedDomains</code></td><td class="desc">Block specific domains even when a broader <code>allowedDomains</code> wildcard would otherwise permit them</td></tr>
                     <tr class="search-item"><td><code>sandbox.network.strictAllowlist</code></td><td class="desc">Deny non-allowlisted hosts for sandboxed commands without prompting</td></tr>
-                    <tr class="search-item"><td><code>sandbox.bwrapPath</code> / <code>sandbox.socatPath</code></td><td class="desc">Custom bubblewrap and socat binary paths (Linux/WSL managed settings)</td></tr>
                     <tr class="search-item"><td><code>sandbox.allowAppleEvents</code></td><td class="desc">Opt-in macOS setting to allow sandboxed commands to send Apple Events</td></tr>
                     <tr class="search-item"><td><code>sandbox.credentials</code></td><td class="desc">Block sandboxed commands from reading credential files and secret environment variables; set <code>mode: "mask"</code> (Linux/WSL) to expose a sentinel copy while the proxy substitutes the real value on egress; supports <code>extract</code>/<code>onExtractNoMatch</code> for structured values, <code>decode: "jwt"</code> with <code>maskClaims</code> for JWT-aware masking, and <code>awsPairs</code>/<code>sigv4</code> for AWS SigV4 re-signing; requires <code>network.tlsTerminate</code>; macOS falls back to <code>deny</code></td></tr>
                     <tr class="search-item"><td><code>sandbox.filesystem.disabled</code></td><td class="desc">Skip filesystem isolation while keeping network egress control</td></tr>
-                    <tr class="search-item"><td><code>wslInheritsWindowsSettings</code></td><td class="desc">WSL sessions inherit Windows-side managed settings (policy key)</td></tr>
-                    <tr class="search-item"><td><code>parentSettingsBehavior</code></td><td class="desc">Admin-tier key: <code>first-wins</code> (default) or <code>merge</code> — opts SDK <code>managedSettings</code> parent tier into policy merge</td></tr>
                     <tr class="search-item"><td><code>"$defaults"</code> (autoMode)</td><td class="desc">Include in <code>autoMode.allow</code>, <code>autoMode.soft_deny</code>, or <code>autoMode.environment</code> to add custom rules alongside the built-in list; <code>autoMode</code> settings are read only from <code>~/.claude/settings.json</code>, not from <code>.claude/settings.local.json</code></td></tr>
                     <tr class="search-item"><td><code>autoMode.hard_deny</code></td><td class="desc">Auto mode classifier rules that block unconditionally regardless of user intent — unlike <code>autoMode.soft_deny</code>, cannot be overridden by allow exceptions</td></tr>
                     <tr class="search-item"><td><code>autoMode.classifyAllShell</code></td><td class="desc">Route all Bash/PowerShell commands through the auto-mode classifier instead of only arbitrary-code-execution patterns</td></tr>
@@ -393,17 +389,8 @@
                     <tr class="search-item"><td><code>attribution.sessionUrl</code></td><td class="desc">Set to <code>false</code> to omit the claude.ai session link from commits and PRs in web and Remote Control sessions</td></tr>
                     <tr class="search-item"><td><code>prUrlTemplate</code></td><td class="desc">Point footer PR badge at a custom code-review URL instead of github.com</td></tr>
                     <tr class="search-item"><td><code>footerLinksRegexes</code></td><td class="desc">Array of regex patterns for regex-matched link badges in the footer row; configurable via user or managed settings</td></tr>
-                    <tr class="search-item"><td><code>channelsEnabled</code></td><td class="desc">Set to <code>true</code> in managed settings to allow <code>--channels</code> with console (API key) auth</td></tr>
-                    <tr class="search-item"><td><code>allowAllClaudeAiMcps</code></td><td class="desc">Enterprise managed setting — load claude.ai cloud MCP connectors alongside <code>managed-mcp.json</code></td></tr>
-                    <tr class="search-item"><td><code>managedMcpServers</code></td><td class="desc">Managed setting — provide HTTP/SSE MCP servers to every user in the organization (same entry shape as <code>.mcp.json</code>); entries naming a command to run are skipped</td></tr>
-                    <tr class="search-item"><td><code>deniedMcpServers</code></td><td class="desc">Managed setting — blocklist of managed MCP servers to deny; use to suppress servers from <code>managed-mcp.json</code> (as of v2.1.259, <code>allowedMcpServers</code> governs only user-added servers and no longer filters managed servers)</td></tr>
-                    <tr class="search-item"><td><code>pluginSuggestionMarketplaces</code></td><td class="desc">Managed setting — allowlist org marketplaces whose plugins may be suggested via context-aware tips</td></tr>
                     <tr class="search-item"><td><code>additionalMarketplaces</code></td><td class="desc">Add plugin marketplace repos beyond the built-in list; friendlier alias for <code>extraKnownMarketplaces</code></td></tr>
-                    <tr class="search-item"><td><code>strictKnownMarketplaces</code></td><td class="desc">Managed setting — allowlist of marketplace repos allowed as plugin sources; supports <code>"owner/*"</code> wildcard to allow all repos under a GitHub org; also accepted as <code>allowedMarketplaces</code></td></tr>
-                    <tr class="search-item"><td><code>blockedMarketplaces</code></td><td class="desc">Managed setting — blocklist of marketplace repos denied as plugin sources; supports <code>"owner/*"</code> wildcard to block all repos under a GitHub org</td></tr>
-                    <tr class="search-item"><td><code>requiredMinimumVersion</code> / <code>requiredMaximumVersion</code></td><td class="desc">Managed settings — CC refuses to start if its version is outside the allowed range; directs user to an approved version</td></tr>
                     <tr class="search-item"><td><code>disableBundledSkills</code></td><td class="desc">Hide bundled skills, workflows, and built-in slash commands from the model; paired with <code>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</code> env var</td></tr>
-                    <tr class="search-item"><td><code>enforceAvailableModels</code></td><td class="desc">Managed setting — when enabled, the <code>availableModels</code> allowlist also constrains the Default model (a Default that resolves to a disallowed model falls back to the first allowed model); user or project settings cannot widen a managed <code>availableModels</code> list</td></tr>
                     <tr class="search-item"><td><code>teammateMode: "iterm2"</code></td><td class="desc">Use iTerm2 as the teammate backend; shows a warning when auto mode cannot find the <code>it2</code> CLI</td></tr>
                     <tr class="search-item"><td><code>awsAuthRefresh</code></td><td class="desc">Configures the "Claude Platform on AWS — refresh credentials" option in <code>/login</code></td></tr>
                     <tr class="search-item"><td><code>respondToBashCommands</code></td><td class="desc">Set to <code>false</code> to keep <code>!</code> bash command output as context-only; default behavior is for Claude to respond automatically</td></tr>
@@ -418,7 +405,32 @@
             </div>
 
             <div class="search-group">
-                <h3>Environment Variables</h3>
+                <h3>Managed & Enterprise</h3>
+                <table>
+                    <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
+                    <tr class="search-item"><td><code>forceRemoteSettingsRefresh</code></td><td class="desc">Block startup until remote managed settings are freshly fetched; fail-closed on fetch failure</td></tr>
+                    <tr class="search-item"><td><code>sandbox.bwrapPath</code> / <code>sandbox.socatPath</code></td><td class="desc">Custom bubblewrap and socat binary paths (Linux/WSL managed settings)</td></tr>
+                    <tr class="search-item"><td><code>wslInheritsWindowsSettings</code></td><td class="desc">WSL sessions inherit Windows-side managed settings (policy key)</td></tr>
+                    <tr class="search-item"><td><code>parentSettingsBehavior</code></td><td class="desc">Admin-tier key: <code>first-wins</code> (default) or <code>merge</code> — opts SDK <code>managedSettings</code> parent tier into policy merge</td></tr>
+                    <tr class="search-item"><td><code>channelsEnabled</code></td><td class="desc">Set to <code>true</code> in managed settings to allow <code>--channels</code> with console (API key) auth</td></tr>
+                    <tr class="search-item"><td><code>allowAllClaudeAiMcps</code></td><td class="desc">Enterprise managed setting — load claude.ai cloud MCP connectors alongside <code>managed-mcp.json</code></td></tr>
+                    <tr class="search-item"><td><code>managedMcpServers</code></td><td class="desc">Managed setting — provide HTTP/SSE MCP servers to every user in the organization (same entry shape as <code>.mcp.json</code>); entries naming a command to run are skipped</td></tr>
+                    <tr class="search-item"><td><code>deniedMcpServers</code></td><td class="desc">Managed setting — blocklist of managed MCP servers to deny; use to suppress servers from <code>managed-mcp.json</code> (as of v2.1.259, <code>allowedMcpServers</code> governs only user-added servers and no longer filters managed servers)</td></tr>
+                    <tr class="search-item"><td><code>pluginSuggestionMarketplaces</code></td><td class="desc">Managed setting — allowlist org marketplaces whose plugins may be suggested via context-aware tips</td></tr>
+                    <tr class="search-item"><td><code>strictKnownMarketplaces</code></td><td class="desc">Managed setting — allowlist of marketplace repos allowed as plugin sources; supports <code>"owner/*"</code> wildcard to allow all repos under a GitHub org; also accepted as <code>allowedMarketplaces</code></td></tr>
+                    <tr class="search-item"><td><code>blockedMarketplaces</code></td><td class="desc">Managed setting — blocklist of marketplace repos denied as plugin sources; supports <code>"owner/*"</code> wildcard to block all repos under a GitHub org</td></tr>
+                    <tr class="search-item"><td><code>requiredMinimumVersion</code> / <code>requiredMaximumVersion</code></td><td class="desc">Managed settings — CC refuses to start if its version is outside the allowed range; directs user to an approved version</td></tr>
+                    <tr class="search-item"><td><code>enforceAvailableModels</code></td><td class="desc">Managed setting — when enabled, the <code>availableModels</code> allowlist also constrains the Default model (a Default that resolves to a disallowed model falls back to the first allowed model); user or project settings cannot widen a managed <code>availableModels</code> list</td></tr>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <h2>Environment Variables</h2>
+
+            <div class="search-group">
+                <h3>All Variables</h3>
                 <table>
                     <thead><tr><th scope="col" class="sr-only">Item</th><th scope="col" class="sr-only">Description</th></tr></thead>
                     <tr class="search-item"><td><code>ANTHROPIC_API_KEY</code></td><td class="desc">Auth override</td></tr>
