@@ -163,6 +163,20 @@ function extractScripts(html) {
     assert.strictEqual(head[1], tag[1], 'print-head release differs from the header release tag');
   });
 
+  // Regression guard for a real bug: loading index.html?q=hook runs performSearch and
+  // revealNoteHits during script execution. revealNoteHits closes over `const noteButtons`,
+  // so if the two-tier block is declared after the search block, that load throws
+  // "Cannot access 'noteButtons' before initialization" and every later block — the
+  // command builder and the since-your-last-visit feed — silently never runs.
+  test('index.html: bindings used by the ?q= load path are declared before it', () => {
+    const declaration = html.indexOf('const noteButtons =');
+    const initialLoad = html.indexOf('revealNoteHits(initialQuery)');
+    assert.ok(declaration !== -1 && initialLoad !== -1, 'expected markers not found');
+    assert.ok(declaration < initialLoad, 'noteButtons must be declared before the initial-query search runs');
+    const groups = html.indexOf('const groupEls =');
+    assert.ok(groups < initialLoad, 'groupEls must be declared before the initial-query search runs');
+  });
+
   test('index.html: command builder single-quote escaping is shell-safe', () => {
     // Extract shellSingleQuote's body and re-run it in isolation — this is the
     // exact logic that generates a copy-pasteable `claude -p '...'` command.

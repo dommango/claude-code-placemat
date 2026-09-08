@@ -894,6 +894,31 @@
             }
         });
 
+        // --- TWO-TIER ENTRIES: notes disclosure ---
+        const noteButtons = Array.from(document.querySelectorAll('.notes-btn'));
+        const setNotes = (btn, open) => {
+            btn.setAttribute('aria-expanded', String(open));
+            btn.nextElementSibling.hidden = !open;
+        };
+        noteButtons.forEach((btn) => btn.addEventListener('click', () => setNotes(btn, btn.getAttribute('aria-expanded') !== 'true')));
+        const notesAllBtn = document.getElementById('notesAll');
+        notesAllBtn.addEventListener('click', () => {
+            const open = notesAllBtn.getAttribute('aria-pressed') !== 'true';
+            notesAllBtn.setAttribute('aria-pressed', String(open));
+            notesAllBtn.textContent = open ? 'Hide all notes' : 'Show all notes';
+            noteButtons.forEach((btn) => setNotes(btn, open));
+        });
+        function revealNoteHits(term) {
+            const needle = term.toLowerCase().trim();
+            if (!needle) return;
+            noteButtons.forEach((btn) => {
+                const row = btn.closest('.search-item');
+                const outside = (row.querySelector('td').textContent + ' ' + row.querySelector('.summary').textContent).toLowerCase().includes(needle);
+                const inside = btn.nextElementSibling.textContent.toLowerCase().includes(needle);
+                if (inside && !outside) setNotes(btn, true);
+            });
+        }
+
         // --- SEARCH: normalised match, highlight, count, URL state ---
         const normaliseSearch = (s) => s.toLowerCase().replace(/[\s+_\-\/.:~]/g, '');
         const searchRows = Array.from(document.querySelectorAll('.search-item'));
@@ -1029,31 +1054,6 @@
             const rows = visibleRows();
             if (rows[0]) { e.preventDefault(); rows[0].focus(); }
         });
-
-        // --- TWO-TIER ENTRIES: notes disclosure ---
-        const noteButtons = Array.from(document.querySelectorAll('.notes-btn'));
-        const setNotes = (btn, open) => {
-            btn.setAttribute('aria-expanded', String(open));
-            btn.nextElementSibling.hidden = !open;
-        };
-        noteButtons.forEach((btn) => btn.addEventListener('click', () => setNotes(btn, btn.getAttribute('aria-expanded') !== 'true')));
-        const notesAllBtn = document.getElementById('notesAll');
-        notesAllBtn.addEventListener('click', () => {
-            const open = notesAllBtn.getAttribute('aria-pressed') !== 'true';
-            notesAllBtn.setAttribute('aria-pressed', String(open));
-            notesAllBtn.textContent = open ? 'Hide all notes' : 'Show all notes';
-            noteButtons.forEach((btn) => setNotes(btn, open));
-        });
-        function revealNoteHits(term) {
-            const needle = term.toLowerCase().trim();
-            if (!needle) return;
-            noteButtons.forEach((btn) => {
-                const row = btn.closest('.search-item');
-                const outside = (row.querySelector('td').textContent + ' ' + row.querySelector('.summary').textContent).toLowerCase().includes(needle);
-                const inside = btn.nextElementSibling.textContent.toLowerCase().includes(needle);
-                if (inside && !outside) setNotes(btn, true);
-            });
-        }
 
         // --- COMPACT COMMAND BUILDER LOGIC ---
         const labPrompt = document.getElementById('labPrompt');
