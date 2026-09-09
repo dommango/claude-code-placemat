@@ -1,7 +1,25 @@
 {
- "generated": "2026-09-04",
- "latest": "v2.1.261",
+ "generated": "2026-09-08",
+ "latest": "v2.1.265",
  "releases": [
+  {
+   "version": "v2.1.265",
+   "label": "v2.1.265",
+   "date": "2026-09-08",
+   "id": "cc-v2-1-265",
+   "entries": [
+    {
+     "tag": "CHG",
+     "item": "--plugin-dir",
+     "html": "<code>--plugin-dir</code> — now accepts a folder of plugins; each child folder with a manifest loads, and additions/removals while running are picked up"
+    },
+    {
+     "tag": "ADD",
+     "item": "forceLoginGatewayUrl",
+     "html": "<code>forceLoginGatewayUrl</code> managed setting — URL of the Claude apps gateway; machines with this set start as gateway sessions from startup, overriding leftover logins or API keys"
+    }
+   ]
+  },
   {
    "version": "v2.1.261",
    "label": "v2.1.261",

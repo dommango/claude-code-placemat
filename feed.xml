@@ -4,7 +4,14 @@
   <link href="https://dommango.github.io/claude-code-placemat/"/>
   <link rel="self" href="https://dommango.github.io/claude-code-placemat/feed.xml"/>
   <id>https://dommango.github.io/claude-code-placemat/</id>
-  <updated>2026-09-04T09:00:00Z</updated>
+  <updated>2026-09-08T09:00:00Z</updated>
+  <entry>
+    <title>Claude Code v2.1.265 — 2 placemat changes</title>
+    <id>https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-265</id>
+    <link href="https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-265"/>
+    <updated>2026-09-08T09:00:00Z</updated>
+    <content type="html">&lt;ul&gt;&lt;li&gt;&lt;b&gt;CHG&lt;/b&gt; &lt;code&gt;--plugin-dir&lt;/code&gt; — now accepts a folder of plugins; each child folder with a manifest loads, and additions/removals while running are picked up&lt;/li&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;forceLoginGatewayUrl&lt;/code&gt; managed setting — URL of the Claude apps gateway; machines with this set start as gateway sessions from startup, overriding leftover logins or API keys&lt;/li&gt;&lt;/ul&gt;</content>
+  </entry>
   <entry>
     <title>Claude Code v2.1.261 — 3 placemat changes</title>
     <id>https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-261</id>
@@ -137,12 +144,5 @@
     <link href="https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-225"/>
     <updated>2026-08-08T09:00:00Z</updated>
     <content type="html">&lt;ul&gt;&lt;li&gt;&lt;b&gt;CHG&lt;/b&gt; &lt;code&gt;SendMessage&lt;/code&gt; — can now initiate a conversation with a Remote Control session on another machine by name, without needing &lt;code&gt;ListAgents&lt;/code&gt;&lt;/li&gt;&lt;/ul&gt;</content>
-  </entry>
-  <entry>
-    <title>Claude Code v2.1.224 — 7 placemat changes</title>
-    <id>https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-224</id>
-    <link href="https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-224"/>
-    <updated>2026-08-07T09:00:00Z</updated>
-    <content type="html">&lt;ul&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;claude self-hosted-runner&lt;/code&gt; CLI command — turn your own machine or container into a session host for Claude Code web, mobile, and desktop sessions (Team and Enterprise plans)&lt;/li&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;ANTHROPIC_BEDROCK_REGION_PREFIX&lt;/code&gt; env var — prefer a specific Bedrock cross-region inference profile over the &lt;code&gt;AWS_REGION&lt;/code&gt;-derived one&lt;/li&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;crossSessionInbound&lt;/code&gt; / &lt;code&gt;dialogExpiry&lt;/code&gt; (JSON settings) — &lt;code&gt;crossSessionInbound&lt;/code&gt; holds inbound cross-session messages for approval when the receiving session has bypassed permissions; &lt;code&gt;dialogExpiry&lt;/code&gt; controls the approval dialog timeout&lt;/li&gt;&lt;li&gt;&lt;b&gt;CHG&lt;/b&gt; &lt;code&gt;sandbox.credentials&lt;/code&gt; — new masking options: &lt;code&gt;extract&lt;/code&gt;/&lt;code&gt;onExtractNoMatch&lt;/code&gt; for structured env values, &lt;code&gt;decode: "jwt"&lt;/code&gt; with &lt;code&gt;maskClaims&lt;/code&gt; for JWT-aware masking, &lt;code&gt;awsPairs&lt;/code&gt;/&lt;code&gt;sigv4&lt;/code&gt; for AWS SigV4 re-signing; requires &lt;code&gt;network.tlsTerminate&lt;/code&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;CHG&lt;/b&gt; &lt;code&gt;CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION&lt;/code&gt; — built-in 200-spawn limit removed; long-running sessions no longer refuse new agents by default; concurrency and depth limits still apply&lt;/li&gt;&lt;li&gt;&lt;b&gt;CHG&lt;/b&gt; &lt;code&gt;SendMessage&lt;/code&gt; — supports cross-session messaging across machines; use &lt;code&gt;ListAgents&lt;/code&gt; to discover sessions (macOS and Linux)&lt;/li&gt;&lt;li&gt;&lt;b&gt;CHG&lt;/b&gt; &lt;code&gt;/plugin install&lt;/code&gt; — now supports &lt;code&gt;archive&lt;/code&gt; source: install plugins from a zip over HTTPS without git or npm; optional SHA-256 pinning&lt;/li&gt;&lt;/ul&gt;</content>
   </entry>
 </feed>
