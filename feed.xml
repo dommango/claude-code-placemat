@@ -4,7 +4,14 @@
   <link href="https://dommango.github.io/claude-code-placemat/"/>
   <link rel="self" href="https://dommango.github.io/claude-code-placemat/feed.xml"/>
   <id>https://dommango.github.io/claude-code-placemat/</id>
-  <updated>2026-09-08T09:00:00Z</updated>
+  <updated>2026-09-09T09:00:00Z</updated>
+  <entry>
+    <title>Claude Code v2.1.267 — 2 placemat changes</title>
+    <id>https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-267</id>
+    <link href="https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-267"/>
+    <updated>2026-09-09T09:00:00Z</updated>
+    <content type="html">&lt;ul&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;maxEffortLevel&lt;/code&gt; setting — caps the maximum effort level on every provider (top-level or per model under &lt;code&gt;modelSettings&lt;/code&gt;); applies to Bedrock, Vertex, and Foundry&lt;/li&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;--system-prompt-snapshot off&lt;/code&gt; flag — renders the system prompt fresh on every request instead of reusing the conversation's recorded prompt&lt;/li&gt;&lt;/ul&gt;</content>
+  </entry>
   <entry>
     <title>Claude Code v2.1.265 — 2 placemat changes</title>
     <id>https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-265</id>
@@ -137,12 +144,5 @@
     <link href="https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-229"/>
     <updated>2026-08-12T09:00:00Z</updated>
     <content type="html">&lt;ul&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;claude remote-control --continue&lt;/code&gt; — resume the most recent Remote Control session&lt;/li&gt;&lt;li&gt;&lt;b&gt;CHG&lt;/b&gt; &lt;code&gt;/commit-push-pr&lt;/code&gt; — git/gh commands with dangerous flags (&lt;code&gt;--force&lt;/code&gt;, &lt;code&gt;--amend&lt;/code&gt;, &lt;code&gt;--no-verify&lt;/code&gt;, etc.) are no longer auto-approved&lt;/li&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS=0&lt;/code&gt; env var — set to &lt;code&gt;0&lt;/code&gt; to disable automatic staggering of same-prefix sibling workflow agents&lt;/li&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;command&lt;/code&gt; (plugin marketplace source) — specify a plugin directory via a local command's output; re-resolved each session without restart; &lt;code&gt;mode: "link"&lt;/code&gt; uses it in place&lt;/li&gt;&lt;/ul&gt;</content>
-  </entry>
-  <entry>
-    <title>Claude Code v2.1.225 — 1 placemat change</title>
-    <id>https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-225</id>
-    <link href="https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-225"/>
-    <updated>2026-08-08T09:00:00Z</updated>
-    <content type="html">&lt;ul&gt;&lt;li&gt;&lt;b&gt;CHG&lt;/b&gt; &lt;code&gt;SendMessage&lt;/code&gt; — can now initiate a conversation with a Remote Control session on another machine by name, without needing &lt;code&gt;ListAgents&lt;/code&gt;&lt;/li&gt;&lt;/ul&gt;</content>
   </entry>
 </feed>
