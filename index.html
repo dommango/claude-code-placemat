@@ -52,7 +52,7 @@
             <span class="header-tagline">Auto-updated reference — always current</span>
         </div>
         <div class="global-controls">
-            <span class="release-tag">As of release: v2.1.266</span>
+            <span class="release-tag">As of release: v2.1.267</span>
             <a href="changelog.html" class="header-link">Changelog →</a>
             <a href="feed.xml" class="header-link" title="Subscribe to placemat changes (RSS)">RSS</a>
             <button type="button" class="header-link print-btn" id="printBtn" title="Print or save as PDF (Ctrl P)">⎙ Print</button>
@@ -89,7 +89,7 @@
 
         <div class="print-head" aria-hidden="true">
             <span class="print-head-title">Claude Code <b>PLACEMAT</b></span>
-            <span>As of release v2.1.266</span>
+            <span>As of release v2.1.267</span>
             <span>■ = new &nbsp; □ = unverified</span>
             <span>dommango.github.io/claude-code-placemat</span>
         </div>
@@ -361,6 +361,7 @@
                     <tr class="search-item" id="i-dangerously-skip-permissions"><td><a class="row-link" href="#i-dangerously-skip-permissions" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>--dangerously-skip-permissions</code></td><td class="desc"><span class="summary">Skip all approval prompts</span> <button type="button" class="notes-btn" aria-expanded="false">+1</button><ul class="notes" hidden><li>Bypasses prompts for writes to <code>.claude/</code>, <code>.git/</code>, <code>.vscode/</code>, shell config files, and other protected paths (catastrophic removal commands still prompt)</li></ul></td></tr>
                     <tr class="search-item" id="i-exclude-dynamic-system-prompt-sections"><td><a class="row-link" href="#i-exclude-dynamic-system-prompt-sections" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>--exclude-dynamic-system-prompt-sections</code></td><td class="desc">Exclude dynamic prompt sections in print mode for cross-user prompt caching</td></tr>
                     <tr class="search-item" id="i-forward-subagent-text"><td><a class="row-link" href="#i-forward-subagent-text" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>--forward-subagent-text</code></td><td class="desc">Include subagent text and thinking in <code>--output-format stream-json</code> output; paired with <code>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</code> env var</td></tr>
+                    <tr class="search-item" id="i-system-prompt-snapshot-off"><td><a class="row-link" href="#i-system-prompt-snapshot-off" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code class="new">--system-prompt-snapshot off</code> <!-- added:v2.1.267 --></td><td class="desc">Renders the system prompt fresh on every request instead of reusing the conversation's recorded prompt; for iterating on prompt text</td></tr>
                 </table>
             </details>
 
@@ -446,6 +447,7 @@
                     <tr class="search-item" id="i-automode-hard-deny"><td><a class="row-link" href="#i-automode-hard-deny" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>autoMode.hard_deny</code></td><td class="desc">Auto mode classifier rules that block unconditionally regardless of user intent — unlike <code>autoMode.soft_deny</code>, cannot be overridden by allow exceptions</td></tr>
                     <tr class="search-item" id="i-automode-classifyallshell"><td><a class="row-link" href="#i-automode-classifyallshell" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>autoMode.classifyAllShell</code></td><td class="desc">Route all Bash/PowerShell commands through the auto-mode classifier instead of only arbitrary-code-execution patterns</td></tr>
                     <tr class="search-item" id="i-disableautomode"><td><a class="row-link" href="#i-disableautomode" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>disableAutoMode</code></td><td class="desc">Set to <code>true</code> to disable auto mode on Bedrock, Vertex AI, and Foundry — auto mode is now available there by default without opt-in</td></tr>
+                    <tr class="search-item" id="i-maxeffortlevel"><td><a class="row-link" href="#i-maxeffortlevel" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code class="new">maxEffortLevel</code> <!-- added:v2.1.267 --></td><td class="desc"><span class="summary">Caps the maximum effort level on every provider; users can still pick a lower level</span> <button type="button" class="notes-btn" aria-expanded="false">+2</button><ul class="notes" hidden><li>Set top-level or per model under <code>modelSettings</code>; applies to Bedrock, Vertex, and Foundry</li><li>Paired with the <code>/effort</code> command's interactive slider</li></ul></td></tr>
                     <tr class="search-item" id="i-item-5"><td><a class="row-link" href="#i-item-5" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>"*"</code> (deny rule glob)</td><td class="desc"><span class="summary">Glob patterns supported in deny rule tool-name position</span> <button type="button" class="notes-btn" aria-expanded="false">+3</button><ul class="notes" hidden><li><code>"*"</code> denies all tools</li><li>Allow rules reject non-MCP globs</li><li>Unknown tool names in deny rules warn at startup</li></ul></td></tr>
                     <tr class="search-item" id="i-tool-param-value"><td><a class="row-link" href="#i-tool-param-value" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>Tool(param:value)</code></td><td class="desc">Permission rule syntax to match a tool's input parameters (supports <code>*</code> wildcard); e.g. <code>Agent(model:opus)</code> to block Opus subagents</td></tr>
                     <tr class="search-item" id="i-write-path"><td><a class="row-link" href="#i-write-path" tabindex="-1" title="Copy link to this entry (or press l on the row)" aria-label="Copy link to this entry">#</a><code>Write(path)</code> / <code>NotebookEdit(path)</code> / <code>Glob(path)</code></td><td class="desc">Deprecated permission-rule tool names — startup warns to use <code>Edit(path)</code> or <code>Read(path)</code> instead</td></tr>
@@ -725,7 +727,7 @@
         <div class="no-results search-exclude" id="noResults">No matches — clear search to see everything.</div>
 
         <footer class="global-footer">
-            Template v1.2 · Content synced 2026-09-08<br>
+            Template v1.2 · Content synced 2026-09-09<br>
             <a href="https://dommango.github.io" target="_blank" rel="noopener noreferrer">Context//Collapse</a>
         </footer>
 

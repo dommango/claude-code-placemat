@@ -1,7 +1,25 @@
 {
- "generated": "2026-09-08",
- "latest": "v2.1.265",
+ "generated": "2026-09-09",
+ "latest": "v2.1.267",
  "releases": [
+  {
+   "version": "v2.1.267",
+   "label": "v2.1.267",
+   "date": "2026-09-09",
+   "id": "cc-v2-1-267",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "maxEffortLevel",
+     "html": "<code>maxEffortLevel</code> setting — caps the maximum effort level on every provider (top-level or per model under <code>modelSettings</code>); applies to Bedrock, Vertex, and Foundry"
+    },
+    {
+     "tag": "ADD",
+     "item": "--system-prompt-snapshot off",
+     "html": "<code>--system-prompt-snapshot off</code> flag — renders the system prompt fresh on every request instead of reusing the conversation's recorded prompt"
+    }
+   ]
+  },
   {
    "version": "v2.1.265",
    "label": "v2.1.265",
