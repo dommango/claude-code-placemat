@@ -1,7 +1,40 @@
 {
- "generated": "2026-09-09",
- "latest": "v2.1.267",
+ "generated": "2026-09-10",
+ "latest": "v2.1.268",
  "releases": [
+  {
+   "version": "v2.1.268",
+   "label": "v2.1.268",
+   "date": "2026-09-10",
+   "id": "cc-v2-1-268",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "claude self-hosted-runner --remove-session-state",
+     "html": "<code>claude self-hosted-runner --remove-session-state</code> CLI flag — delete per-session directories under <code>&lt;base-dir&gt;/_sessions/</code> when sessions end; off by default"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_WEBFETCH_DEADLINE_MS",
+     "html": "<code>CLAUDE_CODE_WEBFETCH_DEADLINE_MS</code> env var — override the 300-second WebFetch response deadline; set to <code>0</code> to disable"
+    },
+    {
+     "tag": "ADD",
+     "item": "gatewayInternalNetworks",
+     "html": "<code>gatewayInternalNetworks</code> managed setting — allow <code>/login</code> to a Claude apps gateway on the organization's own public IPv4 block"
+    },
+    {
+     "tag": "CHG",
+     "item": "claude plugin enable/disable",
+     "html": "<code>claude plugin enable/disable</code> — added <code>--json</code> flag for structured output; also available on <code>install</code>, <code>uninstall</code>, and <code>update</code>"
+    },
+    {
+     "tag": "CHG",
+     "item": "CLAUDE_CODE_ENABLE_TODO_TOOLS=1",
+     "html": "<code>CLAUDE_CODE_ENABLE_TODO_TOOLS=1</code> — clarified: tools are on by default only for Claude 3.x, Opus 4.0–4.7, Sonnet 4.0–4.6, Haiku 4.5; set this to enable on newer models"
+    }
+   ]
+  },
   {
    "version": "v2.1.267",
    "label": "v2.1.267",

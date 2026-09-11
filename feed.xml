@@ -4,7 +4,14 @@
   <link href="https://dommango.github.io/claude-code-placemat/"/>
   <link rel="self" href="https://dommango.github.io/claude-code-placemat/feed.xml"/>
   <id>https://dommango.github.io/claude-code-placemat/</id>
-  <updated>2026-09-09T09:00:00Z</updated>
+  <updated>2026-09-10T09:00:00Z</updated>
+  <entry>
+    <title>Claude Code v2.1.268 — 5 placemat changes</title>
+    <id>https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-268</id>
+    <link href="https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-268"/>
+    <updated>2026-09-10T09:00:00Z</updated>
+    <content type="html">&lt;ul&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;claude self-hosted-runner --remove-session-state&lt;/code&gt; CLI flag — delete per-session directories under &lt;code&gt;&amp;lt;base-dir&amp;gt;/_sessions/&lt;/code&gt; when sessions end; off by default&lt;/li&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;CLAUDE_CODE_WEBFETCH_DEADLINE_MS&lt;/code&gt; env var — override the 300-second WebFetch response deadline; set to &lt;code&gt;0&lt;/code&gt; to disable&lt;/li&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;gatewayInternalNetworks&lt;/code&gt; managed setting — allow &lt;code&gt;/login&lt;/code&gt; to a Claude apps gateway on the organization's own public IPv4 block&lt;/li&gt;&lt;li&gt;&lt;b&gt;CHG&lt;/b&gt; &lt;code&gt;claude plugin enable/disable&lt;/code&gt; — added &lt;code&gt;--json&lt;/code&gt; flag for structured output; also available on &lt;code&gt;install&lt;/code&gt;, &lt;code&gt;uninstall&lt;/code&gt;, and &lt;code&gt;update&lt;/code&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;CHG&lt;/b&gt; &lt;code&gt;CLAUDE_CODE_ENABLE_TODO_TOOLS=1&lt;/code&gt; — clarified: tools are on by default only for Claude 3.x, Opus 4.0–4.7, Sonnet 4.0–4.6, Haiku 4.5; set this to enable on newer models&lt;/li&gt;&lt;/ul&gt;</content>
+  </entry>
   <entry>
     <title>Claude Code v2.1.267 — 2 placemat changes</title>
     <id>https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-267</id>
@@ -137,12 +144,5 @@
     <link href="https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-232"/>
     <updated>2026-08-13T09:00:00Z</updated>
     <content type="html">&lt;ul&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;/advisor&lt;/code&gt; slash command — AI advisor mode; Fable 5 available for organizations with Fable access (enable via &lt;code&gt;/model fable&lt;/code&gt;)&lt;/li&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;additionalMarketplaces&lt;/code&gt; JSON setting — friendlier alias for &lt;code&gt;extraKnownMarketplaces&lt;/code&gt;; add plugin marketplace repos beyond the built-in list&lt;/li&gt;&lt;li&gt;&lt;b&gt;CHG&lt;/b&gt; &lt;code&gt;strictKnownMarketplaces&lt;/code&gt; — now also accepted as &lt;code&gt;allowedMarketplaces&lt;/code&gt;&lt;/li&gt;&lt;/ul&gt;</content>
-  </entry>
-  <entry>
-    <title>Claude Code v2.1.229 — 4 placemat changes</title>
-    <id>https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-229</id>
-    <link href="https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-229"/>
-    <updated>2026-08-12T09:00:00Z</updated>
-    <content type="html">&lt;ul&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;claude remote-control --continue&lt;/code&gt; — resume the most recent Remote Control session&lt;/li&gt;&lt;li&gt;&lt;b&gt;CHG&lt;/b&gt; &lt;code&gt;/commit-push-pr&lt;/code&gt; — git/gh commands with dangerous flags (&lt;code&gt;--force&lt;/code&gt;, &lt;code&gt;--amend&lt;/code&gt;, &lt;code&gt;--no-verify&lt;/code&gt;, etc.) are no longer auto-approved&lt;/li&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS=0&lt;/code&gt; env var — set to &lt;code&gt;0&lt;/code&gt; to disable automatic staggering of same-prefix sibling workflow agents&lt;/li&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;command&lt;/code&gt; (plugin marketplace source) — specify a plugin directory via a local command's output; re-resolved each session without restart; &lt;code&gt;mode: "link"&lt;/code&gt; uses it in place&lt;/li&gt;&lt;/ul&gt;</content>
   </entry>
 </feed>
