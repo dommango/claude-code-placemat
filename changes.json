@@ -1,7 +1,45 @@
 {
- "generated": "2026-09-10",
- "latest": "v2.1.268",
+ "generated": "2026-09-11",
+ "latest": "v2.1.269",
  "releases": [
+  {
+   "version": "v2.1.269",
+   "label": "v2.1.269",
+   "date": "2026-09-11",
+   "id": "cc-v2-1-269",
+   "entries": [
+    {
+     "tag": "ADD",
+     "item": "claude plugin eval",
+     "html": "<code>claude plugin eval</code> CLI command — run a plugin's eval suite against Claude Code; outputs scored, reproducible results as JSON + HTML report"
+    },
+    {
+     "tag": "ADD",
+     "item": "/output-style [name]",
+     "html": "<code>/output-style [name]</code> slash command — list and switch output styles; works over Remote Control and in cloud and headless sessions"
+    },
+    {
+     "tag": "ADD",
+     "item": "bashEditDiffEnabled",
+     "html": "<code>bashEditDiffEnabled</code> setting — show a diff of files a Bash command changed in the tool result when the Bash tool handles file edits"
+    },
+    {
+     "tag": "ADD",
+     "item": "OTEL_METRICS_INCLUDE_REPOSITORY",
+     "html": "<code>OTEL_METRICS_INCLUDE_REPOSITORY</code> env var — tag OpenTelemetry metrics and events with <code>vcs.*</code> repository attributes; commit events also emit <code>vcs.ref.head.*</code> with <code>OTEL_LOG_TOOL_DETAILS</code>"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_GATEWAY_MODEL_DISCOVERY_TIMEOUT_MS",
+     "html": "<code>CLAUDE_CODE_GATEWAY_MODEL_DISCOVERY_TIMEOUT_MS</code> env var — extend the LLM gateway <code>/v1/models</code> discovery timeout (default 3 s)"
+    },
+    {
+     "tag": "ADD",
+     "item": "CLAUDE_CODE_WORKFLOW_MAX_CONCURRENT_AGENTS",
+     "html": "<code>CLAUDE_CODE_WORKFLOW_MAX_CONCURRENT_AGENTS</code> env var — raise the Workflow tool's per-run concurrent agent limit (1–256) for inference-bound fan-outs"
+    }
+   ]
+  },
   {
    "version": "v2.1.268",
    "label": "v2.1.268",

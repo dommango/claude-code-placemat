@@ -167,8 +167,20 @@
                 <h3>Content / CC Release Updates</h3>
                 <!-- September 2026 -->
                 <details class="month-group" open>
-                    <summary>September 2026 <span class="version-date">v2.1.265 – v2.1.268</span> <span class="month-count">4 releases</span></summary>
+                    <summary>September 2026 <span class="version-date">v2.1.265 – v2.1.269</span> <span class="month-count">5 releases</span></summary>
                     <div class="month-content">
+
+                        <div class="change-section">
+                            <h3 id="cc-v2-1-269">CC v2.1.269 <span class="version-date">2026-09-11</span></h3>
+                            <ul class="change-list">
+                                <li><span class="tag tag-add">ADD</span><span class="entry"><code>claude plugin eval</code> CLI command — run a plugin's eval suite against Claude Code; outputs scored, reproducible results as JSON + HTML report</span></li>
+                                <li><span class="tag tag-add">ADD</span><span class="entry"><code>/output-style [name]</code> slash command — list and switch output styles; works over Remote Control and in cloud and headless sessions</span></li>
+                                <li><span class="tag tag-add">ADD</span><span class="entry"><code>bashEditDiffEnabled</code> setting — show a diff of files a Bash command changed in the tool result when the Bash tool handles file edits</span></li>
+                                <li><span class="tag tag-add">ADD</span><span class="entry"><code>OTEL_METRICS_INCLUDE_REPOSITORY</code> env var — tag OpenTelemetry metrics and events with <code>vcs.*</code> repository attributes; commit events also emit <code>vcs.ref.head.*</code> with <code>OTEL_LOG_TOOL_DETAILS</code></span></li>
+                                <li><span class="tag tag-add">ADD</span><span class="entry"><code>CLAUDE_CODE_GATEWAY_MODEL_DISCOVERY_TIMEOUT_MS</code> env var — extend the LLM gateway <code>/v1/models</code> discovery timeout (default 3 s)</span></li>
+                                <li><span class="tag tag-add">ADD</span><span class="entry"><code>CLAUDE_CODE_WORKFLOW_MAX_CONCURRENT_AGENTS</code> env var — raise the Workflow tool's per-run concurrent agent limit (1–256) for inference-bound fan-outs</span></li>
+                            </ul>
+                        </div>
 
                         <div class="change-section">
                             <h3 id="cc-v2-1-268">CC v2.1.268 <span class="version-date">2026-09-10</span></h3>
