@@ -4,7 +4,14 @@
   <link href="https://dommango.github.io/claude-code-placemat/"/>
   <link rel="self" href="https://dommango.github.io/claude-code-placemat/feed.xml"/>
   <id>https://dommango.github.io/claude-code-placemat/</id>
-  <updated>2026-09-10T09:00:00Z</updated>
+  <updated>2026-09-11T09:00:00Z</updated>
+  <entry>
+    <title>Claude Code v2.1.269 — 6 placemat changes</title>
+    <id>https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-269</id>
+    <link href="https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-269"/>
+    <updated>2026-09-11T09:00:00Z</updated>
+    <content type="html">&lt;ul&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;claude plugin eval&lt;/code&gt; CLI command — run a plugin's eval suite against Claude Code; outputs scored, reproducible results as JSON + HTML report&lt;/li&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;/output-style [name]&lt;/code&gt; slash command — list and switch output styles; works over Remote Control and in cloud and headless sessions&lt;/li&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;bashEditDiffEnabled&lt;/code&gt; setting — show a diff of files a Bash command changed in the tool result when the Bash tool handles file edits&lt;/li&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;OTEL_METRICS_INCLUDE_REPOSITORY&lt;/code&gt; env var — tag OpenTelemetry metrics and events with &lt;code&gt;vcs.*&lt;/code&gt; repository attributes; commit events also emit &lt;code&gt;vcs.ref.head.*&lt;/code&gt; with &lt;code&gt;OTEL_LOG_TOOL_DETAILS&lt;/code&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;CLAUDE_CODE_GATEWAY_MODEL_DISCOVERY_TIMEOUT_MS&lt;/code&gt; env var — extend the LLM gateway &lt;code&gt;/v1/models&lt;/code&gt; discovery timeout (default 3 s)&lt;/li&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;CLAUDE_CODE_WORKFLOW_MAX_CONCURRENT_AGENTS&lt;/code&gt; env var — raise the Workflow tool's per-run concurrent agent limit (1–256) for inference-bound fan-outs&lt;/li&gt;&lt;/ul&gt;</content>
+  </entry>
   <entry>
     <title>Claude Code v2.1.268 — 5 placemat changes</title>
     <id>https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-268</id>
@@ -137,12 +144,5 @@
     <link href="https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-233"/>
     <updated>2026-08-14T09:00:00Z</updated>
     <content type="html">&lt;ul&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;CLAUDE_CODE_TOOL_MEMORY_LIMIT&lt;/code&gt; env var — opt-in memory cgroup limit for Bash tool commands on Linux; prevents a runaway build from stalling the session&lt;/li&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS&lt;/code&gt; env var — configure the WebFetch session URL cache TTL in milliseconds (default: 15 minutes)&lt;/li&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;CLAUDE_CODE_ENABLE_TODO_TOOLS=1&lt;/code&gt; env var — re-enable task/todo tools (&lt;code&gt;TaskCreate&lt;/code&gt;/&lt;code&gt;Get&lt;/code&gt;/&lt;code&gt;Update&lt;/code&gt;/&lt;code&gt;List&lt;/code&gt;, &lt;code&gt;TodoWrite&lt;/code&gt;) on Opus 4.8, Sonnet 5, Fable 5, Mythos 5, and newer models where they are no longer available by default&lt;/li&gt;&lt;li&gt;&lt;b&gt;CHG&lt;/b&gt; &lt;code&gt;claude plugin validate&lt;/code&gt; — now also checks a bare &lt;code&gt;.claude/skills&lt;/code&gt; directory, reporting SKILL.md files whose frontmatter fails to parse&lt;/li&gt;&lt;/ul&gt;</content>
-  </entry>
-  <entry>
-    <title>Claude Code v2.1.232 — 3 placemat changes</title>
-    <id>https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-232</id>
-    <link href="https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-232"/>
-    <updated>2026-08-13T09:00:00Z</updated>
-    <content type="html">&lt;ul&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;/advisor&lt;/code&gt; slash command — AI advisor mode; Fable 5 available for organizations with Fable access (enable via &lt;code&gt;/model fable&lt;/code&gt;)&lt;/li&gt;&lt;li&gt;&lt;b&gt;ADD&lt;/b&gt; &lt;code&gt;additionalMarketplaces&lt;/code&gt; JSON setting — friendlier alias for &lt;code&gt;extraKnownMarketplaces&lt;/code&gt;; add plugin marketplace repos beyond the built-in list&lt;/li&gt;&lt;li&gt;&lt;b&gt;CHG&lt;/b&gt; &lt;code&gt;strictKnownMarketplaces&lt;/code&gt; — now also accepted as &lt;code&gt;allowedMarketplaces&lt;/code&gt;&lt;/li&gt;&lt;/ul&gt;</content>
   </entry>
 </feed>
