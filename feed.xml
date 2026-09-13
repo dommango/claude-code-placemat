@@ -4,7 +4,14 @@
   <link href="https://dommango.github.io/claude-code-placemat/"/>
   <link rel="self" href="https://dommango.github.io/claude-code-placemat/feed.xml"/>
   <id>https://dommango.github.io/claude-code-placemat/</id>
-  <updated>2026-09-11T09:00:00Z</updated>
+  <updated>2026-09-13T00:00:00Z</updated>
+  <entry>
+    <title>This feed has moved</title>
+    <id>https://dommango.github.io/claude-code-placemat/#moved-to-agentmats</id>
+    <link href="https://dommango.github.io/agentmats/claude-code/feed.xml"/>
+    <updated>2026-09-13T00:00:00Z</updated>
+    <content type="html">&lt;p&gt;This placemat and its changelog have moved to &lt;a href=&quot;https://dommango.github.io/agentmats/claude-code/&quot;&gt;agentmats&lt;/a&gt;. Update your feed reader to &lt;a href=&quot;https://dommango.github.io/agentmats/claude-code/feed.xml&quot;&gt;https://dommango.github.io/agentmats/claude-code/feed.xml&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Claude Code v2.1.269 — 6 placemat changes</title>
     <id>https://dommango.github.io/claude-code-placemat/changelog.html#cc-v2-1-269</id>

@@ -1,5 +1,7 @@
 # Claude Code Placemat
 
+> **Archived.** This repo is superseded by [dommango/agentmats](https://github.com/dommango/agentmats), which unifies all placemats into one open-source project.
+
 <p align="center">
   <img src=".github/assets/claude_code_placemat_typographic_8bit.png" alt="Claude Code Placemat" width="600">
 </p>
